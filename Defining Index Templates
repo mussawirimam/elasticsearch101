@@ -1,0 +1,53 @@
+PUT _index_template/earthquakes 
+{
+  "index_patterns": ["earthquakes-*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  }
+}
+
+GET _index_template/earthquakes
+
+PUT earthquakes-1
+GET earthquakes-1
+PUT earthquakes-2
+DELETE _index_template/earthquakes
+------------------------------------
+PUT _component_template/shards
+{
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  }
+}
+
+GET _component_template/shards
+
+PUT _index_template/earthquakes
+{
+  "index_patterns": ["earthquakes-*"],
+  "composed_of": ["shards"]                   #this is how you call the component_template to use the template from component_template to expand on the index template.
+}
+
+GET _index_template/earthquakes
+------------------------------------
+GET _cat/nodes?v
+GET _cat/indices?v
+
+PUT earthquakes
+GET earthquakes
+DELETE earthquakes
+
+PUT earthquakes
+{
+  "settings": {
+    "number_of_shards": 1
+    , "number_of_replicas": 0
+  }
+}
+
