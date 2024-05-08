@@ -1,3 +1,7 @@
+Composed 
+
+
+------------------------------------
 PUT _index_template/earthquakes 
 {
   "index_patterns": ["earthquakes-*"],
@@ -8,7 +12,7 @@ PUT _index_template/earthquakes
     }
   }
 }
-
+------------------------------------
 GET _index_template/earthquakes
 
 PUT earthquakes-1
@@ -16,7 +20,7 @@ GET earthquakes-1
 PUT earthquakes-2
 DELETE _index_template/earthquakes
 ------------------------------------
-PUT _component_template/shards
+PUT _component_template/shards #1
 {
   "template": {
     "settings": {
@@ -26,20 +30,20 @@ PUT _component_template/shards
   }
 }
 
-GET _component_template/shards
+GET _component_template/shards #2
 
-PUT _index_template/earthquakes
+PUT _index_template/earthquakes #3
 {
   "index_patterns": ["earthquakes-*"],
   "composed_of": ["shards"]                   #this is how you call the component_template to use the template from component_template to expand on the index template.
 }
 
-GET _index_template/earthquakes
+GET _index_template/earthquakes #4
 ------------------------------------
 GET _cat/nodes?v
 GET _cat/indices?v
 
-PUT earthquakes
+PUT earthquakes #5
 GET earthquakes
 DELETE earthquakes
 
@@ -50,4 +54,5 @@ PUT earthquakes
     , "number_of_replicas": 0
   }
 }
+
 
