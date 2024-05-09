@@ -1,0 +1,206 @@
+Q: what is Data Stream used for?
+
+CREATING DATA STREAMS
+
+Data Streaming
+1) Backing indices store the actual data, but the data stream abstracts them.
+
+2) Search requests made to a data stream are directed to all backing
+
+3) Indexing to a data stream gets routed to the latest index in the stream.
+
+NOTE:
+For all of it to work, we need ILM policy and index template. And then, we will create the Datastream
+If you are doing the datastream, you have ot have rollover in your ILM.
+Because we are doing rollover, that unlocks the ability to do a force merge as well. 
+Homework from video udnerstahdn why we need forcemerge?
+
+
+PUT _ilm/policy/weblogs
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_primary_shard_size": "5gb"
+          },
+          "forcemerge": {
+            "max_num_segments": 1
+          }
+        }
+      },
+      "cold": {
+        "min_age": "7d",
+        "actions": {
+          "set_priority": {
+            "priority": 0
+          },
+          "freeze": {}
+        }
+      },
+      "delete": {
+        "min_age": "30d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+---------------------
+CONSOLE OUTPUT STARTS
+---------------------
+{
+  "acknowledged" : true
+}
+---------------------
+CONSOLE OUTPUT ENDS
+---------------------
+
+GET _ilm/policy/weblogs
+
+---------------------
+CONSOLE OUTPUT STARTS
+---------------------
+{
+  "weblogs" : {
+    "version" : 1,
+    "modified_date" : "2024-05-09T21:12:33.626Z",
+    "policy" : {
+      "phases" : {
+        "cold" : {
+          "min_age" : "7d",
+          "actions" : {
+            "freeze" : { },
+            "set_priority" : {
+              "priority" : 0
+            }
+          }
+        },
+        "hot" : {
+          "min_age" : "0ms",
+          "actions" : {
+            "rollover" : {
+              "max_primary_shard_size" : "5gb"
+            },
+            "forcemerge" : {
+              "max_num_segments" : 1
+            }
+          }
+        },
+        "delete" : {
+          "min_age" : "30d",
+          "actions" : {
+            "delete" : {
+              "delete_searchable_snapshot" : true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+---------------------
+CONSOLE OUTPUT ENDS
+---------------------
+
+PUT _index_template/weblogs
+{
+  "index_patterns": ["weblogs"],
+  "data_stream": {},
+  "composed_of": ["shards"],
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "weblogs"
+    }
+  }
+}
+
+---------------------
+CONSOLE OUTPUT STARTS
+---------------------
+{
+  "acknowledged" : true
+}
+---------------------
+CONSOLE OUTPUT ENDS
+---------------------
+
+GET _index_template/weblogs
+
+---------------------
+CONSOLE OUTPUT STARTS
+---------------------
+{
+  "index_templates" : [
+    {
+      "name" : "weblogs",
+      "index_template" : {
+        "index_patterns" : [
+          "weblogs"
+        ],
+        "template" : {
+          "settings" : {
+            "index" : {
+              "lifecycle" : {
+                "name" : "weblogs"
+              }
+            }
+          }
+        },
+        "composed_of" : [
+          "shards"
+        ],
+        "data_stream" : {
+          "hidden" : false
+        }
+      }
+    }
+  ]
+}
+---------------------
+CONSOLE OUTPUT ENDS
+---------------------
+
+PUT _data_stream/weblogs
+---------------------
+CONSOLE OUTPUT STARTS
+---------------------
+{
+  "acknowledged" : true
+}
+---------------------
+CONSOLE OUTPUT ENDS
+---------------------
+
+GET _data_stream/weblogs
+---------------------
+CONSOLE OUTPUT STARTS
+---------------------
+{
+  "data_streams" : [
+    {
+      "name" : "weblogs",
+      "timestamp_field" : {
+        "name" : "@timestamp"
+      },
+      "indices" : [
+        {
+          "index_name" : ".ds-weblogs-2024.05.09-000001",
+          "index_uuid" : "UHp1frrsTZKHqRE3xA61Bg"
+        }
+      ],
+      "generation" : 1,
+      "status" : "GREEN",
+      "template" : "weblogs",
+      "ilm_policy" : "weblogs",
+      "hidden" : false,
+      "system" : false
+    }
+  ]
+}
+---------------------
+CONSOLE OUTPUT ENDS
+---------------------
