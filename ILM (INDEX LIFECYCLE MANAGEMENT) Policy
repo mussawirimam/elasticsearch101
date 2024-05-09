@@ -1,0 +1,119 @@
+ILM (INDEX LIFECYCLE MANAGEMENT) Policy 
+Automatically manage your indices based on your usage requirements.
+
+Phases
+Prioritize your data based on how you use it with hot, warm, cold, and delete phases.
+
+Phase
+Transitions
+Move indices through the lifecycle based on age, size, or document count.
+
+Phase
+Executions
+Perform actions on indices at each phase, like rollover, force merge, migrate, shrink, freeze, and delete.
+--------------------------------------------------------------------------------------------------------------------------------
+Index LifeCycle
+--------------------------------------------------------------------------------------------------------------------------------
+Hot
+Write Optimized
+The index is actively being written to and frequently queried.
+
+Warm
+Read Optimized
+The index is no longer being written to but is still queried.
+
+Cold
+Storage Optimized
+The index is not being written to and is infrequently queried.
+
+Delete
+Retired
+The index is no longer needed and can be deleted from the cluster.
+
+NOTE: 
+FREEZE unalocated every part of this index except for its metadata in memory. So it uses the absolute minimum resources in elasticsearch. So its readable; However, at thi spoint it is completely read only. 
+
+examples:
+
+PUT _ilm/policy/applogs
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {}
+      },
+      "warm": {
+        "min_age": "1d",
+        "actions": {
+          "forcemerge": {
+            "max_num_segments": 1
+          }
+        }
+      },
+      "cold": {
+        "min_age": "7d",
+        "actions": {
+          "freeze": {}
+        }
+      },
+      "delete": {
+        "min_age": "30d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+
+GET _ilm/policy/applogs
+
+PUT _index_template/applogs
+{
+  "index_patterns": ["applogs-*"],
+  "composed_of": ["shards"],
+  "template": {
+    "settings": {
+      "index.lifecycle.name": "applogs"
+    }
+  }
+}
+
+GET _index_template/applogs
+
+#CREATE THE INDEX 
+PUT applogs-1
+GET applogs-1
+
+---------------
+CONSOLE OUTPUT
+---------------
+{
+  "applogs-1" : {
+    "aliases" : { },
+    "mappings" : { },
+    "settings" : {
+      "index" : {
+        "lifecycle" : {
+          "name" : "applogs"
+        },
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "applogs-1",
+        "creation_date" : "1715287998090",
+        "number_of_replicas" : "0",
+        "uuid" : "f25nsmYdRQ-Jbl8H70HG_g",
+        "version" : {
+          "created" : "7130499"
+        }
+      }
+    }
+  }
+}
+
