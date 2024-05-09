@@ -1,6 +1,23 @@
-Composed 
+------------------------------------
+Defining Indices
+------------------------------------
+GET _cat/nodes?v
+GET _cat/indices?v
 
+PUT earthquakes #5
+GET earthquakes
+DELETE earthquakes
 
+PUT earthquakes
+{
+  "settings": {
+    "number_of_shards": 1
+    , "number_of_replicas": 0
+  }
+}
+
+------------------------------------
+CREATING INDEX PATTERN
 ------------------------------------
 PUT _index_template/earthquakes 
 {
@@ -12,13 +29,16 @@ PUT _index_template/earthquakes
     }
   }
 }
-------------------------------------
+
 GET _index_template/earthquakes
 
 PUT earthquakes-1
 GET earthquakes-1
 PUT earthquakes-2
 DELETE _index_template/earthquakes
+
+------------------------------------
+CREATING COMPONENT TEMPLATE AND USING IN THE INDEX TEMPLATE
 ------------------------------------
 PUT _component_template/shards #1
 {
@@ -39,20 +59,3 @@ PUT _index_template/earthquakes #3
 }
 
 GET _index_template/earthquakes #4
-------------------------------------
-GET _cat/nodes?v
-GET _cat/indices?v
-
-PUT earthquakes #5
-GET earthquakes
-DELETE earthquakes
-
-PUT earthquakes
-{
-  "settings": {
-    "number_of_shards": 1
-    , "number_of_replicas": 0
-  }
-}
-
-
