@@ -207,3 +207,6 @@ CONSOLE OUTPUT ENDS
 
 NOTE: 
 So now whenever we do a indexing operation or a search operation, we can just do it against weblogs, which will do it, essentially, automatically and intelligently against the appropriate backing indices.
+
+LINKS for help:
+https://www.youtube.com/watch?v=z4zU5BoMixY&t=29s
