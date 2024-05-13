@@ -1,0 +1,63 @@
+BEATS:
+------
+Lightweight Data Shippers
+Collect and ship data from the source. There are Beats for just about any kind or source of data you wish to collect.
+
+Built-In Modules
+Pre-built configuration pipelines for well-known use cases.
+
+Extensible with libbeat
+Build your own Beat using the same foundation that all official Elastic Beats are
+built from.
+
+LOGSTASH:
+---------
+Input, parse, enrich, and output live data streams. Logstash is an optional component of the Elastic Stack that provides advanced data processing capabilities.
+It is worth noting that Logstash is powerful even outside of the Elastic Stack as a capable data processing tool.
+
+1) Input data from virtually any source.
+
+2) Filter, parse, and enrich the data.
+
+3) Output the processed data to virtually any destination.
+
+ELASTICSEARCH:
+--------------
+Most data solutions only perform one part of the data pipeline. Not Elasticsearch.
+
+Process
+With Elasticsearch ingest pipelines, you can parse and enrich data as it comes into Elasticsearch.
+
+Index
+Elasticsearch's storage is fast, highly scalable, and fault tolerant.
+
+Analyze
+Elasticsearch can quickly search and aggregate data.
+
+KIBANA:
+-------
+Discover
+Search, filter, and view data stored in the attached Elasticsearch cluster.
+
+Visualize
+Craft informative visualizations from Elasticsearch data.
+
+Dashboard
+Combine visualizations and searches into a single pane of glass.
+
+Time Series Visual Builder (TSVB)
+Create purpose-built time series-based visualizations.
+
+Machine Learning
+Discover and visualize hidden insights and anomalies within Elasticsearch data.
+
+And Much More
+APM, uptime monitoring, SIEM, stack monitoring, and more are also possible with Kibana.
+
+DevTools
+for interacting with elasticsearch through console on kibana
+
+
+
+
+
