@@ -1,0 +1,88 @@
+Storing Analyzed Fields 
+-----------------------
+
+ANALYZED:
+---------
+Original Text:
+The students learned a NEW concept.
+            |
+            |
+            V
+Tokenized Text:
+students | learned | NEW | concept
+            |
+            |
+            V
+Normalized Tokens:
+student | learn new | concept
+            |
+            |
+            V
+Stored Field:
+student | learn | new | concept
+            |
+            |
+            V
+Matched Searches:
+Students.        How to learn?
+  New concepts.
+Learning new ideas.  Never stop learning!
+Newer concepts.    Training new students.
+      Students learning new concepts.
+Learning.    Understanding fresh ideas.
+
+=================================
+              VS
+=================================
+
+NON-ANALYZED:
+-------------
+Original Text:
+The students learned a NEW concept.
+            |
+            |
+            V
+Tokenized Text:
+The students learned a NEW concept.
+            |
+            |
+            V
+Normalized Token:
+the students learned a new concept.
+            |
+            |
+            V
+Stored Field:
+The students learned a NEW concept.
+            |
+            |
+            V
+Matched Searches:
+The students learned a NEW concept.
+
+
+
+RELEVANCY SCORING:
+------------------
+How well a search matches a document.
+
+Term Frequency
+How often does the term appear in the (field)?
+
+Inverse Document
+Frequency
+How often does the term appear in the (index)?
+
+Field-Length Normalization
+How many terms are in
+the field?
+
+QUERY AND FILTER CONTEXT:
+-------------------------
+QUERY CONTEXT:
+Q: How well does the search clause match the document?
+A: < relevancy_score>
+
+FILTER CONTEXT:
+Q: Does the search clause match the document?
+A: true or false
