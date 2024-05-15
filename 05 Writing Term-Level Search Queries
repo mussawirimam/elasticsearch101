@@ -1,0 +1,1374 @@
+Term-Level Queries:
+--------------------
+Search for documents based on exact values.
+
+1) Term-level queries do not analyze search terms.
+
+2) Search terms can be normalized for term-level queries.
+
+3) Avoid using term-level queries on analyzed fields.
+
+#this time a singular query (term)
+GET flights/_search
+{
+  "query": {
+    "term": { 
+      "DestCountry": {
+        "value": "US"
+      }
+    }
+  }
+}
+----------------------
+CONSOLE OUTPUT
+----------------------
+{
+  "took" : 4,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1987,
+      "relation" : "eq"
+    },
+    "max_score" : 1.8826766,
+    "hits" : [
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "bTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "XPJS4OX",
+          "DestCountry" : "US",
+          "OriginWeather" : "Cloudy",
+          "OriginCityName" : "Dubai",
+          "AvgTicketPrice" : 612.1013138254784,
+          "DistanceMiles" : 7964.893791048773,
+          "FlightDelay" : false,
+          "DestWeather" : "Damaging Wind",
+          "Dest" : "Reno Tahoe International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 12818.254033261597,
+          "timestamp" : "2024-03-22T03:45:54",
+          "DestLocation" : {
+            "lat" : "39.49909973",
+            "lon" : "-119.7679977"
+          },
+          "DestAirportID" : "RNO",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 712.1252240700887,
+          "Origin" : "Dubai International Airport",
+          "OriginLocation" : {
+            "lat" : "25.25279999",
+            "lon" : "55.36439896"
+          },
+          "DestRegion" : "US-NV",
+          "OriginAirportID" : "DXB",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Reno",
+          "FlightTimeHour" : 11.868753734501478,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "cTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "OCFEXD9",
+          "DestCountry" : "US",
+          "OriginWeather" : "Sunny",
+          "OriginCityName" : "Tokyo",
+          "AvgTicketPrice" : 886.5074023578774,
+          "DistanceMiles" : 6842.7819803694365,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Richmond International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "JP",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 11012.390123415671,
+          "timestamp" : "2024-03-22T17:17:19",
+          "DestLocation" : {
+            "lat" : "37.50519943",
+            "lon" : "-77.31970215"
+          },
+          "DestAirportID" : "RIC",
+          "Carrier" : "ES-Air",
+          "Cancelled" : false,
+          "FlightTimeMin" : 688.2743827134794,
+          "Origin" : "Narita International Airport",
+          "OriginLocation" : {
+            "lat" : "35.76470184",
+            "lon" : "140.3860016"
+          },
+          "DestRegion" : "US-VA",
+          "OriginAirportID" : "NRT",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Richmond",
+          "FlightTimeHour" : 11.471239711891323,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "cjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "KWJY2SM",
+          "DestCountry" : "US",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "Tokoname",
+          "AvgTicketPrice" : 881.1937380054992,
+          "DistanceMiles" : 6872.61810341732,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Newark Liberty International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "JP",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 11060.406709026043,
+          "timestamp" : "2024-03-22T07:47:56",
+          "DestLocation" : {
+            "lat" : "40.69250107",
+            "lon" : "-74.16870117"
+          },
+          "DestAirportID" : "EWR",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 850.8005160789264,
+          "Origin" : "Chubu Centrair International Airport",
+          "OriginLocation" : {
+            "lat" : "34.85839844",
+            "lon" : "136.8049927"
+          },
+          "DestRegion" : "US-NJ",
+          "OriginAirportID" : "NGO",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Newark",
+          "FlightTimeHour" : 14.180008601315441,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "djTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "D4JR11U",
+          "DestCountry" : "US",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Buenos Aires",
+          "AvgTicketPrice" : 729.9850757501601,
+          "DistanceMiles" : 5136.048523930965,
+          "FlightDelay" : false,
+          "DestWeather" : "Rain",
+          "Dest" : "San Antonio International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AR",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8265.668875697154,
+          "timestamp" : "2024-03-22T00:18:12",
+          "DestLocation" : {
+            "lat" : "29.53370094",
+            "lon" : "-98.46980286"
+          },
+          "DestAirportID" : "SAT",
+          "Carrier" : "JetBeats",
+          "Cancelled" : false,
+          "FlightTimeMin" : 635.820682745935,
+          "Origin" : "Ministro Pistarini International Airport",
+          "OriginLocation" : {
+            "lat" : "-34.8222",
+            "lon" : "-58.5358"
+          },
+          "DestRegion" : "US-TX",
+          "OriginAirportID" : "EZE",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "San Antonio",
+          "FlightTimeHour" : 10.597011379098916,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ezTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "4L0RLJU",
+          "DestCountry" : "US",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "Stockholm",
+          "AvgTicketPrice" : 641.6738218050696,
+          "DistanceMiles" : 5473.118919880514,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Tucson International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "SE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8808.131094996186,
+          "timestamp" : "2024-03-22T11:57:34",
+          "DestLocation" : {
+            "lat" : "32.11610031",
+            "lon" : "-110.9410019"
+          },
+          "DestAirportID" : "TUS",
+          "Carrier" : "JetBeats",
+          "Cancelled" : false,
+          "FlightTimeMin" : 419.43481404743744,
+          "Origin" : "Stockholm-Arlanda Airport",
+          "OriginLocation" : {
+            "lat" : "59.65190125",
+            "lon" : "17.91860008"
+          },
+          "DestRegion" : "US-AZ",
+          "OriginAirportID" : "ARN",
+          "OriginRegion" : "SE-AB",
+          "DestCityName" : "Tucson",
+          "FlightTimeHour" : 6.990580234123957,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ljTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "95ZK5AY",
+          "DestCountry" : "US",
+          "OriginWeather" : "Thunder & Lightning",
+          "OriginCityName" : "Chicago",
+          "AvgTicketPrice" : 221.6829284415216,
+          "DistanceMiles" : 527.7785043983743,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Greater Rochester International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 849.3771693824972,
+          "timestamp" : "2024-03-22T06:08:31",
+          "DestLocation" : {
+            "lat" : "43.1189003",
+            "lon" : "-77.67240143"
+          },
+          "DestAirportID" : "ROC",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : true,
+          "FlightTimeMin" : 65.33670533711516,
+          "Origin" : "Chicago O'Hare International Airport",
+          "OriginLocation" : {
+            "lat" : "41.97859955",
+            "lon" : "-87.90480042"
+          },
+          "DestRegion" : "US-NY",
+          "OriginAirportID" : "ORD",
+          "OriginRegion" : "US-IL",
+          "DestCityName" : "Rochester",
+          "FlightTimeHour" : 1.0889450889519194,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "qTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "SN5EK30",
+          "DestCountry" : "US",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "New Orleans",
+          "AvgTicketPrice" : 207.07356218328897,
+          "DistanceMiles" : 0,
+          "FlightDelay" : true,
+          "DestWeather" : "Heavy Fog",
+          "Dest" : "Louis Armstrong New Orleans International Airport",
+          "FlightDelayType" : "Carrier Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 0,
+          "timestamp" : "2024-03-22T12:08:17",
+          "DestLocation" : {
+            "lat" : "29.99340057",
+            "lon" : "-90.25800323"
+          },
+          "DestAirportID" : "MSY",
+          "Carrier" : "ES-Air",
+          "Cancelled" : false,
+          "FlightTimeMin" : 105,
+          "Origin" : "Louis Armstrong New Orleans International Airport",
+          "OriginLocation" : {
+            "lat" : "29.99340057",
+            "lon" : "-90.25800323"
+          },
+          "DestRegion" : "US-LA",
+          "OriginAirportID" : "MSY",
+          "OriginRegion" : "US-LA",
+          "DestCityName" : "New Orleans",
+          "FlightTimeHour" : 1.75,
+          "FlightDelayMin" : 105
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "sTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "IVB6G6W",
+          "DestCountry" : "US",
+          "OriginWeather" : "Sunny",
+          "OriginCityName" : "Mumbai",
+          "AvgTicketPrice" : 936.2889470105914,
+          "DistanceMiles" : 7755.505053558553,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Seattle Tacoma International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "IN",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 12481.275524914137,
+          "timestamp" : "2024-03-22T12:18:10",
+          "DestLocation" : {
+            "lat" : "47.44900131",
+            "lon" : "-122.3089981"
+          },
+          "DestAirportID" : "SEA",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 780.0797203071336,
+          "Origin" : "Chhatrapati Shivaji International Airport",
+          "OriginLocation" : {
+            "lat" : "19.08869934",
+            "lon" : "72.86789703"
+          },
+          "DestRegion" : "US-WA",
+          "OriginAirportID" : "BOM",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Seattle",
+          "FlightTimeHour" : 13.00132867178556,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "sjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "KBQ01H3",
+          "DestCountry" : "US",
+          "OriginWeather" : "Cloudy",
+          "OriginCityName" : "Paris",
+          "AvgTicketPrice" : 724.4233101609962,
+          "DistanceMiles" : 5697.548547023824,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "San Diego International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "FR",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 9169.31556886151,
+          "timestamp" : "2024-03-22T11:14:43",
+          "DestLocation" : {
+            "lat" : "32.73360062",
+            "lon" : "-117.1900024"
+          },
+          "DestAirportID" : "SAN",
+          "Carrier" : "JetBeats",
+          "Cancelled" : false,
+          "FlightTimeMin" : 573.0822230538444,
+          "Origin" : "Charles de Gaulle International Airport",
+          "OriginLocation" : {
+            "lat" : "49.01279831",
+            "lon" : "2.549999952"
+          },
+          "DestRegion" : "US-CA",
+          "OriginAirportID" : "CDG",
+          "OriginRegion" : "FR-J",
+          "DestCityName" : "San Diego",
+          "FlightTimeHour" : 9.55137038423074,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "yzTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.8826766,
+        "_source" : {
+          "FlightNum" : "JXR3J2N",
+          "DestCountry" : "US",
+          "OriginWeather" : "Cloudy",
+          "OriginCityName" : "Tokyo",
+          "AvgTicketPrice" : 264.5271100325427,
+          "DistanceMiles" : 4952.425880096478,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Spokane International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "JP",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 7970.156875577986,
+          "timestamp" : "2024-03-22T19:57:38",
+          "DestLocation" : {
+            "lat" : "47.61989975",
+            "lon" : "-117.5339966"
+          },
+          "DestAirportID" : "GEG",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 419.481940819894,
+          "Origin" : "Narita International Airport",
+          "OriginLocation" : {
+            "lat" : "35.76470184",
+            "lon" : "140.3860016"
+          },
+          "DestRegion" : "US-WA",
+          "OriginAirportID" : "NRT",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Spokane",
+          "FlightTimeHour" : 6.991365680331567,
+          "FlightDelayMin" : 0
+        }
+      }
+    ]
+  }
+}
+----------------------
+CONSOLE OUTPUT ENDS
+----------------------
+
+#this time a plural query (terms)
+GET flights/_search
+{
+  "query": {
+    "terms": {
+      "Carrier": [
+        "kibana Airlines",
+        "Logstash Airways"
+      ]
+    }
+  }
+}
+----------------------
+CONSOLE OUTPUT
+----------------------
+{
+  "took" : 2,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 3331,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ZjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "XLL6LDF",
+          "DestCountry" : "ZA",
+          "OriginWeather" : "Thunder & Lightning",
+          "OriginCityName" : "Jebel Ali",
+          "AvgTicketPrice" : 642.5951482867853,
+          "DistanceMiles" : 3942.7713488567097,
+          "FlightDelay" : false,
+          "DestWeather" : "Damaging Wind",
+          "Dest" : "OR Tambo International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 6345.275413654453,
+          "timestamp" : "2024-03-22T06:09:09",
+          "DestLocation" : {
+            "lat" : "-26.1392",
+            "lon" : "28.246"
+          },
+          "DestAirportID" : "JNB",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 302.15597207878346,
+          "Origin" : "Al Maktoum International Airport",
+          "OriginLocation" : {
+            "lat" : "24.896356",
+            "lon" : "55.161389"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "DWC",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Johannesburg",
+          "FlightTimeHour" : 5.035932867979724,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "azTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "42JEWIV",
+          "DestCountry" : "KR",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "Genova",
+          "AvgTicketPrice" : 575.6364141604063,
+          "DistanceMiles" : 5591.34159001949,
+          "FlightDelay" : true,
+          "DestWeather" : "Clear",
+          "Dest" : "Gimpo International Airport",
+          "FlightDelayType" : "Late Aircraft Delay",
+          "OriginCountry" : "IT",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8998.392039848326,
+          "timestamp" : "2024-03-22T09:29:17",
+          "DestLocation" : {
+            "lat" : "37.5583",
+            "lon" : "126.791"
+          },
+          "DestAirportID" : "GMP",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 737.1840030652559,
+          "Origin" : "Genoa Cristoforo Colombo Airport",
+          "OriginLocation" : {
+            "lat" : "44.4133",
+            "lon" : "8.8375"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "GE01",
+          "OriginRegion" : "IT-42",
+          "DestCityName" : "Seoul",
+          "FlightTimeHour" : 12.286400051087599,
+          "FlightDelayMin" : 45
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "bTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "XPJS4OX",
+          "DestCountry" : "US",
+          "OriginWeather" : "Cloudy",
+          "OriginCityName" : "Dubai",
+          "AvgTicketPrice" : 612.1013138254784,
+          "DistanceMiles" : 7964.893791048773,
+          "FlightDelay" : false,
+          "DestWeather" : "Damaging Wind",
+          "Dest" : "Reno Tahoe International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 12818.254033261597,
+          "timestamp" : "2024-03-22T03:45:54",
+          "DestLocation" : {
+            "lat" : "39.49909973",
+            "lon" : "-119.7679977"
+          },
+          "DestAirportID" : "RNO",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 712.1252240700887,
+          "Origin" : "Dubai International Airport",
+          "OriginLocation" : {
+            "lat" : "25.25279999",
+            "lon" : "55.36439896"
+          },
+          "DestRegion" : "US-NV",
+          "OriginAirportID" : "DXB",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Reno",
+          "FlightTimeHour" : 11.868753734501478,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ejTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "LCUCEJ1",
+          "DestCountry" : "CA",
+          "OriginWeather" : "Hail",
+          "OriginCityName" : "Torino",
+          "AvgTicketPrice" : 651.2022149311482,
+          "DistanceMiles" : 4488.142495802366,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Winnipeg / James Armstrong Richardson International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "IT",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 7222.965196764563,
+          "timestamp" : "2024-03-22T06:24:44",
+          "DestLocation" : {
+            "lat" : "49.90999985",
+            "lon" : "-97.23989868"
+          },
+          "DestAirportID" : "YWG",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : true,
+          "FlightTimeMin" : 401.275844264698,
+          "Origin" : "Turin Airport",
+          "OriginLocation" : {
+            "lat" : "45.200802",
+            "lon" : "7.64963"
+          },
+          "DestRegion" : "CA-MB",
+          "OriginAirportID" : "TO11",
+          "OriginRegion" : "IT-21",
+          "DestCityName" : "Winnipeg",
+          "FlightTimeHour" : 6.687930737744966,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "fjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "O115OY5",
+          "DestCountry" : "IT",
+          "OriginWeather" : "Thunder & Lightning",
+          "OriginCityName" : "Spokane",
+          "AvgTicketPrice" : 714.7494822313002,
+          "DistanceMiles" : 5339.098058472737,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Venice Marco Polo Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8592.445425814749,
+          "timestamp" : "2024-03-22T11:59:14",
+          "DestLocation" : {
+            "lat" : "45.505299",
+            "lon" : "12.3519"
+          },
+          "DestAirportID" : "VE05",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : true,
+          "FlightTimeMin" : 613.7461018439107,
+          "Origin" : "Spokane International Airport",
+          "OriginLocation" : {
+            "lat" : "47.61989975",
+            "lon" : "-117.5339966"
+          },
+          "DestRegion" : "IT-34",
+          "OriginAirportID" : "GEG",
+          "OriginRegion" : "US-WA",
+          "DestCityName" : "Venice",
+          "FlightTimeHour" : 10.22910169739851,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "gDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "N8E4J3E",
+          "DestCountry" : "AR",
+          "OriginWeather" : "Cloudy",
+          "OriginCityName" : "Fort Wayne",
+          "AvgTicketPrice" : 811.4282844448094,
+          "DistanceMiles" : 5484.062754746267,
+          "FlightDelay" : true,
+          "DestWeather" : "Thunder & Lightning",
+          "Dest" : "Ministro Pistarini International Airport",
+          "FlightDelayType" : "NAS Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8825.743489974377,
+          "timestamp" : "2024-03-22T17:30:14",
+          "DestLocation" : {
+            "lat" : "-34.8222",
+            "lon" : "-58.5358"
+          },
+          "DestAirportID" : "EZE",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 660.410249283884,
+          "Origin" : "Fort Wayne International Airport",
+          "OriginLocation" : {
+            "lat" : "40.97850037",
+            "lon" : "-85.19509888"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "FWA",
+          "OriginRegion" : "US-IN",
+          "DestCityName" : "Buenos Aires",
+          "FlightTimeHour" : 11.006837488064734,
+          "FlightDelayMin" : 30
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "gjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "HQ4UFA2",
+          "DestCountry" : "GB",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "Bogota",
+          "AvgTicketPrice" : 581.4022979475494,
+          "DistanceMiles" : 5214.053057008498,
+          "FlightDelay" : false,
+          "DestWeather" : "Thunder & Lightning",
+          "Dest" : "Manchester Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "CO",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8391.205002978286,
+          "timestamp" : "2024-03-22T07:11:39",
+          "DestLocation" : {
+            "lat" : "53.35369873",
+            "lon" : "-2.274950027"
+          },
+          "DestAirportID" : "MAN",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : true,
+          "FlightTimeMin" : 699.2670835815238,
+          "Origin" : "El Dorado International Airport",
+          "OriginLocation" : {
+            "lat" : "4.70159",
+            "lon" : "-74.1469"
+          },
+          "DestRegion" : "GB-ENG",
+          "OriginAirportID" : "BOG",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Manchester",
+          "FlightTimeHour" : 11.654451393025397,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "iDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "0EUV9G6",
+          "DestCountry" : "JP",
+          "OriginWeather" : "Heavy Fog",
+          "OriginCityName" : "Abu Dhabi",
+          "AvgTicketPrice" : 273.3560293039689,
+          "DistanceMiles" : 4783.573672738463,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Kansai International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 7698.415588779609,
+          "timestamp" : "2024-03-22T23:33:18",
+          "DestLocation" : {
+            "lat" : "34.4272995",
+            "lon" : "135.2440033"
+          },
+          "DestAirportID" : "KIX",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 513.2277059186406,
+          "Origin" : "Abu Dhabi International Airport",
+          "OriginLocation" : {
+            "lat" : "24.43300056",
+            "lon" : "54.65110016"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "AUH",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Osaka",
+          "FlightTimeHour" : 8.55379509864401,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "jzTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "VDI3SZR",
+          "DestCountry" : "KR",
+          "OriginWeather" : "Damaging Wind",
+          "OriginCityName" : "Cologne",
+          "AvgTicketPrice" : 970.7259542870589,
+          "DistanceMiles" : 5332.331640388077,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Gimpo International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "DE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8581.55593146871,
+          "timestamp" : "2024-03-22T08:42:22",
+          "DestLocation" : {
+            "lat" : "37.5583",
+            "lon" : "126.791"
+          },
+          "DestAirportID" : "GMP",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 451.6608384983532,
+          "Origin" : "Cologne Bonn Airport",
+          "OriginLocation" : {
+            "lat" : "50.86589813",
+            "lon" : "7.142739773"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "CGN",
+          "OriginRegion" : "DE-NW",
+          "DestCityName" : "Seoul",
+          "FlightTimeHour" : 7.52768064163922,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "lDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "PBQ9KV1",
+          "DestCountry" : "IT",
+          "OriginWeather" : "Heavy Fog",
+          "OriginCityName" : "Lima",
+          "AvgTicketPrice" : 262.7675053001014,
+          "DistanceMiles" : 6664.4450829833595,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Pisa International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "PE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 10725.384707628773,
+          "timestamp" : "2024-03-22T12:32:39",
+          "DestLocation" : {
+            "lat" : "43.683899",
+            "lon" : "10.3927"
+          },
+          "DestAirportID" : "PI05",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 595.8547059793763,
+          "Origin" : "Jorge Chavez International Airport",
+          "OriginLocation" : {
+            "lat" : "-12.0219",
+            "lon" : "-77.114304"
+          },
+          "DestRegion" : "IT-52",
+          "OriginAirportID" : "LIM",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Pisa",
+          "FlightTimeHour" : 9.930911766322938,
+          "FlightDelayMin" : 0
+        }
+      }
+    ]
+  }
+}
+----------------------
+CONSOLE OUTPUT ENDS
+----------------------
+#this time a range query
+#typically we search numerical value or date values with range searches
+GET flights/_search
+{
+  "query": {
+    "range": {
+      "AvgTicketPrice": {
+        "gte": 200,
+        "lt": 300
+      }
+    }
+  }
+}
+----------------------
+CONSOLE OUTPUT
+----------------------
+{
+  "took" : 4,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1067,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ajTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "76ZQ4RP",
+          "DestCountry" : "CA",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Winnipeg",
+          "AvgTicketPrice" : 227.35425118762947,
+          "DistanceMiles" : 0,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Winnipeg / James Armstrong Richardson International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "CA",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 0,
+          "timestamp" : "2024-03-22T06:11:16",
+          "DestLocation" : {
+            "lat" : "49.90999985",
+            "lon" : "-97.23989868"
+          },
+          "DestAirportID" : "YWG",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 0,
+          "Origin" : "Winnipeg / James Armstrong Richardson International Airport",
+          "OriginLocation" : {
+            "lat" : "49.90999985",
+            "lon" : "-97.23989868"
+          },
+          "DestRegion" : "CA-MB",
+          "OriginAirportID" : "YWG",
+          "OriginRegion" : "CA-MB",
+          "DestCityName" : "Winnipeg",
+          "FlightTimeHour" : 0,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "gTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "99211I7",
+          "DestCountry" : "IT",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Abu Dhabi",
+          "AvgTicketPrice" : 258.63247764548413,
+          "DistanceMiles" : 2976.462320954196,
+          "FlightDelay" : true,
+          "DestWeather" : "Heavy Fog",
+          "Dest" : "Turin Airport",
+          "FlightDelayType" : "Weather Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 4790.15177745371,
+          "timestamp" : "2024-03-22T14:21:11",
+          "DestLocation" : {
+            "lat" : "45.200802",
+            "lon" : "7.64963"
+          },
+          "DestAirportID" : "TO11",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 735.4683434048827,
+          "Origin" : "Abu Dhabi International Airport",
+          "OriginLocation" : {
+            "lat" : "24.43300056",
+            "lon" : "54.65110016"
+          },
+          "DestRegion" : "IT-21",
+          "OriginAirportID" : "AUH",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Torino",
+          "FlightTimeHour" : 12.257805723414712,
+          "FlightDelayMin" : 300
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "iDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "0EUV9G6",
+          "DestCountry" : "JP",
+          "OriginWeather" : "Heavy Fog",
+          "OriginCityName" : "Abu Dhabi",
+          "AvgTicketPrice" : 273.3560293039689,
+          "DistanceMiles" : 4783.573672738463,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Kansai International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 7698.415588779609,
+          "timestamp" : "2024-03-22T23:33:18",
+          "DestLocation" : {
+            "lat" : "34.4272995",
+            "lon" : "135.2440033"
+          },
+          "DestAirportID" : "KIX",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 513.2277059186406,
+          "Origin" : "Abu Dhabi International Airport",
+          "OriginLocation" : {
+            "lat" : "24.43300056",
+            "lon" : "54.65110016"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "AUH",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Osaka",
+          "FlightTimeHour" : 8.55379509864401,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ijTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "BT58UHP",
+          "DestCountry" : "IN",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Hyderabad",
+          "AvgTicketPrice" : 245.67096174404574,
+          "DistanceMiles" : 0,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Rajiv Gandhi International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "IN",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 0,
+          "timestamp" : "2024-03-22T10:41:09",
+          "DestLocation" : {
+            "lat" : "17.23131752",
+            "lon" : "78.42985535"
+          },
+          "DestAirportID" : "HYD",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 0,
+          "Origin" : "Rajiv Gandhi International Airport",
+          "OriginLocation" : {
+            "lat" : "17.23131752",
+            "lon" : "78.42985535"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "HYD",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Hyderabad",
+          "FlightTimeHour" : 0,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "lDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "PBQ9KV1",
+          "DestCountry" : "IT",
+          "OriginWeather" : "Heavy Fog",
+          "OriginCityName" : "Lima",
+          "AvgTicketPrice" : 262.7675053001014,
+          "DistanceMiles" : 6664.4450829833595,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Pisa International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "PE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 10725.384707628773,
+          "timestamp" : "2024-03-22T12:32:39",
+          "DestLocation" : {
+            "lat" : "43.683899",
+            "lon" : "10.3927"
+          },
+          "DestAirportID" : "PI05",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 595.8547059793763,
+          "Origin" : "Jorge Chavez International Airport",
+          "OriginLocation" : {
+            "lat" : "-12.0219",
+            "lon" : "-77.114304"
+          },
+          "DestRegion" : "IT-52",
+          "OriginAirportID" : "LIM",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Pisa",
+          "FlightTimeHour" : 9.930911766322938,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "ljTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "95ZK5AY",
+          "DestCountry" : "US",
+          "OriginWeather" : "Thunder & Lightning",
+          "OriginCityName" : "Chicago",
+          "AvgTicketPrice" : 221.6829284415216,
+          "DistanceMiles" : 527.7785043983743,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Greater Rochester International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 849.3771693824972,
+          "timestamp" : "2024-03-22T06:08:31",
+          "DestLocation" : {
+            "lat" : "43.1189003",
+            "lon" : "-77.67240143"
+          },
+          "DestAirportID" : "ROC",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : true,
+          "FlightTimeMin" : 65.33670533711516,
+          "Origin" : "Chicago O'Hare International Airport",
+          "OriginLocation" : {
+            "lat" : "41.97859955",
+            "lon" : "-87.90480042"
+          },
+          "DestRegion" : "US-NY",
+          "OriginAirportID" : "ORD",
+          "OriginRegion" : "US-IL",
+          "DestCityName" : "Rochester",
+          "FlightTimeHour" : 1.0889450889519194,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "nDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "HLVLK7X",
+          "DestCountry" : "JP",
+          "OriginWeather" : "Cloudy",
+          "OriginCityName" : "Dublin",
+          "AvgTicketPrice" : 272.758914235496,
+          "DistanceMiles" : 5974.191408866089,
+          "FlightDelay" : true,
+          "DestWeather" : "Damaging Wind",
+          "Dest" : "Narita International Airport",
+          "FlightDelayType" : "NAS Delay",
+          "OriginCountry" : "IE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 9614.529098710187,
+          "timestamp" : "2024-03-22T02:38:34",
+          "DestLocation" : {
+            "lat" : "35.76470184",
+            "lon" : "140.3860016"
+          },
+          "DestAirportID" : "NRT",
+          "Carrier" : "Logstash Airways",
+          "Cancelled" : false,
+          "FlightTimeMin" : 1116.210758225849,
+          "Origin" : "Dublin Airport",
+          "OriginLocation" : {
+            "lat" : "53.42129898",
+            "lon" : "-6.270070076"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "DUB",
+          "OriginRegion" : "IE-D",
+          "DestCityName" : "Tokyo",
+          "FlightTimeHour" : 18.603512637097484,
+          "FlightDelayMin" : 315
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "nTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "6SLS6P0",
+          "DestCountry" : "MX",
+          "OriginWeather" : "Damaging Wind",
+          "OriginCityName" : "Bergamo",
+          "AvgTicketPrice" : 268.9976839773493,
+          "DistanceMiles" : 6125.383801585718,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Licenciado Benito Juarez International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "IT",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 9857.849668779167,
+          "timestamp" : "2024-03-22T20:47:07",
+          "DestLocation" : {
+            "lat" : "19.4363",
+            "lon" : "-99.072098"
+          },
+          "DestAirportID" : "AICM",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 547.6583149321759,
+          "Origin" : "Il Caravaggio International Airport",
+          "OriginLocation" : {
+            "lat" : "45.673901",
+            "lon" : "9.70417"
+          },
+          "DestRegion" : "MX-DIF",
+          "OriginAirportID" : "BG01",
+          "OriginRegion" : "IT-25",
+          "DestCityName" : "Mexico City",
+          "FlightTimeHour" : 9.127638582202932,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "qTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "SN5EK30",
+          "DestCountry" : "US",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "New Orleans",
+          "AvgTicketPrice" : 207.07356218328897,
+          "DistanceMiles" : 0,
+          "FlightDelay" : true,
+          "DestWeather" : "Heavy Fog",
+          "Dest" : "Louis Armstrong New Orleans International Airport",
+          "FlightDelayType" : "Carrier Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 0,
+          "timestamp" : "2024-03-22T12:08:17",
+          "DestLocation" : {
+            "lat" : "29.99340057",
+            "lon" : "-90.25800323"
+          },
+          "DestAirportID" : "MSY",
+          "Carrier" : "ES-Air",
+          "Cancelled" : false,
+          "FlightTimeMin" : 105,
+          "Origin" : "Louis Armstrong New Orleans International Airport",
+          "OriginLocation" : {
+            "lat" : "29.99340057",
+            "lon" : "-90.25800323"
+          },
+          "DestRegion" : "US-LA",
+          "OriginAirportID" : "MSY",
+          "OriginRegion" : "US-LA",
+          "DestCityName" : "New Orleans",
+          "FlightTimeHour" : 1.75,
+          "FlightDelayMin" : 105
+        }
+      },
+      {
+        "_index" : "kibana_sample_data_flights",
+        "_type" : "_doc",
+        "_id" : "qzTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "DCDCM5F",
+          "DestCountry" : "CA",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Brisbane",
+          "AvgTicketPrice" : 251.17284080218565,
+          "DistanceMiles" : 7836.314312135084,
+          "FlightDelay" : false,
+          "DestWeather" : "Rain",
+          "Dest" : "Edmonton International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "AU",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 12611.325420348725,
+          "timestamp" : "2024-03-22T13:20:08",
+          "DestLocation" : {
+            "lat" : "53.30970001",
+            "lon" : "-113.5800018"
+          },
+          "DestAirportID" : "CYEG",
+          "Carrier" : "ES-Air",
+          "Cancelled" : false,
+          "FlightTimeMin" : 900.8089585963374,
+          "Origin" : "Brisbane International Airport",
+          "OriginLocation" : {
+            "lat" : "-27.38419914",
+            "lon" : "153.1170044"
+          },
+          "DestRegion" : "CA-AB",
+          "OriginAirportID" : "BNE",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Edmonton",
+          "FlightTimeHour" : 15.01348264327229,
+          "FlightDelayMin" : 0
+        }
+      }
+    ]
+  }
+}
+----------------------
+CONSOLE OUTPUT ENDS
+----------------------
+#common use case for range would be for dates, to search for flight dates
+GET flights/_search
+{
+  "query": {
+    "range": {
+      "timestamp": {
+        "gte": "now/d",
+        "lte": "now"
+      }
+    }
+  }
+}
+----------------------
+CONSOLE OUTPUT 
+----------------------
+IT SHOULD SHOW THE TIME STAMP IN THE RANGE BUT IN MY CASE ITS SHOWING NULL
+----------------------
+CONSOLE OUTPUT ENDS
+----------------------
+
+
+
