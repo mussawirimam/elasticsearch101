@@ -66,14 +66,14 @@ RELEVANCY SCORING:
 ------------------
 How well a search matches a document.
 
-Term Frequency
+Term Frequency:
 How often does the term appear in the (field)?
 
 Inverse Document
-Frequency
+Frequency:
 How often does the term appear in the (index)?
 
-Field-Length Normalization
+Field-Length Normalization:
 How many terms are in
 the field?
 
