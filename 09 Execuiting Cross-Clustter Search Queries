@@ -1,12 +1,28 @@
+Cross-Cluster
+Search
+Run a search request against 1 or more remote clusters.
+
+You can search remote clusters that are 1 major version behind or ahead of the coordinating node.
 --------
 |client|
 --------
------------
-|cluster1 |
-~~~~~~~~~~~
-| node-1  |
-~~~~~~~~~~~
-| node-2  |
-~~~~~~~~~~~ 
-| node-3  |
-~~~~~~~~~~~
+    |
+    |
+    V
+-----------         ----------- 
+|cluster1 |         |cluster 2| 
+~~~~~~~~~~~         ~~~~~~~~~~~ 
+| node-1  |         | node-1  | 
+~~~~~~~~~~~ ------> ~~~~~~~~~~~ 
+| node-2  | ------  | node-2  | 
+~~~~~~~~~~~    |    ~~~~~~~~~~~ 
+| node-3  |    |    | node-3  | 
+-----------    |    ----------- 
+               | 
+               |    ----------- 
+               \    |cluster 3| 
+                --> ~~~~~~~~~~~ 
+                    | node-1  | 
+                    ~~~~~~~~~~~ 
+                    | node-2  | 
+                    ~~~~~~~~~~~ 
