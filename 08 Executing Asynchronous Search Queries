@@ -17,3 +17,2046 @@ DELETE:
 Delete the search:
 Search results can be deleted when no longer needed.
 
+POST ecommerce/_async_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "taxful_total_price": {
+              "lte": 20
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "term": {
+            "category.keyword": {
+              "value": "Men's Clothing"
+            }
+          }
+        },
+        {
+          "term": {
+            "category.keyword": {
+              "value": "Men's Shoes"
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+      , "must_not": [
+        {
+          "match": {
+            "products.product_name": "sweatshirt"
+          }
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "is_partial" : false,
+  "is_running" : false,
+  "start_time_in_millis" : 1715891266680,
+  "expiration_time_in_millis" : 1716323266680,
+  "response" : {
+    "took" : 9,
+    "timed_out" : false,
+    "_shards" : {
+      "total" : 1,
+      "successful" : 1,
+      "skipped" : 0,
+      "failed" : 0
+    },
+    "hits" : {
+      "total" : {
+        "value" : 30,
+        "relation" : "eq"
+      },
+      "max_score" : 1.9859598,
+      "hits" : [
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "VTTHkY4Bo6y4JKDsGXv4",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Abd",
+            "customer_full_name" : "Abd Jimenez",
+            "customer_gender" : "MALE",
+            "customer_id" : 52,
+            "customer_last_name" : "Jimenez",
+            "customer_phone" : "",
+            "day_of_week" : "Friday",
+            "day_of_week_i" : 4,
+            "email" : "abd@jimenez-family.zzz",
+            "manufacturer" : [
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-29T19:16:19+00:00",
+            "order_id" : 571762,
+            "products" : [
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 19629,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0555305553",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.92,
+                "_id" : "sold_product_571762_19629",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-16T19:16:19+00:00",
+                "product_name" : "Print T-shirt - white/red",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              },
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 13497,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0558405584",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.82,
+                "_id" : "sold_product_571762_13497",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-16T19:16:19+00:00",
+                "product_name" : "Print T-shirt - mottled light grey",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              }
+            ],
+            "sku" : [
+              "ZO0555305553",
+              "ZO0558405584"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "abd",
+            "geoip" : {
+              "country_iso_code" : "EG",
+              "location" : {
+                "lon" : 31.3,
+                "lat" : 30.1
+              },
+              "region_name" : "Cairo Governorate",
+              "continent_name" : "Africa",
+              "city_name" : "Cairo"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "CDTHkY4Bo6y4JKDsIHwt",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jim",
+            "customer_full_name" : "Jim Dawson",
+            "customer_gender" : "MALE",
+            "customer_id" : 41,
+            "customer_last_name" : "Dawson",
+            "customer_phone" : "",
+            "day_of_week" : "Friday",
+            "day_of_week_i" : 4,
+            "email" : "jim@dawson-family.zzz",
+            "manufacturer" : [
+              "Spritechnologies",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-22T17:25:26+00:00",
+            "order_id" : 562211,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Spritechnologies",
+                "tax_amount" : 0,
+                "product_id" : 17044,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0616806168",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 6.04,
+                "_id" : "sold_product_562211_17044",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-09T17:25:26+00:00",
+                "product_name" : "Sports shirt - bright white",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 19937,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0551805518",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.01,
+                "_id" : "sold_product_562211_19937",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-09T17:25:26+00:00",
+                "product_name" : "Basic T-shirt - rose",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0616806168",
+              "ZO0551805518"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jim",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -74,
+                "lat" : 40.8
+              },
+              "region_name" : "New York",
+              "continent_name" : "North America",
+              "city_name" : "New York"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "RzTHkY4Bo6y4JKDsIHwt",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jason",
+            "customer_full_name" : "Jason Williams",
+            "customer_gender" : "MALE",
+            "customer_id" : 16,
+            "customer_last_name" : "Williams",
+            "customer_phone" : "",
+            "day_of_week" : "Thursday",
+            "day_of_week_i" : 3,
+            "email" : "jason@williams-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Microlutions"
+            ],
+            "order_date" : "2024-04-11T17:03:50+00:00",
+            "order_id" : 589068,
+            "products" : [
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 18882,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0555405554",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.07,
+                "_id" : "sold_product_589068_18882",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-29T17:03:50+00:00",
+                "product_name" : "Print T-shirt - white/black",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              },
+              {
+                "base_price" : 11.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Microlutions",
+                "tax_amount" : 0,
+                "product_id" : 22409,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0121301213",
+                "taxless_price" : 11.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.76,
+                "_id" : "sold_product_589068_22409",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-29T17:03:50+00:00",
+                "product_name" : "Basic T-shirt - Dark Salmon",
+                "price" : 11.99,
+                "taxful_price" : 11.99,
+                "base_unit_price" : 11.99
+              }
+            ],
+            "sku" : [
+              "ZO0555405554",
+              "ZO0121301213"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jason",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -74,
+                "lat" : 40.8
+              },
+              "region_name" : "New York",
+              "continent_name" : "North America",
+              "city_name" : "New York"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "rTTHkY4Bo6y4JKDsIHwt",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Marwan",
+            "customer_full_name" : "Marwan Gregory",
+            "customer_gender" : "MALE",
+            "customer_id" : 51,
+            "customer_last_name" : "Gregory",
+            "customer_phone" : "",
+            "day_of_week" : "Sunday",
+            "day_of_week_i" : 6,
+            "email" : "marwan@gregory-family.zzz",
+            "manufacturer" : [
+              "Microlutions",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-17T22:14:53+00:00",
+            "order_id" : 555670,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Microlutions",
+                "tax_amount" : 0,
+                "product_id" : 19379,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0130301303",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.71,
+                "_id" : "sold_product_555670_19379",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-04T22:14:53+00:00",
+                "product_name" : "3 PACK - Socks - black/white/kaki",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 8.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 11867,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0546005460",
+                "taxless_price" : 8.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.76,
+                "_id" : "sold_product_555670_11867",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-04T22:14:53+00:00",
+                "product_name" : "Basic T-shirt - bordeaux multicolor",
+                "price" : 8.99,
+                "taxful_price" : 8.99,
+                "base_unit_price" : 8.99
+              }
+            ],
+            "sku" : [
+              "ZO0130301303",
+              "ZO0546005460"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "marwan",
+            "geoip" : {
+              "country_iso_code" : "MA",
+              "location" : {
+                "lon" : -8,
+                "lat" : 31.6
+              },
+              "region_name" : "Marrakech-Tensift-Al Haouz",
+              "continent_name" : "Africa",
+              "city_name" : "Marrakesh"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "EzTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Yahya",
+            "customer_full_name" : "Yahya Padilla",
+            "customer_gender" : "MALE",
+            "customer_id" : 23,
+            "customer_last_name" : "Padilla",
+            "customer_phone" : "",
+            "day_of_week" : "Wednesday",
+            "day_of_week_i" : 2,
+            "email" : "yahya@padilla-family.zzz",
+            "manufacturer" : [
+              "Low Tide Media"
+            ],
+            "order_date" : "2024-04-03T12:46:05+00:00",
+            "order_id" : 578062,
+            "products" : [
+              {
+                "base_price" : 11.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 21727,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0477304773",
+                "taxless_price" : 11.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 6.01,
+                "_id" : "sold_product_578062_21727",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-21T12:46:05+00:00",
+                "product_name" : "3 PACK - Shorts - Honeydew",
+                "price" : 11.99,
+                "taxful_price" : 11.99,
+                "base_unit_price" : 11.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 20238,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0479704797",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.84,
+                "_id" : "sold_product_578062_20238",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-21T12:46:05+00:00",
+                "product_name" : "3 PACK - Socks - blue/black/grey",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0477304773",
+              "ZO0479704797"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "yahya",
+            "geoip" : {
+              "country_iso_code" : "MA",
+              "location" : {
+                "lon" : -8,
+                "lat" : 31.6
+              },
+              "region_name" : "Marrakech-Tensift-Al Haouz",
+              "continent_name" : "Africa",
+              "city_name" : "Marrakesh"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "QzTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing",
+              "Men's Accessories"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Muniz",
+            "customer_full_name" : "Muniz Mcdonald",
+            "customer_gender" : "MALE",
+            "customer_id" : 37,
+            "customer_last_name" : "Mcdonald",
+            "customer_phone" : "",
+            "day_of_week" : "Saturday",
+            "day_of_week_i" : 5,
+            "email" : "muniz@mcdonald-family.zzz",
+            "manufacturer" : [
+              "Low Tide Media",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-30T16:42:14+00:00",
+            "order_id" : 572987,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 11794,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0436104361",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.5,
+                "_id" : "sold_product_572987_11794",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-17T16:42:14+00:00",
+                "product_name" : "Long sleeved top - light grey multicolor",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 6.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 17306,
+                "category" : "Men's Accessories",
+                "sku" : "ZO0597405974",
+                "taxless_price" : 6.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.7,
+                "_id" : "sold_product_572987_17306",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-17T16:42:14+00:00",
+                "product_name" : "Cap - black/black",
+                "price" : 6.99,
+                "taxful_price" : 6.99,
+                "base_unit_price" : 6.99
+              }
+            ],
+            "sku" : [
+              "ZO0436104361",
+              "ZO0597405974"
+            ],
+            "taxful_total_price" : 17.98,
+            "taxless_total_price" : 17.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "muniz",
+            "geoip" : {
+              "country_iso_code" : "MA",
+              "location" : {
+                "lon" : -8,
+                "lat" : 31.6
+              },
+              "region_name" : "Marrakech-Tensift-Al Haouz",
+              "continent_name" : "Africa",
+              "city_name" : "Marrakesh"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "hTTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jim",
+            "customer_full_name" : "Jim Marshall",
+            "customer_gender" : "MALE",
+            "customer_id" : 41,
+            "customer_last_name" : "Marshall",
+            "customer_phone" : "",
+            "day_of_week" : "Thursday",
+            "day_of_week_i" : 3,
+            "email" : "jim@marshall-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Oceanavigations"
+            ],
+            "order_date" : "2024-04-04T06:37:26+00:00",
+            "order_id" : 579019,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 18449,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0558005580",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.39,
+                "_id" : "sold_product_579019_18449",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-22T06:37:26+00:00",
+                "product_name" : "Print T-shirt - white",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Oceanavigations",
+                "tax_amount" : 0,
+                "product_id" : 11175,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0276502765",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.84,
+                "_id" : "sold_product_579019_11175",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-22T06:37:26+00:00",
+                "product_name" : "Bow tie - black",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0558005580",
+              "ZO0276502765"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jim",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -74,
+                "lat" : 40.8
+              },
+              "region_name" : "New York",
+              "continent_name" : "North America",
+              "city_name" : "New York"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "nTTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Eddie",
+            "customer_full_name" : "Eddie Hopkins",
+            "customer_gender" : "MALE",
+            "customer_id" : 38,
+            "customer_last_name" : "Hopkins",
+            "customer_phone" : "",
+            "day_of_week" : "Sunday",
+            "day_of_week_i" : 6,
+            "email" : "eddie@hopkins-family.zzz",
+            "manufacturer" : [
+              "Oceanavigations",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-04-07T06:12:58+00:00",
+            "order_id" : 583104,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Oceanavigations",
+                "tax_amount" : 0,
+                "product_id" : 20078,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0276902769",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.28,
+                "_id" : "sold_product_583104_20078",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-25T06:12:58+00:00",
+                "product_name" : "Tie - red",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 13221,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0549305493",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.31,
+                "_id" : "sold_product_583104_13221",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-25T06:12:58+00:00",
+                "product_name" : "Print T-shirt - white/dark blue",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0276902769",
+              "ZO0549305493"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "eddie",
+            "geoip" : {
+              "country_iso_code" : "EG",
+              "location" : {
+                "lon" : 31.3,
+                "lat" : 30.1
+              },
+              "region_name" : "Cairo Governorate",
+              "continent_name" : "Africa",
+              "city_name" : "Cairo"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "uTTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing",
+              "Men's Accessories"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Boris",
+            "customer_full_name" : "Boris Fletcher",
+            "customer_gender" : "MALE",
+            "customer_id" : 36,
+            "customer_last_name" : "Fletcher",
+            "customer_phone" : "",
+            "day_of_week" : "Thursday",
+            "day_of_week_i" : 3,
+            "email" : "boris@fletcher-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Low Tide Media"
+            ],
+            "order_date" : "2024-03-21T08:00:58+00:00",
+            "order_id" : 560284,
+            "products" : [
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 20560,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0545605456",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.92,
+                "_id" : "sold_product_560284_20560",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-08T08:00:58+00:00",
+                "product_name" : "Basic T-shirt - black",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              },
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 16084,
+                "category" : "Men's Accessories",
+                "sku" : "ZO0463004630",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.39,
+                "_id" : "sold_product_560284_16084",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-08T08:00:58+00:00",
+                "product_name" : "Scarf - black",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              }
+            ],
+            "sku" : [
+              "ZO0545605456",
+              "ZO0463004630"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "boris",
+            "geoip" : {
+              "country_iso_code" : "GB",
+              "location" : {
+                "lon" : -0.1,
+                "lat" : 51.5
+              },
+              "continent_name" : "Europe"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "UDTHkY4Bo6y4JKDsKYDx",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jackson",
+            "customer_full_name" : "Jackson Tran",
+            "customer_gender" : "MALE",
+            "customer_id" : 13,
+            "customer_last_name" : "Tran",
+            "customer_phone" : "",
+            "day_of_week" : "Monday",
+            "day_of_week_i" : 0,
+            "email" : "jackson@tran-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Low Tide Media"
+            ],
+            "order_date" : "2024-04-08T08:00:58+00:00",
+            "order_id" : 584605,
+            "products" : [
+              {
+                "base_price" : 8.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 20378,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0545705457",
+                "taxless_price" : 8.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.23,
+                "_id" : "sold_product_584605_20378",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-26T08:00:58+00:00",
+                "product_name" : "Basic T-shirt - white",
+                "price" : 8.99,
+                "taxful_price" : 8.99,
+                "base_unit_price" : 8.99
+              },
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 24924,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0438904389",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.71,
+                "_id" : "sold_product_584605_24924",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-26T08:00:58+00:00",
+                "product_name" : "Print T-shirt - navy",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              }
+            ],
+            "sku" : [
+              "ZO0545705457",
+              "ZO0438904389"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jackson",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -118.2,
+                "lat" : 34.1
+              },
+              "region_name" : "California",
+              "continent_name" : "North America",
+              "city_name" : "Los Angeles"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+POST ecommerce/_async_search?wait_for_completion_timeout=0
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "taxful_total_price": {
+              "lte": 20
+            }
+          }
+        }
+      ],
+      "should": [
+        {
+          "term": {
+            "category.keyword": {
+              "value": "Men's Clothing"
+            }
+          }
+        },
+        {
+          "term": {
+            "category.keyword": {
+              "value": "Men's Shoes"
+            }
+          }
+        }
+      ],
+      "minimum_should_match": 1
+      , "must_not": [
+        {
+          "match": {
+            "products.product_name": "sweatshirt"
+          }
+        }
+      ]
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT 
+--------------------
+#we can use this id to interact with the asynchronous search
+{
+  "id" : "FnhnOTItZm9NVGJHT2pmeE02Y3p3U3ccSXlHZ24tQmFUWHFFOGNmZ2Z1QzN0ZzozNzQyNg==",
+  "is_partial" : true,
+  "is_running" : true,
+  "start_time_in_millis" : 1715891368403,
+  "expiration_time_in_millis" : 1716323368403,
+  "response" : {
+    "took" : 1,
+    "timed_out" : false,
+    "terminated_early" : false,
+    "num_reduce_phases" : 0,
+    "_shards" : {
+      "total" : 1,
+      "successful" : 0,
+      "skipped" : 0,
+      "failed" : 0
+    },
+    "hits" : {
+      "total" : {
+        "value" : 0,
+        "relation" : "gte"
+      },
+      "max_score" : null,
+      "hits" : [ ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#you can use this query and the id you get when you run asyncronous search query to get the status 
+GET _async_search/status/FnhnOTItZm9NVGJHT2pmeE02Y3p3U3ccSXlHZ24tQmFUWHFFOGNmZ2Z1QzN0ZzozNzQyNg==
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "id" : "FnhnOTItZm9NVGJHT2pmeE02Y3p3U3ccSXlHZ24tQmFUWHFFOGNmZ2Z1QzN0ZzozNzQyNg==",
+  "is_running" : false,
+  "is_partial" : false,
+  "start_time_in_millis" : 1715891368403,
+  "expiration_time_in_millis" : 1716323368403,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "completion_status" : 200
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+GET _async_search/FnhnOTItZm9NVGJHT2pmeE02Y3p3U3ccSXlHZ24tQmFUWHFFOGNmZ2Z1QzN0ZzozNzQyNg==
+--------------------
+CONSOLE OUTPUT 
+--------------------
+
+{
+  "id" : "FnhnOTItZm9NVGJHT2pmeE02Y3p3U3ccSXlHZ24tQmFUWHFFOGNmZ2Z1QzN0ZzozNzQyNg==",
+  "is_partial" : false,
+  "is_running" : false,
+  "start_time_in_millis" : 1715891368403,
+  "expiration_time_in_millis" : 1716323368403,
+  "response" : {
+    "took" : 11,
+    "timed_out" : false,
+    "_shards" : {
+      "total" : 1,
+      "successful" : 1,
+      "skipped" : 0,
+      "failed" : 0
+    },
+    "hits" : {
+      "total" : {
+        "value" : 30,
+        "relation" : "eq"
+      },
+      "max_score" : 1.9859598,
+      "hits" : [
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "VTTHkY4Bo6y4JKDsGXv4",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Abd",
+            "customer_full_name" : "Abd Jimenez",
+            "customer_gender" : "MALE",
+            "customer_id" : 52,
+            "customer_last_name" : "Jimenez",
+            "customer_phone" : "",
+            "day_of_week" : "Friday",
+            "day_of_week_i" : 4,
+            "email" : "abd@jimenez-family.zzz",
+            "manufacturer" : [
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-29T19:16:19+00:00",
+            "order_id" : 571762,
+            "products" : [
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 19629,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0555305553",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.92,
+                "_id" : "sold_product_571762_19629",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-16T19:16:19+00:00",
+                "product_name" : "Print T-shirt - white/red",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              },
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 13497,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0558405584",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.82,
+                "_id" : "sold_product_571762_13497",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-16T19:16:19+00:00",
+                "product_name" : "Print T-shirt - mottled light grey",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              }
+            ],
+            "sku" : [
+              "ZO0555305553",
+              "ZO0558405584"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "abd",
+            "geoip" : {
+              "country_iso_code" : "EG",
+              "location" : {
+                "lon" : 31.3,
+                "lat" : 30.1
+              },
+              "region_name" : "Cairo Governorate",
+              "continent_name" : "Africa",
+              "city_name" : "Cairo"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "CDTHkY4Bo6y4JKDsIHwt",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jim",
+            "customer_full_name" : "Jim Dawson",
+            "customer_gender" : "MALE",
+            "customer_id" : 41,
+            "customer_last_name" : "Dawson",
+            "customer_phone" : "",
+            "day_of_week" : "Friday",
+            "day_of_week_i" : 4,
+            "email" : "jim@dawson-family.zzz",
+            "manufacturer" : [
+              "Spritechnologies",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-22T17:25:26+00:00",
+            "order_id" : 562211,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Spritechnologies",
+                "tax_amount" : 0,
+                "product_id" : 17044,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0616806168",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 6.04,
+                "_id" : "sold_product_562211_17044",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-09T17:25:26+00:00",
+                "product_name" : "Sports shirt - bright white",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 19937,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0551805518",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.01,
+                "_id" : "sold_product_562211_19937",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-09T17:25:26+00:00",
+                "product_name" : "Basic T-shirt - rose",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0616806168",
+              "ZO0551805518"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jim",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -74,
+                "lat" : 40.8
+              },
+              "region_name" : "New York",
+              "continent_name" : "North America",
+              "city_name" : "New York"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "RzTHkY4Bo6y4JKDsIHwt",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jason",
+            "customer_full_name" : "Jason Williams",
+            "customer_gender" : "MALE",
+            "customer_id" : 16,
+            "customer_last_name" : "Williams",
+            "customer_phone" : "",
+            "day_of_week" : "Thursday",
+            "day_of_week_i" : 3,
+            "email" : "jason@williams-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Microlutions"
+            ],
+            "order_date" : "2024-04-11T17:03:50+00:00",
+            "order_id" : 589068,
+            "products" : [
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 18882,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0555405554",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.07,
+                "_id" : "sold_product_589068_18882",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-29T17:03:50+00:00",
+                "product_name" : "Print T-shirt - white/black",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              },
+              {
+                "base_price" : 11.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Microlutions",
+                "tax_amount" : 0,
+                "product_id" : 22409,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0121301213",
+                "taxless_price" : 11.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.76,
+                "_id" : "sold_product_589068_22409",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-29T17:03:50+00:00",
+                "product_name" : "Basic T-shirt - Dark Salmon",
+                "price" : 11.99,
+                "taxful_price" : 11.99,
+                "base_unit_price" : 11.99
+              }
+            ],
+            "sku" : [
+              "ZO0555405554",
+              "ZO0121301213"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jason",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -74,
+                "lat" : 40.8
+              },
+              "region_name" : "New York",
+              "continent_name" : "North America",
+              "city_name" : "New York"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "rTTHkY4Bo6y4JKDsIHwt",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Marwan",
+            "customer_full_name" : "Marwan Gregory",
+            "customer_gender" : "MALE",
+            "customer_id" : 51,
+            "customer_last_name" : "Gregory",
+            "customer_phone" : "",
+            "day_of_week" : "Sunday",
+            "day_of_week_i" : 6,
+            "email" : "marwan@gregory-family.zzz",
+            "manufacturer" : [
+              "Microlutions",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-17T22:14:53+00:00",
+            "order_id" : 555670,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Microlutions",
+                "tax_amount" : 0,
+                "product_id" : 19379,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0130301303",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.71,
+                "_id" : "sold_product_555670_19379",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-04T22:14:53+00:00",
+                "product_name" : "3 PACK - Socks - black/white/kaki",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 8.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 11867,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0546005460",
+                "taxless_price" : 8.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.76,
+                "_id" : "sold_product_555670_11867",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-04T22:14:53+00:00",
+                "product_name" : "Basic T-shirt - bordeaux multicolor",
+                "price" : 8.99,
+                "taxful_price" : 8.99,
+                "base_unit_price" : 8.99
+              }
+            ],
+            "sku" : [
+              "ZO0130301303",
+              "ZO0546005460"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "marwan",
+            "geoip" : {
+              "country_iso_code" : "MA",
+              "location" : {
+                "lon" : -8,
+                "lat" : 31.6
+              },
+              "region_name" : "Marrakech-Tensift-Al Haouz",
+              "continent_name" : "Africa",
+              "city_name" : "Marrakesh"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "EzTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Yahya",
+            "customer_full_name" : "Yahya Padilla",
+            "customer_gender" : "MALE",
+            "customer_id" : 23,
+            "customer_last_name" : "Padilla",
+            "customer_phone" : "",
+            "day_of_week" : "Wednesday",
+            "day_of_week_i" : 2,
+            "email" : "yahya@padilla-family.zzz",
+            "manufacturer" : [
+              "Low Tide Media"
+            ],
+            "order_date" : "2024-04-03T12:46:05+00:00",
+            "order_id" : 578062,
+            "products" : [
+              {
+                "base_price" : 11.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 21727,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0477304773",
+                "taxless_price" : 11.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 6.01,
+                "_id" : "sold_product_578062_21727",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-21T12:46:05+00:00",
+                "product_name" : "3 PACK - Shorts - Honeydew",
+                "price" : 11.99,
+                "taxful_price" : 11.99,
+                "base_unit_price" : 11.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 20238,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0479704797",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.84,
+                "_id" : "sold_product_578062_20238",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-21T12:46:05+00:00",
+                "product_name" : "3 PACK - Socks - blue/black/grey",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0477304773",
+              "ZO0479704797"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "yahya",
+            "geoip" : {
+              "country_iso_code" : "MA",
+              "location" : {
+                "lon" : -8,
+                "lat" : 31.6
+              },
+              "region_name" : "Marrakech-Tensift-Al Haouz",
+              "continent_name" : "Africa",
+              "city_name" : "Marrakesh"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "QzTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing",
+              "Men's Accessories"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Muniz",
+            "customer_full_name" : "Muniz Mcdonald",
+            "customer_gender" : "MALE",
+            "customer_id" : 37,
+            "customer_last_name" : "Mcdonald",
+            "customer_phone" : "",
+            "day_of_week" : "Saturday",
+            "day_of_week_i" : 5,
+            "email" : "muniz@mcdonald-family.zzz",
+            "manufacturer" : [
+              "Low Tide Media",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-03-30T16:42:14+00:00",
+            "order_id" : 572987,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 11794,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0436104361",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.5,
+                "_id" : "sold_product_572987_11794",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-17T16:42:14+00:00",
+                "product_name" : "Long sleeved top - light grey multicolor",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 6.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 17306,
+                "category" : "Men's Accessories",
+                "sku" : "ZO0597405974",
+                "taxless_price" : 6.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.7,
+                "_id" : "sold_product_572987_17306",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-17T16:42:14+00:00",
+                "product_name" : "Cap - black/black",
+                "price" : 6.99,
+                "taxful_price" : 6.99,
+                "base_unit_price" : 6.99
+              }
+            ],
+            "sku" : [
+              "ZO0436104361",
+              "ZO0597405974"
+            ],
+            "taxful_total_price" : 17.98,
+            "taxless_total_price" : 17.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "muniz",
+            "geoip" : {
+              "country_iso_code" : "MA",
+              "location" : {
+                "lon" : -8,
+                "lat" : 31.6
+              },
+              "region_name" : "Marrakech-Tensift-Al Haouz",
+              "continent_name" : "Africa",
+              "city_name" : "Marrakesh"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "hTTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jim",
+            "customer_full_name" : "Jim Marshall",
+            "customer_gender" : "MALE",
+            "customer_id" : 41,
+            "customer_last_name" : "Marshall",
+            "customer_phone" : "",
+            "day_of_week" : "Thursday",
+            "day_of_week_i" : 3,
+            "email" : "jim@marshall-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Oceanavigations"
+            ],
+            "order_date" : "2024-04-04T06:37:26+00:00",
+            "order_id" : 579019,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 18449,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0558005580",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.39,
+                "_id" : "sold_product_579019_18449",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-22T06:37:26+00:00",
+                "product_name" : "Print T-shirt - white",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Oceanavigations",
+                "tax_amount" : 0,
+                "product_id" : 11175,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0276502765",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.84,
+                "_id" : "sold_product_579019_11175",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-22T06:37:26+00:00",
+                "product_name" : "Bow tie - black",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0558005580",
+              "ZO0276502765"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jim",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -74,
+                "lat" : 40.8
+              },
+              "region_name" : "New York",
+              "continent_name" : "North America",
+              "city_name" : "New York"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "nTTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Eddie",
+            "customer_full_name" : "Eddie Hopkins",
+            "customer_gender" : "MALE",
+            "customer_id" : 38,
+            "customer_last_name" : "Hopkins",
+            "customer_phone" : "",
+            "day_of_week" : "Sunday",
+            "day_of_week_i" : 6,
+            "email" : "eddie@hopkins-family.zzz",
+            "manufacturer" : [
+              "Oceanavigations",
+              "Elitelligence"
+            ],
+            "order_date" : "2024-04-07T06:12:58+00:00",
+            "order_id" : 583104,
+            "products" : [
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Oceanavigations",
+                "tax_amount" : 0,
+                "product_id" : 20078,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0276902769",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.28,
+                "_id" : "sold_product_583104_20078",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-25T06:12:58+00:00",
+                "product_name" : "Tie - red",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              },
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 13221,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0549305493",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.31,
+                "_id" : "sold_product_583104_13221",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-25T06:12:58+00:00",
+                "product_name" : "Print T-shirt - white/dark blue",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              }
+            ],
+            "sku" : [
+              "ZO0276902769",
+              "ZO0549305493"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "eddie",
+            "geoip" : {
+              "country_iso_code" : "EG",
+              "location" : {
+                "lon" : 31.3,
+                "lat" : 30.1
+              },
+              "region_name" : "Cairo Governorate",
+              "continent_name" : "Africa",
+              "city_name" : "Cairo"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "uTTHkY4Bo6y4JKDsIH0t",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing",
+              "Men's Accessories"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Boris",
+            "customer_full_name" : "Boris Fletcher",
+            "customer_gender" : "MALE",
+            "customer_id" : 36,
+            "customer_last_name" : "Fletcher",
+            "customer_phone" : "",
+            "day_of_week" : "Thursday",
+            "day_of_week_i" : 3,
+            "email" : "boris@fletcher-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Low Tide Media"
+            ],
+            "order_date" : "2024-03-21T08:00:58+00:00",
+            "order_id" : 560284,
+            "products" : [
+              {
+                "base_price" : 7.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 20560,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0545605456",
+                "taxless_price" : 7.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 3.92,
+                "_id" : "sold_product_560284_20560",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-08T08:00:58+00:00",
+                "product_name" : "Basic T-shirt - black",
+                "price" : 7.99,
+                "taxful_price" : 7.99,
+                "base_unit_price" : 7.99
+              },
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 16084,
+                "category" : "Men's Accessories",
+                "sku" : "ZO0463004630",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.39,
+                "_id" : "sold_product_560284_16084",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-08T08:00:58+00:00",
+                "product_name" : "Scarf - black",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              }
+            ],
+            "sku" : [
+              "ZO0545605456",
+              "ZO0463004630"
+            ],
+            "taxful_total_price" : 18.98,
+            "taxless_total_price" : 18.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "boris",
+            "geoip" : {
+              "country_iso_code" : "GB",
+              "location" : {
+                "lon" : -0.1,
+                "lat" : 51.5
+              },
+              "continent_name" : "Europe"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        },
+        {
+          "_index" : "kibana_sample_data_ecommerce",
+          "_type" : "_doc",
+          "_id" : "UDTHkY4Bo6y4JKDsKYDx",
+          "_score" : 1.9859598,
+          "_source" : {
+            "category" : [
+              "Men's Clothing"
+            ],
+            "currency" : "EUR",
+            "customer_first_name" : "Jackson",
+            "customer_full_name" : "Jackson Tran",
+            "customer_gender" : "MALE",
+            "customer_id" : 13,
+            "customer_last_name" : "Tran",
+            "customer_phone" : "",
+            "day_of_week" : "Monday",
+            "day_of_week_i" : 0,
+            "email" : "jackson@tran-family.zzz",
+            "manufacturer" : [
+              "Elitelligence",
+              "Low Tide Media"
+            ],
+            "order_date" : "2024-04-08T08:00:58+00:00",
+            "order_id" : 584605,
+            "products" : [
+              {
+                "base_price" : 8.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Elitelligence",
+                "tax_amount" : 0,
+                "product_id" : 20378,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0545705457",
+                "taxless_price" : 8.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 4.23,
+                "_id" : "sold_product_584605_20378",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-26T08:00:58+00:00",
+                "product_name" : "Basic T-shirt - white",
+                "price" : 8.99,
+                "taxful_price" : 8.99,
+                "base_unit_price" : 8.99
+              },
+              {
+                "base_price" : 10.99,
+                "discount_percentage" : 0,
+                "quantity" : 1,
+                "manufacturer" : "Low Tide Media",
+                "tax_amount" : 0,
+                "product_id" : 24924,
+                "category" : "Men's Clothing",
+                "sku" : "ZO0438904389",
+                "taxless_price" : 10.99,
+                "unit_discount_amount" : 0,
+                "min_price" : 5.71,
+                "_id" : "sold_product_584605_24924",
+                "discount_amount" : 0,
+                "created_on" : "2016-12-26T08:00:58+00:00",
+                "product_name" : "Print T-shirt - navy",
+                "price" : 10.99,
+                "taxful_price" : 10.99,
+                "base_unit_price" : 10.99
+              }
+            ],
+            "sku" : [
+              "ZO0545705457",
+              "ZO0438904389"
+            ],
+            "taxful_total_price" : 19.98,
+            "taxless_total_price" : 19.98,
+            "total_quantity" : 2,
+            "total_unique_products" : 2,
+            "type" : "order",
+            "user" : "jackson",
+            "geoip" : {
+              "country_iso_code" : "US",
+              "location" : {
+                "lon" : -118.2,
+                "lat" : 34.1
+              },
+              "region_name" : "California",
+              "continent_name" : "North America",
+              "city_name" : "Los Angeles"
+            },
+            "event" : {
+              "dataset" : "sample_ecommerce"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
