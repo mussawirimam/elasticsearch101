@@ -2059,4 +2059,15 @@ CONSOLE OUTPUT
 --------------------
 CONSOLE OUTPUT ENDS
 --------------------
+#asyncronous search will delete itself after 5 days but it is a good practice to delete the asyncronous search after getting the results or once you are done with the task.
+DELETE _async_search/FnhnOTItZm9NVGJHT2pmeE02Y3p3U3ccSXlHZ24tQmFUWHFFOGNmZ2Z1QzN0ZzozNzQyNg==
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "acknowledged" : true
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
 
