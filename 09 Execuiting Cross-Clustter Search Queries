@@ -25,4 +25,4 @@ You can search remote clusters that are 1 major version behind or ahead of the c
                     | node-1  | 
                     ~~~~~~~~~~~ 
                     | node-2  | 
-                    ~~~~~~~~~~~ 
+                    -----------
