@@ -1,0 +1,19 @@
+#Asynchronous search query is usrf incase if the query is taking longer to process
+#then, you can use asynchronous search query to run and come back later with the ID that it gives you and come back later to get the results 
+
+SUBMIT:
+Write the query:
+_async_search accepts the same parameters and body as the _search API.
+
+CHECK:
+Check search status:
+_async_search requests return an ID that can be used to check the search status.
+
+RESULTS:
+Get search results:
+Search results can be fetched while _async_search executes and after it completes.
+
+DELETE:
+Delete the search:
+Search results can be deleted when no longer needed.
+
