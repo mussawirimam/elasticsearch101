@@ -1,0 +1,2 @@
+#Asynchronous search query is usrf incase if the query is taking longer to process
+#then, you can use asynchronous search query to run and come back later with the ID that it gives you and come back later to ge tthe results 
