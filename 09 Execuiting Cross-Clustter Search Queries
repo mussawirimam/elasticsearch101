@@ -74,3 +74,3134 @@ You can search remote clusters that are 1 major version behind or ahead of the c
                     ~~~~~~~~~~~ 
                     | node-2  | 
                     -----------
+---------------------------------------------------------------------------------------------------------
+#copy the private ip of the Node
+#your ip is going to be different
+#remote cluster IP 172.31.16.72
+PUT _cluster/settings
+{
+  "persistent": {
+    "cluster": {
+      "remote": {
+        "cluster_2": {
+          "seeds": ["172.31.16.72:9300"]
+        }
+      }
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+{
+  "acknowledged" : true,
+  "persistent" : {
+    "cluster" : {
+      "remote" : {
+        "cluster_2" : {
+          "seeds" : [
+            "172.31.16.72:9300"
+          ]
+        }
+      }
+    }
+  },
+  "transient" : { }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#this is the result from our local cluster that we are currently on
+GET filebeat-7.13.4/_search
+{
+  "query": {
+    "range": {
+      "@timestamp": {
+        "gte": "now-1h",
+        "lte":"now"
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 8,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 2,
+    "successful" : 2,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1091,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "ii4ng48BzzALfNtiHvr3",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "metricbeat"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6682541
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : """2024-05-16T20:45:22.409Z#011INFO#011[monitoring]#011log/log.go:144#011Non-zero metrics in the last 30s#011{"monitoring": {"metrics": {"beat":{"cpu":{"system":{"ticks":69900,"time":{"ms":441}},"total":{"ticks":114240,"time":{"ms":696},"value":114240},"user":{"ticks":44340,"time":{"ms":255}}},"handles":{"limit":{"hard":4096,"soft":1024},"open":9},"info":{"ephemeral_id":"c098e086-4a4a-4447-ac7f-46274aa4f318","uptime":{"ms":5316604}},"memstats":{"gc_next":18709664,"memory_alloc":11588088,"memory_total":10237296504,"rss":158265344},"runtime":{"goroutines":61}},"libbeat":{"config":{"module":{"running":3}},"output":{"events":{"acked":45,"active":0,"batches":3,"total":45},"read":{"bytes":1330},"write":{"bytes":89571}},"pipeline":{"clients":10,"events":{"active":0,"published":45,"total":45},"queue":{"acked":45}}},"metricbeat":{"system":{"cpu":{"events":3,"success":3},"filesystem":{"events":1,"success":1},"fsstat":{"events":1,"success":1},"load":{"events":3,"success":3},"memory":{"events":3,"success":3},"network":{"events":9,"success":9},"process":{"events":19,"success":19},"process_summary":{"events":3,"success":3},"socket_summary":{"events":3,"success":3}}},"system":{"load":{"1":0.43,"15":0.13,"5":0.16,"norm":{"1":0.215,"15":0.065,"5":0.08}}}}}}""",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:45:22.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:45:30.230461855Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "iS4ng48BzzALfNtiC_pu",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "filebeat"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6681440
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : """2024-05-16T20:45:16.596Z#011INFO#011[monitoring]#011log/log.go:144#011Non-zero metrics in the last 30s#011{"monitoring": {"metrics": {"beat":{"cpu":{"system":{"ticks":3200,"time":{"ms":10}},"total":{"ticks":6920,"time":{"ms":36},"value":6920},"user":{"ticks":3720,"time":{"ms":26}}},"handles":{"limit":{"hard":4096,"soft":1024},"open":12},"info":{"ephemeral_id":"c209c254-bff8-4792-aa81-04a4bea39f13","uptime":{"ms":5314732}},"memstats":{"gc_next":18743264,"memory_alloc":11130168,"memory_total":388805640,"rss":132120576},"runtime":{"goroutines":37}},"filebeat":{"events":{"added":16,"done":16},"harvester":{"open_files":1,"running":1}},"libbeat":{"config":{"module":{"running":1}},"output":{"events":{"acked":16,"active":0,"batches":4,"total":16},"read":{"bytes":1476},"write":{"bytes":26137}},"pipeline":{"clients":2,"events":{"active":0,"published":16,"total":16},"queue":{"acked":16}}},"registrar":{"states":{"current":11,"update":16},"writes":{"success":4,"total":4}},"system":{"load":{"1":0.38,"15":0.12,"5":0.14,"norm":{"1":0.19,"15":0.06,"5":0.07}}}}}}""",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:45:16.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:45:25.229956892Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "2i4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "filebeat"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6686229
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : """2024-05-16T20:46:16.596Z#011INFO#011[monitoring]#011log/log.go:144#011Non-zero metrics in the last 30s#011{"monitoring": {"metrics": {"beat":{"cpu":{"system":{"ticks":3230,"time":{"ms":19}},"total":{"ticks":6960,"time":{"ms":25},"value":6960},"user":{"ticks":3730,"time":{"ms":6}}},"handles":{"limit":{"hard":4096,"soft":1024},"open":12},"info":{"ephemeral_id":"c209c254-bff8-4792-aa81-04a4bea39f13","uptime":{"ms":5374731}},"memstats":{"gc_next":18743264,"memory_alloc":13666104,"memory_total":391341576,"rss":132120576},"runtime":{"goroutines":37}},"filebeat":{"events":{"added":3,"done":3},"harvester":{"open_files":1,"running":1}},"libbeat":{"config":{"module":{"running":1}},"output":{"events":{"acked":3,"active":0,"batches":3,"total":3},"read":{"bytes":1029},"write":{"bytes":7400}},"pipeline":{"clients":2,"events":{"active":0,"published":3,"total":3},"queue":{"acked":3}}},"registrar":{"states":{"current":11,"update":3},"writes":{"success":3,"total":3}},"system":{"load":{"1":0.38,"15":0.14,"5":0.2,"norm":{"1":0.19,"15":0.07,"5":0.1}}}}}}""",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:16.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.240517313Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "2y4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687318
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "PRC: Renewing lease on ens5.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "containerized" : false,
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.241604025Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "3C4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687392
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "XMT: Renew on ens5, interval 10960ms.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.242173065Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "3S4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687475
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "RCV: Reply message on ens5 from fe80::f6:42ff:fe00:86aa.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.242640986Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "3i4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687577
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892378.0876] dhcp6 (ens5):   valid_lft 450",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.244831138Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "3y4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687683
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892378.0880] dhcp6 (ens5):   preferred_lft 140",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.245342768Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "4C4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687793
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892378.0880] dhcp6 (ens5):   address 2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.245838319Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "4S4ng48BzzALfNti3vpy",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6687932
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892378.0880] dhcp6 (ens5): state changed bound -> bound, event ID=\"8b:74:f9:b1|1715892378\"",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:46:18.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "containerized" : false,
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:46:19.246306300Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+#if we want to run the same search in our remote cluster we will have to put cluster_2 and then same search url
+#now with this we will search our remote cluster index
+GET cluster_2:filebeat-7.13.4/_search
+{
+  "query": {
+    "range": {
+      "@timestamp": {
+        "gte": "now-1h",
+        "lte":"now"
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 17,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 2,
+    "successful" : 2,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "_clusters" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1094,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "wC4pg48BzzALfNtixvu7",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "filebeat"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6699123
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : """2024-05-16T20:48:16.597Z#011INFO#011[monitoring]#011log/log.go:144#011Non-zero metrics in the last 30s#011{"monitoring": {"metrics": {"beat":{"cpu":{"system":{"ticks":3290,"time":{"ms":16}},"total":{"ticks":7090,"time":{"ms":28},"value":7090},"user":{"ticks":3800,"time":{"ms":12}}},"handles":{"limit":{"hard":4096,"soft":1024},"open":12},"info":{"ephemeral_id":"c209c254-bff8-4792-aa81-04a4bea39f13","uptime":{"ms":5494731}},"memstats":{"gc_next":18617136,"memory_alloc":13940976,"memory_total":398502072,"rss":132120576},"runtime":{"goroutines":37}},"filebeat":{"events":{"added":3,"done":3},"harvester":{"open_files":1,"running":1}},"libbeat":{"config":{"module":{"running":1}},"output":{"events":{"acked":3,"active":0,"batches":3,"total":3},"read":{"bytes":1030},"write":{"bytes":7412}},"pipeline":{"clients":2,"events":{"active":0,"published":3,"total":3},"queue":{"acked":3}}},"registrar":{"states":{"current":11,"update":3},"writes":{"success":3,"total":3}},"system":{"load":{"1":0.05,"15":0.13,"5":0.14,"norm":{"1":0.025,"15":0.065,"5":0.07}}}}}}""",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:48:16.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "containerized" : false,
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:48:24.250774733Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "oy4pg48BzzALfNtijPsi",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "systemd"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6699052
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "Started Session 98 of user root.",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:48:01.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:48:09.250198514Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Sy4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "filebeat"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6707742
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : """2024-05-16T20:49:46.597Z#011INFO#011[monitoring]#011log/log.go:144#011Non-zero metrics in the last 30s#011{"monitoring": {"metrics": {"beat":{"cpu":{"system":{"ticks":3330,"time":{"ms":17}},"total":{"ticks":7180,"time":{"ms":22},"value":7180},"user":{"ticks":3850,"time":{"ms":5}}},"handles":{"limit":{"hard":4096,"soft":1024},"open":12},"info":{"ephemeral_id":"c209c254-bff8-4792-aa81-04a4bea39f13","uptime":{"ms":5584730}},"memstats":{"gc_next":18742368,"memory_alloc":11589640,"memory_total":402954016,"rss":132120576},"runtime":{"goroutines":37}},"filebeat":{"events":{"added":2,"done":2},"harvester":{"open_files":1,"running":1}},"libbeat":{"config":{"module":{"running":1}},"output":{"events":{"acked":2,"active":0,"batches":2,"total":2},"read":{"bytes":690},"write":{"bytes":5856}},"pipeline":{"clients":2,"events":{"active":0,"published":2,"total":2},"queue":{"acked":2}}},"registrar":{"states":{"current":11,"update":2},"writes":{"success":2,"total":2}},"system":{"load":{"1":0.08,"15":0.13,"5":0.13,"norm":{"1":0.04,"15":0.065,"5":0.065}}}}}}""",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:46.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.258618916Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "TC4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6708834
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "PRC: Renewing lease on ens5.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.259274426Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "TS4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6708908
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "XMT: Renew on ens5, interval 9100ms.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.259543986Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Ti4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6708990
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "RCV: Reply message on ens5 from fe80::f6:42ff:fe00:86aa.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.259839007Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Ty4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6709092
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892588.3246] dhcp6 (ens5):   valid_lft 450",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.260101147Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "UC4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6709198
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892588.3250] dhcp6 (ens5):   preferred_lft 140",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "containerized" : false,
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.260368077Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "US4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6709308
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892588.3251] dhcp6 (ens5):   address 2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.260624888Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "cluster_2:filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Ui4rg48BzzALfNtiHvyP",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6709447
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892588.3251] dhcp6 (ens5): state changed bound -> bound, event ID=\"8b:74:f9:b1|1715892588\"",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:49:48.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:49:52.260911359Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+#so incase of searching both clusters
+# so we use the filebeat index and then with comma (,) we write cluster2 with it as well. This way you will have both cluster1 and cluster 2 search results
+#this query will search local index and remote index
+GET filebeat-7.13.4,cluster_2:filebeat-7.13.4/_search
+{
+  "query": {
+    "range": {
+      "@timestamp": {
+        "gte": "now-1h",
+        "lte":"now"
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 62,
+  "timed_out" : false,
+  "num_reduce_phases" : 3,
+  "_shards" : {
+    "total" : 4,
+    "successful" : 4,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "_clusters" : {
+    "total" : 2,
+    "successful" : 2,
+    "skipped" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2228,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Qy4tg48BzzALfNtiNf3H",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "systemd"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6722503
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "Started Session 102 of user root.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:01.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:09.286808527Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "RC4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6722575
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "PRC: Renewing lease on ens5.",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "containerized" : false,
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.289885335Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "RS4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6722649
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "XMT: Renew on ens5, interval 10090ms.",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.290602336Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Ri4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dhclient",
+            "pid" : 1183
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6722732
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "RCV: Reply message on ens5 from fe80::f6:42ff:fe00:86aa.",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.291021717Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Ry4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6722834
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892728.4718] dhcp6 (ens5):   valid_lft 450",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.291418967Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "SC4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6722940
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892728.4724] dhcp6 (ens5):   preferred_lft 140",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.292023138Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "SS4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "type" : "filebeat",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6723050
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892728.4725] dhcp6 (ens5):   address 2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "service" : {
+              "name" : "EC2"
+            },
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.292634878Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Si4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "NetworkManager",
+            "pid" : 761
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6723189
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "<info>  [1715892728.4725] dhcp6 (ens5): state changed bound -> bound, event ID=\"8b:74:f9:b1|1715892728\"",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.293107959Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "Sy4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "dbus",
+            "pid" : 664
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6723343
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "[system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'",
+          "cloud" : {
+            "availability_zone" : "us-east-1d",
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "family" : "redhat",
+              "type" : "linux",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.293509329Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      },
+      {
+        "_index" : "filebeat-7.13.4-2024.05.07-000002",
+        "_type" : "_doc",
+        "_id" : "TC4tg48BzzALfNtiPf2f",
+        "_score" : 1.0,
+        "_source" : {
+          "agent" : {
+            "hostname" : "abf2bdee1f1c.mylabserver.com",
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "0ae389fe-2e94-4a6a-9ccc-d1b799309fae",
+            "type" : "filebeat",
+            "ephemeral_id" : "c209c254-bff8-4792-aa81-04a4bea39f13",
+            "version" : "7.13.4"
+          },
+          "process" : {
+            "name" : "systemd"
+          },
+          "log" : {
+            "file" : {
+              "path" : "/var/log/messages"
+            },
+            "offset" : 6723511
+          },
+          "fileset" : {
+            "name" : "syslog"
+          },
+          "message" : "Starting Network Manager Script Dispatcher Service...",
+          "cloud" : {
+            "image" : {
+              "id" : "ami-021f5b2fc4933dd6a"
+            },
+            "availability_zone" : "us-east-1d",
+            "instance" : {
+              "id" : "i-0bbd42a9d1a91270c"
+            },
+            "provider" : "aws",
+            "machine" : {
+              "type" : "t3a.large"
+            },
+            "service" : {
+              "name" : "EC2"
+            },
+            "region" : "us-east-1",
+            "account" : {
+              "id" : "045981373300"
+            }
+          },
+          "input" : {
+            "type" : "log"
+          },
+          "@timestamp" : "2024-05-16T20:52:08.000Z",
+          "system" : {
+            "syslog" : { }
+          },
+          "ecs" : {
+            "version" : "1.9.0"
+          },
+          "related" : {
+            "hosts" : [
+              "abf2bdee1f1c"
+            ]
+          },
+          "service" : {
+            "type" : "system"
+          },
+          "host" : {
+            "hostname" : "abf2bdee1f1c",
+            "os" : {
+              "kernel" : "3.10.0-1160.108.1.el7.x86_64",
+              "codename" : "Core",
+              "name" : "CentOS Linux",
+              "type" : "linux",
+              "family" : "redhat",
+              "version" : "7 (Core)",
+              "platform" : "centos"
+            },
+            "containerized" : false,
+            "ip" : [
+              "172.31.16.72",
+              "2600:1f18:502:2f03:180e:1091:cef9:7e8c",
+              "fe80::94:8bff:fe74:f9b1"
+            ],
+            "name" : "abf2bdee1f1c.mylabserver.com",
+            "id" : "f9afeb75a5a382dce8269887a67fbf58",
+            "mac" : [
+              "02:94:8b:74:f9:b1"
+            ],
+            "architecture" : "x86_64"
+          },
+          "event" : {
+            "ingested" : "2024-05-16T20:52:11.293935880Z",
+            "timezone" : "+00:00",
+            "kind" : "event",
+            "module" : "system",
+            "dataset" : "system.syslog"
+          }
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
