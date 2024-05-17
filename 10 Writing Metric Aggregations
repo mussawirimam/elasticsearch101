@@ -1,0 +1,796 @@
+Metric Aggregation:
+Writing (Metric aggregation) is for Producing Numberical output 
+
+Bucket aggregation:
+(Bucket aggregation) is for categorizing or bucketizing our data
+
+Sub aggregation:
+and when you combine these (Sub-Aggregation) is used for that. So Aggregations within aggregations.
+
+Pipeline aggregation:
+Lastly, we're going to elevate our aggregations skills further by going over (Pipeline Aggregations). These are ways of taking the output of 1 aggregation and making it the input of another.
+and we will also talk about different types of pipeline aggregations as well
+
+Metrics:
+--------
+Aggregations
+***(Computes)*** numeric values!
+
+  Metrics aggregations are either single or multi-value aggregations that can operate on a variety of (non-analyzed) fields to produce a numerical value.
+
+Sample of Metric-aggregation:
+-----------------------------
+So this aggregation here is basically going to tell us
+what is the sum, or basically the total sales
+from our ecommerce dataset.
+
+# single-value metrics aggregation
+GET ecommerce/_search
+{
+  "size": 0 # simplify the output
+    "aggs": {
+      "total_sales" : { # any name
+        "sum": { # metrics agg
+          "field": "taxless_total_price" #we are doing an aggregation on the field_taxless_total_price.
+        }
+      }
+   }
+}
+
+So whenever we're doing an aggregation,
+we don't really care about the hits array.
+We don't care about the top 10 or whatever documents
+that match our query.
+All we care about is the aggregation output.
+So whenever we're not doing a query
+and we're just doing an aggregation,
+it makes sense to go ahead and just set that size
+of the hits array to 0.
+
+GET earthquakes/_search
+-------------------
+CONSOLE OUTPUT
+-------------------
+{
+  "took" : 30,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:44:18",
+          "Latitude" : 19.246,
+          "Magnitude" : 6.0,
+          "Longitude" : 145.616,
+          "Date" : "01/02/1965",
+          "Depth" : 131.6,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-02T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "19.246,145.616",
+          "ID" : "ISCGEM860706"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:29:49",
+          "Latitude" : 1.863,
+          "Magnitude" : 5.8,
+          "Longitude" : 127.352,
+          "Date" : "01/04/1965",
+          "Depth" : 80.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-04T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "1.863,127.352",
+          "ID" : "ISCGEM860737"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:05:58",
+          "Latitude" : -20.579,
+          "Magnitude" : 6.2,
+          "Longitude" : -173.972,
+          "Date" : "01/05/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-05T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-20.579,-173.972",
+          "ID" : "ISCGEM860762"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:49:43",
+          "Latitude" : -59.076,
+          "Magnitude" : 5.8,
+          "Longitude" : -23.557,
+          "Date" : "01/08/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-08T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-59.076,-23.557",
+          "ID" : "ISCGEM860856"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:50",
+          "Latitude" : 11.938,
+          "Magnitude" : 5.8,
+          "Longitude" : 126.427,
+          "Date" : "01/09/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-09T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "11.938,126.427",
+          "ID" : "ISCGEM860890"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:36:32",
+          "Latitude" : -13.405,
+          "Magnitude" : 6.7,
+          "Longitude" : 166.629,
+          "Date" : "01/10/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-10T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.405,166.629",
+          "ID" : "ISCGEM860922"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:25",
+          "Latitude" : 27.357,
+          "Magnitude" : 5.9,
+          "Longitude" : 87.867,
+          "Date" : "01/12/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-12T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "27.357,87.867",
+          "ID" : "ISCGEM861007"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "23:17:42",
+          "Latitude" : -13.309,
+          "Magnitude" : 6.0,
+          "Longitude" : 166.212,
+          "Date" : "01/15/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-15T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.309,166.212",
+          "ID" : "ISCGEM861111"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:32:37",
+          "Latitude" : -56.452,
+          "Magnitude" : 6.0,
+          "Longitude" : -27.043,
+          "Date" : "01/16/1965",
+          "Depth" : 95.0,
+          "Source" : "ISCGEMSUP",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-16T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-56.452,-27.043",
+          "ID" : "ISCGEMSUP861125"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "10:43:17",
+          "Latitude" : -24.563,
+          "Magnitude" : 5.8,
+          "Longitude" : 178.487,
+          "Date" : "01/17/1965",
+          "Depth" : 565.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-17T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-24.563,178.487",
+          "ID" : "ISCGEM861148"
+        }
+      }
+    ]
+  },
+  "aggregations" : {
+    "average_magnitude" : {
+      "value" : 5.882534278757849
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+#Notice:
+you can see that we're getting some documents and there's no aggregation in these documents.
+So this is what I mean by setting the (size to 0). So these are the top 10 documents in the hits array. If you scroll all the way down, then we get to our aggregation for average_magnitude value. 
+
+GET earthquakes/_search
+{
+  "aggs": {
+    "average_magnitude": {
+      "avg": {
+        "field": "Magnitude"
+      }
+    }
+  }
+}
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+{
+  "took" : 12,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:44:18",
+          "Latitude" : 19.246,
+          "Magnitude" : 6.0,
+          "Longitude" : 145.616,
+          "Date" : "01/02/1965",
+          "Depth" : 131.6,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-02T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "19.246,145.616",
+          "ID" : "ISCGEM860706"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:29:49",
+          "Latitude" : 1.863,
+          "Magnitude" : 5.8,
+          "Longitude" : 127.352,
+          "Date" : "01/04/1965",
+          "Depth" : 80.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-04T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "1.863,127.352",
+          "ID" : "ISCGEM860737"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:05:58",
+          "Latitude" : -20.579,
+          "Magnitude" : 6.2,
+          "Longitude" : -173.972,
+          "Date" : "01/05/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-05T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-20.579,-173.972",
+          "ID" : "ISCGEM860762"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:49:43",
+          "Latitude" : -59.076,
+          "Magnitude" : 5.8,
+          "Longitude" : -23.557,
+          "Date" : "01/08/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-08T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-59.076,-23.557",
+          "ID" : "ISCGEM860856"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:50",
+          "Latitude" : 11.938,
+          "Magnitude" : 5.8,
+          "Longitude" : 126.427,
+          "Date" : "01/09/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-09T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "11.938,126.427",
+          "ID" : "ISCGEM860890"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:36:32",
+          "Latitude" : -13.405,
+          "Magnitude" : 6.7,
+          "Longitude" : 166.629,
+          "Date" : "01/10/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-10T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.405,166.629",
+          "ID" : "ISCGEM860922"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:25",
+          "Latitude" : 27.357,
+          "Magnitude" : 5.9,
+          "Longitude" : 87.867,
+          "Date" : "01/12/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-12T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "27.357,87.867",
+          "ID" : "ISCGEM861007"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "23:17:42",
+          "Latitude" : -13.309,
+          "Magnitude" : 6.0,
+          "Longitude" : 166.212,
+          "Date" : "01/15/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-15T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.309,166.212",
+          "ID" : "ISCGEM861111"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:32:37",
+          "Latitude" : -56.452,
+          "Magnitude" : 6.0,
+          "Longitude" : -27.043,
+          "Date" : "01/16/1965",
+          "Depth" : 95.0,
+          "Source" : "ISCGEMSUP",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-16T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-56.452,-27.043",
+          "ID" : "ISCGEMSUP861125"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "10:43:17",
+          "Latitude" : -24.563,
+          "Magnitude" : 5.8,
+          "Longitude" : 178.487,
+          "Date" : "01/17/1965",
+          "Depth" : 565.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-17T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-24.563,178.487",
+          "ID" : "ISCGEM861148"
+        }
+      }
+    ]
+  },
+  "aggregations" : {
+    "average_magnitude" : {
+      "value" : 5.882534278757849
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+AVERAGE:
+#Notice:
+once you set the size to 0, you will no longer have to scroll through the documents to get to the value of metric-aggregation you just performed.
+#Notice you can use the size to 0 in an (inline parameter), or in a (parameter within the body)
+
+GET earthquakes/_search
+{
+  "size": 0, 
+  "aggs": {
+    "average_magnitude": {
+      "avg": {
+        "field": "Magnitude"
+      }
+    }
+  }
+}
+
+OR
+
+#another way to do achieve this is by putting size=0 in top 
+
+GET earthquakes/_search?size=0
+{
+  "aggs": {
+    "average_magnitude": {
+      "avg": {
+        "field": "Magnitude"
+      }
+    }
+  }
+}
+-------------------
+CONSOLE OUTPUT 
+-------------------
+{
+  "took" : 5,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "average_magnitude" : {
+      "value" : 5.882534278757849
+    }
+  }
+}
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+MAX:
+#to find the max metric-aggregation of the Magnitude field.
+GET earthquakes/_search?size=0
+{
+  "aggs": {
+    "max_magnitude": {
+      "max": {
+        "field": "Magnitude"
+      }
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT
+-------------------
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "max_magnitude" : {
+      "value" : 9.1
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+
+MULTI-VALUE AGGREGATION
+
+GET earthquakes/_search?size=0
+{
+  "aggs": {
+    "max_magnitude": {
+      "stats": {
+        "field": "Magnitude"
+      }
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT
+-------------------
+{
+  "took" : 12,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "max_magnitude" : {
+      "count" : 23411,
+      "min" : 5.5,
+      "max" : 9.1,
+      "avg" : 5.882534278757849,
+      "sum" : 137716.01
+    }
+  }
+}
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+CARDINALITY:
+It doesn't take in a numerical value, but it produces one.
+
+#counting the unique 
+#cardinality helps count the number of unique values
+GET earthquakes/_search
+{
+  "size": 0
+  , "aggs": {
+    "types": {
+      "cardinality": {
+        "field": "Type"
+      }
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+{
+  "took" : 23,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "types" : {
+      "value" : 4 <----------------------  ----------------------  ----------------------  ----------------------  ----------------------
+    }
+  }
+}
+
+-------------------
+CONSOLE OUTPUT ENDS
+-------------------
+NOTE:
+Alright, so this is just a few examples
+of some single-value, multi-value,
+numerical inputs, string inputs,
+just kind of a broad array here
+of the most common types of
+metrics aggregations you can do.
+Again, check out the documentation,
+familiarize yourself with what's available
+so that you're ready to answer any question
+thrown at you on the exam.
+Alright, so that's how we create metrics aggregations
+in Elasticsearch.
