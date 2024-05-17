@@ -24,3 +24,6657 @@ GET ecommerce/_search
      }
    }
 }
+--------------------------------------------------------------
+
+
+GET earthquakes/_search
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:44:18",
+          "Latitude" : 19.246,
+          "Magnitude" : 6.0,
+          "Longitude" : 145.616,
+          "Date" : "01/02/1965",
+          "Depth" : 131.6,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-02T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "19.246,145.616",
+          "ID" : "ISCGEM860706"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:29:49",
+          "Latitude" : 1.863,
+          "Magnitude" : 5.8,
+          "Longitude" : 127.352,
+          "Date" : "01/04/1965",
+          "Depth" : 80.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-04T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "1.863,127.352",
+          "ID" : "ISCGEM860737"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:05:58",
+          "Latitude" : -20.579,
+          "Magnitude" : 6.2,
+          "Longitude" : -173.972,
+          "Date" : "01/05/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-05T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-20.579,-173.972",
+          "ID" : "ISCGEM860762"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:49:43",
+          "Latitude" : -59.076,
+          "Magnitude" : 5.8,
+          "Longitude" : -23.557,
+          "Date" : "01/08/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-08T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-59.076,-23.557",
+          "ID" : "ISCGEM860856"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:50",
+          "Latitude" : 11.938,
+          "Magnitude" : 5.8,
+          "Longitude" : 126.427,
+          "Date" : "01/09/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-09T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "11.938,126.427",
+          "ID" : "ISCGEM860890"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:36:32",
+          "Latitude" : -13.405,
+          "Magnitude" : 6.7,
+          "Longitude" : 166.629,
+          "Date" : "01/10/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-10T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.405,166.629",
+          "ID" : "ISCGEM860922"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:25",
+          "Latitude" : 27.357,
+          "Magnitude" : 5.9,
+          "Longitude" : 87.867,
+          "Date" : "01/12/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-12T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "27.357,87.867",
+          "ID" : "ISCGEM861007"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "23:17:42",
+          "Latitude" : -13.309,
+          "Magnitude" : 6.0,
+          "Longitude" : 166.212,
+          "Date" : "01/15/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-15T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.309,166.212",
+          "ID" : "ISCGEM861111"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:32:37",
+          "Latitude" : -56.452,
+          "Magnitude" : 6.0,
+          "Longitude" : -27.043,
+          "Date" : "01/16/1965",
+          "Depth" : 95.0,
+          "Source" : "ISCGEMSUP",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-16T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-56.452,-27.043",
+          "ID" : "ISCGEMSUP861125"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "10:43:17",
+          "Latitude" : -24.563,
+          "Magnitude" : 5.8,
+          "Longitude" : 178.487,
+          "Date" : "01/17/1965",
+          "Depth" : 565.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-17T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-24.563,178.487",
+          "ID" : "ISCGEM861148"
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+GET earthquakes/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_day": {
+      "date_histogram": {
+        "field": "Date",
+        "interval": "month"
+      }
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+#! [interval] on [date_histogram] is deprecated, use [fixed_interval] or [calendar_interval] in the future.
+{
+  "took" : 9,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_day" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1965",
+          "key" : -157766400000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "02/01/1965",
+          "key" : -155088000000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "03/01/1965",
+          "key" : -152668800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "04/01/1965",
+          "key" : -149990400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "05/01/1965",
+          "key" : -147398400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "06/01/1965",
+          "key" : -144720000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "07/01/1965",
+          "key" : -142128000000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "08/01/1965",
+          "key" : -139449600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "09/01/1965",
+          "key" : -136771200000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "10/01/1965",
+          "key" : -134179200000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "11/01/1965",
+          "key" : -131500800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "12/01/1965",
+          "key" : -128908800000,
+          "doc_count" : 20
+        },
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "02/01/1966",
+          "key" : -123552000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "03/01/1966",
+          "key" : -121132800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "04/01/1966",
+          "key" : -118454400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "05/01/1966",
+          "key" : -115862400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "06/01/1966",
+          "key" : -113184000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "07/01/1966",
+          "key" : -110592000000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "08/01/1966",
+          "key" : -107913600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "09/01/1966",
+          "key" : -105235200000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "10/01/1966",
+          "key" : -102643200000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "11/01/1966",
+          "key" : -99964800000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "12/01/1966",
+          "key" : -97372800000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "02/01/1967",
+          "key" : -92016000000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "03/01/1967",
+          "key" : -89596800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "04/01/1967",
+          "key" : -86918400000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "05/01/1967",
+          "key" : -84326400000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "06/01/1967",
+          "key" : -81648000000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "07/01/1967",
+          "key" : -79056000000,
+          "doc_count" : 15
+        },
+        {
+          "key_as_string" : "08/01/1967",
+          "key" : -76377600000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "09/01/1967",
+          "key" : -73699200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "10/01/1967",
+          "key" : -71107200000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "11/01/1967",
+          "key" : -68428800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "12/01/1967",
+          "key" : -65836800000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/1968",
+          "key" : -60480000000,
+          "doc_count" : 20
+        },
+        {
+          "key_as_string" : "03/01/1968",
+          "key" : -57974400000,
+          "doc_count" : 16
+        },
+        {
+          "key_as_string" : "04/01/1968",
+          "key" : -55296000000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "05/01/1968",
+          "key" : -52704000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "06/01/1968",
+          "key" : -50025600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/1968",
+          "key" : -47433600000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "08/01/1968",
+          "key" : -44755200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "09/01/1968",
+          "key" : -42076800000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "10/01/1968",
+          "key" : -39484800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "11/01/1968",
+          "key" : -36806400000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "12/01/1968",
+          "key" : -34214400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "02/01/1969",
+          "key" : -28857600000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "03/01/1969",
+          "key" : -26438400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "04/01/1969",
+          "key" : -23760000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "05/01/1969",
+          "key" : -21168000000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "06/01/1969",
+          "key" : -18489600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "07/01/1969",
+          "key" : -15897600000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "08/01/1969",
+          "key" : -13219200000,
+          "doc_count" : 62
+        },
+        {
+          "key_as_string" : "09/01/1969",
+          "key" : -10540800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/1969",
+          "key" : -7948800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "11/01/1969",
+          "key" : -5270400000,
+          "doc_count" : 14
+        },
+        {
+          "key_as_string" : "12/01/1969",
+          "key" : -2678400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "02/01/1970",
+          "key" : 2678400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "03/01/1970",
+          "key" : 5097600000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "04/01/1970",
+          "key" : 7776000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "05/01/1970",
+          "key" : 10368000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "06/01/1970",
+          "key" : 13046400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "07/01/1970",
+          "key" : 15638400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "08/01/1970",
+          "key" : 18316800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "09/01/1970",
+          "key" : 20995200000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "10/01/1970",
+          "key" : 23587200000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "11/01/1970",
+          "key" : 26265600000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "12/01/1970",
+          "key" : 28857600000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "02/01/1971",
+          "key" : 34214400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/1971",
+          "key" : 36633600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1971",
+          "key" : 39312000000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "05/01/1971",
+          "key" : 41904000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "06/01/1971",
+          "key" : 44582400000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "07/01/1971",
+          "key" : 47174400000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "08/01/1971",
+          "key" : 49852800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "09/01/1971",
+          "key" : 52531200000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/1971",
+          "key" : 55123200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1971",
+          "key" : 57801600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "12/01/1971",
+          "key" : 60393600000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1972",
+          "key" : 65750400000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "03/01/1972",
+          "key" : 68256000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "04/01/1972",
+          "key" : 70934400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "05/01/1972",
+          "key" : 73526400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "06/01/1972",
+          "key" : 76204800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "07/01/1972",
+          "key" : 78796800000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "08/01/1972",
+          "key" : 81475200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "09/01/1972",
+          "key" : 84153600000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/1972",
+          "key" : 86745600000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "11/01/1972",
+          "key" : 89424000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "12/01/1972",
+          "key" : 92016000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/1973",
+          "key" : 97372800000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1973",
+          "key" : 99792000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "04/01/1973",
+          "key" : 102470400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "05/01/1973",
+          "key" : 105062400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "06/01/1973",
+          "key" : 107740800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "07/01/1973",
+          "key" : 110332800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "08/01/1973",
+          "key" : 113011200000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "09/01/1973",
+          "key" : 115689600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "10/01/1973",
+          "key" : 118281600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "11/01/1973",
+          "key" : 120960000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "12/01/1973",
+          "key" : 123552000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "02/01/1974",
+          "key" : 128908800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "03/01/1974",
+          "key" : 131328000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1974",
+          "key" : 134006400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "05/01/1974",
+          "key" : 136598400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "06/01/1974",
+          "key" : 139276800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "07/01/1974",
+          "key" : 141868800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "08/01/1974",
+          "key" : 144547200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "09/01/1974",
+          "key" : 147225600000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "10/01/1974",
+          "key" : 149817600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "11/01/1974",
+          "key" : 152496000000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "12/01/1974",
+          "key" : 155088000000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "02/01/1975",
+          "key" : 160444800000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1975",
+          "key" : 162864000000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "04/01/1975",
+          "key" : 165542400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "05/01/1975",
+          "key" : 168134400000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "06/01/1975",
+          "key" : 170812800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "07/01/1975",
+          "key" : 173404800000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "08/01/1975",
+          "key" : 176083200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "09/01/1975",
+          "key" : 178761600000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "10/01/1975",
+          "key" : 181353600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "11/01/1975",
+          "key" : 184032000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "12/01/1975",
+          "key" : 186624000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "02/01/1976",
+          "key" : 191980800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "03/01/1976",
+          "key" : 194486400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1976",
+          "key" : 197164800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "05/01/1976",
+          "key" : 199756800000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "06/01/1976",
+          "key" : 202435200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1976",
+          "key" : 205027200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/1976",
+          "key" : 207705600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "09/01/1976",
+          "key" : 210384000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "10/01/1976",
+          "key" : 212976000000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "11/01/1976",
+          "key" : 215654400000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "12/01/1976",
+          "key" : 218246400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "02/01/1977",
+          "key" : 223603200000,
+          "doc_count" : 20
+        },
+        {
+          "key_as_string" : "03/01/1977",
+          "key" : 226022400000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "04/01/1977",
+          "key" : 228700800000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "05/01/1977",
+          "key" : 231292800000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "06/01/1977",
+          "key" : 233971200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "07/01/1977",
+          "key" : 236563200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "08/01/1977",
+          "key" : 239241600000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "09/01/1977",
+          "key" : 241920000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/1977",
+          "key" : 244512000000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "11/01/1977",
+          "key" : 247190400000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/1977",
+          "key" : 249782400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "02/01/1978",
+          "key" : 255139200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "03/01/1978",
+          "key" : 257558400000,
+          "doc_count" : 66
+        },
+        {
+          "key_as_string" : "04/01/1978",
+          "key" : 260236800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "05/01/1978",
+          "key" : 262828800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "06/01/1978",
+          "key" : 265507200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1978",
+          "key" : 268099200000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "08/01/1978",
+          "key" : 270777600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "09/01/1978",
+          "key" : 273456000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/1978",
+          "key" : 276048000000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "11/01/1978",
+          "key" : 278726400000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "12/01/1978",
+          "key" : 281318400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "02/01/1979",
+          "key" : 286675200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1979",
+          "key" : 289094400000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "04/01/1979",
+          "key" : 291772800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "05/01/1979",
+          "key" : 294364800000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "06/01/1979",
+          "key" : 297043200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "07/01/1979",
+          "key" : 299635200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "08/01/1979",
+          "key" : 302313600000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "09/01/1979",
+          "key" : 304992000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "10/01/1979",
+          "key" : 307584000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "11/01/1979",
+          "key" : 310262400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "12/01/1979",
+          "key" : 312854400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "02/01/1980",
+          "key" : 318211200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1980",
+          "key" : 320716800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "04/01/1980",
+          "key" : 323395200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "05/01/1980",
+          "key" : 325987200000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "06/01/1980",
+          "key" : 328665600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/1980",
+          "key" : 331257600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/1980",
+          "key" : 333936000000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "09/01/1980",
+          "key" : 336614400000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "10/01/1980",
+          "key" : 339206400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "11/01/1980",
+          "key" : 341884800000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "12/01/1980",
+          "key" : 344476800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "02/01/1981",
+          "key" : 349833600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1981",
+          "key" : 352252800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1981",
+          "key" : 354931200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "05/01/1981",
+          "key" : 357523200000,
+          "doc_count" : 16
+        },
+        {
+          "key_as_string" : "06/01/1981",
+          "key" : 360201600000,
+          "doc_count" : 16
+        },
+        {
+          "key_as_string" : "07/01/1981",
+          "key" : 362793600000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "08/01/1981",
+          "key" : 365472000000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "09/01/1981",
+          "key" : 368150400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "10/01/1981",
+          "key" : 370742400000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "11/01/1981",
+          "key" : 373420800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "12/01/1981",
+          "key" : 376012800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "02/01/1982",
+          "key" : 381369600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "03/01/1982",
+          "key" : 383788800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "04/01/1982",
+          "key" : 386467200000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "05/01/1982",
+          "key" : 389059200000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "06/01/1982",
+          "key" : 391737600000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "07/01/1982",
+          "key" : 394329600000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "08/01/1982",
+          "key" : 397008000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "09/01/1982",
+          "key" : 399686400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "10/01/1982",
+          "key" : 402278400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "11/01/1982",
+          "key" : 404956800000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "12/01/1982",
+          "key" : 407548800000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "02/01/1983",
+          "key" : 412905600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/1983",
+          "key" : 415324800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "04/01/1983",
+          "key" : 418003200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "05/01/1983",
+          "key" : 420595200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "06/01/1983",
+          "key" : 423273600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "07/01/1983",
+          "key" : 425865600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "08/01/1983",
+          "key" : 428544000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "09/01/1983",
+          "key" : 431222400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "10/01/1983",
+          "key" : 433814400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "11/01/1983",
+          "key" : 436492800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "12/01/1983",
+          "key" : 439084800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "02/01/1984",
+          "key" : 444441600000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "03/01/1984",
+          "key" : 446947200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/1984",
+          "key" : 449625600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "05/01/1984",
+          "key" : 452217600000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "06/01/1984",
+          "key" : 454896000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "07/01/1984",
+          "key" : 457488000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/1984",
+          "key" : 460166400000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "09/01/1984",
+          "key" : 462844800000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "10/01/1984",
+          "key" : 465436800000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "11/01/1984",
+          "key" : 468115200000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "12/01/1984",
+          "key" : 470707200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "02/01/1985",
+          "key" : 476064000000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1985",
+          "key" : 478483200000,
+          "doc_count" : 65
+        },
+        {
+          "key_as_string" : "04/01/1985",
+          "key" : 481161600000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "05/01/1985",
+          "key" : 483753600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "06/01/1985",
+          "key" : 486432000000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1985",
+          "key" : 489024000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/1985",
+          "key" : 491702400000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "09/01/1985",
+          "key" : 494380800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/1985",
+          "key" : 496972800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1985",
+          "key" : 499651200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "12/01/1985",
+          "key" : 502243200000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1986",
+          "key" : 507600000000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "03/01/1986",
+          "key" : 510019200000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "04/01/1986",
+          "key" : 512697600000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "05/01/1986",
+          "key" : 515289600000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "06/01/1986",
+          "key" : 517968000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "07/01/1986",
+          "key" : 520560000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "08/01/1986",
+          "key" : 523238400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "09/01/1986",
+          "key" : 525916800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "10/01/1986",
+          "key" : 528508800000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "11/01/1986",
+          "key" : 531187200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "12/01/1986",
+          "key" : 533779200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "02/01/1987",
+          "key" : 539136000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "03/01/1987",
+          "key" : 541555200000,
+          "doc_count" : 62
+        },
+        {
+          "key_as_string" : "04/01/1987",
+          "key" : 544233600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "05/01/1987",
+          "key" : 546825600000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "06/01/1987",
+          "key" : 549504000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "07/01/1987",
+          "key" : 552096000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "08/01/1987",
+          "key" : 554774400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "09/01/1987",
+          "key" : 557452800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "10/01/1987",
+          "key" : 560044800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "11/01/1987",
+          "key" : 562723200000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "12/01/1987",
+          "key" : 565315200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "02/01/1988",
+          "key" : 570672000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "03/01/1988",
+          "key" : 573177600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "04/01/1988",
+          "key" : 575856000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "05/01/1988",
+          "key" : 578448000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/1988",
+          "key" : 581126400000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "07/01/1988",
+          "key" : 583718400000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "08/01/1988",
+          "key" : 586396800000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "09/01/1988",
+          "key" : 589075200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "10/01/1988",
+          "key" : 591667200000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "11/01/1988",
+          "key" : 594345600000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "12/01/1988",
+          "key" : 596937600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "02/01/1989",
+          "key" : 602294400000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "03/01/1989",
+          "key" : 604713600000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "04/01/1989",
+          "key" : 607392000000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "05/01/1989",
+          "key" : 609984000000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "06/01/1989",
+          "key" : 612662400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/1989",
+          "key" : 615254400000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "08/01/1989",
+          "key" : 617932800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "09/01/1989",
+          "key" : 620611200000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/1989",
+          "key" : 623203200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "11/01/1989",
+          "key" : 625881600000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/1989",
+          "key" : 628473600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "02/01/1990",
+          "key" : 633830400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "03/01/1990",
+          "key" : 636249600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/1990",
+          "key" : 638928000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "05/01/1990",
+          "key" : 641520000000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "06/01/1990",
+          "key" : 644198400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/1990",
+          "key" : 646790400000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "08/01/1990",
+          "key" : 649468800000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "09/01/1990",
+          "key" : 652147200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "10/01/1990",
+          "key" : 654739200000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "11/01/1990",
+          "key" : 657417600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "12/01/1990",
+          "key" : 660009600000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "02/01/1991",
+          "key" : 665366400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "03/01/1991",
+          "key" : 667785600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "04/01/1991",
+          "key" : 670464000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "05/01/1991",
+          "key" : 673056000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "06/01/1991",
+          "key" : 675734400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "07/01/1991",
+          "key" : 678326400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "08/01/1991",
+          "key" : 681004800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "09/01/1991",
+          "key" : 683683200000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "10/01/1991",
+          "key" : 686275200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1991",
+          "key" : 688953600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "12/01/1991",
+          "key" : 691545600000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "02/01/1992",
+          "key" : 696902400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1992",
+          "key" : 699408000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "04/01/1992",
+          "key" : 702086400000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "05/01/1992",
+          "key" : 704678400000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "06/01/1992",
+          "key" : 707356800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "07/01/1992",
+          "key" : 709948800000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "08/01/1992",
+          "key" : 712627200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "09/01/1992",
+          "key" : 715305600000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "10/01/1992",
+          "key" : 717897600000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "11/01/1992",
+          "key" : 720576000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "12/01/1992",
+          "key" : 723168000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "02/01/1993",
+          "key" : 728524800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "03/01/1993",
+          "key" : 730944000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "04/01/1993",
+          "key" : 733622400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "05/01/1993",
+          "key" : 736214400000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "06/01/1993",
+          "key" : 738892800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "07/01/1993",
+          "key" : 741484800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "08/01/1993",
+          "key" : 744163200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "09/01/1993",
+          "key" : 746841600000,
+          "doc_count" : 60
+        },
+        {
+          "key_as_string" : "10/01/1993",
+          "key" : 749433600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "11/01/1993",
+          "key" : 752112000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "12/01/1993",
+          "key" : 754704000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1994",
+          "key" : 760060800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "03/01/1994",
+          "key" : 762480000000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "04/01/1994",
+          "key" : 765158400000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "05/01/1994",
+          "key" : 767750400000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "06/01/1994",
+          "key" : 770428800000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "07/01/1994",
+          "key" : 773020800000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "08/01/1994",
+          "key" : 775699200000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "09/01/1994",
+          "key" : 778377600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "10/01/1994",
+          "key" : 780969600000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "11/01/1994",
+          "key" : 783648000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "12/01/1994",
+          "key" : 786240000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "02/01/1995",
+          "key" : 791596800000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "03/01/1995",
+          "key" : 794016000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "04/01/1995",
+          "key" : 796694400000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "05/01/1995",
+          "key" : 799286400000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "06/01/1995",
+          "key" : 801964800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1995",
+          "key" : 804556800000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "08/01/1995",
+          "key" : 807235200000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "09/01/1995",
+          "key" : 809913600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/1995",
+          "key" : 812505600000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "11/01/1995",
+          "key" : 815184000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "12/01/1995",
+          "key" : 817776000000,
+          "doc_count" : 60
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1996",
+          "key" : 823132800000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "03/01/1996",
+          "key" : 825638400000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "04/01/1996",
+          "key" : 828316800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "05/01/1996",
+          "key" : 830908800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "06/01/1996",
+          "key" : 833587200000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "07/01/1996",
+          "key" : 836179200000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "08/01/1996",
+          "key" : 838857600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "09/01/1996",
+          "key" : 841536000000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "10/01/1996",
+          "key" : 844128000000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "11/01/1996",
+          "key" : 846806400000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "12/01/1996",
+          "key" : 849398400000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "01/01/1997",
+          "key" : 852076800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/1997",
+          "key" : 854755200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1997",
+          "key" : 857174400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "04/01/1997",
+          "key" : 859852800000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "05/01/1997",
+          "key" : 862444800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/1997",
+          "key" : 865123200000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "07/01/1997",
+          "key" : 867715200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "08/01/1997",
+          "key" : 870393600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "09/01/1997",
+          "key" : 873072000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "10/01/1997",
+          "key" : 875664000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "11/01/1997",
+          "key" : 878342400000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "12/01/1997",
+          "key" : 880934400000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "01/01/1998",
+          "key" : 883612800000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "02/01/1998",
+          "key" : 886291200000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "03/01/1998",
+          "key" : 888710400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "04/01/1998",
+          "key" : 891388800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "05/01/1998",
+          "key" : 893980800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "06/01/1998",
+          "key" : 896659200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "07/01/1998",
+          "key" : 899251200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "08/01/1998",
+          "key" : 901929600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "09/01/1998",
+          "key" : 904608000000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "10/01/1998",
+          "key" : 907200000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "11/01/1998",
+          "key" : 909878400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "12/01/1998",
+          "key" : 912470400000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "01/01/1999",
+          "key" : 915148800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "02/01/1999",
+          "key" : 917827200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1999",
+          "key" : 920246400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/1999",
+          "key" : 922924800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "05/01/1999",
+          "key" : 925516800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "06/01/1999",
+          "key" : 928195200000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "07/01/1999",
+          "key" : 930787200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/1999",
+          "key" : 933465600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "09/01/1999",
+          "key" : 936144000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "10/01/1999",
+          "key" : 938736000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1999",
+          "key" : 941414400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "12/01/1999",
+          "key" : 944006400000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "01/01/2000",
+          "key" : 946684800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "02/01/2000",
+          "key" : 949363200000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "03/01/2000",
+          "key" : 951868800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "04/01/2000",
+          "key" : 954547200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "05/01/2000",
+          "key" : 957139200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "06/01/2000",
+          "key" : 959817600000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "07/01/2000",
+          "key" : 962409600000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "08/01/2000",
+          "key" : 965088000000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "09/01/2000",
+          "key" : 967766400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/2000",
+          "key" : 970358400000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "11/01/2000",
+          "key" : 973036800000,
+          "doc_count" : 83
+        },
+        {
+          "key_as_string" : "12/01/2000",
+          "key" : 975628800000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "01/01/2001",
+          "key" : 978307200000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "02/01/2001",
+          "key" : 980985600000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "03/01/2001",
+          "key" : 983404800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "04/01/2001",
+          "key" : 986083200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "05/01/2001",
+          "key" : 988675200000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "06/01/2001",
+          "key" : 991353600000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "07/01/2001",
+          "key" : 993945600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/2001",
+          "key" : 996624000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "09/01/2001",
+          "key" : 999302400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "10/01/2001",
+          "key" : 1001894400000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "11/01/2001",
+          "key" : 1004572800000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "12/01/2001",
+          "key" : 1007164800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "01/01/2002",
+          "key" : 1009843200000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "02/01/2002",
+          "key" : 1012521600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/2002",
+          "key" : 1014940800000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "04/01/2002",
+          "key" : 1017619200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "05/01/2002",
+          "key" : 1020211200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "06/01/2002",
+          "key" : 1022889600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "07/01/2002",
+          "key" : 1025481600000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "08/01/2002",
+          "key" : 1028160000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "09/01/2002",
+          "key" : 1030838400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/2002",
+          "key" : 1033430400000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "11/01/2002",
+          "key" : 1036108800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "12/01/2002",
+          "key" : 1038700800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "01/01/2003",
+          "key" : 1041379200000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "02/01/2003",
+          "key" : 1044057600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/2003",
+          "key" : 1046476800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/2003",
+          "key" : 1049155200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "05/01/2003",
+          "key" : 1051747200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "06/01/2003",
+          "key" : 1054425600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/2003",
+          "key" : 1057017600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "08/01/2003",
+          "key" : 1059696000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "09/01/2003",
+          "key" : 1062374400000,
+          "doc_count" : 59
+        },
+        {
+          "key_as_string" : "10/01/2003",
+          "key" : 1064966400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "11/01/2003",
+          "key" : 1067644800000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/2003",
+          "key" : 1070236800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "01/01/2004",
+          "key" : 1072915200000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "02/01/2004",
+          "key" : 1075593600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "03/01/2004",
+          "key" : 1078099200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "04/01/2004",
+          "key" : 1080777600000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "05/01/2004",
+          "key" : 1083369600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "06/01/2004",
+          "key" : 1086048000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "07/01/2004",
+          "key" : 1088640000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/2004",
+          "key" : 1091318400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "09/01/2004",
+          "key" : 1093996800000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "10/01/2004",
+          "key" : 1096588800000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "11/01/2004",
+          "key" : 1099267200000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "12/01/2004",
+          "key" : 1101859200000,
+          "doc_count" : 112
+        },
+        {
+          "key_as_string" : "01/01/2005",
+          "key" : 1104537600000,
+          "doc_count" : 82
+        },
+        {
+          "key_as_string" : "02/01/2005",
+          "key" : 1107216000000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "03/01/2005",
+          "key" : 1109635200000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "04/01/2005",
+          "key" : 1112313600000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "05/01/2005",
+          "key" : 1114905600000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "06/01/2005",
+          "key" : 1117584000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "07/01/2005",
+          "key" : 1120176000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "08/01/2005",
+          "key" : 1122854400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "09/01/2005",
+          "key" : 1125532800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/2005",
+          "key" : 1128124800000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "11/01/2005",
+          "key" : 1130803200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "12/01/2005",
+          "key" : 1133395200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/2006",
+          "key" : 1136073600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "02/01/2006",
+          "key" : 1138752000000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "03/01/2006",
+          "key" : 1141171200000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "04/01/2006",
+          "key" : 1143849600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "05/01/2006",
+          "key" : 1146441600000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "06/01/2006",
+          "key" : 1149120000000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "07/01/2006",
+          "key" : 1151712000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "08/01/2006",
+          "key" : 1154390400000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "09/01/2006",
+          "key" : 1157068800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "10/01/2006",
+          "key" : 1159660800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "11/01/2006",
+          "key" : 1162339200000,
+          "doc_count" : 65
+        },
+        {
+          "key_as_string" : "12/01/2006",
+          "key" : 1164931200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "01/01/2007",
+          "key" : 1167609600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "02/01/2007",
+          "key" : 1170288000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "03/01/2007",
+          "key" : 1172707200000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "04/01/2007",
+          "key" : 1175385600000,
+          "doc_count" : 81
+        },
+        {
+          "key_as_string" : "05/01/2007",
+          "key" : 1177977600000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/2007",
+          "key" : 1180656000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "07/01/2007",
+          "key" : 1183248000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "08/01/2007",
+          "key" : 1185926400000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "09/01/2007",
+          "key" : 1188604800000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "10/01/2007",
+          "key" : 1191196800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "11/01/2007",
+          "key" : 1193875200000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "12/01/2007",
+          "key" : 1196467200000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "01/01/2008",
+          "key" : 1199145600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "02/01/2008",
+          "key" : 1201824000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "03/01/2008",
+          "key" : 1204329600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "04/01/2008",
+          "key" : 1207008000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "05/01/2008",
+          "key" : 1209600000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "06/01/2008",
+          "key" : 1212278400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/2008",
+          "key" : 1214870400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "08/01/2008",
+          "key" : 1217548800000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "09/01/2008",
+          "key" : 1220227200000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/2008",
+          "key" : 1222819200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "11/01/2008",
+          "key" : 1225497600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "12/01/2008",
+          "key" : 1228089600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "01/01/2009",
+          "key" : 1230768000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "02/01/2009",
+          "key" : 1233446400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "03/01/2009",
+          "key" : 1235865600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "04/01/2009",
+          "key" : 1238544000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "05/01/2009",
+          "key" : 1241136000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "06/01/2009",
+          "key" : 1243814400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "07/01/2009",
+          "key" : 1246406400000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "08/01/2009",
+          "key" : 1249084800000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "09/01/2009",
+          "key" : 1251763200000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/2009",
+          "key" : 1254355200000,
+          "doc_count" : 82
+        },
+        {
+          "key_as_string" : "11/01/2009",
+          "key" : 1257033600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "12/01/2009",
+          "key" : 1259625600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "01/01/2010",
+          "key" : 1262304000000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "02/01/2010",
+          "key" : 1264982400000,
+          "doc_count" : 76
+        },
+        {
+          "key_as_string" : "03/01/2010",
+          "key" : 1267401600000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "04/01/2010",
+          "key" : 1270080000000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "05/01/2010",
+          "key" : 1272672000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "06/01/2010",
+          "key" : 1275350400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "07/01/2010",
+          "key" : 1277942400000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "08/01/2010",
+          "key" : 1280620800000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "09/01/2010",
+          "key" : 1283299200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "10/01/2010",
+          "key" : 1285891200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "11/01/2010",
+          "key" : 1288569600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "12/01/2010",
+          "key" : 1291161600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "01/01/2011",
+          "key" : 1293840000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "02/01/2011",
+          "key" : 1296518400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "03/01/2011",
+          "key" : 1298937600000,
+          "doc_count" : 227
+        },
+        {
+          "key_as_string" : "04/01/2011",
+          "key" : 1301616000000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "05/01/2011",
+          "key" : 1304208000000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "06/01/2011",
+          "key" : 1306886400000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "07/01/2011",
+          "key" : 1309478400000,
+          "doc_count" : 63
+        },
+        {
+          "key_as_string" : "08/01/2011",
+          "key" : 1312156800000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "09/01/2011",
+          "key" : 1314835200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "10/01/2011",
+          "key" : 1317427200000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "11/01/2011",
+          "key" : 1320105600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "12/01/2011",
+          "key" : 1322697600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "01/01/2012",
+          "key" : 1325376000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "02/01/2012",
+          "key" : 1328054400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "03/01/2012",
+          "key" : 1330560000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "04/01/2012",
+          "key" : 1333238400000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "05/01/2012",
+          "key" : 1335830400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "06/01/2012",
+          "key" : 1338508800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "07/01/2012",
+          "key" : 1341100800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/2012",
+          "key" : 1343779200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "09/01/2012",
+          "key" : 1346457600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "10/01/2012",
+          "key" : 1349049600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "11/01/2012",
+          "key" : 1351728000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "12/01/2012",
+          "key" : 1354320000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/2013",
+          "key" : 1356998400000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/2013",
+          "key" : 1359676800000,
+          "doc_count" : 82
+        },
+        {
+          "key_as_string" : "03/01/2013",
+          "key" : 1362096000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/2013",
+          "key" : 1364774400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "05/01/2013",
+          "key" : 1367366400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/2013",
+          "key" : 1370044800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "07/01/2013",
+          "key" : 1372636800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "08/01/2013",
+          "key" : 1375315200000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "09/01/2013",
+          "key" : 1377993600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/2013",
+          "key" : 1380585600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "11/01/2013",
+          "key" : 1383264000000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/2013",
+          "key" : 1385856000000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "01/01/2014",
+          "key" : 1388534400000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "02/01/2014",
+          "key" : 1391212800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "03/01/2014",
+          "key" : 1393632000000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "04/01/2014",
+          "key" : 1396310400000,
+          "doc_count" : 68
+        },
+        {
+          "key_as_string" : "05/01/2014",
+          "key" : 1398902400000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "06/01/2014",
+          "key" : 1401580800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "07/01/2014",
+          "key" : 1404172800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "08/01/2014",
+          "key" : 1406851200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "09/01/2014",
+          "key" : 1409529600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "10/01/2014",
+          "key" : 1412121600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/2014",
+          "key" : 1414800000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "12/01/2014",
+          "key" : 1417392000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/2015",
+          "key" : 1420070400000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "02/01/2015",
+          "key" : 1422748800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "03/01/2015",
+          "key" : 1425168000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "04/01/2015",
+          "key" : 1427846400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "05/01/2015",
+          "key" : 1430438400000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "06/01/2015",
+          "key" : 1433116800000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/2015",
+          "key" : 1435708800000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "08/01/2015",
+          "key" : 1438387200000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "09/01/2015",
+          "key" : 1441065600000,
+          "doc_count" : 66
+        },
+        {
+          "key_as_string" : "10/01/2015",
+          "key" : 1443657600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "11/01/2015",
+          "key" : 1446336000000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "12/01/2015",
+          "key" : 1448928000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "01/01/2016",
+          "key" : 1451606400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "02/01/2016",
+          "key" : 1454284800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "03/01/2016",
+          "key" : 1456790400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "04/01/2016",
+          "key" : 1459468800000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "05/01/2016",
+          "key" : 1462060800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "06/01/2016",
+          "key" : 1464739200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/2016",
+          "key" : 1467331200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "08/01/2016",
+          "key" : 1470009600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "09/01/2016",
+          "key" : 1472688000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "10/01/2016",
+          "key" : 1475280000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "11/01/2016",
+          "key" : 1477958400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "12/01/2016",
+          "key" : 1480550400000,
+          "doc_count" : 53
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+GET earthquakes/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_day": {
+      "date_histogram": {
+        "field": "Date",
+        "calendar_interval": "month"
+      }
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 4,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_day" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1965",
+          "key" : -157766400000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "02/01/1965",
+          "key" : -155088000000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "03/01/1965",
+          "key" : -152668800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "04/01/1965",
+          "key" : -149990400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "05/01/1965",
+          "key" : -147398400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "06/01/1965",
+          "key" : -144720000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "07/01/1965",
+          "key" : -142128000000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "08/01/1965",
+          "key" : -139449600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "09/01/1965",
+          "key" : -136771200000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "10/01/1965",
+          "key" : -134179200000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "11/01/1965",
+          "key" : -131500800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "12/01/1965",
+          "key" : -128908800000,
+          "doc_count" : 20
+        },
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "02/01/1966",
+          "key" : -123552000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "03/01/1966",
+          "key" : -121132800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "04/01/1966",
+          "key" : -118454400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "05/01/1966",
+          "key" : -115862400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "06/01/1966",
+          "key" : -113184000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "07/01/1966",
+          "key" : -110592000000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "08/01/1966",
+          "key" : -107913600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "09/01/1966",
+          "key" : -105235200000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "10/01/1966",
+          "key" : -102643200000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "11/01/1966",
+          "key" : -99964800000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "12/01/1966",
+          "key" : -97372800000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "02/01/1967",
+          "key" : -92016000000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "03/01/1967",
+          "key" : -89596800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "04/01/1967",
+          "key" : -86918400000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "05/01/1967",
+          "key" : -84326400000,
+          "doc_count" : 12
+        },
+        {
+          "key_as_string" : "06/01/1967",
+          "key" : -81648000000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "07/01/1967",
+          "key" : -79056000000,
+          "doc_count" : 15
+        },
+        {
+          "key_as_string" : "08/01/1967",
+          "key" : -76377600000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "09/01/1967",
+          "key" : -73699200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "10/01/1967",
+          "key" : -71107200000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "11/01/1967",
+          "key" : -68428800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "12/01/1967",
+          "key" : -65836800000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/1968",
+          "key" : -60480000000,
+          "doc_count" : 20
+        },
+        {
+          "key_as_string" : "03/01/1968",
+          "key" : -57974400000,
+          "doc_count" : 16
+        },
+        {
+          "key_as_string" : "04/01/1968",
+          "key" : -55296000000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "05/01/1968",
+          "key" : -52704000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "06/01/1968",
+          "key" : -50025600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/1968",
+          "key" : -47433600000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "08/01/1968",
+          "key" : -44755200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "09/01/1968",
+          "key" : -42076800000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "10/01/1968",
+          "key" : -39484800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "11/01/1968",
+          "key" : -36806400000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "12/01/1968",
+          "key" : -34214400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "02/01/1969",
+          "key" : -28857600000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "03/01/1969",
+          "key" : -26438400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "04/01/1969",
+          "key" : -23760000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "05/01/1969",
+          "key" : -21168000000,
+          "doc_count" : 17
+        },
+        {
+          "key_as_string" : "06/01/1969",
+          "key" : -18489600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "07/01/1969",
+          "key" : -15897600000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "08/01/1969",
+          "key" : -13219200000,
+          "doc_count" : 62
+        },
+        {
+          "key_as_string" : "09/01/1969",
+          "key" : -10540800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/1969",
+          "key" : -7948800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "11/01/1969",
+          "key" : -5270400000,
+          "doc_count" : 14
+        },
+        {
+          "key_as_string" : "12/01/1969",
+          "key" : -2678400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "02/01/1970",
+          "key" : 2678400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "03/01/1970",
+          "key" : 5097600000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "04/01/1970",
+          "key" : 7776000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "05/01/1970",
+          "key" : 10368000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "06/01/1970",
+          "key" : 13046400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "07/01/1970",
+          "key" : 15638400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "08/01/1970",
+          "key" : 18316800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "09/01/1970",
+          "key" : 20995200000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "10/01/1970",
+          "key" : 23587200000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "11/01/1970",
+          "key" : 26265600000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "12/01/1970",
+          "key" : 28857600000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "02/01/1971",
+          "key" : 34214400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/1971",
+          "key" : 36633600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1971",
+          "key" : 39312000000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "05/01/1971",
+          "key" : 41904000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "06/01/1971",
+          "key" : 44582400000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "07/01/1971",
+          "key" : 47174400000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "08/01/1971",
+          "key" : 49852800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "09/01/1971",
+          "key" : 52531200000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/1971",
+          "key" : 55123200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1971",
+          "key" : 57801600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "12/01/1971",
+          "key" : 60393600000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1972",
+          "key" : 65750400000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "03/01/1972",
+          "key" : 68256000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "04/01/1972",
+          "key" : 70934400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "05/01/1972",
+          "key" : 73526400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "06/01/1972",
+          "key" : 76204800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "07/01/1972",
+          "key" : 78796800000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "08/01/1972",
+          "key" : 81475200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "09/01/1972",
+          "key" : 84153600000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/1972",
+          "key" : 86745600000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "11/01/1972",
+          "key" : 89424000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "12/01/1972",
+          "key" : 92016000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/1973",
+          "key" : 97372800000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1973",
+          "key" : 99792000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "04/01/1973",
+          "key" : 102470400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "05/01/1973",
+          "key" : 105062400000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "06/01/1973",
+          "key" : 107740800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "07/01/1973",
+          "key" : 110332800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "08/01/1973",
+          "key" : 113011200000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "09/01/1973",
+          "key" : 115689600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "10/01/1973",
+          "key" : 118281600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "11/01/1973",
+          "key" : 120960000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "12/01/1973",
+          "key" : 123552000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "02/01/1974",
+          "key" : 128908800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "03/01/1974",
+          "key" : 131328000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1974",
+          "key" : 134006400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "05/01/1974",
+          "key" : 136598400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "06/01/1974",
+          "key" : 139276800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "07/01/1974",
+          "key" : 141868800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "08/01/1974",
+          "key" : 144547200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "09/01/1974",
+          "key" : 147225600000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "10/01/1974",
+          "key" : 149817600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "11/01/1974",
+          "key" : 152496000000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "12/01/1974",
+          "key" : 155088000000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "02/01/1975",
+          "key" : 160444800000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1975",
+          "key" : 162864000000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "04/01/1975",
+          "key" : 165542400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "05/01/1975",
+          "key" : 168134400000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "06/01/1975",
+          "key" : 170812800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "07/01/1975",
+          "key" : 173404800000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "08/01/1975",
+          "key" : 176083200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "09/01/1975",
+          "key" : 178761600000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "10/01/1975",
+          "key" : 181353600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "11/01/1975",
+          "key" : 184032000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "12/01/1975",
+          "key" : 186624000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "02/01/1976",
+          "key" : 191980800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "03/01/1976",
+          "key" : 194486400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1976",
+          "key" : 197164800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "05/01/1976",
+          "key" : 199756800000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "06/01/1976",
+          "key" : 202435200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1976",
+          "key" : 205027200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/1976",
+          "key" : 207705600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "09/01/1976",
+          "key" : 210384000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "10/01/1976",
+          "key" : 212976000000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "11/01/1976",
+          "key" : 215654400000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "12/01/1976",
+          "key" : 218246400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "02/01/1977",
+          "key" : 223603200000,
+          "doc_count" : 20
+        },
+        {
+          "key_as_string" : "03/01/1977",
+          "key" : 226022400000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "04/01/1977",
+          "key" : 228700800000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "05/01/1977",
+          "key" : 231292800000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "06/01/1977",
+          "key" : 233971200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "07/01/1977",
+          "key" : 236563200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "08/01/1977",
+          "key" : 239241600000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "09/01/1977",
+          "key" : 241920000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/1977",
+          "key" : 244512000000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "11/01/1977",
+          "key" : 247190400000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/1977",
+          "key" : 249782400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "02/01/1978",
+          "key" : 255139200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "03/01/1978",
+          "key" : 257558400000,
+          "doc_count" : 66
+        },
+        {
+          "key_as_string" : "04/01/1978",
+          "key" : 260236800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "05/01/1978",
+          "key" : 262828800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "06/01/1978",
+          "key" : 265507200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1978",
+          "key" : 268099200000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "08/01/1978",
+          "key" : 270777600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "09/01/1978",
+          "key" : 273456000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/1978",
+          "key" : 276048000000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "11/01/1978",
+          "key" : 278726400000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "12/01/1978",
+          "key" : 281318400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "02/01/1979",
+          "key" : 286675200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1979",
+          "key" : 289094400000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "04/01/1979",
+          "key" : 291772800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "05/01/1979",
+          "key" : 294364800000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "06/01/1979",
+          "key" : 297043200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "07/01/1979",
+          "key" : 299635200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "08/01/1979",
+          "key" : 302313600000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "09/01/1979",
+          "key" : 304992000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "10/01/1979",
+          "key" : 307584000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "11/01/1979",
+          "key" : 310262400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "12/01/1979",
+          "key" : 312854400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "02/01/1980",
+          "key" : 318211200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1980",
+          "key" : 320716800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "04/01/1980",
+          "key" : 323395200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "05/01/1980",
+          "key" : 325987200000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "06/01/1980",
+          "key" : 328665600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/1980",
+          "key" : 331257600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/1980",
+          "key" : 333936000000,
+          "doc_count" : 13
+        },
+        {
+          "key_as_string" : "09/01/1980",
+          "key" : 336614400000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "10/01/1980",
+          "key" : 339206400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "11/01/1980",
+          "key" : 341884800000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "12/01/1980",
+          "key" : 344476800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "02/01/1981",
+          "key" : 349833600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1981",
+          "key" : 352252800000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/1981",
+          "key" : 354931200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "05/01/1981",
+          "key" : 357523200000,
+          "doc_count" : 16
+        },
+        {
+          "key_as_string" : "06/01/1981",
+          "key" : 360201600000,
+          "doc_count" : 16
+        },
+        {
+          "key_as_string" : "07/01/1981",
+          "key" : 362793600000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "08/01/1981",
+          "key" : 365472000000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "09/01/1981",
+          "key" : 368150400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "10/01/1981",
+          "key" : 370742400000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "11/01/1981",
+          "key" : 373420800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "12/01/1981",
+          "key" : 376012800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "02/01/1982",
+          "key" : 381369600000,
+          "doc_count" : 18
+        },
+        {
+          "key_as_string" : "03/01/1982",
+          "key" : 383788800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "04/01/1982",
+          "key" : 386467200000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "05/01/1982",
+          "key" : 389059200000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "06/01/1982",
+          "key" : 391737600000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "07/01/1982",
+          "key" : 394329600000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "08/01/1982",
+          "key" : 397008000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "09/01/1982",
+          "key" : 399686400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "10/01/1982",
+          "key" : 402278400000,
+          "doc_count" : 21
+        },
+        {
+          "key_as_string" : "11/01/1982",
+          "key" : 404956800000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "12/01/1982",
+          "key" : 407548800000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "02/01/1983",
+          "key" : 412905600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/1983",
+          "key" : 415324800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "04/01/1983",
+          "key" : 418003200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "05/01/1983",
+          "key" : 420595200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "06/01/1983",
+          "key" : 423273600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "07/01/1983",
+          "key" : 425865600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "08/01/1983",
+          "key" : 428544000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "09/01/1983",
+          "key" : 431222400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "10/01/1983",
+          "key" : 433814400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "11/01/1983",
+          "key" : 436492800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "12/01/1983",
+          "key" : 439084800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "02/01/1984",
+          "key" : 444441600000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "03/01/1984",
+          "key" : 446947200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/1984",
+          "key" : 449625600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "05/01/1984",
+          "key" : 452217600000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "06/01/1984",
+          "key" : 454896000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "07/01/1984",
+          "key" : 457488000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/1984",
+          "key" : 460166400000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "09/01/1984",
+          "key" : 462844800000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "10/01/1984",
+          "key" : 465436800000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "11/01/1984",
+          "key" : 468115200000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "12/01/1984",
+          "key" : 470707200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "02/01/1985",
+          "key" : 476064000000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1985",
+          "key" : 478483200000,
+          "doc_count" : 65
+        },
+        {
+          "key_as_string" : "04/01/1985",
+          "key" : 481161600000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "05/01/1985",
+          "key" : 483753600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "06/01/1985",
+          "key" : 486432000000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1985",
+          "key" : 489024000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/1985",
+          "key" : 491702400000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "09/01/1985",
+          "key" : 494380800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/1985",
+          "key" : 496972800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1985",
+          "key" : 499651200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "12/01/1985",
+          "key" : 502243200000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1986",
+          "key" : 507600000000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "03/01/1986",
+          "key" : 510019200000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "04/01/1986",
+          "key" : 512697600000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "05/01/1986",
+          "key" : 515289600000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "06/01/1986",
+          "key" : 517968000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "07/01/1986",
+          "key" : 520560000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "08/01/1986",
+          "key" : 523238400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "09/01/1986",
+          "key" : 525916800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "10/01/1986",
+          "key" : 528508800000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "11/01/1986",
+          "key" : 531187200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "12/01/1986",
+          "key" : 533779200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "02/01/1987",
+          "key" : 539136000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "03/01/1987",
+          "key" : 541555200000,
+          "doc_count" : 62
+        },
+        {
+          "key_as_string" : "04/01/1987",
+          "key" : 544233600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "05/01/1987",
+          "key" : 546825600000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "06/01/1987",
+          "key" : 549504000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "07/01/1987",
+          "key" : 552096000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "08/01/1987",
+          "key" : 554774400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "09/01/1987",
+          "key" : 557452800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "10/01/1987",
+          "key" : 560044800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "11/01/1987",
+          "key" : 562723200000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "12/01/1987",
+          "key" : 565315200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "02/01/1988",
+          "key" : 570672000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "03/01/1988",
+          "key" : 573177600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "04/01/1988",
+          "key" : 575856000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "05/01/1988",
+          "key" : 578448000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/1988",
+          "key" : 581126400000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "07/01/1988",
+          "key" : 583718400000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "08/01/1988",
+          "key" : 586396800000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "09/01/1988",
+          "key" : 589075200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "10/01/1988",
+          "key" : 591667200000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "11/01/1988",
+          "key" : 594345600000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "12/01/1988",
+          "key" : 596937600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "02/01/1989",
+          "key" : 602294400000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "03/01/1989",
+          "key" : 604713600000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "04/01/1989",
+          "key" : 607392000000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "05/01/1989",
+          "key" : 609984000000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "06/01/1989",
+          "key" : 612662400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/1989",
+          "key" : 615254400000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "08/01/1989",
+          "key" : 617932800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "09/01/1989",
+          "key" : 620611200000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/1989",
+          "key" : 623203200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "11/01/1989",
+          "key" : 625881600000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/1989",
+          "key" : 628473600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "02/01/1990",
+          "key" : 633830400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "03/01/1990",
+          "key" : 636249600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/1990",
+          "key" : 638928000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "05/01/1990",
+          "key" : 641520000000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "06/01/1990",
+          "key" : 644198400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/1990",
+          "key" : 646790400000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "08/01/1990",
+          "key" : 649468800000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "09/01/1990",
+          "key" : 652147200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "10/01/1990",
+          "key" : 654739200000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "11/01/1990",
+          "key" : 657417600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "12/01/1990",
+          "key" : 660009600000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "02/01/1991",
+          "key" : 665366400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "03/01/1991",
+          "key" : 667785600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "04/01/1991",
+          "key" : 670464000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "05/01/1991",
+          "key" : 673056000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "06/01/1991",
+          "key" : 675734400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "07/01/1991",
+          "key" : 678326400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "08/01/1991",
+          "key" : 681004800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "09/01/1991",
+          "key" : 683683200000,
+          "doc_count" : 22
+        },
+        {
+          "key_as_string" : "10/01/1991",
+          "key" : 686275200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1991",
+          "key" : 688953600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "12/01/1991",
+          "key" : 691545600000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 19
+        },
+        {
+          "key_as_string" : "02/01/1992",
+          "key" : 696902400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1992",
+          "key" : 699408000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "04/01/1992",
+          "key" : 702086400000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "05/01/1992",
+          "key" : 704678400000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "06/01/1992",
+          "key" : 707356800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "07/01/1992",
+          "key" : 709948800000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "08/01/1992",
+          "key" : 712627200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "09/01/1992",
+          "key" : 715305600000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "10/01/1992",
+          "key" : 717897600000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "11/01/1992",
+          "key" : 720576000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "12/01/1992",
+          "key" : 723168000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "02/01/1993",
+          "key" : 728524800000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "03/01/1993",
+          "key" : 730944000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "04/01/1993",
+          "key" : 733622400000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "05/01/1993",
+          "key" : 736214400000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "06/01/1993",
+          "key" : 738892800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "07/01/1993",
+          "key" : 741484800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "08/01/1993",
+          "key" : 744163200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "09/01/1993",
+          "key" : 746841600000,
+          "doc_count" : 60
+        },
+        {
+          "key_as_string" : "10/01/1993",
+          "key" : 749433600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "11/01/1993",
+          "key" : 752112000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "12/01/1993",
+          "key" : 754704000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1994",
+          "key" : 760060800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "03/01/1994",
+          "key" : 762480000000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "04/01/1994",
+          "key" : 765158400000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "05/01/1994",
+          "key" : 767750400000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "06/01/1994",
+          "key" : 770428800000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "07/01/1994",
+          "key" : 773020800000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "08/01/1994",
+          "key" : 775699200000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "09/01/1994",
+          "key" : 778377600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "10/01/1994",
+          "key" : 780969600000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "11/01/1994",
+          "key" : 783648000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "12/01/1994",
+          "key" : 786240000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "02/01/1995",
+          "key" : 791596800000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "03/01/1995",
+          "key" : 794016000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "04/01/1995",
+          "key" : 796694400000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "05/01/1995",
+          "key" : 799286400000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "06/01/1995",
+          "key" : 801964800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "07/01/1995",
+          "key" : 804556800000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "08/01/1995",
+          "key" : 807235200000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "09/01/1995",
+          "key" : 809913600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/1995",
+          "key" : 812505600000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "11/01/1995",
+          "key" : 815184000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "12/01/1995",
+          "key" : 817776000000,
+          "doc_count" : 60
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "02/01/1996",
+          "key" : 823132800000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "03/01/1996",
+          "key" : 825638400000,
+          "doc_count" : 53
+        },
+        {
+          "key_as_string" : "04/01/1996",
+          "key" : 828316800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "05/01/1996",
+          "key" : 830908800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "06/01/1996",
+          "key" : 833587200000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "07/01/1996",
+          "key" : 836179200000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "08/01/1996",
+          "key" : 838857600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "09/01/1996",
+          "key" : 841536000000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "10/01/1996",
+          "key" : 844128000000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "11/01/1996",
+          "key" : 846806400000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "12/01/1996",
+          "key" : 849398400000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "01/01/1997",
+          "key" : 852076800000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/1997",
+          "key" : 854755200000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "03/01/1997",
+          "key" : 857174400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "04/01/1997",
+          "key" : 859852800000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "05/01/1997",
+          "key" : 862444800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/1997",
+          "key" : 865123200000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "07/01/1997",
+          "key" : 867715200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "08/01/1997",
+          "key" : 870393600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "09/01/1997",
+          "key" : 873072000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "10/01/1997",
+          "key" : 875664000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "11/01/1997",
+          "key" : 878342400000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "12/01/1997",
+          "key" : 880934400000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "01/01/1998",
+          "key" : 883612800000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "02/01/1998",
+          "key" : 886291200000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "03/01/1998",
+          "key" : 888710400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "04/01/1998",
+          "key" : 891388800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "05/01/1998",
+          "key" : 893980800000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "06/01/1998",
+          "key" : 896659200000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "07/01/1998",
+          "key" : 899251200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "08/01/1998",
+          "key" : 901929600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "09/01/1998",
+          "key" : 904608000000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "10/01/1998",
+          "key" : 907200000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "11/01/1998",
+          "key" : 909878400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "12/01/1998",
+          "key" : 912470400000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "01/01/1999",
+          "key" : 915148800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "02/01/1999",
+          "key" : 917827200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "03/01/1999",
+          "key" : 920246400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/1999",
+          "key" : 922924800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "05/01/1999",
+          "key" : 925516800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "06/01/1999",
+          "key" : 928195200000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "07/01/1999",
+          "key" : 930787200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/1999",
+          "key" : 933465600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "09/01/1999",
+          "key" : 936144000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "10/01/1999",
+          "key" : 938736000000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/1999",
+          "key" : 941414400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "12/01/1999",
+          "key" : 944006400000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "01/01/2000",
+          "key" : 946684800000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "02/01/2000",
+          "key" : 949363200000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "03/01/2000",
+          "key" : 951868800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "04/01/2000",
+          "key" : 954547200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "05/01/2000",
+          "key" : 957139200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "06/01/2000",
+          "key" : 959817600000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "07/01/2000",
+          "key" : 962409600000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "08/01/2000",
+          "key" : 965088000000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "09/01/2000",
+          "key" : 967766400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/2000",
+          "key" : 970358400000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "11/01/2000",
+          "key" : 973036800000,
+          "doc_count" : 83
+        },
+        {
+          "key_as_string" : "12/01/2000",
+          "key" : 975628800000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "01/01/2001",
+          "key" : 978307200000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "02/01/2001",
+          "key" : 980985600000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "03/01/2001",
+          "key" : 983404800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "04/01/2001",
+          "key" : 986083200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "05/01/2001",
+          "key" : 988675200000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "06/01/2001",
+          "key" : 991353600000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "07/01/2001",
+          "key" : 993945600000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/2001",
+          "key" : 996624000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "09/01/2001",
+          "key" : 999302400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "10/01/2001",
+          "key" : 1001894400000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "11/01/2001",
+          "key" : 1004572800000,
+          "doc_count" : 26
+        },
+        {
+          "key_as_string" : "12/01/2001",
+          "key" : 1007164800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "01/01/2002",
+          "key" : 1009843200000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "02/01/2002",
+          "key" : 1012521600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/2002",
+          "key" : 1014940800000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "04/01/2002",
+          "key" : 1017619200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "05/01/2002",
+          "key" : 1020211200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "06/01/2002",
+          "key" : 1022889600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "07/01/2002",
+          "key" : 1025481600000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "08/01/2002",
+          "key" : 1028160000000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "09/01/2002",
+          "key" : 1030838400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/2002",
+          "key" : 1033430400000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "11/01/2002",
+          "key" : 1036108800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "12/01/2002",
+          "key" : 1038700800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "01/01/2003",
+          "key" : 1041379200000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "02/01/2003",
+          "key" : 1044057600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "03/01/2003",
+          "key" : 1046476800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "04/01/2003",
+          "key" : 1049155200000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "05/01/2003",
+          "key" : 1051747200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "06/01/2003",
+          "key" : 1054425600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/2003",
+          "key" : 1057017600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "08/01/2003",
+          "key" : 1059696000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "09/01/2003",
+          "key" : 1062374400000,
+          "doc_count" : 59
+        },
+        {
+          "key_as_string" : "10/01/2003",
+          "key" : 1064966400000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "11/01/2003",
+          "key" : 1067644800000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/2003",
+          "key" : 1070236800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "01/01/2004",
+          "key" : 1072915200000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "02/01/2004",
+          "key" : 1075593600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "03/01/2004",
+          "key" : 1078099200000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "04/01/2004",
+          "key" : 1080777600000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "05/01/2004",
+          "key" : 1083369600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "06/01/2004",
+          "key" : 1086048000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "07/01/2004",
+          "key" : 1088640000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "08/01/2004",
+          "key" : 1091318400000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "09/01/2004",
+          "key" : 1093996800000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "10/01/2004",
+          "key" : 1096588800000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "11/01/2004",
+          "key" : 1099267200000,
+          "doc_count" : 54
+        },
+        {
+          "key_as_string" : "12/01/2004",
+          "key" : 1101859200000,
+          "doc_count" : 112
+        },
+        {
+          "key_as_string" : "01/01/2005",
+          "key" : 1104537600000,
+          "doc_count" : 82
+        },
+        {
+          "key_as_string" : "02/01/2005",
+          "key" : 1107216000000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "03/01/2005",
+          "key" : 1109635200000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "04/01/2005",
+          "key" : 1112313600000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "05/01/2005",
+          "key" : 1114905600000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "06/01/2005",
+          "key" : 1117584000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "07/01/2005",
+          "key" : 1120176000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "08/01/2005",
+          "key" : 1122854400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "09/01/2005",
+          "key" : 1125532800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "10/01/2005",
+          "key" : 1128124800000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "11/01/2005",
+          "key" : 1130803200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "12/01/2005",
+          "key" : 1133395200000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/2006",
+          "key" : 1136073600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "02/01/2006",
+          "key" : 1138752000000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "03/01/2006",
+          "key" : 1141171200000,
+          "doc_count" : 45
+        },
+        {
+          "key_as_string" : "04/01/2006",
+          "key" : 1143849600000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "05/01/2006",
+          "key" : 1146441600000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "06/01/2006",
+          "key" : 1149120000000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "07/01/2006",
+          "key" : 1151712000000,
+          "doc_count" : 55
+        },
+        {
+          "key_as_string" : "08/01/2006",
+          "key" : 1154390400000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "09/01/2006",
+          "key" : 1157068800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "10/01/2006",
+          "key" : 1159660800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "11/01/2006",
+          "key" : 1162339200000,
+          "doc_count" : 65
+        },
+        {
+          "key_as_string" : "12/01/2006",
+          "key" : 1164931200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "01/01/2007",
+          "key" : 1167609600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "02/01/2007",
+          "key" : 1170288000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "03/01/2007",
+          "key" : 1172707200000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "04/01/2007",
+          "key" : 1175385600000,
+          "doc_count" : 81
+        },
+        {
+          "key_as_string" : "05/01/2007",
+          "key" : 1177977600000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/2007",
+          "key" : 1180656000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "07/01/2007",
+          "key" : 1183248000000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "08/01/2007",
+          "key" : 1185926400000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "09/01/2007",
+          "key" : 1188604800000,
+          "doc_count" : 64
+        },
+        {
+          "key_as_string" : "10/01/2007",
+          "key" : 1191196800000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "11/01/2007",
+          "key" : 1193875200000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "12/01/2007",
+          "key" : 1196467200000,
+          "doc_count" : 47
+        },
+        {
+          "key_as_string" : "01/01/2008",
+          "key" : 1199145600000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "02/01/2008",
+          "key" : 1201824000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "03/01/2008",
+          "key" : 1204329600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "04/01/2008",
+          "key" : 1207008000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "05/01/2008",
+          "key" : 1209600000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "06/01/2008",
+          "key" : 1212278400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/2008",
+          "key" : 1214870400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "08/01/2008",
+          "key" : 1217548800000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "09/01/2008",
+          "key" : 1220227200000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/2008",
+          "key" : 1222819200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "11/01/2008",
+          "key" : 1225497600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "12/01/2008",
+          "key" : 1228089600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "01/01/2009",
+          "key" : 1230768000000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "02/01/2009",
+          "key" : 1233446400000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "03/01/2009",
+          "key" : 1235865600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "04/01/2009",
+          "key" : 1238544000000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "05/01/2009",
+          "key" : 1241136000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "06/01/2009",
+          "key" : 1243814400000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "07/01/2009",
+          "key" : 1246406400000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "08/01/2009",
+          "key" : 1249084800000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "09/01/2009",
+          "key" : 1251763200000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "10/01/2009",
+          "key" : 1254355200000,
+          "doc_count" : 82
+        },
+        {
+          "key_as_string" : "11/01/2009",
+          "key" : 1257033600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "12/01/2009",
+          "key" : 1259625600000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "01/01/2010",
+          "key" : 1262304000000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "02/01/2010",
+          "key" : 1264982400000,
+          "doc_count" : 76
+        },
+        {
+          "key_as_string" : "03/01/2010",
+          "key" : 1267401600000,
+          "doc_count" : 61
+        },
+        {
+          "key_as_string" : "04/01/2010",
+          "key" : 1270080000000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "05/01/2010",
+          "key" : 1272672000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "06/01/2010",
+          "key" : 1275350400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "07/01/2010",
+          "key" : 1277942400000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "08/01/2010",
+          "key" : 1280620800000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "09/01/2010",
+          "key" : 1283299200000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "10/01/2010",
+          "key" : 1285891200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "11/01/2010",
+          "key" : 1288569600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "12/01/2010",
+          "key" : 1291161600000,
+          "doc_count" : 49
+        },
+        {
+          "key_as_string" : "01/01/2011",
+          "key" : 1293840000000,
+          "doc_count" : 42
+        },
+        {
+          "key_as_string" : "02/01/2011",
+          "key" : 1296518400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "03/01/2011",
+          "key" : 1298937600000,
+          "doc_count" : 227
+        },
+        {
+          "key_as_string" : "04/01/2011",
+          "key" : 1301616000000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "05/01/2011",
+          "key" : 1304208000000,
+          "doc_count" : 48
+        },
+        {
+          "key_as_string" : "06/01/2011",
+          "key" : 1306886400000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "07/01/2011",
+          "key" : 1309478400000,
+          "doc_count" : 63
+        },
+        {
+          "key_as_string" : "08/01/2011",
+          "key" : 1312156800000,
+          "doc_count" : 51
+        },
+        {
+          "key_as_string" : "09/01/2011",
+          "key" : 1314835200000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "10/01/2011",
+          "key" : 1317427200000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "11/01/2011",
+          "key" : 1320105600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "12/01/2011",
+          "key" : 1322697600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "01/01/2012",
+          "key" : 1325376000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "02/01/2012",
+          "key" : 1328054400000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "03/01/2012",
+          "key" : 1330560000000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "04/01/2012",
+          "key" : 1333238400000,
+          "doc_count" : 58
+        },
+        {
+          "key_as_string" : "05/01/2012",
+          "key" : 1335830400000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "06/01/2012",
+          "key" : 1338508800000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "07/01/2012",
+          "key" : 1341100800000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "08/01/2012",
+          "key" : 1343779200000,
+          "doc_count" : 38
+        },
+        {
+          "key_as_string" : "09/01/2012",
+          "key" : 1346457600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "10/01/2012",
+          "key" : 1349049600000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "11/01/2012",
+          "key" : 1351728000000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "12/01/2012",
+          "key" : 1354320000000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "01/01/2013",
+          "key" : 1356998400000,
+          "doc_count" : 23
+        },
+        {
+          "key_as_string" : "02/01/2013",
+          "key" : 1359676800000,
+          "doc_count" : 82
+        },
+        {
+          "key_as_string" : "03/01/2013",
+          "key" : 1362096000000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "04/01/2013",
+          "key" : 1364774400000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "05/01/2013",
+          "key" : 1367366400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "06/01/2013",
+          "key" : 1370044800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "07/01/2013",
+          "key" : 1372636800000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "08/01/2013",
+          "key" : 1375315200000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "09/01/2013",
+          "key" : 1377993600000,
+          "doc_count" : 39
+        },
+        {
+          "key_as_string" : "10/01/2013",
+          "key" : 1380585600000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "11/01/2013",
+          "key" : 1383264000000,
+          "doc_count" : 43
+        },
+        {
+          "key_as_string" : "12/01/2013",
+          "key" : 1385856000000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "01/01/2014",
+          "key" : 1388534400000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "02/01/2014",
+          "key" : 1391212800000,
+          "doc_count" : 29
+        },
+        {
+          "key_as_string" : "03/01/2014",
+          "key" : 1393632000000,
+          "doc_count" : 50
+        },
+        {
+          "key_as_string" : "04/01/2014",
+          "key" : 1396310400000,
+          "doc_count" : 68
+        },
+        {
+          "key_as_string" : "05/01/2014",
+          "key" : 1398902400000,
+          "doc_count" : 56
+        },
+        {
+          "key_as_string" : "06/01/2014",
+          "key" : 1401580800000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "07/01/2014",
+          "key" : 1404172800000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "08/01/2014",
+          "key" : 1406851200000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "09/01/2014",
+          "key" : 1409529600000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "10/01/2014",
+          "key" : 1412121600000,
+          "doc_count" : 34
+        },
+        {
+          "key_as_string" : "11/01/2014",
+          "key" : 1414800000000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "12/01/2014",
+          "key" : 1417392000000,
+          "doc_count" : 32
+        },
+        {
+          "key_as_string" : "01/01/2015",
+          "key" : 1420070400000,
+          "doc_count" : 25
+        },
+        {
+          "key_as_string" : "02/01/2015",
+          "key" : 1422748800000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "03/01/2015",
+          "key" : 1425168000000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "04/01/2015",
+          "key" : 1427846400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "05/01/2015",
+          "key" : 1430438400000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "06/01/2015",
+          "key" : 1433116800000,
+          "doc_count" : 31
+        },
+        {
+          "key_as_string" : "07/01/2015",
+          "key" : 1435708800000,
+          "doc_count" : 40
+        },
+        {
+          "key_as_string" : "08/01/2015",
+          "key" : 1438387200000,
+          "doc_count" : 33
+        },
+        {
+          "key_as_string" : "09/01/2015",
+          "key" : 1441065600000,
+          "doc_count" : 66
+        },
+        {
+          "key_as_string" : "10/01/2015",
+          "key" : 1443657600000,
+          "doc_count" : 28
+        },
+        {
+          "key_as_string" : "11/01/2015",
+          "key" : 1446336000000,
+          "doc_count" : 52
+        },
+        {
+          "key_as_string" : "12/01/2015",
+          "key" : 1448928000000,
+          "doc_count" : 27
+        },
+        {
+          "key_as_string" : "01/01/2016",
+          "key" : 1451606400000,
+          "doc_count" : 37
+        },
+        {
+          "key_as_string" : "02/01/2016",
+          "key" : 1454284800000,
+          "doc_count" : 24
+        },
+        {
+          "key_as_string" : "03/01/2016",
+          "key" : 1456790400000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "04/01/2016",
+          "key" : 1459468800000,
+          "doc_count" : 57
+        },
+        {
+          "key_as_string" : "05/01/2016",
+          "key" : 1462060800000,
+          "doc_count" : 30
+        },
+        {
+          "key_as_string" : "06/01/2016",
+          "key" : 1464739200000,
+          "doc_count" : 41
+        },
+        {
+          "key_as_string" : "07/01/2016",
+          "key" : 1467331200000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "08/01/2016",
+          "key" : 1470009600000,
+          "doc_count" : 35
+        },
+        {
+          "key_as_string" : "09/01/2016",
+          "key" : 1472688000000,
+          "doc_count" : 46
+        },
+        {
+          "key_as_string" : "10/01/2016",
+          "key" : 1475280000000,
+          "doc_count" : 36
+        },
+        {
+          "key_as_string" : "11/01/2016",
+          "key" : 1477958400000,
+          "doc_count" : 44
+        },
+        {
+          "key_as_string" : "12/01/2016",
+          "key" : 1480550400000,
+          "doc_count" : 53
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+GET earthquakes/_search
+{
+  "size": 0,
+  "aggs": {
+    "types": {
+      "terms": {
+        "field": "Type",
+        "size": 10
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 2,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "types" : {
+      "doc_count_error_upper_bound" : 0,
+      "sum_other_doc_count" : 0,
+      "buckets" : [
+        {
+          "key" : "Earthquake",
+          "doc_count" : 23231
+        },
+        {
+          "key" : "Nuclear Explosion",
+          "doc_count" : 175
+        },
+        {
+          "key" : "Explosion",
+          "doc_count" : 4
+        },
+        {
+          "key" : "Rock Burst",
+          "doc_count" : 1
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
