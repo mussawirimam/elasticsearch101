@@ -1,0 +1,26 @@
+So with bucket aggregations, we're just creating a bucket or a group of documents.
+
+Creates buckets of documents.
+we're establishing a criterion
+to categorize our documents based on the date field.
+So in this case, the order date of our ecommerce data,
+we're going to create a bucket for every day,
+and then we're going to put all of our documents
+in whatever day bucket they belong to.
+So we're just bucketizing our data out.
+
+
+SAMPLE: 
+# bucket aggregation
+GET ecommerce/_search
+{
+  "size": 0,  # simplify the output
+    "aggs" : {
+      "orders_per_day": {  # any name
+        "date_histogram": {  # bucket agg
+          "field": "order_date",
+          "calendar_interval": "day"
+       }
+     }
+   }
+}
