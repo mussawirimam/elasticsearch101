@@ -1,1 +1,6072 @@
-Sub Aggregation
+SUB-AGGREGATION:
+--------------------
+Aggregates per bucket.
+Each bucket of a parent pipeline aggregation can have sub-aggregations performed on it.
+
+MY UNDERSTANDING: Sub-aggregation is used for nested aggregations..
+You can use it with the bucket or metric or whichever aggregation type you want. 
+
+SAMPLE SUB-AGGREGATION:
+------------------------
+GET ecommerce/_search
+{
+  "size": 0, # simplifiy the output
+  "aggs" : {
+    "total_sales_per_day": {  # any name
+      "date_histogram": {  #bucket agg  
+        "field": "order_date"
+        "calendar_interval": "day"
+      },
+      "aggs": {  # sub-agg <---------- this time it is underneath our total_sales_per_day aggregation
+        "total_sales": {
+          "sum": {  # metrics agg
+            "field": "taxless_total_price"
+          }
+        }
+      }
+    }
+  }
+--------------------------------------------------------------------------------------------------------------
+#SUB-AGGREGATION WITH THE DATE HISTOGRAM AND THE METRIC AGGREGATION
+GET earthquakes/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_day": {
+      "date_histogram": {
+        "field": "Date",
+        "interval": "month"
+      },
+      "aggs": {
+        "avg_magnitude": {
+          "avg": {
+            "field": "Magnitude"
+          }
+        }
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT
+--------------------
+#! [interval] on [date_histogram] is deprecated, use [fixed_interval] or [calendar_interval] in the future.
+{
+  "took" : 95,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_day" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1965",
+          "key" : -157766400000,
+          "doc_count" : 13,
+          "avg_magnitude" : {
+            "value" : 6.123076923076923
+          }
+        },
+        {
+          "key_as_string" : "02/01/1965",
+          "key" : -155088000000,
+          "doc_count" : 54,
+          "avg_magnitude" : {
+            "value" : 5.955555555555556
+          }
+        },
+        {
+          "key_as_string" : "03/01/1965",
+          "key" : -152668800000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 6.057894736842105
+          }
+        },
+        {
+          "key_as_string" : "04/01/1965",
+          "key" : -149990400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.945454545454545
+          }
+        },
+        {
+          "key_as_string" : "05/01/1965",
+          "key" : -147398400000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.954545454545454
+          }
+        },
+        {
+          "key_as_string" : "06/01/1965",
+          "key" : -144720000000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.90625
+          }
+        },
+        {
+          "key_as_string" : "07/01/1965",
+          "key" : -142128000000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.923809523809524
+          }
+        },
+        {
+          "key_as_string" : "08/01/1965",
+          "key" : -139449600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 6.314705882352941
+          }
+        },
+        {
+          "key_as_string" : "09/01/1965",
+          "key" : -136771200000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 6.057142857142857
+          }
+        },
+        {
+          "key_as_string" : "10/01/1965",
+          "key" : -134179200000,
+          "doc_count" : 17,
+          "avg_magnitude" : {
+            "value" : 5.958823529411765
+          }
+        },
+        {
+          "key_as_string" : "11/01/1965",
+          "key" : -131500800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.992592592592593
+          }
+        },
+        {
+          "key_as_string" : "12/01/1965",
+          "key" : -128908800000,
+          "doc_count" : 20,
+          "avg_magnitude" : {
+            "value" : 5.970000000000001
+          }
+        },
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 12,
+          "avg_magnitude" : {
+            "value" : 5.825
+          }
+        },
+        {
+          "key_as_string" : "02/01/1966",
+          "key" : -123552000000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 6.059259259259259
+          }
+        },
+        {
+          "key_as_string" : "03/01/1966",
+          "key" : -121132800000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 6.160869565217391
+          }
+        },
+        {
+          "key_as_string" : "04/01/1966",
+          "key" : -118454400000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.961904761904762
+          }
+        },
+        {
+          "key_as_string" : "05/01/1966",
+          "key" : -115862400000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.872727272727272
+          }
+        },
+        {
+          "key_as_string" : "06/01/1966",
+          "key" : -113184000000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 6.037037037037037
+          }
+        },
+        {
+          "key_as_string" : "07/01/1966",
+          "key" : -110592000000,
+          "doc_count" : 12,
+          "avg_magnitude" : {
+            "value" : 6.041666666666667
+          }
+        },
+        {
+          "key_as_string" : "08/01/1966",
+          "key" : -107913600000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.984285714285714
+          }
+        },
+        {
+          "key_as_string" : "09/01/1966",
+          "key" : -105235200000,
+          "doc_count" : 12,
+          "avg_magnitude" : {
+            "value" : 6.2
+          }
+        },
+        {
+          "key_as_string" : "10/01/1966",
+          "key" : -102643200000,
+          "doc_count" : 13,
+          "avg_magnitude" : {
+            "value" : 6.253846153846154
+          }
+        },
+        {
+          "key_as_string" : "11/01/1966",
+          "key" : -99964800000,
+          "doc_count" : 13,
+          "avg_magnitude" : {
+            "value" : 5.884615384615385
+          }
+        },
+        {
+          "key_as_string" : "12/01/1966",
+          "key" : -97372800000,
+          "doc_count" : 17,
+          "avg_magnitude" : {
+            "value" : 6.277647058823529
+          }
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.969444444444445
+          }
+        },
+        {
+          "key_as_string" : "02/01/1967",
+          "key" : -92016000000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 6.133333333333334
+          }
+        },
+        {
+          "key_as_string" : "03/01/1967",
+          "key" : -89596800000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 5.995652173913044
+          }
+        },
+        {
+          "key_as_string" : "04/01/1967",
+          "key" : -86918400000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 5.915789473684211
+          }
+        },
+        {
+          "key_as_string" : "05/01/1967",
+          "key" : -84326400000,
+          "doc_count" : 12,
+          "avg_magnitude" : {
+            "value" : 5.916666666666667
+          }
+        },
+        {
+          "key_as_string" : "06/01/1967",
+          "key" : -81648000000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.786363636363636
+          }
+        },
+        {
+          "key_as_string" : "07/01/1967",
+          "key" : -79056000000,
+          "doc_count" : 15,
+          "avg_magnitude" : {
+            "value" : 6.22
+          }
+        },
+        {
+          "key_as_string" : "08/01/1967",
+          "key" : -76377600000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.945833333333333
+          }
+        },
+        {
+          "key_as_string" : "09/01/1967",
+          "key" : -73699200000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 6.079166666666667
+          }
+        },
+        {
+          "key_as_string" : "10/01/1967",
+          "key" : -71107200000,
+          "doc_count" : 17,
+          "avg_magnitude" : {
+            "value" : 6.064705882352941
+          }
+        },
+        {
+          "key_as_string" : "11/01/1967",
+          "key" : -68428800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.955555555555556
+          }
+        },
+        {
+          "key_as_string" : "12/01/1967",
+          "key" : -65836800000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 6.183333333333334
+          }
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 6.117391304347826
+          }
+        },
+        {
+          "key_as_string" : "02/01/1968",
+          "key" : -60480000000,
+          "doc_count" : 20,
+          "avg_magnitude" : {
+            "value" : 6.02
+          }
+        },
+        {
+          "key_as_string" : "03/01/1968",
+          "key" : -57974400000,
+          "doc_count" : 16,
+          "avg_magnitude" : {
+            "value" : 5.89375
+          }
+        },
+        {
+          "key_as_string" : "04/01/1968",
+          "key" : -55296000000,
+          "doc_count" : 13,
+          "avg_magnitude" : {
+            "value" : 6.186923076923076
+          }
+        },
+        {
+          "key_as_string" : "05/01/1968",
+          "key" : -52704000000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 6.185714285714286
+          }
+        },
+        {
+          "key_as_string" : "06/01/1968",
+          "key" : -50025600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.990322580645161
+          }
+        },
+        {
+          "key_as_string" : "07/01/1968",
+          "key" : -47433600000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 6.047826086956522
+          }
+        },
+        {
+          "key_as_string" : "08/01/1968",
+          "key" : -44755200000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 6.165
+          }
+        },
+        {
+          "key_as_string" : "09/01/1968",
+          "key" : -42076800000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 6.115384615384615
+          }
+        },
+        {
+          "key_as_string" : "10/01/1968",
+          "key" : -39484800000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 6.129166666666666
+          }
+        },
+        {
+          "key_as_string" : "11/01/1968",
+          "key" : -36806400000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 5.994736842105263
+          }
+        },
+        {
+          "key_as_string" : "12/01/1968",
+          "key" : -34214400000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.886666666666667
+          }
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 6.199999999999999
+          }
+        },
+        {
+          "key_as_string" : "02/01/1969",
+          "key" : -28857600000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 6.295238095238095
+          }
+        },
+        {
+          "key_as_string" : "03/01/1969",
+          "key" : -26438400000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 6.026666666666667
+          }
+        },
+        {
+          "key_as_string" : "04/01/1969",
+          "key" : -23760000000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.919354838709677
+          }
+        },
+        {
+          "key_as_string" : "05/01/1969",
+          "key" : -21168000000,
+          "doc_count" : 17,
+          "avg_magnitude" : {
+            "value" : 5.9411764705882355
+          }
+        },
+        {
+          "key_as_string" : "06/01/1969",
+          "key" : -18489600000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 5.922222222222222
+          }
+        },
+        {
+          "key_as_string" : "07/01/1969",
+          "key" : -15897600000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.854545454545455
+          }
+        },
+        {
+          "key_as_string" : "08/01/1969",
+          "key" : -13219200000,
+          "doc_count" : 62,
+          "avg_magnitude" : {
+            "value" : 6.067741935483871
+          }
+        },
+        {
+          "key_as_string" : "09/01/1969",
+          "key" : -10540800000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.889729729729729
+          }
+        },
+        {
+          "key_as_string" : "10/01/1969",
+          "key" : -7948800000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.904166666666666
+          }
+        },
+        {
+          "key_as_string" : "11/01/1969",
+          "key" : -5270400000,
+          "doc_count" : 14,
+          "avg_magnitude" : {
+            "value" : 6.221428571428571
+          }
+        },
+        {
+          "key_as_string" : "12/01/1969",
+          "key" : -2678400000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.904761904761905
+          }
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 6.096
+          }
+        },
+        {
+          "key_as_string" : "02/01/1970",
+          "key" : 2678400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.96060606060606
+          }
+        },
+        {
+          "key_as_string" : "03/01/1970",
+          "key" : 5097600000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 6.0284615384615385
+          }
+        },
+        {
+          "key_as_string" : "04/01/1970",
+          "key" : 7776000000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 6.030952380952381
+          }
+        },
+        {
+          "key_as_string" : "05/01/1970",
+          "key" : 10368000000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 6.074074074074074
+          }
+        },
+        {
+          "key_as_string" : "06/01/1970",
+          "key" : 13046400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 6.1030303030303035
+          }
+        },
+        {
+          "key_as_string" : "07/01/1970",
+          "key" : 15638400000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 6.2318181818181815
+          }
+        },
+        {
+          "key_as_string" : "08/01/1970",
+          "key" : 18316800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 6.066666666666667
+          }
+        },
+        {
+          "key_as_string" : "09/01/1970",
+          "key" : 20995200000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 6.0736842105263165
+          }
+        },
+        {
+          "key_as_string" : "10/01/1970",
+          "key" : 23587200000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 6.013636363636365
+          }
+        },
+        {
+          "key_as_string" : "11/01/1970",
+          "key" : 26265600000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.863636363636363
+          }
+        },
+        {
+          "key_as_string" : "12/01/1970",
+          "key" : 28857600000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.991666666666666
+          }
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.988235294117647
+          }
+        },
+        {
+          "key_as_string" : "02/01/1971",
+          "key" : 34214400000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.996428571428572
+          }
+        },
+        {
+          "key_as_string" : "03/01/1971",
+          "key" : 36633600000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.892857142857143
+          }
+        },
+        {
+          "key_as_string" : "04/01/1971",
+          "key" : 39312000000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.876923076923077
+          }
+        },
+        {
+          "key_as_string" : "05/01/1971",
+          "key" : 41904000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.958333333333333
+          }
+        },
+        {
+          "key_as_string" : "06/01/1971",
+          "key" : 44582400000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 5.888888888888889
+          }
+        },
+        {
+          "key_as_string" : "07/01/1971",
+          "key" : 47174400000,
+          "doc_count" : 64,
+          "avg_magnitude" : {
+            "value" : 6.04375
+          }
+        },
+        {
+          "key_as_string" : "08/01/1971",
+          "key" : 49852800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.963888888888889
+          }
+        },
+        {
+          "key_as_string" : "09/01/1971",
+          "key" : 52531200000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.992307692307692
+          }
+        },
+        {
+          "key_as_string" : "10/01/1971",
+          "key" : 55123200000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.991176470588235
+          }
+        },
+        {
+          "key_as_string" : "11/01/1971",
+          "key" : 57801600000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 6.0055555555555555
+          }
+        },
+        {
+          "key_as_string" : "12/01/1971",
+          "key" : 60393600000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.944
+          }
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 6.18125
+          }
+        },
+        {
+          "key_as_string" : "02/01/1972",
+          "key" : 65750400000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.916666666666667
+          }
+        },
+        {
+          "key_as_string" : "03/01/1972",
+          "key" : 68256000000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.964516129032258
+          }
+        },
+        {
+          "key_as_string" : "04/01/1972",
+          "key" : 70934400000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 6.089285714285714
+          }
+        },
+        {
+          "key_as_string" : "05/01/1972",
+          "key" : 73526400000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.935483870967742
+          }
+        },
+        {
+          "key_as_string" : "06/01/1972",
+          "key" : 76204800000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 5.873913043478261
+          }
+        },
+        {
+          "key_as_string" : "07/01/1972",
+          "key" : 78796800000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.896
+          }
+        },
+        {
+          "key_as_string" : "08/01/1972",
+          "key" : 81475200000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.9025
+          }
+        },
+        {
+          "key_as_string" : "09/01/1972",
+          "key" : 84153600000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.952272727272727
+          }
+        },
+        {
+          "key_as_string" : "10/01/1972",
+          "key" : 86745600000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.824137931034483
+          }
+        },
+        {
+          "key_as_string" : "11/01/1972",
+          "key" : 89424000000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.857142857142857
+          }
+        },
+        {
+          "key_as_string" : "12/01/1972",
+          "key" : 92016000000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.92608695652174
+          }
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 5.895652173913043
+          }
+        },
+        {
+          "key_as_string" : "02/01/1973",
+          "key" : 97372800000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.828125
+          }
+        },
+        {
+          "key_as_string" : "03/01/1973",
+          "key" : 99792000000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.75
+          }
+        },
+        {
+          "key_as_string" : "04/01/1973",
+          "key" : 102470400000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.871428571428572
+          }
+        },
+        {
+          "key_as_string" : "05/01/1973",
+          "key" : 105062400000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.709090909090909
+          }
+        },
+        {
+          "key_as_string" : "06/01/1973",
+          "key" : 107740800000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.773846153846154
+          }
+        },
+        {
+          "key_as_string" : "07/01/1973",
+          "key" : 110332800000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.78421052631579
+          }
+        },
+        {
+          "key_as_string" : "08/01/1973",
+          "key" : 113011200000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.886486486486487
+          }
+        },
+        {
+          "key_as_string" : "09/01/1973",
+          "key" : 115689600000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.788571428571428
+          }
+        },
+        {
+          "key_as_string" : "10/01/1973",
+          "key" : 118281600000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 5.9944444444444445
+          }
+        },
+        {
+          "key_as_string" : "11/01/1973",
+          "key" : 120960000000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.7384615384615385
+          }
+        },
+        {
+          "key_as_string" : "12/01/1973",
+          "key" : 123552000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.87027027027027
+          }
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.83030303030303
+          }
+        },
+        {
+          "key_as_string" : "02/01/1974",
+          "key" : 128908800000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.8121212121212125
+          }
+        },
+        {
+          "key_as_string" : "03/01/1974",
+          "key" : 131328000000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.789285714285714
+          }
+        },
+        {
+          "key_as_string" : "04/01/1974",
+          "key" : 134006400000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.619047619047619
+          }
+        },
+        {
+          "key_as_string" : "05/01/1974",
+          "key" : 136598400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.821621621621622
+          }
+        },
+        {
+          "key_as_string" : "06/01/1974",
+          "key" : 139276800000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.782758620689655
+          }
+        },
+        {
+          "key_as_string" : "07/01/1974",
+          "key" : 141868800000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.914285714285714
+          }
+        },
+        {
+          "key_as_string" : "08/01/1974",
+          "key" : 144547200000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.830555555555556
+          }
+        },
+        {
+          "key_as_string" : "09/01/1974",
+          "key" : 147225600000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.760000000000001
+          }
+        },
+        {
+          "key_as_string" : "10/01/1974",
+          "key" : 149817600000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.982857142857143
+          }
+        },
+        {
+          "key_as_string" : "11/01/1974",
+          "key" : 152496000000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.867241379310345
+          }
+        },
+        {
+          "key_as_string" : "12/01/1974",
+          "key" : 155088000000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.886363636363637
+          }
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.84074074074074
+          }
+        },
+        {
+          "key_as_string" : "02/01/1975",
+          "key" : 160444800000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.876
+          }
+        },
+        {
+          "key_as_string" : "03/01/1975",
+          "key" : 162864000000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.875862068965517
+          }
+        },
+        {
+          "key_as_string" : "04/01/1975",
+          "key" : 165542400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.796969696969697
+          }
+        },
+        {
+          "key_as_string" : "05/01/1975",
+          "key" : 168134400000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.879310344827586
+          }
+        },
+        {
+          "key_as_string" : "06/01/1975",
+          "key" : 170812800000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.803076923076923
+          }
+        },
+        {
+          "key_as_string" : "07/01/1975",
+          "key" : 173404800000,
+          "doc_count" : 51,
+          "avg_magnitude" : {
+            "value" : 5.874509803921569
+          }
+        },
+        {
+          "key_as_string" : "08/01/1975",
+          "key" : 176083200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.796875
+          }
+        },
+        {
+          "key_as_string" : "09/01/1975",
+          "key" : 178761600000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.763333333333334
+          }
+        },
+        {
+          "key_as_string" : "10/01/1975",
+          "key" : 181353600000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.9774
+          }
+        },
+        {
+          "key_as_string" : "11/01/1975",
+          "key" : 184032000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.783333333333333
+          }
+        },
+        {
+          "key_as_string" : "12/01/1975",
+          "key" : 186624000000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.848387096774194
+          }
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 61,
+          "avg_magnitude" : {
+            "value" : 5.823606557377049
+          }
+        },
+        {
+          "key_as_string" : "02/01/1976",
+          "key" : 191980800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.766136363636364
+          }
+        },
+        {
+          "key_as_string" : "03/01/1976",
+          "key" : 194486400000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.816428571428571
+          }
+        },
+        {
+          "key_as_string" : "04/01/1976",
+          "key" : 197164800000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.747058823529412
+          }
+        },
+        {
+          "key_as_string" : "05/01/1976",
+          "key" : 199756800000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.9
+          }
+        },
+        {
+          "key_as_string" : "06/01/1976",
+          "key" : 202435200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.876315789473685
+          }
+        },
+        {
+          "key_as_string" : "07/01/1976",
+          "key" : 205027200000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 6.017647058823529
+          }
+        },
+        {
+          "key_as_string" : "08/01/1976",
+          "key" : 207705600000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.885365853658537
+          }
+        },
+        {
+          "key_as_string" : "09/01/1976",
+          "key" : 210384000000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.6911764705882355
+          }
+        },
+        {
+          "key_as_string" : "10/01/1976",
+          "key" : 212976000000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.6875
+          }
+        },
+        {
+          "key_as_string" : "11/01/1976",
+          "key" : 215654400000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.907692307692308
+          }
+        },
+        {
+          "key_as_string" : "12/01/1976",
+          "key" : 218246400000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.693548387096774
+          }
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.793103448275862
+          }
+        },
+        {
+          "key_as_string" : "02/01/1977",
+          "key" : 223603200000,
+          "doc_count" : 20,
+          "avg_magnitude" : {
+            "value" : 5.825
+          }
+        },
+        {
+          "key_as_string" : "03/01/1977",
+          "key" : 226022400000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.822857142857143
+          }
+        },
+        {
+          "key_as_string" : "04/01/1977",
+          "key" : 228700800000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.954285714285715
+          }
+        },
+        {
+          "key_as_string" : "05/01/1977",
+          "key" : 231292800000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.673076923076923
+          }
+        },
+        {
+          "key_as_string" : "06/01/1977",
+          "key" : 233971200000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.688
+          }
+        },
+        {
+          "key_as_string" : "07/01/1977",
+          "key" : 236563200000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.832000000000001
+          }
+        },
+        {
+          "key_as_string" : "08/01/1977",
+          "key" : 239241600000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 5.832075471698114
+          }
+        },
+        {
+          "key_as_string" : "09/01/1977",
+          "key" : 241920000000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.7318181818181815
+          }
+        },
+        {
+          "key_as_string" : "10/01/1977",
+          "key" : 244512000000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 5.70566037735849
+          }
+        },
+        {
+          "key_as_string" : "11/01/1977",
+          "key" : 247190400000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.7627906976744185
+          }
+        },
+        {
+          "key_as_string" : "12/01/1977",
+          "key" : 249782400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.794594594594595
+          }
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.771428571428571
+          }
+        },
+        {
+          "key_as_string" : "02/01/1978",
+          "key" : 255139200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.781578947368421
+          }
+        },
+        {
+          "key_as_string" : "03/01/1978",
+          "key" : 257558400000,
+          "doc_count" : 66,
+          "avg_magnitude" : {
+            "value" : 5.887878787878789
+          }
+        },
+        {
+          "key_as_string" : "04/01/1978",
+          "key" : 260236800000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.813793103448275
+          }
+        },
+        {
+          "key_as_string" : "05/01/1978",
+          "key" : 262828800000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.745945945945945
+          }
+        },
+        {
+          "key_as_string" : "06/01/1978",
+          "key" : 265507200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.8999999999999995
+          }
+        },
+        {
+          "key_as_string" : "07/01/1978",
+          "key" : 268099200000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.828571428571429
+          }
+        },
+        {
+          "key_as_string" : "08/01/1978",
+          "key" : 270777600000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.7631578947368425
+          }
+        },
+        {
+          "key_as_string" : "09/01/1978",
+          "key" : 273456000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.756756756756757
+          }
+        },
+        {
+          "key_as_string" : "10/01/1978",
+          "key" : 276048000000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 5.6421052631578945
+          }
+        },
+        {
+          "key_as_string" : "11/01/1978",
+          "key" : 278726400000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.937037037037038
+          }
+        },
+        {
+          "key_as_string" : "12/01/1978",
+          "key" : 281318400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.8875
+          }
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.796428571428572
+          }
+        },
+        {
+          "key_as_string" : "02/01/1979",
+          "key" : 286675200000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.852
+          }
+        },
+        {
+          "key_as_string" : "03/01/1979",
+          "key" : 289094400000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.832000000000001
+          }
+        },
+        {
+          "key_as_string" : "04/01/1979",
+          "key" : 291772800000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.858333333333333
+          }
+        },
+        {
+          "key_as_string" : "05/01/1979",
+          "key" : 294364800000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.7975
+          }
+        },
+        {
+          "key_as_string" : "06/01/1979",
+          "key" : 297043200000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.804166666666667
+          }
+        },
+        {
+          "key_as_string" : "07/01/1979",
+          "key" : 299635200000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.763999999999999
+          }
+        },
+        {
+          "key_as_string" : "08/01/1979",
+          "key" : 302313600000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.9192307692307695
+          }
+        },
+        {
+          "key_as_string" : "09/01/1979",
+          "key" : 304992000000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.78
+          }
+        },
+        {
+          "key_as_string" : "10/01/1979",
+          "key" : 307584000000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.8525
+          }
+        },
+        {
+          "key_as_string" : "11/01/1979",
+          "key" : 310262400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.934375
+          }
+        },
+        {
+          "key_as_string" : "12/01/1979",
+          "key" : 312854400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.7625
+          }
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.741935483870968
+          }
+        },
+        {
+          "key_as_string" : "02/01/1980",
+          "key" : 318211200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.84375
+          }
+        },
+        {
+          "key_as_string" : "03/01/1980",
+          "key" : 320716800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.866666666666667
+          }
+        },
+        {
+          "key_as_string" : "04/01/1980",
+          "key" : 323395200000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.766666666666667
+          }
+        },
+        {
+          "key_as_string" : "05/01/1980",
+          "key" : 325987200000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.896
+          }
+        },
+        {
+          "key_as_string" : "06/01/1980",
+          "key" : 328665600000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.814634146341463
+          }
+        },
+        {
+          "key_as_string" : "07/01/1980",
+          "key" : 331257600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 6.014705882352941
+          }
+        },
+        {
+          "key_as_string" : "08/01/1980",
+          "key" : 333936000000,
+          "doc_count" : 13,
+          "avg_magnitude" : {
+            "value" : 5.800000000000001
+          }
+        },
+        {
+          "key_as_string" : "09/01/1980",
+          "key" : 336614400000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 5.732631578947369
+          }
+        },
+        {
+          "key_as_string" : "10/01/1980",
+          "key" : 339206400000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.897619047619047
+          }
+        },
+        {
+          "key_as_string" : "11/01/1980",
+          "key" : 341884800000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.914285714285715
+          }
+        },
+        {
+          "key_as_string" : "12/01/1980",
+          "key" : 344476800000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.779411764705882
+          }
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.915
+          }
+        },
+        {
+          "key_as_string" : "02/01/1981",
+          "key" : 349833600000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.825
+          }
+        },
+        {
+          "key_as_string" : "03/01/1981",
+          "key" : 352252800000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.732142857142857
+          }
+        },
+        {
+          "key_as_string" : "04/01/1981",
+          "key" : 354931200000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.85
+          }
+        },
+        {
+          "key_as_string" : "05/01/1981",
+          "key" : 357523200000,
+          "doc_count" : 16,
+          "avg_magnitude" : {
+            "value" : 5.93125
+          }
+        },
+        {
+          "key_as_string" : "06/01/1981",
+          "key" : 360201600000,
+          "doc_count" : 16,
+          "avg_magnitude" : {
+            "value" : 5.86875
+          }
+        },
+        {
+          "key_as_string" : "07/01/1981",
+          "key" : 362793600000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 5.894736842105263
+          }
+        },
+        {
+          "key_as_string" : "08/01/1981",
+          "key" : 365472000000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 5.677777777777778
+          }
+        },
+        {
+          "key_as_string" : "09/01/1981",
+          "key" : 368150400000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.871428571428571
+          }
+        },
+        {
+          "key_as_string" : "10/01/1981",
+          "key" : 370742400000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.972
+          }
+        },
+        {
+          "key_as_string" : "11/01/1981",
+          "key" : 373420800000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.884848484848485
+          }
+        },
+        {
+          "key_as_string" : "12/01/1981",
+          "key" : 376012800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.892592592592592
+          }
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.909302325581395
+          }
+        },
+        {
+          "key_as_string" : "02/01/1982",
+          "key" : 381369600000,
+          "doc_count" : 18,
+          "avg_magnitude" : {
+            "value" : 5.727777777777778
+          }
+        },
+        {
+          "key_as_string" : "03/01/1982",
+          "key" : 383788800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.82962962962963
+          }
+        },
+        {
+          "key_as_string" : "04/01/1982",
+          "key" : 386467200000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.71111111111111
+          }
+        },
+        {
+          "key_as_string" : "05/01/1982",
+          "key" : 389059200000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.842857142857143
+          }
+        },
+        {
+          "key_as_string" : "06/01/1982",
+          "key" : 391737600000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.9222222222222225
+          }
+        },
+        {
+          "key_as_string" : "07/01/1982",
+          "key" : 394329600000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.918181818181818
+          }
+        },
+        {
+          "key_as_string" : "08/01/1982",
+          "key" : 397008000000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.82962962962963
+          }
+        },
+        {
+          "key_as_string" : "09/01/1982",
+          "key" : 399686400000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.813157894736842
+          }
+        },
+        {
+          "key_as_string" : "10/01/1982",
+          "key" : 402278400000,
+          "doc_count" : 21,
+          "avg_magnitude" : {
+            "value" : 5.647619047619047
+          }
+        },
+        {
+          "key_as_string" : "11/01/1982",
+          "key" : 404956800000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.781818181818182
+          }
+        },
+        {
+          "key_as_string" : "12/01/1982",
+          "key" : 407548800000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 5.796226415094339
+          }
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.836956521739131
+          }
+        },
+        {
+          "key_as_string" : "02/01/1983",
+          "key" : 412905600000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.878571428571428
+          }
+        },
+        {
+          "key_as_string" : "03/01/1983",
+          "key" : 415324800000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.870588235294117
+          }
+        },
+        {
+          "key_as_string" : "04/01/1983",
+          "key" : 418003200000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.911904761904762
+          }
+        },
+        {
+          "key_as_string" : "05/01/1983",
+          "key" : 420595200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.860526315789474
+          }
+        },
+        {
+          "key_as_string" : "06/01/1983",
+          "key" : 423273600000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.857142857142857
+          }
+        },
+        {
+          "key_as_string" : "07/01/1983",
+          "key" : 425865600000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.8307692307692305
+          }
+        },
+        {
+          "key_as_string" : "08/01/1983",
+          "key" : 428544000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.81891891891892
+          }
+        },
+        {
+          "key_as_string" : "09/01/1983",
+          "key" : 431222400000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.8
+          }
+        },
+        {
+          "key_as_string" : "10/01/1983",
+          "key" : 433814400000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.984090909090909
+          }
+        },
+        {
+          "key_as_string" : "11/01/1983",
+          "key" : 436492800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.949999999999999
+          }
+        },
+        {
+          "key_as_string" : "12/01/1983",
+          "key" : 439084800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.892272727272727
+          }
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.800000000000001
+          }
+        },
+        {
+          "key_as_string" : "02/01/1984",
+          "key" : 444441600000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.875862068965517
+          }
+        },
+        {
+          "key_as_string" : "03/01/1984",
+          "key" : 446947200000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.895121951219512
+          }
+        },
+        {
+          "key_as_string" : "04/01/1984",
+          "key" : 449625600000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.864102564102564
+          }
+        },
+        {
+          "key_as_string" : "05/01/1984",
+          "key" : 452217600000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.826190476190476
+          }
+        },
+        {
+          "key_as_string" : "06/01/1984",
+          "key" : 454896000000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.858823529411764
+          }
+        },
+        {
+          "key_as_string" : "07/01/1984",
+          "key" : 457488000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.754054054054055
+          }
+        },
+        {
+          "key_as_string" : "08/01/1984",
+          "key" : 460166400000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.837142857142857
+          }
+        },
+        {
+          "key_as_string" : "09/01/1984",
+          "key" : 462844800000,
+          "doc_count" : 45,
+          "avg_magnitude" : {
+            "value" : 5.848888888888888
+          }
+        },
+        {
+          "key_as_string" : "10/01/1984",
+          "key" : 465436800000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.845238095238095
+          }
+        },
+        {
+          "key_as_string" : "11/01/1984",
+          "key" : 468115200000,
+          "doc_count" : 56,
+          "avg_magnitude" : {
+            "value" : 5.902142857142857
+          }
+        },
+        {
+          "key_as_string" : "12/01/1984",
+          "key" : 470707200000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.892682926829268
+          }
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.813513513513513
+          }
+        },
+        {
+          "key_as_string" : "02/01/1985",
+          "key" : 476064000000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.692
+          }
+        },
+        {
+          "key_as_string" : "03/01/1985",
+          "key" : 478483200000,
+          "doc_count" : 65,
+          "avg_magnitude" : {
+            "value" : 5.949230769230769
+          }
+        },
+        {
+          "key_as_string" : "04/01/1985",
+          "key" : 481161600000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.922727272727273
+          }
+        },
+        {
+          "key_as_string" : "05/01/1985",
+          "key" : 483753600000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.921621621621622
+          }
+        },
+        {
+          "key_as_string" : "06/01/1985",
+          "key" : 486432000000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.826315789473685
+          }
+        },
+        {
+          "key_as_string" : "07/01/1985",
+          "key" : 489024000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.9270270270270276
+          }
+        },
+        {
+          "key_as_string" : "08/01/1985",
+          "key" : 491702400000,
+          "doc_count" : 45,
+          "avg_magnitude" : {
+            "value" : 5.8391111111111105
+          }
+        },
+        {
+          "key_as_string" : "09/01/1985",
+          "key" : 494380800000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.94102564102564
+          }
+        },
+        {
+          "key_as_string" : "10/01/1985",
+          "key" : 496972800000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.944117647058824
+          }
+        },
+        {
+          "key_as_string" : "11/01/1985",
+          "key" : 499651200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.902631578947369
+          }
+        },
+        {
+          "key_as_string" : "12/01/1985",
+          "key" : 502243200000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.962162162162162
+          }
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.746875
+          }
+        },
+        {
+          "key_as_string" : "02/01/1986",
+          "key" : 507600000000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.804545454545455
+          }
+        },
+        {
+          "key_as_string" : "03/01/1986",
+          "key" : 510019200000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.822727272727272
+          }
+        },
+        {
+          "key_as_string" : "04/01/1986",
+          "key" : 512697600000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.903703703703704
+          }
+        },
+        {
+          "key_as_string" : "05/01/1986",
+          "key" : 515289600000,
+          "doc_count" : 64,
+          "avg_magnitude" : {
+            "value" : 5.871875
+          }
+        },
+        {
+          "key_as_string" : "06/01/1986",
+          "key" : 517968000000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.958695652173914
+          }
+        },
+        {
+          "key_as_string" : "07/01/1986",
+          "key" : 520560000000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.819818181818182
+          }
+        },
+        {
+          "key_as_string" : "08/01/1986",
+          "key" : 523238400000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.897619047619047
+          }
+        },
+        {
+          "key_as_string" : "09/01/1986",
+          "key" : 525916800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.903703703703704
+          }
+        },
+        {
+          "key_as_string" : "10/01/1986",
+          "key" : 528508800000,
+          "doc_count" : 58,
+          "avg_magnitude" : {
+            "value" : 5.855172413793104
+          }
+        },
+        {
+          "key_as_string" : "11/01/1986",
+          "key" : 531187200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.825
+          }
+        },
+        {
+          "key_as_string" : "12/01/1986",
+          "key" : 533779200000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.844444444444445
+          }
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.961111111111111
+          }
+        },
+        {
+          "key_as_string" : "02/01/1987",
+          "key" : 539136000000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.93265306122449
+          }
+        },
+        {
+          "key_as_string" : "03/01/1987",
+          "key" : 541555200000,
+          "doc_count" : 62,
+          "avg_magnitude" : {
+            "value" : 5.880645161290323
+          }
+        },
+        {
+          "key_as_string" : "04/01/1987",
+          "key" : 544233600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.955882352941177
+          }
+        },
+        {
+          "key_as_string" : "05/01/1987",
+          "key" : 546825600000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.916666666666667
+          }
+        },
+        {
+          "key_as_string" : "06/01/1987",
+          "key" : 549504000000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.834545454545454
+          }
+        },
+        {
+          "key_as_string" : "07/01/1987",
+          "key" : 552096000000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.819512195121951
+          }
+        },
+        {
+          "key_as_string" : "08/01/1987",
+          "key" : 554774400000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.892857142857143
+          }
+        },
+        {
+          "key_as_string" : "09/01/1987",
+          "key" : 557452800000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.951219512195122
+          }
+        },
+        {
+          "key_as_string" : "10/01/1987",
+          "key" : 560044800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.952272727272727
+          }
+        },
+        {
+          "key_as_string" : "11/01/1987",
+          "key" : 562723200000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.941666666666666
+          }
+        },
+        {
+          "key_as_string" : "12/01/1987",
+          "key" : 565315200000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.816129032258065
+          }
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.833333333333333
+          }
+        },
+        {
+          "key_as_string" : "02/01/1988",
+          "key" : 570672000000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.9173913043478255
+          }
+        },
+        {
+          "key_as_string" : "03/01/1988",
+          "key" : 573177600000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.848979591836735
+          }
+        },
+        {
+          "key_as_string" : "04/01/1988",
+          "key" : 575856000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.830555555555556
+          }
+        },
+        {
+          "key_as_string" : "05/01/1988",
+          "key" : 578448000000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.840909090909091
+          }
+        },
+        {
+          "key_as_string" : "06/01/1988",
+          "key" : 581126400000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.861538461538462
+          }
+        },
+        {
+          "key_as_string" : "07/01/1988",
+          "key" : 583718400000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.893877551020409
+          }
+        },
+        {
+          "key_as_string" : "08/01/1988",
+          "key" : 586396800000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.882000000000001
+          }
+        },
+        {
+          "key_as_string" : "09/01/1988",
+          "key" : 589075200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.71875
+          }
+        },
+        {
+          "key_as_string" : "10/01/1988",
+          "key" : 591667200000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.793103448275862
+          }
+        },
+        {
+          "key_as_string" : "11/01/1988",
+          "key" : 594345600000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.888461538461538
+          }
+        },
+        {
+          "key_as_string" : "12/01/1988",
+          "key" : 596937600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.791176470588235
+          }
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.857575757575758
+          }
+        },
+        {
+          "key_as_string" : "02/01/1989",
+          "key" : 602294400000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.804255319148936
+          }
+        },
+        {
+          "key_as_string" : "03/01/1989",
+          "key" : 604713600000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.81923076923077
+          }
+        },
+        {
+          "key_as_string" : "04/01/1989",
+          "key" : 607392000000,
+          "doc_count" : 45,
+          "avg_magnitude" : {
+            "value" : 5.853333333333333
+          }
+        },
+        {
+          "key_as_string" : "05/01/1989",
+          "key" : 609984000000,
+          "doc_count" : 56,
+          "avg_magnitude" : {
+            "value" : 5.873214285714285
+          }
+        },
+        {
+          "key_as_string" : "06/01/1989",
+          "key" : 612662400000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.751612903225807
+          }
+        },
+        {
+          "key_as_string" : "07/01/1989",
+          "key" : 615254400000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.892307692307692
+          }
+        },
+        {
+          "key_as_string" : "08/01/1989",
+          "key" : 617932800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.863636363636363
+          }
+        },
+        {
+          "key_as_string" : "09/01/1989",
+          "key" : 620611200000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.86923076923077
+          }
+        },
+        {
+          "key_as_string" : "10/01/1989",
+          "key" : 623203200000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.868292682926829
+          }
+        },
+        {
+          "key_as_string" : "11/01/1989",
+          "key" : 625881600000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.783720930232558
+          }
+        },
+        {
+          "key_as_string" : "12/01/1989",
+          "key" : 628473600000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.865306122448979
+          }
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.753488372093023
+          }
+        },
+        {
+          "key_as_string" : "02/01/1990",
+          "key" : 633830400000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.871315789473684
+          }
+        },
+        {
+          "key_as_string" : "03/01/1990",
+          "key" : 636249600000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.939024390243903
+          }
+        },
+        {
+          "key_as_string" : "04/01/1990",
+          "key" : 638928000000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.8981818181818175
+          }
+        },
+        {
+          "key_as_string" : "05/01/1990",
+          "key" : 641520000000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 6.028301886792453
+          }
+        },
+        {
+          "key_as_string" : "06/01/1990",
+          "key" : 644198400000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.856097560975609
+          }
+        },
+        {
+          "key_as_string" : "07/01/1990",
+          "key" : 646790400000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.83
+          }
+        },
+        {
+          "key_as_string" : "08/01/1990",
+          "key" : 649468800000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.826086956521739
+          }
+        },
+        {
+          "key_as_string" : "09/01/1990",
+          "key" : 652147200000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.831707317073171
+          }
+        },
+        {
+          "key_as_string" : "10/01/1990",
+          "key" : 654739200000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.844827586206897
+          }
+        },
+        {
+          "key_as_string" : "11/01/1990",
+          "key" : 657417600000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.8
+          }
+        },
+        {
+          "key_as_string" : "12/01/1990",
+          "key" : 660009600000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 5.80943396226415
+          }
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.859523809523809
+          }
+        },
+        {
+          "key_as_string" : "02/01/1991",
+          "key" : 665366400000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.893548387096774
+          }
+        },
+        {
+          "key_as_string" : "03/01/1991",
+          "key" : 667785600000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.825
+          }
+        },
+        {
+          "key_as_string" : "04/01/1991",
+          "key" : 670464000000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.929545454545454
+          }
+        },
+        {
+          "key_as_string" : "05/01/1991",
+          "key" : 673056000000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.897058823529412
+          }
+        },
+        {
+          "key_as_string" : "06/01/1991",
+          "key" : 675734400000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.911111111111111
+          }
+        },
+        {
+          "key_as_string" : "07/01/1991",
+          "key" : 678326400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.869696969696969
+          }
+        },
+        {
+          "key_as_string" : "08/01/1991",
+          "key" : 681004800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.802777777777778
+          }
+        },
+        {
+          "key_as_string" : "09/01/1991",
+          "key" : 683683200000,
+          "doc_count" : 22,
+          "avg_magnitude" : {
+            "value" : 5.863636363636363
+          }
+        },
+        {
+          "key_as_string" : "10/01/1991",
+          "key" : 686275200000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.867647058823529
+          }
+        },
+        {
+          "key_as_string" : "11/01/1991",
+          "key" : 688953600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.961290322580646
+          }
+        },
+        {
+          "key_as_string" : "12/01/1991",
+          "key" : 691545600000,
+          "doc_count" : 54,
+          "avg_magnitude" : {
+            "value" : 5.892592592592592
+          }
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 19,
+          "avg_magnitude" : {
+            "value" : 5.78421052631579
+          }
+        },
+        {
+          "key_as_string" : "02/01/1992",
+          "key" : 696902400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.8625
+          }
+        },
+        {
+          "key_as_string" : "03/01/1992",
+          "key" : 699408000000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.897435897435898
+          }
+        },
+        {
+          "key_as_string" : "04/01/1992",
+          "key" : 702086400000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.882040816326531
+          }
+        },
+        {
+          "key_as_string" : "05/01/1992",
+          "key" : 704678400000,
+          "doc_count" : 56,
+          "avg_magnitude" : {
+            "value" : 5.933928571428572
+          }
+        },
+        {
+          "key_as_string" : "06/01/1992",
+          "key" : 707356800000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.83826923076923
+          }
+        },
+        {
+          "key_as_string" : "07/01/1992",
+          "key" : 709948800000,
+          "doc_count" : 51,
+          "avg_magnitude" : {
+            "value" : 5.844509803921569
+          }
+        },
+        {
+          "key_as_string" : "08/01/1992",
+          "key" : 712627200000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 6.002380952380952
+          }
+        },
+        {
+          "key_as_string" : "09/01/1992",
+          "key" : 715305600000,
+          "doc_count" : 54,
+          "avg_magnitude" : {
+            "value" : 5.824074074074074
+          }
+        },
+        {
+          "key_as_string" : "10/01/1992",
+          "key" : 717897600000,
+          "doc_count" : 51,
+          "avg_magnitude" : {
+            "value" : 5.954901960784314
+          }
+        },
+        {
+          "key_as_string" : "11/01/1992",
+          "key" : 720576000000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.854761904761905
+          }
+        },
+        {
+          "key_as_string" : "12/01/1992",
+          "key" : 723168000000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.860869565217392
+          }
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.85945945945946
+          }
+        },
+        {
+          "key_as_string" : "02/01/1993",
+          "key" : 728524800000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.722222222222222
+          }
+        },
+        {
+          "key_as_string" : "03/01/1993",
+          "key" : 730944000000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.909523809523809
+          }
+        },
+        {
+          "key_as_string" : "04/01/1993",
+          "key" : 733622400000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.875
+          }
+        },
+        {
+          "key_as_string" : "05/01/1993",
+          "key" : 736214400000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.888461538461538
+          }
+        },
+        {
+          "key_as_string" : "06/01/1993",
+          "key" : 738892800000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.930769230769231
+          }
+        },
+        {
+          "key_as_string" : "07/01/1993",
+          "key" : 741484800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.8694444444444445
+          }
+        },
+        {
+          "key_as_string" : "08/01/1993",
+          "key" : 744163200000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.978571428571429
+          }
+        },
+        {
+          "key_as_string" : "09/01/1993",
+          "key" : 746841600000,
+          "doc_count" : 60,
+          "avg_magnitude" : {
+            "value" : 5.901666666666667
+          }
+        },
+        {
+          "key_as_string" : "10/01/1993",
+          "key" : 749433600000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.928205128205128
+          }
+        },
+        {
+          "key_as_string" : "11/01/1993",
+          "key" : 752112000000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.83030303030303
+          }
+        },
+        {
+          "key_as_string" : "12/01/1993",
+          "key" : 754704000000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.890322580645161
+          }
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.8928125
+          }
+        },
+        {
+          "key_as_string" : "02/01/1994",
+          "key" : 760060800000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.894230769230769
+          }
+        },
+        {
+          "key_as_string" : "03/01/1994",
+          "key" : 762480000000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.945833333333333
+          }
+        },
+        {
+          "key_as_string" : "04/01/1994",
+          "key" : 765158400000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.8604651162790695
+          }
+        },
+        {
+          "key_as_string" : "05/01/1994",
+          "key" : 767750400000,
+          "doc_count" : 51,
+          "avg_magnitude" : {
+            "value" : 5.854901960784314
+          }
+        },
+        {
+          "key_as_string" : "06/01/1994",
+          "key" : 770428800000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.961702127659574
+          }
+        },
+        {
+          "key_as_string" : "07/01/1994",
+          "key" : 773020800000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.857142857142857
+          }
+        },
+        {
+          "key_as_string" : "08/01/1994",
+          "key" : 775699200000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.816666666666666
+          }
+        },
+        {
+          "key_as_string" : "09/01/1994",
+          "key" : 778377600000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.847368421052631
+          }
+        },
+        {
+          "key_as_string" : "10/01/1994",
+          "key" : 780969600000,
+          "doc_count" : 61,
+          "avg_magnitude" : {
+            "value" : 5.932786885245902
+          }
+        },
+        {
+          "key_as_string" : "11/01/1994",
+          "key" : 783648000000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.825
+          }
+        },
+        {
+          "key_as_string" : "12/01/1994",
+          "key" : 786240000000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.828571428571429
+          }
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.860416666666667
+          }
+        },
+        {
+          "key_as_string" : "02/01/1995",
+          "key" : 791596800000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.8936170212765955
+          }
+        },
+        {
+          "key_as_string" : "03/01/1995",
+          "key" : 794016000000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.8
+          }
+        },
+        {
+          "key_as_string" : "04/01/1995",
+          "key" : 796694400000,
+          "doc_count" : 54,
+          "avg_magnitude" : {
+            "value" : 6.0
+          }
+        },
+        {
+          "key_as_string" : "05/01/1995",
+          "key" : 799286400000,
+          "doc_count" : 64,
+          "avg_magnitude" : {
+            "value" : 5.940625
+          }
+        },
+        {
+          "key_as_string" : "06/01/1995",
+          "key" : 801964800000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.818421052631579
+          }
+        },
+        {
+          "key_as_string" : "07/01/1995",
+          "key" : 804556800000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.875
+          }
+        },
+        {
+          "key_as_string" : "08/01/1995",
+          "key" : 807235200000,
+          "doc_count" : 64,
+          "avg_magnitude" : {
+            "value" : 5.9375
+          }
+        },
+        {
+          "key_as_string" : "09/01/1995",
+          "key" : 809913600000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.8364864864864865
+          }
+        },
+        {
+          "key_as_string" : "10/01/1995",
+          "key" : 812505600000,
+          "doc_count" : 57,
+          "avg_magnitude" : {
+            "value" : 6.007017543859649
+          }
+        },
+        {
+          "key_as_string" : "11/01/1995",
+          "key" : 815184000000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.87948717948718
+          }
+        },
+        {
+          "key_as_string" : "12/01/1995",
+          "key" : 817776000000,
+          "doc_count" : 60,
+          "avg_magnitude" : {
+            "value" : 5.891666666666667
+          }
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.84375
+          }
+        },
+        {
+          "key_as_string" : "02/01/1996",
+          "key" : 823132800000,
+          "doc_count" : 57,
+          "avg_magnitude" : {
+            "value" : 5.9982456140350875
+          }
+        },
+        {
+          "key_as_string" : "03/01/1996",
+          "key" : 825638400000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 5.862264150943396
+          }
+        },
+        {
+          "key_as_string" : "04/01/1996",
+          "key" : 828316800000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.775757575757575
+          }
+        },
+        {
+          "key_as_string" : "05/01/1996",
+          "key" : 830908800000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.8
+          }
+        },
+        {
+          "key_as_string" : "06/01/1996",
+          "key" : 833587200000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.990384615384615
+          }
+        },
+        {
+          "key_as_string" : "07/01/1996",
+          "key" : 836179200000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.948484848484849
+          }
+        },
+        {
+          "key_as_string" : "08/01/1996",
+          "key" : 838857600000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.834
+          }
+        },
+        {
+          "key_as_string" : "09/01/1996",
+          "key" : 841536000000,
+          "doc_count" : 61,
+          "avg_magnitude" : {
+            "value" : 5.827868852459017
+          }
+        },
+        {
+          "key_as_string" : "10/01/1996",
+          "key" : 844128000000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.857446808510638
+          }
+        },
+        {
+          "key_as_string" : "11/01/1996",
+          "key" : 846806400000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.861818181818181
+          }
+        },
+        {
+          "key_as_string" : "12/01/1996",
+          "key" : 849398400000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.787179487179487
+          }
+        },
+        {
+          "key_as_string" : "01/01/1997",
+          "key" : 852076800000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 5.878260869565217
+          }
+        },
+        {
+          "key_as_string" : "02/01/1997",
+          "key" : 854755200000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.867999999999999
+          }
+        },
+        {
+          "key_as_string" : "03/01/1997",
+          "key" : 857174400000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.810526315789474
+          }
+        },
+        {
+          "key_as_string" : "04/01/1997",
+          "key" : 859852800000,
+          "doc_count" : 56,
+          "avg_magnitude" : {
+            "value" : 5.833928571428571
+          }
+        },
+        {
+          "key_as_string" : "05/01/1997",
+          "key" : 862444800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.954545454545454
+          }
+        },
+        {
+          "key_as_string" : "06/01/1997",
+          "key" : 865123200000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.84074074074074
+          }
+        },
+        {
+          "key_as_string" : "07/01/1997",
+          "key" : 867715200000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.948387096774193
+          }
+        },
+        {
+          "key_as_string" : "08/01/1997",
+          "key" : 870393600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.841935483870968
+          }
+        },
+        {
+          "key_as_string" : "09/01/1997",
+          "key" : 873072000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.841666666666666
+          }
+        },
+        {
+          "key_as_string" : "10/01/1997",
+          "key" : 875664000000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.859090909090909
+          }
+        },
+        {
+          "key_as_string" : "11/01/1997",
+          "key" : 878342400000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.841304347826087
+          }
+        },
+        {
+          "key_as_string" : "12/01/1997",
+          "key" : 880934400000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.830909090909091
+          }
+        },
+        {
+          "key_as_string" : "01/01/1998",
+          "key" : 883612800000,
+          "doc_count" : 45,
+          "avg_magnitude" : {
+            "value" : 5.948888888888889
+          }
+        },
+        {
+          "key_as_string" : "02/01/1998",
+          "key" : 886291200000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.785185185185185
+          }
+        },
+        {
+          "key_as_string" : "03/01/1998",
+          "key" : 888710400000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.916129032258064
+          }
+        },
+        {
+          "key_as_string" : "04/01/1998",
+          "key" : 891388800000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.87
+          }
+        },
+        {
+          "key_as_string" : "05/01/1998",
+          "key" : 893980800000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.884615384615385
+          }
+        },
+        {
+          "key_as_string" : "06/01/1998",
+          "key" : 896659200000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.820833333333333
+          }
+        },
+        {
+          "key_as_string" : "07/01/1998",
+          "key" : 899251200000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.929032258064517
+          }
+        },
+        {
+          "key_as_string" : "08/01/1998",
+          "key" : 901929600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.925806451612903
+          }
+        },
+        {
+          "key_as_string" : "09/01/1998",
+          "key" : 904608000000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.823684210526316
+          }
+        },
+        {
+          "key_as_string" : "10/01/1998",
+          "key" : 907200000000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.765625
+          }
+        },
+        {
+          "key_as_string" : "11/01/1998",
+          "key" : 909878400000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.883333333333334
+          }
+        },
+        {
+          "key_as_string" : "12/01/1998",
+          "key" : 912470400000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.808333333333334
+          }
+        },
+        {
+          "key_as_string" : "01/01/1999",
+          "key" : 915148800000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.848484848484849
+          }
+        },
+        {
+          "key_as_string" : "02/01/1999",
+          "key" : 917827200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.84375
+          }
+        },
+        {
+          "key_as_string" : "03/01/1999",
+          "key" : 920246400000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.860975609756098
+          }
+        },
+        {
+          "key_as_string" : "04/01/1999",
+          "key" : 922924800000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.989999999999999
+          }
+        },
+        {
+          "key_as_string" : "05/01/1999",
+          "key" : 925516800000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.873684210526315
+          }
+        },
+        {
+          "key_as_string" : "06/01/1999",
+          "key" : 928195200000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.796153846153846
+          }
+        },
+        {
+          "key_as_string" : "07/01/1999",
+          "key" : 930787200000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.788235294117648
+          }
+        },
+        {
+          "key_as_string" : "08/01/1999",
+          "key" : 933465600000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.901
+          }
+        },
+        {
+          "key_as_string" : "09/01/1999",
+          "key" : 936144000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.997222222222223
+          }
+        },
+        {
+          "key_as_string" : "10/01/1999",
+          "key" : 938736000000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.805
+          }
+        },
+        {
+          "key_as_string" : "11/01/1999",
+          "key" : 941414400000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 6.004545454545454
+          }
+        },
+        {
+          "key_as_string" : "12/01/1999",
+          "key" : 944006400000,
+          "doc_count" : 58,
+          "avg_magnitude" : {
+            "value" : 5.913793103448276
+          }
+        },
+        {
+          "key_as_string" : "01/01/2000",
+          "key" : 946684800000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.828846153846154
+          }
+        },
+        {
+          "key_as_string" : "02/01/2000",
+          "key" : 949363200000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.8133333333333335
+          }
+        },
+        {
+          "key_as_string" : "03/01/2000",
+          "key" : 951868800000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.8133333333333335
+          }
+        },
+        {
+          "key_as_string" : "04/01/2000",
+          "key" : 954547200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.74375
+          }
+        },
+        {
+          "key_as_string" : "05/01/2000",
+          "key" : 957139200000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.9
+          }
+        },
+        {
+          "key_as_string" : "06/01/2000",
+          "key" : 959817600000,
+          "doc_count" : 58,
+          "avg_magnitude" : {
+            "value" : 5.977586206896552
+          }
+        },
+        {
+          "key_as_string" : "07/01/2000",
+          "key" : 962409600000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.835416666666667
+          }
+        },
+        {
+          "key_as_string" : "08/01/2000",
+          "key" : 965088000000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.895744680851064
+          }
+        },
+        {
+          "key_as_string" : "09/01/2000",
+          "key" : 967766400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.775675675675675
+          }
+        },
+        {
+          "key_as_string" : "10/01/2000",
+          "key" : 970358400000,
+          "doc_count" : 56,
+          "avg_magnitude" : {
+            "value" : 5.855357142857143
+          }
+        },
+        {
+          "key_as_string" : "11/01/2000",
+          "key" : 973036800000,
+          "doc_count" : 83,
+          "avg_magnitude" : {
+            "value" : 5.895180722891566
+          }
+        },
+        {
+          "key_as_string" : "12/01/2000",
+          "key" : 975628800000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.840816326530612
+          }
+        },
+        {
+          "key_as_string" : "01/01/2001",
+          "key" : 978307200000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.934545454545455
+          }
+        },
+        {
+          "key_as_string" : "02/01/2001",
+          "key" : 980985600000,
+          "doc_count" : 45,
+          "avg_magnitude" : {
+            "value" : 5.902222222222223
+          }
+        },
+        {
+          "key_as_string" : "03/01/2001",
+          "key" : 983404800000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.837931034482759
+          }
+        },
+        {
+          "key_as_string" : "04/01/2001",
+          "key" : 986083200000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.833333333333333
+          }
+        },
+        {
+          "key_as_string" : "05/01/2001",
+          "key" : 988675200000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.828571428571428
+          }
+        },
+        {
+          "key_as_string" : "06/01/2001",
+          "key" : 991353600000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.876595744680851
+          }
+        },
+        {
+          "key_as_string" : "07/01/2001",
+          "key" : 993945600000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.908108108108108
+          }
+        },
+        {
+          "key_as_string" : "08/01/2001",
+          "key" : 996624000000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.821212121212121
+          }
+        },
+        {
+          "key_as_string" : "09/01/2001",
+          "key" : 999302400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.796969696969697
+          }
+        },
+        {
+          "key_as_string" : "10/01/2001",
+          "key" : 1001894400000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.8975
+          }
+        },
+        {
+          "key_as_string" : "11/01/2001",
+          "key" : 1004572800000,
+          "doc_count" : 26,
+          "avg_magnitude" : {
+            "value" : 5.946153846153846
+          }
+        },
+        {
+          "key_as_string" : "12/01/2001",
+          "key" : 1007164800000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.908823529411765
+          }
+        },
+        {
+          "key_as_string" : "01/01/2002",
+          "key" : 1009843200000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.871739130434783
+          }
+        },
+        {
+          "key_as_string" : "02/01/2002",
+          "key" : 1012521600000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.757142857142857
+          }
+        },
+        {
+          "key_as_string" : "03/01/2002",
+          "key" : 1014940800000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.853488372093023
+          }
+        },
+        {
+          "key_as_string" : "04/01/2002",
+          "key" : 1017619200000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.912903225806452
+          }
+        },
+        {
+          "key_as_string" : "05/01/2002",
+          "key" : 1020211200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.784375
+          }
+        },
+        {
+          "key_as_string" : "06/01/2002",
+          "key" : 1022889600000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.915384615384615
+          }
+        },
+        {
+          "key_as_string" : "07/01/2002",
+          "key" : 1025481600000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 5.765217391304348
+          }
+        },
+        {
+          "key_as_string" : "08/01/2002",
+          "key" : 1028160000000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.915384615384615
+          }
+        },
+        {
+          "key_as_string" : "09/01/2002",
+          "key" : 1030838400000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.831818181818182
+          }
+        },
+        {
+          "key_as_string" : "10/01/2002",
+          "key" : 1033430400000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.971739130434782
+          }
+        },
+        {
+          "key_as_string" : "11/01/2002",
+          "key" : 1036108800000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.937837837837837
+          }
+        },
+        {
+          "key_as_string" : "12/01/2002",
+          "key" : 1038700800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.783333333333333
+          }
+        },
+        {
+          "key_as_string" : "01/01/2003",
+          "key" : 1041379200000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.885714285714286
+          }
+        },
+        {
+          "key_as_string" : "02/01/2003",
+          "key" : 1044057600000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.760714285714285
+          }
+        },
+        {
+          "key_as_string" : "03/01/2003",
+          "key" : 1046476800000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.926829268292683
+          }
+        },
+        {
+          "key_as_string" : "04/01/2003",
+          "key" : 1049155200000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.77741935483871
+          }
+        },
+        {
+          "key_as_string" : "05/01/2003",
+          "key" : 1051747200000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.981395348837209
+          }
+        },
+        {
+          "key_as_string" : "06/01/2003",
+          "key" : 1054425600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.95483870967742
+          }
+        },
+        {
+          "key_as_string" : "07/01/2003",
+          "key" : 1057017600000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.846
+          }
+        },
+        {
+          "key_as_string" : "08/01/2003",
+          "key" : 1059696000000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.7749999999999995
+          }
+        },
+        {
+          "key_as_string" : "09/01/2003",
+          "key" : 1062374400000,
+          "doc_count" : 59,
+          "avg_magnitude" : {
+            "value" : 5.893220338983051
+          }
+        },
+        {
+          "key_as_string" : "10/01/2003",
+          "key" : 1064966400000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.919444444444444
+          }
+        },
+        {
+          "key_as_string" : "11/01/2003",
+          "key" : 1067644800000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.876744186046511
+          }
+        },
+        {
+          "key_as_string" : "12/01/2003",
+          "key" : 1070236800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.988181818181818
+          }
+        },
+        {
+          "key_as_string" : "01/01/2004",
+          "key" : 1072915200000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.812
+          }
+        },
+        {
+          "key_as_string" : "02/01/2004",
+          "key" : 1075593600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.917647058823529
+          }
+        },
+        {
+          "key_as_string" : "03/01/2004",
+          "key" : 1078099200000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.738095238095238
+          }
+        },
+        {
+          "key_as_string" : "04/01/2004",
+          "key" : 1080777600000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.858333333333333
+          }
+        },
+        {
+          "key_as_string" : "05/01/2004",
+          "key" : 1083369600000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.773684210526316
+          }
+        },
+        {
+          "key_as_string" : "06/01/2004",
+          "key" : 1086048000000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.910714285714286
+          }
+        },
+        {
+          "key_as_string" : "07/01/2004",
+          "key" : 1088640000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.886486486486487
+          }
+        },
+        {
+          "key_as_string" : "08/01/2004",
+          "key" : 1091318400000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.706451612903226
+          }
+        },
+        {
+          "key_as_string" : "09/01/2004",
+          "key" : 1093996800000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.901489361702128
+          }
+        },
+        {
+          "key_as_string" : "10/01/2004",
+          "key" : 1096588800000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.837999999999999
+          }
+        },
+        {
+          "key_as_string" : "11/01/2004",
+          "key" : 1099267200000,
+          "doc_count" : 54,
+          "avg_magnitude" : {
+            "value" : 6.033333333333333
+          }
+        },
+        {
+          "key_as_string" : "12/01/2004",
+          "key" : 1101859200000,
+          "doc_count" : 112,
+          "avg_magnitude" : {
+            "value" : 5.823214285714286
+          }
+        },
+        {
+          "key_as_string" : "01/01/2005",
+          "key" : 1104537600000,
+          "doc_count" : 82,
+          "avg_magnitude" : {
+            "value" : 5.7926829268292686
+          }
+        },
+        {
+          "key_as_string" : "02/01/2005",
+          "key" : 1107216000000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.874
+          }
+        },
+        {
+          "key_as_string" : "03/01/2005",
+          "key" : 1109635200000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.917307692307692
+          }
+        },
+        {
+          "key_as_string" : "04/01/2005",
+          "key" : 1112313600000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.870212765957446
+          }
+        },
+        {
+          "key_as_string" : "05/01/2005",
+          "key" : 1114905600000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.958620689655173
+          }
+        },
+        {
+          "key_as_string" : "06/01/2005",
+          "key" : 1117584000000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.904999999999999
+          }
+        },
+        {
+          "key_as_string" : "07/01/2005",
+          "key" : 1120176000000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.804878048780488
+          }
+        },
+        {
+          "key_as_string" : "08/01/2005",
+          "key" : 1122854400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.856756756756757
+          }
+        },
+        {
+          "key_as_string" : "09/01/2005",
+          "key" : 1125532800000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.845945945945945
+          }
+        },
+        {
+          "key_as_string" : "10/01/2005",
+          "key" : 1128124800000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.7875000000000005
+          }
+        },
+        {
+          "key_as_string" : "11/01/2005",
+          "key" : 1130803200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.821052631578947
+          }
+        },
+        {
+          "key_as_string" : "12/01/2005",
+          "key" : 1133395200000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.925
+          }
+        },
+        {
+          "key_as_string" : "01/01/2006",
+          "key" : 1136073600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.941935483870967
+          }
+        },
+        {
+          "key_as_string" : "02/01/2006",
+          "key" : 1138752000000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.873333333333333
+          }
+        },
+        {
+          "key_as_string" : "03/01/2006",
+          "key" : 1141171200000,
+          "doc_count" : 45,
+          "avg_magnitude" : {
+            "value" : 5.782222222222222
+          }
+        },
+        {
+          "key_as_string" : "04/01/2006",
+          "key" : 1143849600000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.872000000000001
+          }
+        },
+        {
+          "key_as_string" : "05/01/2006",
+          "key" : 1146441600000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.908333333333334
+          }
+        },
+        {
+          "key_as_string" : "06/01/2006",
+          "key" : 1149120000000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.87
+          }
+        },
+        {
+          "key_as_string" : "07/01/2006",
+          "key" : 1151712000000,
+          "doc_count" : 55,
+          "avg_magnitude" : {
+            "value" : 5.778181818181818
+          }
+        },
+        {
+          "key_as_string" : "08/01/2006",
+          "key" : 1154390400000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.864705882352942
+          }
+        },
+        {
+          "key_as_string" : "09/01/2006",
+          "key" : 1157068800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.888888888888889
+          }
+        },
+        {
+          "key_as_string" : "10/01/2006",
+          "key" : 1159660800000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.934146341463415
+          }
+        },
+        {
+          "key_as_string" : "11/01/2006",
+          "key" : 1162339200000,
+          "doc_count" : 65,
+          "avg_magnitude" : {
+            "value" : 5.838461538461538
+          }
+        },
+        {
+          "key_as_string" : "12/01/2006",
+          "key" : 1164931200000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.832558139534883
+          }
+        },
+        {
+          "key_as_string" : "01/01/2007",
+          "key" : 1167609600000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.887755102040816
+          }
+        },
+        {
+          "key_as_string" : "02/01/2007",
+          "key" : 1170288000000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.748780487804877
+          }
+        },
+        {
+          "key_as_string" : "03/01/2007",
+          "key" : 1172707200000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.84
+          }
+        },
+        {
+          "key_as_string" : "04/01/2007",
+          "key" : 1175385600000,
+          "doc_count" : 81,
+          "avg_magnitude" : {
+            "value" : 5.88641975308642
+          }
+        },
+        {
+          "key_as_string" : "05/01/2007",
+          "key" : 1177977600000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.734090909090909
+          }
+        },
+        {
+          "key_as_string" : "06/01/2007",
+          "key" : 1180656000000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.7942857142857145
+          }
+        },
+        {
+          "key_as_string" : "07/01/2007",
+          "key" : 1183248000000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.906818181818181
+          }
+        },
+        {
+          "key_as_string" : "08/01/2007",
+          "key" : 1185926400000,
+          "doc_count" : 58,
+          "avg_magnitude" : {
+            "value" : 5.912068965517241
+          }
+        },
+        {
+          "key_as_string" : "09/01/2007",
+          "key" : 1188604800000,
+          "doc_count" : 64,
+          "avg_magnitude" : {
+            "value" : 6.0453125
+          }
+        },
+        {
+          "key_as_string" : "10/01/2007",
+          "key" : 1191196800000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.897368421052631
+          }
+        },
+        {
+          "key_as_string" : "11/01/2007",
+          "key" : 1193875200000,
+          "doc_count" : 57,
+          "avg_magnitude" : {
+            "value" : 5.940350877192983
+          }
+        },
+        {
+          "key_as_string" : "12/01/2007",
+          "key" : 1196467200000,
+          "doc_count" : 47,
+          "avg_magnitude" : {
+            "value" : 5.919148936170212
+          }
+        },
+        {
+          "key_as_string" : "01/01/2008",
+          "key" : 1199145600000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.894736842105263
+          }
+        },
+        {
+          "key_as_string" : "02/01/2008",
+          "key" : 1201824000000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 6.0725
+          }
+        },
+        {
+          "key_as_string" : "03/01/2008",
+          "key" : 1204329600000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.875
+          }
+        },
+        {
+          "key_as_string" : "04/01/2008",
+          "key" : 1207008000000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.938775510204081
+          }
+        },
+        {
+          "key_as_string" : "05/01/2008",
+          "key" : 1209600000000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.930434782608696
+          }
+        },
+        {
+          "key_as_string" : "06/01/2008",
+          "key" : 1212278400000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.892682926829268
+          }
+        },
+        {
+          "key_as_string" : "07/01/2008",
+          "key" : 1214870400000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.939473684210526
+          }
+        },
+        {
+          "key_as_string" : "08/01/2008",
+          "key" : 1217548800000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.856521739130434
+          }
+        },
+        {
+          "key_as_string" : "09/01/2008",
+          "key" : 1220227200000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.912820512820512
+          }
+        },
+        {
+          "key_as_string" : "10/01/2008",
+          "key" : 1222819200000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.881395348837209
+          }
+        },
+        {
+          "key_as_string" : "11/01/2008",
+          "key" : 1225497600000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.871428571428571
+          }
+        },
+        {
+          "key_as_string" : "12/01/2008",
+          "key" : 1228089600000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.848717948717948
+          }
+        },
+        {
+          "key_as_string" : "01/01/2009",
+          "key" : 1230768000000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.904081632653061
+          }
+        },
+        {
+          "key_as_string" : "02/01/2009",
+          "key" : 1233446400000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.785714285714286
+          }
+        },
+        {
+          "key_as_string" : "03/01/2009",
+          "key" : 1235865600000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.815625
+          }
+        },
+        {
+          "key_as_string" : "04/01/2009",
+          "key" : 1238544000000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.8525
+          }
+        },
+        {
+          "key_as_string" : "05/01/2009",
+          "key" : 1241136000000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.765625
+          }
+        },
+        {
+          "key_as_string" : "06/01/2009",
+          "key" : 1243814400000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.75625
+          }
+        },
+        {
+          "key_as_string" : "07/01/2009",
+          "key" : 1246406400000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.857142857142857
+          }
+        },
+        {
+          "key_as_string" : "08/01/2009",
+          "key" : 1249084800000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.964583333333334
+          }
+        },
+        {
+          "key_as_string" : "09/01/2009",
+          "key" : 1251763200000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.920454545454546
+          }
+        },
+        {
+          "key_as_string" : "10/01/2009",
+          "key" : 1254355200000,
+          "doc_count" : 82,
+          "avg_magnitude" : {
+            "value" : 5.945121951219512
+          }
+        },
+        {
+          "key_as_string" : "11/01/2009",
+          "key" : 1257033600000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.9
+          }
+        },
+        {
+          "key_as_string" : "12/01/2009",
+          "key" : 1259625600000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.775609756097561
+          }
+        },
+        {
+          "key_as_string" : "01/01/2010",
+          "key" : 1262304000000,
+          "doc_count" : 57,
+          "avg_magnitude" : {
+            "value" : 5.828070175438596
+          }
+        },
+        {
+          "key_as_string" : "02/01/2010",
+          "key" : 1264982400000,
+          "doc_count" : 76,
+          "avg_magnitude" : {
+            "value" : 5.868157894736842
+          }
+        },
+        {
+          "key_as_string" : "03/01/2010",
+          "key" : 1267401600000,
+          "doc_count" : 61,
+          "avg_magnitude" : {
+            "value" : 5.937704918032787
+          }
+        },
+        {
+          "key_as_string" : "04/01/2010",
+          "key" : 1270080000000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.994736842105263
+          }
+        },
+        {
+          "key_as_string" : "05/01/2010",
+          "key" : 1272672000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 6.002777777777777
+          }
+        },
+        {
+          "key_as_string" : "06/01/2010",
+          "key" : 1275350400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.91945945945946
+          }
+        },
+        {
+          "key_as_string" : "07/01/2010",
+          "key" : 1277942400000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 6.0125
+          }
+        },
+        {
+          "key_as_string" : "08/01/2010",
+          "key" : 1280620800000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.953488372093023
+          }
+        },
+        {
+          "key_as_string" : "09/01/2010",
+          "key" : 1283299200000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.806976744186046
+          }
+        },
+        {
+          "key_as_string" : "10/01/2010",
+          "key" : 1285891200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.8921052631578945
+          }
+        },
+        {
+          "key_as_string" : "11/01/2010",
+          "key" : 1288569600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.7441176470588236
+          }
+        },
+        {
+          "key_as_string" : "12/01/2010",
+          "key" : 1291161600000,
+          "doc_count" : 49,
+          "avg_magnitude" : {
+            "value" : 5.857142857142857
+          }
+        },
+        {
+          "key_as_string" : "01/01/2011",
+          "key" : 1293840000000,
+          "doc_count" : 42,
+          "avg_magnitude" : {
+            "value" : 5.902380952380953
+          }
+        },
+        {
+          "key_as_string" : "02/01/2011",
+          "key" : 1296518400000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.880487804878048
+          }
+        },
+        {
+          "key_as_string" : "03/01/2011",
+          "key" : 1298937600000,
+          "doc_count" : 227,
+          "avg_magnitude" : {
+            "value" : 5.877533039647577
+          }
+        },
+        {
+          "key_as_string" : "04/01/2011",
+          "key" : 1301616000000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.867307692307692
+          }
+        },
+        {
+          "key_as_string" : "05/01/2011",
+          "key" : 1304208000000,
+          "doc_count" : 48,
+          "avg_magnitude" : {
+            "value" : 5.729166666666667
+          }
+        },
+        {
+          "key_as_string" : "06/01/2011",
+          "key" : 1306886400000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.811627906976744
+          }
+        },
+        {
+          "key_as_string" : "07/01/2011",
+          "key" : 1309478400000,
+          "doc_count" : 63,
+          "avg_magnitude" : {
+            "value" : 5.850793650793651
+          }
+        },
+        {
+          "key_as_string" : "08/01/2011",
+          "key" : 1312156800000,
+          "doc_count" : 51,
+          "avg_magnitude" : {
+            "value" : 5.858823529411765
+          }
+        },
+        {
+          "key_as_string" : "09/01/2011",
+          "key" : 1314835200000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 6.015
+          }
+        },
+        {
+          "key_as_string" : "10/01/2011",
+          "key" : 1317427200000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.8621621621621625
+          }
+        },
+        {
+          "key_as_string" : "11/01/2011",
+          "key" : 1320105600000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.84
+          }
+        },
+        {
+          "key_as_string" : "12/01/2011",
+          "key" : 1322697600000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.857142857142857
+          }
+        },
+        {
+          "key_as_string" : "01/01/2012",
+          "key" : 1325376000000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.893548387096774
+          }
+        },
+        {
+          "key_as_string" : "02/01/2012",
+          "key" : 1328054400000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.823684210526316
+          }
+        },
+        {
+          "key_as_string" : "03/01/2012",
+          "key" : 1330560000000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.945454545454545
+          }
+        },
+        {
+          "key_as_string" : "04/01/2012",
+          "key" : 1333238400000,
+          "doc_count" : 58,
+          "avg_magnitude" : {
+            "value" : 5.943103448275862
+          }
+        },
+        {
+          "key_as_string" : "05/01/2012",
+          "key" : 1335830400000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.824242424242424
+          }
+        },
+        {
+          "key_as_string" : "06/01/2012",
+          "key" : 1338508800000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.7918918918918925
+          }
+        },
+        {
+          "key_as_string" : "07/01/2012",
+          "key" : 1341100800000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.823529411764706
+          }
+        },
+        {
+          "key_as_string" : "08/01/2012",
+          "key" : 1343779200000,
+          "doc_count" : 38,
+          "avg_magnitude" : {
+            "value" : 5.955263157894737
+          }
+        },
+        {
+          "key_as_string" : "09/01/2012",
+          "key" : 1346457600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.851612903225806
+          }
+        },
+        {
+          "key_as_string" : "10/01/2012",
+          "key" : 1349049600000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.8275
+          }
+        },
+        {
+          "key_as_string" : "11/01/2012",
+          "key" : 1351728000000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.856097560975609
+          }
+        },
+        {
+          "key_as_string" : "12/01/2012",
+          "key" : 1354320000000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.906451612903226
+          }
+        },
+        {
+          "key_as_string" : "01/01/2013",
+          "key" : 1356998400000,
+          "doc_count" : 23,
+          "avg_magnitude" : {
+            "value" : 5.869565217391305
+          }
+        },
+        {
+          "key_as_string" : "02/01/2013",
+          "key" : 1359676800000,
+          "doc_count" : 82,
+          "avg_magnitude" : {
+            "value" : 5.896341463414634
+          }
+        },
+        {
+          "key_as_string" : "03/01/2013",
+          "key" : 1362096000000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.742857142857143
+          }
+        },
+        {
+          "key_as_string" : "04/01/2013",
+          "key" : 1364774400000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.9731707317073175
+          }
+        },
+        {
+          "key_as_string" : "05/01/2013",
+          "key" : 1367366400000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.890909090909091
+          }
+        },
+        {
+          "key_as_string" : "06/01/2013",
+          "key" : 1370044800000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.796666666666667
+          }
+        },
+        {
+          "key_as_string" : "07/01/2013",
+          "key" : 1372636800000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.883333333333334
+          }
+        },
+        {
+          "key_as_string" : "08/01/2013",
+          "key" : 1375315200000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.887878787878789
+          }
+        },
+        {
+          "key_as_string" : "09/01/2013",
+          "key" : 1377993600000,
+          "doc_count" : 39,
+          "avg_magnitude" : {
+            "value" : 5.964102564102564
+          }
+        },
+        {
+          "key_as_string" : "10/01/2013",
+          "key" : 1380585600000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 6.040625
+          }
+        },
+        {
+          "key_as_string" : "11/01/2013",
+          "key" : 1383264000000,
+          "doc_count" : 43,
+          "avg_magnitude" : {
+            "value" : 5.841860465116278
+          }
+        },
+        {
+          "key_as_string" : "12/01/2013",
+          "key" : 1385856000000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.7
+          }
+        },
+        {
+          "key_as_string" : "01/01/2014",
+          "key" : 1388534400000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.7625
+          }
+        },
+        {
+          "key_as_string" : "02/01/2014",
+          "key" : 1391212800000,
+          "doc_count" : 29,
+          "avg_magnitude" : {
+            "value" : 5.820689655172414
+          }
+        },
+        {
+          "key_as_string" : "03/01/2014",
+          "key" : 1393632000000,
+          "doc_count" : 50,
+          "avg_magnitude" : {
+            "value" : 5.888
+          }
+        },
+        {
+          "key_as_string" : "04/01/2014",
+          "key" : 1396310400000,
+          "doc_count" : 68,
+          "avg_magnitude" : {
+            "value" : 6.051470588235294
+          }
+        },
+        {
+          "key_as_string" : "05/01/2014",
+          "key" : 1398902400000,
+          "doc_count" : 56,
+          "avg_magnitude" : {
+            "value" : 5.866071428571429
+          }
+        },
+        {
+          "key_as_string" : "06/01/2014",
+          "key" : 1401580800000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.959090909090909
+          }
+        },
+        {
+          "key_as_string" : "07/01/2014",
+          "key" : 1404172800000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.912195121951219
+          }
+        },
+        {
+          "key_as_string" : "08/01/2014",
+          "key" : 1406851200000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.791764705882352
+          }
+        },
+        {
+          "key_as_string" : "09/01/2014",
+          "key" : 1409529600000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.767741935483872
+          }
+        },
+        {
+          "key_as_string" : "10/01/2014",
+          "key" : 1412121600000,
+          "doc_count" : 34,
+          "avg_magnitude" : {
+            "value" : 5.8088235294117645
+          }
+        },
+        {
+          "key_as_string" : "11/01/2014",
+          "key" : 1414800000000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.921621621621622
+          }
+        },
+        {
+          "key_as_string" : "12/01/2014",
+          "key" : 1417392000000,
+          "doc_count" : 32,
+          "avg_magnitude" : {
+            "value" : 5.853125
+          }
+        },
+        {
+          "key_as_string" : "01/01/2015",
+          "key" : 1420070400000,
+          "doc_count" : 25,
+          "avg_magnitude" : {
+            "value" : 5.7252
+          }
+        },
+        {
+          "key_as_string" : "02/01/2015",
+          "key" : 1422748800000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.909090909090909
+          }
+        },
+        {
+          "key_as_string" : "03/01/2015",
+          "key" : 1425168000000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.865714285714286
+          }
+        },
+        {
+          "key_as_string" : "04/01/2015",
+          "key" : 1427846400000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 6.010000000000001
+          }
+        },
+        {
+          "key_as_string" : "05/01/2015",
+          "key" : 1430438400000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 6.102173913043478
+          }
+        },
+        {
+          "key_as_string" : "06/01/2015",
+          "key" : 1433116800000,
+          "doc_count" : 31,
+          "avg_magnitude" : {
+            "value" : 5.84516129032258
+          }
+        },
+        {
+          "key_as_string" : "07/01/2015",
+          "key" : 1435708800000,
+          "doc_count" : 40,
+          "avg_magnitude" : {
+            "value" : 5.885
+          }
+        },
+        {
+          "key_as_string" : "08/01/2015",
+          "key" : 1438387200000,
+          "doc_count" : 33,
+          "avg_magnitude" : {
+            "value" : 5.7727272727272725
+          }
+        },
+        {
+          "key_as_string" : "09/01/2015",
+          "key" : 1441065600000,
+          "doc_count" : 66,
+          "avg_magnitude" : {
+            "value" : 5.921212121212122
+          }
+        },
+        {
+          "key_as_string" : "10/01/2015",
+          "key" : 1443657600000,
+          "doc_count" : 28,
+          "avg_magnitude" : {
+            "value" : 5.871428571428572
+          }
+        },
+        {
+          "key_as_string" : "11/01/2015",
+          "key" : 1446336000000,
+          "doc_count" : 52,
+          "avg_magnitude" : {
+            "value" : 5.957692307692308
+          }
+        },
+        {
+          "key_as_string" : "12/01/2015",
+          "key" : 1448928000000,
+          "doc_count" : 27,
+          "avg_magnitude" : {
+            "value" : 5.951851851851852
+          }
+        },
+        {
+          "key_as_string" : "01/01/2016",
+          "key" : 1451606400000,
+          "doc_count" : 37,
+          "avg_magnitude" : {
+            "value" : 5.948648648648648
+          }
+        },
+        {
+          "key_as_string" : "02/01/2016",
+          "key" : 1454284800000,
+          "doc_count" : 24,
+          "avg_magnitude" : {
+            "value" : 5.8999999999999995
+          }
+        },
+        {
+          "key_as_string" : "03/01/2016",
+          "key" : 1456790400000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.75
+          }
+        },
+        {
+          "key_as_string" : "04/01/2016",
+          "key" : 1459468800000,
+          "doc_count" : 57,
+          "avg_magnitude" : {
+            "value" : 5.975438596491228
+          }
+        },
+        {
+          "key_as_string" : "05/01/2016",
+          "key" : 1462060800000,
+          "doc_count" : 30,
+          "avg_magnitude" : {
+            "value" : 5.886666666666667
+          }
+        },
+        {
+          "key_as_string" : "06/01/2016",
+          "key" : 1464739200000,
+          "doc_count" : 41,
+          "avg_magnitude" : {
+            "value" : 5.853658536585366
+          }
+        },
+        {
+          "key_as_string" : "07/01/2016",
+          "key" : 1467331200000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.852777777777778
+          }
+        },
+        {
+          "key_as_string" : "08/01/2016",
+          "key" : 1470009600000,
+          "doc_count" : 35,
+          "avg_magnitude" : {
+            "value" : 5.945714285714286
+          }
+        },
+        {
+          "key_as_string" : "09/01/2016",
+          "key" : 1472688000000,
+          "doc_count" : 46,
+          "avg_magnitude" : {
+            "value" : 5.805217391304348
+          }
+        },
+        {
+          "key_as_string" : "10/01/2016",
+          "key" : 1475280000000,
+          "doc_count" : 36,
+          "avg_magnitude" : {
+            "value" : 5.8277777777777775
+          }
+        },
+        {
+          "key_as_string" : "11/01/2016",
+          "key" : 1477958400000,
+          "doc_count" : 44,
+          "avg_magnitude" : {
+            "value" : 5.906818181818181
+          }
+        },
+        {
+          "key_as_string" : "12/01/2016",
+          "key" : 1480550400000,
+          "doc_count" : 53,
+          "avg_magnitude" : {
+            "value" : 5.977358490566038
+          }
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+ ENDS
+--------------------
+#SUB-AGGREGATION FOR BUCKET WITHIN THE BUCKET 
+GET earthquakes/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_year": {
+      "date_histogram": {
+        "field": "Date",
+        "interval": "year"
+      },
+      "aggs": {
+        "types": {
+          "terms": {
+            "field": "Type",
+            "size": 10
+          }
+        }
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT
+--------------------
+#! [interval] on [date_histogram] is deprecated, use [fixed_interval] or [calendar_interval] in the future.
+{
+  "took" : 27,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_year" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1965",
+          "key" : -157766400000,
+          "doc_count" : 339,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 339
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 234,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 233
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 255,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 255
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 305,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 303
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 2
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 323,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 322
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 345,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 344
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 386,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 386
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 388,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 388
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 401,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 394
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 6
+              },
+              {
+                "key" : "Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 361,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 355
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 6
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 412,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 402
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 9
+              },
+              {
+                "key" : "Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 457,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 447
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 425,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 417
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 8
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 410,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 395
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 15
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 356,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 343
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 13
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 348,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 335
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 13
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 321,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 313
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 8
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 346,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 340
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 6
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 453,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 443
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 482,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 467
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 14
+              },
+              {
+                "key" : "Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 476,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 469
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 6
+              },
+              {
+                "key" : "Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 485,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 484
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 505,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 489
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 16
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 489,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 479
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 10
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 480,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 473
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 7
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 528,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 524
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 4
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 429,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 428
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 533,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 532
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 466,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 465
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 508,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 506
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 2
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 591,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 589
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 2
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 541,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 540
+              },
+              {
+                "key" : "Nuclear Explosion",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1997",
+          "key" : 852076800000,
+          "doc_count" : 456,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 456
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1998",
+          "key" : 883612800000,
+          "doc_count" : 388,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 388
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/1999",
+          "key" : 915148800000,
+          "doc_count" : 446,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 446
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2000",
+          "key" : 946684800000,
+          "doc_count" : 553,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 553
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2001",
+          "key" : 978307200000,
+          "doc_count" : 443,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 443
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2002",
+          "key" : 1009843200000,
+          "doc_count" : 444,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 444
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2003",
+          "key" : 1041379200000,
+          "doc_count" : 485,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 485
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2004",
+          "key" : 1072915200000,
+          "doc_count" : 571,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 571
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2005",
+          "key" : 1104537600000,
+          "doc_count" : 533,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 533
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2006",
+          "key" : 1136073600000,
+          "doc_count" : 508,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 508
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2007",
+          "key" : 1167609600000,
+          "doc_count" : 608,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 608
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2008",
+          "key" : 1199145600000,
+          "doc_count" : 508,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 508
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2009",
+          "key" : 1230768000000,
+          "doc_count" : 517,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 517
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2010",
+          "key" : 1262304000000,
+          "doc_count" : 560,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 559
+              },
+              {
+                "key" : "Rock Burst",
+                "doc_count" : 1
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2011",
+          "key" : 1293840000000,
+          "doc_count" : 712,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 712
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2012",
+          "key" : 1325376000000,
+          "doc_count" : 445,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 445
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2013",
+          "key" : 1356998400000,
+          "doc_count" : 461,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 461
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2014",
+          "key" : 1388534400000,
+          "doc_count" : 480,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 480
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2015",
+          "key" : 1420070400000,
+          "doc_count" : 446,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 446
+              }
+            ]
+          }
+        },
+        {
+          "key_as_string" : "01/01/2016",
+          "key" : 1451606400000,
+          "doc_count" : 469,
+          "types" : {
+            "doc_count_error_upper_bound" : 0,
+            "sum_other_doc_count" : 0,
+            "buckets" : [
+              {
+                "key" : "Earthquake",
+                "doc_count" : 469
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#SUB-AGGREGATION WITH BUCKET, BUCKET, METRIC AGGREGATION
+GET earthquakes/_search
+{
+  "size": 0,
+  "aggs": {
+    "per_year": {
+      "date_histogram": {
+        "field": "Date",
+        "interval": "year"
+      },
+      "aggs": {
+        "types": {
+          "terms": {
+            "field": "Type",
+            "size": 10
+          },
+          "aggs": {
+            "max_magnitude": {
+              "max": {
+                "field": "Magnitude"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
