@@ -1,8 +1,29 @@
+WRITING PIPELINE AGGREGATIONS:
+------------------------------
+NOTE FOR MYSELF: I still havent grasp this concept fully
+
 Parent Pipeline Aggregations:
 ------------------------------
 Takes the output of a parent aggregation.
 Using the output of a parent aggregation, 
 parent pipeline aggregations create new buckets or new values for existing buckets.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline.html
+Pipeline aggregations work on the outputs produced from other aggregations rather than from document sets, adding information to the output tree. There are many different types of pipeline aggregation, each computing different information from other aggregations, but these types can be broken down into two families:
+
+Parent
+A family of pipeline aggregations that is provided with the output of its parent aggregation and is able to compute new buckets or new aggregations to add to existing buckets.
+Sibling
+Pipeline aggregations that are provided with the output of a sibling aggregation and are able to compute a new aggregation which will be at the same level as the sibling aggregation.
+Pipeline aggregations can reference the aggregations they need to perform their computation by using the buckets_path parameter to indicate the paths to the required metrics. The syntax for defining these paths can be found in the buckets_path Syntax section below.
+
+Pipeline aggregations cannot have sub-aggregations but depending on the type it can reference another pipeline in the buckets_path allowing pipeline aggregations to be chained. For example, you can chain together two derivatives to calculate the second derivative (i.e. a derivative of a derivative).
+
+Because pipeline aggregations only add to the output, when chaining pipeline aggregations the output of each pipeline aggregation will be included in the final output.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 SAMPLE 1 PARENT PIPELINE AGGREGATIONS:
 --------
@@ -101,25 +122,1172 @@ GET flights/_search
     }
   }
 }
+
+-------------------------------------------------
+GET earthquakes/_search
+{
+  "size": 0,
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Nuclear Explosion"
+      }
+    }
+  }
+}
 -----------------
 CONSOLE OUT
 -----------------
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 175,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  }
+}
+
 -----------------
 CONSOLE OUT ENDS
 -----------------
+GET earthquakes/_search
+{
+  "size": 0,
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Nuclear Explosion"
+      }
+    }
+  },
+  "aggs": {
+    "per_year": {
+      "date_histogram": {
+        "field": "Date",
+        "calendar_interval": "year"
+      },
+      "aggs": {
+        "max_magnitude": {
+          "max": {
+            "field": "Magnitude"
+          }
+        }
+      }
+    }
+  }
+}
 
 -----------------
 CONSOLE OUT
 -----------------
+{
+  "took" : 20,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 175,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_year" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.62
+          }
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 5.63
+          }
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.82
+          }
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.54
+          }
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.9
+          }
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.7
+          }
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 9,
+          "max_magnitude" : {
+            "value" : 6.7
+          }
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 5.9
+          }
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 8,
+          "max_magnitude" : {
+            "value" : 6.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 15,
+          "max_magnitude" : {
+            "value" : 6.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 13,
+          "max_magnitude" : {
+            "value" : 6.3
+          }
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 13,
+          "max_magnitude" : {
+            "value" : 6.2
+          }
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 8,
+          "max_magnitude" : {
+            "value" : 6.2
+          }
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.1
+          }
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 6.1
+          }
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 14,
+          "max_magnitude" : {
+            "value" : 6.2
+          }
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.7
+          }
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 16,
+          "max_magnitude" : {
+            "value" : 6.2
+          }
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 6.1
+          }
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 7,
+          "max_magnitude" : {
+            "value" : 6.1
+          }
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 4,
+          "max_magnitude" : {
+            "value" : 6.2
+          }
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.5
+          }
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 6.5
+          }
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.9
+          }
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 6.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 6.1
+          }
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.9
+          }
+        }
+      ]
+    }
+  }
+}
+
 -----------------
 CONSOLE OUT ENDS
 -----------------
+# PARENT PIPELINE AGGREGATION
+remember it's a parent pipeline agg
+because it takes as its input,
+the output of another aggregation above it.
+So in this case, it has to be a nested agg.
+So I'm going to do this right in line
+in the sub-agg section.
+
+GET earthquakes/_search
+{
+  "size": 0,
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Nuclear Explosion"
+      }
+    }
+  },
+  "aggs": {
+    "per_year": {
+      "date_histogram": {
+        "field": "Date",
+        "calendar_interval": "year"
+      },
+      "aggs": {
+        "max_magnitude": {
+          "max": {
+            "field": "Magnitude"
+          }
+        },
+        "change_in_max_magnitude": {
+          "derivative": {
+            "buckets_path": "max_magnitude"
+          }
+        }
+      }
+    }
+  }
+}
 
 -----------------
 CONSOLE OUT
 -----------------
+{
+  "took" : 5,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 175,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_year" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.62
+          }
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 5.63
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.82
+          },
+          "change_in_max_magnitude" : {    
+            "value" : 0.1900000000000004
+          }
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.54
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.28000000000000025
+          }
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.7
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.20000000000000018
+          }
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 9,
+          "max_magnitude" : {
+            "value" : 6.7
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 5.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.7999999999999998
+          }
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 8,
+          "max_magnitude" : {
+            "value" : 6.0            <------------------------------------<< example of parent aggregation as input 
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 15,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0            <------------------------------------<< deravative is zero because 1977 to 1978 the earthquakes max_magnitude remained the same so the deravitive value is 0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 13,
+          "max_magnitude" : {
+            "value" : 6.3
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.2999999999999998
+          }
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 13,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 8,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 14,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.20000000000000018
+          }
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.7
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.2999999999999998
+          }
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 16,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.5
+          }
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 7,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 4,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.5
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.7000000000000002
+          }
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 6.5
+          },
+          "change_in_max_magnitude" : {
+            "value" : 1.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.5999999999999996
+          }
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.1999999999999993
+          }
+        }
+      ]
+    }
+  }
+}
+
 -----------------
 CONSOLE OUT ENDS
 -----------------
+# SIBLING AGGREGATION
+GET earthquakes/_search
+{
+  "size": 0,
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Nuclear Explosion"
+      }
+    }
+  },
+  "aggs": {
+    "per_year": {
+      "date_histogram": {
+        "field": "Date",
+        "calendar_interval": "year"
+      },
+      "aggs": {
+        "max_magnitude": {
+          "max": {
+            "field": "Magnitude"
+          }
+        },
+        "change_in_max_magnitude": {
+          "derivative": {
+            "buckets_path": "max_magnitude"
+          }
+        }
+      }
+    },
+    "stats_change_in_max_magnitude": {
+      "stats_bucket": {
+        "buckets_path": "per_year>change_in_max_magnitude"
+      }
+    }
+  }
+}
 
+
+-----------------
+CONSOLE OUT
+-----------------
+{
+  "took" : 5,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 175,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "per_year" : {
+      "buckets" : [
+        {
+          "key_as_string" : "01/01/1966",
+          "key" : -126230400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.62
+          }
+        },
+        {
+          "key_as_string" : "01/01/1967",
+          "key" : -94694400000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1968",
+          "key" : -63158400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 5.63
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1969",
+          "key" : -31536000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.82
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.1900000000000004
+          }
+        },
+        {
+          "key_as_string" : "01/01/1970",
+          "key" : 0,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.54
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.28000000000000025
+          }
+        },
+        {
+          "key_as_string" : "01/01/1971",
+          "key" : 31536000000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1972",
+          "key" : 63072000000,
+          "doc_count" : 0,
+          "max_magnitude" : {
+            "value" : null
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1973",
+          "key" : 94694400000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : null
+          }
+        },
+        {
+          "key_as_string" : "01/01/1974",
+          "key" : 126230400000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.7
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.20000000000000018
+          }
+        },
+        {
+          "key_as_string" : "01/01/1975",
+          "key" : 157766400000,
+          "doc_count" : 9,
+          "max_magnitude" : {
+            "value" : 6.7
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1976",
+          "key" : 189302400000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 5.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.7999999999999998
+          }
+        },
+        {
+          "key_as_string" : "01/01/1977",
+          "key" : 220924800000,
+          "doc_count" : 8,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1978",
+          "key" : 252460800000,
+          "doc_count" : 15,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1979",
+          "key" : 283996800000,
+          "doc_count" : 13,
+          "max_magnitude" : {
+            "value" : 6.3
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.2999999999999998
+          }
+        },
+        {
+          "key_as_string" : "01/01/1980",
+          "key" : 315532800000,
+          "doc_count" : 13,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1981",
+          "key" : 347155200000,
+          "doc_count" : 8,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1982",
+          "key" : 378691200000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1983",
+          "key" : 410227200000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1984",
+          "key" : 441763200000,
+          "doc_count" : 14,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1985",
+          "key" : 473385600000,
+          "doc_count" : 6,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.20000000000000018
+          }
+        },
+        {
+          "key_as_string" : "01/01/1986",
+          "key" : 504921600000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.7
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.2999999999999998
+          }
+        },
+        {
+          "key_as_string" : "01/01/1987",
+          "key" : 536457600000,
+          "doc_count" : 16,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.5
+          }
+        },
+        {
+          "key_as_string" : "01/01/1988",
+          "key" : 567993600000,
+          "doc_count" : 10,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1989",
+          "key" : 599616000000,
+          "doc_count" : 7,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1990",
+          "key" : 631152000000,
+          "doc_count" : 4,
+          "max_magnitude" : {
+            "value" : 6.2
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.10000000000000053
+          }
+        },
+        {
+          "key_as_string" : "01/01/1991",
+          "key" : 662688000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.5
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.7000000000000002
+          }
+        },
+        {
+          "key_as_string" : "01/01/1992",
+          "key" : 694224000000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 6.5
+          },
+          "change_in_max_magnitude" : {
+            "value" : 1.0
+          }
+        },
+        {
+          "key_as_string" : "01/01/1993",
+          "key" : 725846400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.5999999999999996
+          }
+        },
+        {
+          "key_as_string" : "01/01/1994",
+          "key" : 757382400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 6.0
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1995",
+          "key" : 788918400000,
+          "doc_count" : 2,
+          "max_magnitude" : {
+            "value" : 6.1
+          },
+          "change_in_max_magnitude" : {
+            "value" : 0.09999999999999964
+          }
+        },
+        {
+          "key_as_string" : "01/01/1996",
+          "key" : 820454400000,
+          "doc_count" : 1,
+          "max_magnitude" : {
+            "value" : 5.9
+          },
+          "change_in_max_magnitude" : {
+            "value" : -0.1999999999999993
+          }
+        }
+      ]
+    },
+    "stats_change_in_max_magnitude" : {        <------------------------------------<<       
+      "count" : 25,
+      "min" : -0.7999999999999998,
+      "max" : 1.0,
+      "avg" : -0.04359999999999999,
+      "sum" : -1.0899999999999999
+    }
+  }
+}
+
+-----------------
+CONSOLE OUT ENDS
+-----------------
 
