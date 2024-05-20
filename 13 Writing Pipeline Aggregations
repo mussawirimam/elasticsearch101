@@ -1,0 +1,125 @@
+Parent Pipeline Aggregations:
+------------------------------
+Takes the output of a parent aggregation.
+Using the output of a parent aggregation, 
+parent pipeline aggregations create new buckets or new values for existing buckets.
+
+SAMPLE 1 PARENT PIPELINE AGGREGATIONS:
+--------
+    NOTE:
+    So we have our parent aggregation here,
+in this case, is our date_histogram aggregation.
+Then we're doing a sub-aggregation,
+which is the sum,
+and then we're doing a parent pipeline aggregation.
+So we're taking the output
+of that sum aggregation and we're piping it
+into our cumulative sum aggregation.
+So that's why we're calling it a pipeline
+because it's taking as its input,    <------------<<<
+the output of something else.        <------------<<<
+
+GET flights/_search
+{
+  "size": 0,
+  "aggs": {
+    "delay_minutes_per_day": {
+      "date_histogram": { # parent agg
+        "field": "timestamp"
+        "calendar_interval": "day"
+      },
+      "aggs": {
+        "delay_minutes": {
+          "sum": {  # sub-agg
+            "field": "FlightDelayMin"
+          }
+        }
+        "cumulative_delay_minutes": {
+          "cumulative_sum" : {  # pipeline agg
+            "buckets_path": "delay_minutes"
+          }
+        }
+      }
+    }
+  }
+}
+
+SIBLING PIPELINE AGGREGATIONS:
+------------------------------
+Takes the output of a sibling aggregation.
+Using the output of a sibling aggregation, sibling pipeline aggregations create new outputs at the same level as the sibling aggregation.
+
+SAMPLE 2 SIBLING PIPELINE AGGREGATIONS:
+----------
+    NOTE:
+    the other type of pipeline aggregation,
+which is the sibling pipeline aggregation.
+So this takes the output
+of a sibling aggregation as its input,
+which is very similar
+to parent pipeline aggregations,
+except in this case,
+our pipeline agg is actually a sibling
+to the top-most aggregation.
+It's not a sub-aggregation.
+
+  you can see here on the sample,
+we have our parent aggregation--
+again, our date_histogram--
+we have a sub-agg, and then--outside of that,
+so a sibling to our date_histogram aggregation--
+we have our pipeline aggregation.
+So the pipeline aggregation is
+either a parent or a sibling,
+depending on where it's input is coming from.
+If it's input is the output of a parent,
+it's a parent pipeline agg.
+If it's input is the output of a sibling,
+it's a sibling pipeline agg.
+
+GET flights/_search
+{
+  "size": 0,
+  "aggs": {
+    "miles_per_day": {
+      "date_histogram": { # parent agg
+        "field": "timestamp"
+        "calendar_interval": "day"
+      },
+      "aggs": {
+        "total miles": {
+          "sum": { # sub-agg
+            "field": "DistanceMiles"
+          }
+        }
+      }
+    },
+    "most_miles_per_day": {
+      "max_bucket": { # pipeline agg
+        "buckets_path": "miles_per_day>total_miles"
+      }
+    }
+  }
+}
+-----------------
+CONSOLE OUT
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+-----------------
+CONSOLE OUT
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+-----------------
+CONSOLE OUT
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+
