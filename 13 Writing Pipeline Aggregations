@@ -1,6 +1,14 @@
 WRITING PIPELINE AGGREGATIONS:
 ------------------------------
 NOTE FOR MYSELF: I still havent grasp this concept fully
+TIP:
+        Parent pipeline aggregations are going
+to add values to buckets.
+Sibling aggregations are going
+to be siblings of the greater aggregation.
+They're not going to add value to buckets.
+They're going to be their own thing.
+
 
 Parent Pipeline Aggregations:
 ------------------------------
