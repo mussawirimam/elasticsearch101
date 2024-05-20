@@ -1,5 +1,6 @@
 WRITING PIPELINE AGGREGATIONS:
 ------------------------------
+https://mkonda007.medium.com/parent-and-sibling-aggregations-in-elasticsearch-da34e91a8ed6
 NOTE FOR MYSELF: I still havent grasp this concept fully
 TIP:
         Parent pipeline aggregations are going
