@@ -9,6 +9,7 @@ and then we're going to put all of our documents
 in whatever day bucket they belong to.
 So we're just bucketizing our data out.
 
+MY UNDERSTANDING: So, in kibana you usually get to see the graphs in histogram with dates, instead of graphs you see it as output in the console when doing bucket-aggregation. 
 
 SAMPLE: 
 # bucket aggregation
@@ -285,7 +286,7 @@ CONSOLE OUTPUT
 --------------------
 CONSOLE OUTPUT ENDS
 --------------------
-
+#DATE HISTOGRAM IS DEPRECATED I THINK
 GET earthquakes/_search
 {
   "size": 0,
@@ -6616,7 +6617,7 @@ CONSOLE OUTPUT
 --------------------
 CONSOLE OUTPUT ENDS
 --------------------
-
+# TERMS BUCKET AGGREGATION
 GET earthquakes/_search
 {
   "size": 0,
