@@ -1129,3 +1129,1106 @@ CONSOLE OUTPUT
 --------------------
 CONSOLE OUTPUT ENDS
 --------------------
+GET ecommerce/_search
+{
+  "query": {
+    "match": {
+      "products.product_name": "sweatshirt"
+    }
+  },
+  "highlight": {
+    "pre_tags": "<b>",
+    "post_tags": "<b>", 
+    "fields": {
+      "products.product_name": {}
+    }
+  },
+  "sort": [
+    {
+      "customer_last_name.keyword": {}
+    },
+    {
+      "customer_first_name.keyword": {}
+    }
+  ]
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 29,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 347,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "EzTHkY4Bo6y4JKDsGXr4",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Shoes",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Muniz",
+          "customer_full_name" : "Muniz Abbott",
+          "customer_gender" : "MALE",
+          "customer_id" : 37,
+          "customer_last_name" : "Abbott",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "muniz@abbott-family.zzz",
+          "manufacturer" : [
+            "Angeldale",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-23T16:00:29+00:00",
+          "order_id" : 563460,
+          "products" : [
+            {
+              "base_price" : 79.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 2036,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0682506825",
+              "taxless_price" : 79.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 39.99,
+              "_id" : "sold_product_563460_2036",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-10T16:00:29+00:00",
+              "product_name" : "Lace-ups - Midnight Blue",
+              "price" : 79.99,
+              "taxful_price" : 79.99,
+              "base_unit_price" : 79.99
+            },
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 17157,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0594505945",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.29,
+              "_id" : "sold_product_563460_17157",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-10T16:00:29+00:00",
+              "product_name" : "Sweatshirt - off white",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            }
+          ],
+          "sku" : [
+            "ZO0682506825",
+            "ZO0594505945"
+          ],
+          "taxful_total_price" : 100.98,
+          "taxless_total_price" : 100.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "muniz",
+          "geoip" : {
+            "country_iso_code" : "MA",
+            "location" : {
+              "lon" : -8,
+              "lat" : 31.6
+            },
+            "region_name" : "Marrakech-Tensift-Al Haouz",
+            "continent_name" : "Africa",
+            "city_name" : "Marrakesh"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - off white"
+          ]
+        },
+        "sort" : [
+          "Abbott",
+          "Muniz"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "xTTHkY4Bo6y4JKDsIHwt",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Tariq",
+          "customer_full_name" : "Tariq Abbott",
+          "customer_gender" : "MALE",
+          "customer_id" : 25,
+          "customer_last_name" : "Abbott",
+          "customer_phone" : "",
+          "day_of_week" : "Sunday",
+          "day_of_week_i" : 6,
+          "email" : "tariq@abbott-family.zzz",
+          "manufacturer" : [
+            "Elitelligence",
+            "Spritechnologies"
+          ],
+          "order_date" : "2024-03-31T09:25:55+00:00",
+          "order_id" : 573907,
+          "products" : [
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 21904,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0590605906",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.49,
+              "_id" : "sold_product_573907_21904",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-18T09:25:55+00:00",
+              "product_name" : "Sweatshirt - mottled grey/bordeaux",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            },
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Spritechnologies",
+              "tax_amount" : 0,
+              "product_id" : 13530,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0622606226",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.99,
+              "_id" : "sold_product_573907_13530",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-18T09:25:55+00:00",
+              "product_name" : "Windbreaker - dark grey",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            }
+          ],
+          "sku" : [
+            "ZO0590605906",
+            "ZO0622606226"
+          ],
+          "taxful_total_price" : 45.98,
+          "taxless_total_price" : 45.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "tariq",
+          "geoip" : {
+            "country_iso_code" : "TR",
+            "location" : {
+              "lon" : 29,
+              "lat" : 41
+            },
+            "region_name" : "Istanbul",
+            "continent_name" : "Asia",
+            "city_name" : "Istanbul"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - mottled grey/bordeaux"
+          ]
+        },
+        "sort" : [
+          "Abbott",
+          "Tariq"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "LDTHkY4Bo6y4JKDsJX6D",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Wagdi",
+          "customer_full_name" : "Wagdi Abbott",
+          "customer_gender" : "MALE",
+          "customer_id" : 15,
+          "customer_last_name" : "Abbott",
+          "customer_phone" : "",
+          "day_of_week" : "Wednesday",
+          "day_of_week_i" : 2,
+          "email" : "wagdi@abbott-family.zzz",
+          "manufacturer" : [
+            "Elitelligence"
+          ],
+          "order_date" : "2024-04-03T01:26:24+00:00",
+          "order_id" : 577419,
+          "products" : [
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 23215,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0553905539",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.06,
+              "_id" : "sold_product_577419_23215",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-21T01:26:24+00:00",
+              "product_name" : "Print T-shirt - mottled grey",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            },
+            {
+              "base_price" : 16.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 2915,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0581005810",
+              "taxless_price" : 16.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.17,
+              "_id" : "sold_product_577419_2915",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-21T01:26:24+00:00",
+              "product_name" : "Sweatshirt - black",
+              "price" : 16.99,
+              "taxful_price" : 16.99,
+              "base_unit_price" : 16.99
+            }
+          ],
+          "sku" : [
+            "ZO0553905539",
+            "ZO0581005810"
+          ],
+          "taxful_total_price" : 27.98,
+          "taxless_total_price" : 27.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "wagdi",
+          "geoip" : {
+            "country_iso_code" : "SA",
+            "location" : {
+              "lon" : 45,
+              "lat" : 25
+            },
+            "continent_name" : "Asia"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Abbott",
+          "Wagdi"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "CTTHkY4Bo6y4JKDsAHWc",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Women's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Abigail",
+          "customer_full_name" : "Abigail Adams",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 46,
+          "customer_last_name" : "Adams",
+          "customer_phone" : "",
+          "day_of_week" : "Wednesday",
+          "day_of_week_i" : 2,
+          "email" : "abigail@adams-family.zzz",
+          "manufacturer" : [
+            "Pyramidustries",
+            "Champion Arts"
+          ],
+          "order_date" : "2024-04-03T23:00:58+00:00",
+          "order_id" : 578600,
+          "products" : [
+            {
+              "base_price" : 17.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Pyramidustries",
+              "tax_amount" : 0,
+              "product_id" : 14582,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0179701797",
+              "taxless_price" : 17.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 8.99,
+              "_id" : "sold_product_578600_14582",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-21T23:00:58+00:00",
+              "product_name" : "Sweatshirt - dark grey multicolor",
+              "price" : 17.99,
+              "taxful_price" : 17.99,
+              "base_unit_price" : 17.99
+            },
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Champion Arts",
+              "tax_amount" : 0,
+              "product_id" : 13989,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0496004960",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 11.5,
+              "_id" : "sold_product_578600_13989",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-21T23:00:58+00:00",
+              "product_name" : "Shirt - blue",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            }
+          ],
+          "sku" : [
+            "ZO0179701797",
+            "ZO0496004960"
+          ],
+          "taxful_total_price" : 42.98,
+          "taxless_total_price" : 42.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "abigail",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -1.9,
+              "lat" : 52.5
+            },
+            "region_name" : "Birmingham",
+            "continent_name" : "Europe",
+            "city_name" : "Birmingham"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - dark grey multicolor"
+          ]
+        },
+        "sort" : [
+          "Adams",
+          "Abigail"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "qDTHkY4Bo6y4JKDsKYDx",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Women's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Elyssa",
+          "customer_full_name" : "Elyssa Adams",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 27,
+          "customer_last_name" : "Adams",
+          "customer_phone" : "",
+          "day_of_week" : "Sunday",
+          "day_of_week_i" : 6,
+          "email" : "elyssa@adams-family.zzz",
+          "manufacturer" : [
+            "Tigress Enterprises",
+            "Champion Arts"
+          ],
+          "order_date" : "2024-03-24T00:41:46+00:00",
+          "order_id" : 563965,
+          "products" : [
+            {
+              "base_price" : 33.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Tigress Enterprises",
+              "tax_amount" : 0,
+              "product_id" : 18560,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0045800458",
+              "taxless_price" : 33.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 18.01,
+              "_id" : "sold_product_563965_18560",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-11T00:41:46+00:00",
+              "product_name" : "Summer dress - peacoat/pomegranade",
+              "price" : 33.99,
+              "taxful_price" : 33.99,
+              "base_unit_price" : 33.99
+            },
+            {
+              "base_price" : 18.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Champion Arts",
+              "tax_amount" : 0,
+              "product_id" : 14856,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0503405034",
+              "taxless_price" : 18.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.31,
+              "_id" : "sold_product_563965_14856",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-11T00:41:46+00:00",
+              "product_name" : "Sweatshirt - grey",
+              "price" : 18.99,
+              "taxful_price" : 18.99,
+              "base_unit_price" : 18.99
+            }
+          ],
+          "sku" : [
+            "ZO0045800458",
+            "ZO0503405034"
+          ],
+          "taxful_total_price" : 52.98,
+          "taxless_total_price" : 52.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "elyssa",
+          "geoip" : {
+            "country_iso_code" : "US",
+            "location" : {
+              "lon" : -74,
+              "lat" : 40.8
+            },
+            "region_name" : "New York",
+            "continent_name" : "North America",
+            "city_name" : "New York"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - grey"
+          ]
+        },
+        "sort" : [
+          "Adams",
+          "Elyssa"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "qzTHkY4Bo6y4JKDsGXr4",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Women's Clothing",
+            "Women's Shoes"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Rabbia Al",
+          "customer_full_name" : "Rabbia Al Adams",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 5,
+          "customer_last_name" : "Adams",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "rabbia al@adams-family.zzz",
+          "manufacturer" : [
+            "Pyramidustries",
+            "Tigress Enterprises"
+          ],
+          "order_date" : "2024-03-30T09:50:24+00:00",
+          "order_id" : 572610,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Pyramidustries",
+              "tax_amount" : 0,
+              "product_id" : 23715,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0178901789",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.01,
+              "_id" : "sold_product_572610_23715",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T09:50:24+00:00",
+              "product_name" : "Sweatshirt - dark grey multicolor",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 41.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Tigress Enterprises",
+              "tax_amount" : 0,
+              "product_id" : 5561,
+              "category" : "Women's Shoes",
+              "sku" : "ZO0031300313",
+              "taxless_price" : 41.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 21.01,
+              "_id" : "sold_product_572610_5561",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T09:50:24+00:00",
+              "product_name" : "Lace-up boots - Blue Violety",
+              "price" : 41.99,
+              "taxful_price" : 41.99,
+              "base_unit_price" : 41.99
+            }
+          ],
+          "sku" : [
+            "ZO0178901789",
+            "ZO0031300313"
+          ],
+          "taxful_total_price" : 66.98,
+          "taxless_total_price" : 66.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "rabbia",
+          "geoip" : {
+            "country_iso_code" : "AE",
+            "location" : {
+              "lon" : 55.3,
+              "lat" : 25.3
+            },
+            "region_name" : "Dubai",
+            "continent_name" : "Asia",
+            "city_name" : "Dubai"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - dark grey multicolor"
+          ]
+        },
+        "sort" : [
+          "Adams",
+          "Rabbia Al"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "GjTHkY4Bo6y4JKDsIH0t",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Accessories",
+            "Men's Shoes",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Tariq",
+          "customer_full_name" : "Tariq Allison",
+          "customer_gender" : "MALE",
+          "customer_id" : 25,
+          "customer_last_name" : "Allison",
+          "customer_phone" : "",
+          "day_of_week" : "Wednesday",
+          "day_of_week_i" : 2,
+          "email" : "tariq@allison-family.zzz",
+          "manufacturer" : [
+            "Low Tide Media",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-04-10T10:40:48+00:00",
+          "order_id" : 714707,
+          "products" : [
+            {
+              "base_price" : 79.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 20313,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0467604676",
+              "taxless_price" : 79.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 43.19,
+              "_id" : "sold_product_714707_20313",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T10:40:48+00:00",
+              "product_name" : "Crossover Strap Bag",
+              "price" : 79.99,
+              "taxful_price" : 79.99,
+              "base_unit_price" : 79.99
+            },
+            {
+              "base_price" : 49.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 24934,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0403504035",
+              "taxless_price" : 49.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 22.5,
+              "_id" : "sold_product_714707_24934",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T10:40:48+00:00",
+              "product_name" : "Lace-up boots - resin coffee",
+              "price" : 49.99,
+              "taxful_price" : 49.99,
+              "base_unit_price" : 49.99
+            },
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 18963,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0585005850",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.08,
+              "_id" : "sold_product_714707_18963",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T10:40:48+00:00",
+              "product_name" : "Sweatshirt - white",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            },
+            {
+              "base_price" : 11.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 24738,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0568205682",
+              "taxless_price" : 11.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.64,
+              "_id" : "sold_product_714707_24738",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T10:40:48+00:00",
+              "product_name" : "Long sleeved top - off white/black",
+              "price" : 11.99,
+              "taxful_price" : 11.99,
+              "base_unit_price" : 11.99
+            }
+          ],
+          "sku" : [
+            "ZO0467604676",
+            "ZO0403504035",
+            "ZO0585005850",
+            "ZO0568205682"
+          ],
+          "taxful_total_price" : 162.96,
+          "taxless_total_price" : 162.96,
+          "total_quantity" : 4,
+          "total_unique_products" : 4,
+          "type" : "order",
+          "user" : "tariq",
+          "geoip" : {
+            "country_iso_code" : "TR",
+            "location" : {
+              "lon" : 29,
+              "lat" : 41
+            },
+            "region_name" : "Istanbul",
+            "continent_name" : "Asia",
+            "city_name" : "Istanbul"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - white"
+          ]
+        },
+        "sort" : [
+          "Allison",
+          "Tariq"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "njTHkY4Bo6y4JKDsB3bU",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Women's Clothing",
+            "Women's Shoes"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Brigitte",
+          "customer_full_name" : "Brigitte Alvarez",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 12,
+          "customer_last_name" : "Alvarez",
+          "customer_phone" : "",
+          "day_of_week" : "Sunday",
+          "day_of_week_i" : 6,
+          "email" : "brigitte@alvarez-family.zzz",
+          "manufacturer" : [
+            "Champion Arts",
+            "Primemaster"
+          ],
+          "order_date" : "2024-03-17T03:59:02+00:00",
+          "order_id" : 554655,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Champion Arts",
+              "tax_amount" : 0,
+              "product_id" : 24572,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0502005020",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.25,
+              "_id" : "sold_product_554655_24572",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-04T03:59:02+00:00",
+              "product_name" : "Sweatshirt - light grey multicolor",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 124.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Primemaster",
+              "tax_amount" : 0,
+              "product_id" : 14166,
+              "category" : "Women's Shoes",
+              "sku" : "ZO0364303643",
+              "taxless_price" : 124.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 61.25,
+              "_id" : "sold_product_554655_14166",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-04T03:59:02+00:00",
+              "product_name" : "Platform boots - golden",
+              "price" : 124.99,
+              "taxful_price" : 124.99,
+              "base_unit_price" : 124.99
+            }
+          ],
+          "sku" : [
+            "ZO0502005020",
+            "ZO0364303643"
+          ],
+          "taxful_total_price" : 149.98,
+          "taxless_total_price" : 149.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "brigitte",
+          "geoip" : {
+            "country_iso_code" : "US",
+            "location" : {
+              "lon" : -74,
+              "lat" : 40.8
+            },
+            "region_name" : "New York",
+            "continent_name" : "North America",
+            "city_name" : "New York"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - light grey multicolor"
+          ]
+        },
+        "sort" : [
+          "Alvarez",
+          "Brigitte"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "-TTHkY4Bo6y4JKDsPIVd",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "George",
+          "customer_full_name" : "George Alvarez",
+          "customer_gender" : "MALE",
+          "customer_id" : 32,
+          "customer_last_name" : "Alvarez",
+          "customer_phone" : "",
+          "day_of_week" : "Thursday",
+          "day_of_week_i" : 3,
+          "email" : "george@alvarez-family.zzz",
+          "manufacturer" : [
+            "Elitelligence"
+          ],
+          "order_date" : "2024-04-11T11:02:24+00:00",
+          "order_id" : 588750,
+          "products" : [
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 24487,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0528305283",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.91,
+              "_id" : "sold_product_588750_24487",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T11:02:24+00:00",
+              "product_name" : "Chinos - grey",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            },
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 24118,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0583205832",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.01,
+              "_id" : "sold_product_588750_24118",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T11:02:24+00:00",
+              "product_name" : "Sweatshirt - blue",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            }
+          ],
+          "sku" : [
+            "ZO0528305283",
+            "ZO0583205832"
+          ],
+          "taxful_total_price" : 45.98,
+          "taxless_total_price" : 45.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "george",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -1.9,
+              "lat" : 52.5
+            },
+            "region_name" : "Birmingham",
+            "continent_name" : "Europe",
+            "city_name" : "Birmingham"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - blue"
+          ]
+        },
+        "sort" : [
+          "Alvarez",
+          "George"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "ajTHkY4Bo6y4JKDsPIZd",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Mostafa",
+          "customer_full_name" : "Mostafa Alvarez",
+          "customer_gender" : "MALE",
+          "customer_id" : 9,
+          "customer_last_name" : "Alvarez",
+          "customer_phone" : "",
+          "day_of_week" : "Monday",
+          "day_of_week_i" : 0,
+          "email" : "mostafa@alvarez-family.zzz",
+          "manufacturer" : [
+            "Low Tide Media",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-18T14:34:05+00:00",
+          "order_id" : 556580,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 16549,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0459604596",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.74,
+              "_id" : "sold_product_556580_16549",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-05T14:34:05+00:00",
+              "product_name" : "Sweatshirt - mottled green ",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 41.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 21677,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0540305403",
+              "taxless_price" : 41.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 22.25,
+              "_id" : "sold_product_556580_21677",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-05T14:34:05+00:00",
+              "product_name" : "Light jacket - black",
+              "price" : 41.99,
+              "taxful_price" : 41.99,
+              "base_unit_price" : 41.99
+            }
+          ],
+          "sku" : [
+            "ZO0459604596",
+            "ZO0540305403"
+          ],
+          "taxful_total_price" : 66.98,
+          "taxless_total_price" : 66.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "mostafa",
+          "geoip" : {
+            "country_iso_code" : "EG",
+            "location" : {
+              "lon" : 31.3,
+              "lat" : 30.1
+            },
+            "region_name" : "Cairo Governorate",
+            "continent_name" : "Africa",
+            "city_name" : "Cairo"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - mottled green"
+          ]
+        },
+        "sort" : [
+          "Alvarez",
+          "Mostafa"
+        ]
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
