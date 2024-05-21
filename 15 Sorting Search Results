@@ -22,17 +22,1110 @@ Meaningfully organize search results.
 ⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻2.⢿⣿⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿ 2. Sort Mode: For multi-value fields, sort by min, max, sum, average, or median.
 ⣿⣿⣿⣿⣿⡿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⣿⣿⣿⣷⣤⣀⢀⣠⣴⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻3.⢿⣿⣿⣿⣿ 3. Sort Order: Determine whether it should be ascending or descending.
 ⣿⣿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⡿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠿⣿
-⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣀⣀⣀⣀⣀⣀⣀⣴⡿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⢰⣤⣤⣶⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠋⠉⢉⣍⡉⠉⠉⠻⢷⠿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣛⣛⣛⣋⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡶⣶⣿⣛⣿⡶⠶⡶⣿⢾⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣿⣉⣹⣿⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠙⠛⠋⠀⠀⣠⣴⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣭⣉⣩⣍⠀⠀⣠⡀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠛⠛⠛⠛⠛⢿⣯⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣭⣽⣿⠀⢾⣿⠾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣀⣀⣀⣀⣀⣀⣀⣴⡿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⢰⣤⣤⣶⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠋⠉⢉⣍⡉⠉⠉⠻⢷⠿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣛⣛⣛⣋⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡶⣶⣿⣛⣿⡶⠶⡶⣿⢾⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣿⣉⣹⣿⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠙⠛⠋⠀⠀⣠⣴⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣭⣉⣩⣍⠀⠀⣠⡀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠛⠛⠛⠛⠛⢿⣯⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣭⣽⣿⠀⢾⣿⠾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠙⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
 ⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣷⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾
 ⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⣀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+GET ecommerce/_search
+{
+  "query": {
+    "match": {
+      "products.product_name": "sweatshirt"
+    }
+  },
+  "highlight": {
+    "pre_tags": "<b>",
+    "post_tags": "<b>", 
+    "fields": {
+      "products.product_name": {}
+    }
+  },
+  "sort": [
+    {
+      "customer_last_name.keyword": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 22,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 347,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "1TTHkY4Bo6y4JKDsJX-D",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Yahya",
+          "customer_full_name" : "Yahya Wood",
+          "customer_gender" : "MALE",
+          "customer_id" : 23,
+          "customer_last_name" : "Wood",
+          "customer_phone" : "",
+          "day_of_week" : "Friday",
+          "day_of_week_i" : 4,
+          "email" : "yahya@wood-family.zzz",
+          "manufacturer" : [
+            "Low Tide Media",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-15T09:31:41+00:00",
+          "order_id" : 552271,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 21468,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0425304253",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 11.75,
+              "_id" : "sold_product_552271_21468",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-02T09:31:41+00:00",
+              "product_name" : "Jeans Skinny Fit - grey",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 16.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 2887,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0580905809",
+              "taxless_price" : 16.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 8.33,
+              "_id" : "sold_product_552271_2887",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-02T09:31:41+00:00",
+              "product_name" : "Sweatshirt - oliv",
+              "price" : 16.99,
+              "taxful_price" : 16.99,
+              "base_unit_price" : 16.99
+            }
+          ],
+          "sku" : [
+            "ZO0425304253",
+            "ZO0580905809"
+          ],
+          "taxful_total_price" : 41.98,
+          "taxless_total_price" : 41.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "yahya",
+          "geoip" : {
+            "country_iso_code" : "MA",
+            "location" : {
+              "lon" : -8,
+              "lat" : 31.6
+            },
+            "region_name" : "Marrakech-Tensift-Al Haouz",
+            "continent_name" : "Africa",
+            "city_name" : "Marrakesh"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - oliv"
+          ]
+        },
+        "sort" : [
+          "Wood"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "IzTHkY4Bo6y4JKDsAHSc",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Eddie",
+          "customer_full_name" : "Eddie Wolfe",
+          "customer_gender" : "MALE",
+          "customer_id" : 38,
+          "customer_last_name" : "Wolfe",
+          "customer_phone" : "",
+          "day_of_week" : "Monday",
+          "day_of_week_i" : 0,
+          "email" : "eddie@wolfe-family.zzz",
+          "manufacturer" : [
+            "Elitelligence",
+            "Oceanavigations",
+            "Low Tide Media"
+          ],
+          "order_date" : "2024-04-01T19:59:31+00:00",
+          "order_id" : 715061,
+          "products" : [
+            {
+              "base_price" : 28.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 13695,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0590205902",
+              "taxless_price" : 28.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 14.21,
+              "_id" : "sold_product_715061_13695",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-19T19:59:31+00:00",
+              "product_name" : "Sweatshirt - white",
+              "price" : 28.99,
+              "taxful_price" : 28.99,
+              "base_unit_price" : 28.99
+            },
+            {
+              "base_price" : 199.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 16955,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0291402914",
+              "taxless_price" : 199.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 92.01,
+              "_id" : "sold_product_715061_16955",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-19T19:59:31+00:00",
+              "product_name" : "Classic coat - navy",
+              "price" : 199.99,
+              "taxful_price" : 199.99,
+              "base_unit_price" : 199.99
+            },
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 16663,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0297002970",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.25,
+              "_id" : "sold_product_715061_16663",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-19T19:59:31+00:00",
+              "product_name" : "Jumper - dark grey multicolor",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 12.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 14513,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0476504765",
+              "taxless_price" : 12.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 7.14,
+              "_id" : "sold_product_715061_14513",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-19T19:59:31+00:00",
+              "product_name" : "3 PACK - Shorts - Blue Violety/navy/grey",
+              "price" : 12.99,
+              "taxful_price" : 12.99,
+              "base_unit_price" : 12.99
+            }
+          ],
+          "sku" : [
+            "ZO0590205902",
+            "ZO0291402914",
+            "ZO0297002970",
+            "ZO0476504765"
+          ],
+          "taxful_total_price" : 266.96,
+          "taxless_total_price" : 266.96,
+          "total_quantity" : 4,
+          "total_unique_products" : 4,
+          "type" : "order",
+          "user" : "eddie",
+          "geoip" : {
+            "country_iso_code" : "EG",
+            "location" : {
+              "lon" : 31.3,
+              "lat" : 30.1
+            },
+            "region_name" : "Cairo Governorate",
+            "continent_name" : "Africa",
+            "city_name" : "Cairo"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - white"
+          ]
+        },
+        "sort" : [
+          "Wolfe"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "tjTHkY4Bo6y4JKDsJX6D",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Women's Clothing",
+            "Women's Shoes"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Rabbia Al",
+          "customer_full_name" : "Rabbia Al Wise",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 5,
+          "customer_last_name" : "Wise",
+          "customer_phone" : "",
+          "day_of_week" : "Monday",
+          "day_of_week_i" : 0,
+          "email" : "rabbia al@wise-family.zzz",
+          "manufacturer" : [
+            "Champion Arts",
+            "Oceanavigations"
+          ],
+          "order_date" : "2024-03-25T19:09:07+00:00",
+          "order_id" : 566382,
+          "products" : [
+            {
+              "base_price" : 18.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Champion Arts",
+              "tax_amount" : 0,
+              "product_id" : 15477,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0503505035",
+              "taxless_price" : 18.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.68,
+              "_id" : "sold_product_566382_15477",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-12T19:09:07+00:00",
+              "product_name" : "Sweatshirt - black",
+              "price" : 18.99,
+              "taxful_price" : 18.99,
+              "base_unit_price" : 18.99
+            },
+            {
+              "base_price" : 64.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 20551,
+              "category" : "Women's Shoes",
+              "sku" : "ZO0240302403",
+              "taxless_price" : 64.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 33.79,
+              "_id" : "sold_product_566382_20551",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-12T19:09:07+00:00",
+              "product_name" : "Lace-ups - Purple",
+              "price" : 64.99,
+              "taxful_price" : 64.99,
+              "base_unit_price" : 64.99
+            }
+          ],
+          "sku" : [
+            "ZO0503505035",
+            "ZO0240302403"
+          ],
+          "taxful_total_price" : 83.98,
+          "taxless_total_price" : 83.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "rabbia",
+          "geoip" : {
+            "country_iso_code" : "AE",
+            "location" : {
+              "lon" : 55.3,
+              "lat" : 25.3
+            },
+            "region_name" : "Dubai",
+            "continent_name" : "Asia",
+            "city_name" : "Dubai"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Wise"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "KzTHkY4Bo6y4JKDsNoRk",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Tariq",
+          "customer_full_name" : "Tariq Willis",
+          "customer_gender" : "MALE",
+          "customer_id" : 25,
+          "customer_last_name" : "Willis",
+          "customer_phone" : "",
+          "day_of_week" : "Sunday",
+          "day_of_week_i" : 6,
+          "email" : "tariq@willis-family.zzz",
+          "manufacturer" : [
+            "Elitelligence",
+            "Oceanavigations"
+          ],
+          "order_date" : "2024-03-31T11:41:17+00:00",
+          "order_id" : 574025,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 12380,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0534705347",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 13.24,
+              "_id" : "sold_product_574025_12380",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-18T11:41:17+00:00",
+              "product_name" : "Slim fit jeans - moon washed",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 28.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 24814,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0299502995",
+              "taxless_price" : 28.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 15.36,
+              "_id" : "sold_product_574025_24814",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-18T11:41:17+00:00",
+              "product_name" : "Sweatshirt - black/white",
+              "price" : 28.99,
+              "taxful_price" : 28.99,
+              "base_unit_price" : 28.99
+            }
+          ],
+          "sku" : [
+            "ZO0534705347",
+            "ZO0299502995"
+          ],
+          "taxful_total_price" : 53.98,
+          "taxless_total_price" : 53.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "tariq",
+          "geoip" : {
+            "country_iso_code" : "TR",
+            "location" : {
+              "lon" : 29,
+              "lat" : 41
+            },
+            "region_name" : "Istanbul",
+            "continent_name" : "Asia",
+            "city_name" : "Istanbul"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - black/white"
+          ]
+        },
+        "sort" : [
+          "Willis"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "BDTHkY4Bo6y4JKDsD3oJ",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing",
+            "Women's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "George",
+          "customer_full_name" : "George Willis",
+          "customer_gender" : "MALE",
+          "customer_id" : 32,
+          "customer_last_name" : "Willis",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "george@willis-family.zzz",
+          "manufacturer" : [
+            "Oceanavigations",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-04-06T06:36:00+00:00",
+          "order_id" : 581714,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 22592,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0300703007",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.99,
+              "_id" : "sold_product_581714_22592",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-24T06:36:00+00:00",
+              "product_name" : "Sweatshirt - black",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 15659,
+              "category" : "Women's Accessories",
+              "sku" : "ZO0601706017",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.66,
+              "_id" : "sold_product_581714_15659",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-24T06:36:00+00:00",
+              "product_name" : "Watch - black",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            }
+          ],
+          "sku" : [
+            "ZO0300703007",
+            "ZO0601706017"
+          ],
+          "taxful_total_price" : 45.98,
+          "taxless_total_price" : 45.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "george",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -1.9,
+              "lat" : 52.5
+            },
+            "region_name" : "Birmingham",
+            "continent_name" : "Europe",
+            "city_name" : "Birmingham"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Willis"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "9TTHkY4Bo6y4JKDsIHwt",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Shoes",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Phil",
+          "customer_full_name" : "Phil Williams",
+          "customer_gender" : "MALE",
+          "customer_id" : 50,
+          "customer_last_name" : "Williams",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "phil@williams-family.zzz",
+          "manufacturer" : [
+            "Elitelligence",
+            "Oceanavigations"
+          ],
+          "order_date" : "2024-03-23T12:04:19+00:00",
+          "order_id" : 563246,
+          "products" : [
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 17897,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0515205152",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.7,
+              "_id" : "sold_product_563246_17897",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-10T12:04:19+00:00",
+              "product_name" : "Trainers - grey",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            },
+            {
+              "base_price" : 28.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 20203,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0300803008",
+              "taxless_price" : 28.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 14.78,
+              "_id" : "sold_product_563246_20203",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-10T12:04:19+00:00",
+              "product_name" : "Sweatshirt - black",
+              "price" : 28.99,
+              "taxful_price" : 28.99,
+              "base_unit_price" : 28.99
+            }
+          ],
+          "sku" : [
+            "ZO0515205152",
+            "ZO0300803008"
+          ],
+          "taxful_total_price" : 49.98,
+          "taxless_total_price" : 49.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "phil",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -0.1,
+              "lat" : 51.5
+            },
+            "continent_name" : "Europe"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Williams"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "3DTHkY4Bo6y4JKDsJX-D",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Accessories",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Wagdi",
+          "customer_full_name" : "Wagdi Williams",
+          "customer_gender" : "MALE",
+          "customer_id" : 15,
+          "customer_last_name" : "Williams",
+          "customer_phone" : "",
+          "day_of_week" : "Tuesday",
+          "day_of_week_i" : 1,
+          "email" : "wagdi@williams-family.zzz",
+          "manufacturer" : [
+            "Oceanavigations",
+            "Low Tide Media"
+          ],
+          "order_date" : "2024-03-26T11:51:22+00:00",
+          "order_id" : 567294,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 21723,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0317403174",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.99,
+              "_id" : "sold_product_567294_21723",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-13T11:51:22+00:00",
+              "product_name" : "SET - Hat - Medium Slate Blue",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 20325,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0457204572",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.08,
+              "_id" : "sold_product_567294_20325",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-13T11:51:22+00:00",
+              "product_name" : "Sweatshirt - dark blue",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            }
+          ],
+          "sku" : [
+            "ZO0317403174",
+            "ZO0457204572"
+          ],
+          "taxful_total_price" : 45.98,
+          "taxless_total_price" : 45.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "wagdi",
+          "geoip" : {
+            "country_iso_code" : "SA",
+            "location" : {
+              "lon" : 45,
+              "lat" : 25
+            },
+            "continent_name" : "Asia"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - dark blue"
+          ]
+        },
+        "sort" : [
+          "Williams"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "TjTHkY4Bo6y4JKDsGXr4",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Shoes",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Oliver",
+          "customer_full_name" : "Oliver Williams",
+          "customer_gender" : "MALE",
+          "customer_id" : 7,
+          "customer_last_name" : "Williams",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "oliver@williams-family.zzz",
+          "manufacturer" : [
+            "Angeldale",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-16T17:16:48+00:00",
+          "order_id" : 554054,
+          "products" : [
+            {
+              "base_price" : 84.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 21397,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0682906829",
+              "taxless_price" : 84.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 45.04,
+              "_id" : "sold_product_554054_21397",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-03T17:16:48+00:00",
+              "product_name" : "Lace-ups - black",
+              "price" : 84.99,
+              "taxful_price" : 84.99,
+              "base_unit_price" : 84.99
+            },
+            {
+              "base_price" : 22.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 24831,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0589205892",
+              "taxless_price" : 22.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.64,
+              "_id" : "sold_product_554054_24831",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-03T17:16:48+00:00",
+              "product_name" : "Sweatshirt - black/red",
+              "price" : 22.99,
+              "taxful_price" : 22.99,
+              "base_unit_price" : 22.99
+            }
+          ],
+          "sku" : [
+            "ZO0682906829",
+            "ZO0589205892"
+          ],
+          "taxful_total_price" : 107.98,
+          "taxless_total_price" : 107.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "oliver",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -0.1,
+              "lat" : 51.5
+            },
+            "continent_name" : "Europe"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - black/red"
+          ]
+        },
+        "sort" : [
+          "Williams"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "tjTHkY4Bo6y4JKDsJX-D",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Accessories",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Jim",
+          "customer_full_name" : "Jim Weber",
+          "customer_gender" : "MALE",
+          "customer_id" : 41,
+          "customer_last_name" : "Weber",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "jim@weber-family.zzz",
+          "manufacturer" : [
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-30T11:34:05+00:00",
+          "order_id" : 572706,
+          "products" : [
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 24085,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0596305963",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.06,
+              "_id" : "sold_product_572706_24085",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T11:34:05+00:00",
+              "product_name" : "Hat - navy/beige/ white",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            },
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 15303,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0584805848",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 10.7,
+              "_id" : "sold_product_572706_15303",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T11:34:05+00:00",
+              "product_name" : "Sweatshirt - blue",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            }
+          ],
+          "sku" : [
+            "ZO0596305963",
+            "ZO0584805848"
+          ],
+          "taxful_total_price" : 31.98,
+          "taxless_total_price" : 31.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "jim",
+          "geoip" : {
+            "country_iso_code" : "US",
+            "location" : {
+              "lon" : -74,
+              "lat" : 40.8
+            },
+            "region_name" : "New York",
+            "continent_name" : "North America",
+            "city_name" : "New York"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - blue"
+          ]
+        },
+        "sort" : [
+          "Weber"
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "0zTHkY4Bo6y4JKDsD3gI",
+        "_score" : null,
+        "_source" : {
+          "category" : [
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Abdulraheem Al",
+          "customer_full_name" : "Abdulraheem Al Weber",
+          "customer_gender" : "MALE",
+          "customer_id" : 33,
+          "customer_last_name" : "Weber",
+          "customer_phone" : "",
+          "day_of_week" : "Thursday",
+          "day_of_week_i" : 3,
+          "email" : "abdulraheem al@weber-family.zzz",
+          "manufacturer" : [
+            "Elitelligence",
+            "Oceanavigations"
+          ],
+          "order_date" : "2024-04-11T18:21:36+00:00",
+          "order_id" : 589135,
+          "products" : [
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 14314,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0594705947",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.87,
+              "_id" : "sold_product_589135_14314",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T18:21:36+00:00",
+              "product_name" : "Sweatshirt - dark grey",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            },
+            {
+              "base_price" : 22.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 12237,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0278202782",
+              "taxless_price" : 22.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 11.04,
+              "_id" : "sold_product_589135_12237",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T18:21:36+00:00",
+              "product_name" : "SUPER SLIM - Formal shirt - black",
+              "price" : 22.99,
+              "taxful_price" : 22.99,
+              "base_unit_price" : 22.99
+            }
+          ],
+          "sku" : [
+            "ZO0594705947",
+            "ZO0278202782"
+          ],
+          "taxful_total_price" : 43.98,
+          "taxless_total_price" : 43.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "abdulraheem",
+          "geoip" : {
+            "country_iso_code" : "AE",
+            "location" : {
+              "lon" : 54.4,
+              "lat" : 24.5
+            },
+            "region_name" : "Abu Dhabi",
+            "continent_name" : "Asia",
+            "city_name" : "Abu Dhabi"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Sweatshirt<b> - dark grey"
+          ]
+        },
+        "sort" : [
+          "Weber"
+        ]
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
