@@ -1129,6 +1129,7 @@ CONSOLE OUTPUT
 --------------------
 CONSOLE OUTPUT ENDS
 --------------------
+# if we get rid of the descending order, the default search--or sort, rather-- is going to be ascending. So, we can search for multiple things like in this case customer's last and first name.
 GET ecommerce/_search
 {
   "query": {
