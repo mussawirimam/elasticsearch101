@@ -1,0 +1,31 @@
+PAGINATE:
+---------
+Split search results into discrete pages.
+Having too many search results displayed at once can be overwhelming.
+More often than not, what you actually care about is on the first page.
+
+--------------------------------------------------------------------------------------------------
+
+Nov 10, 2021 @ 11:50:13.000     AvgTicketPrice: 274.574 Cancelled: false Carrier: ES-Air 
+                                dayOfWeek: 2 Dest: Verona Villafranca Airport
+                                DestAirportID: VR10 DestCityName: Verona
+                                DestCountry: IT DestLocation: ( "coordinates": [ 10.8885,
+                                45.395699 ], "type": "Point" ) DestRegion: IT-34
+--------------------------------------------------------------------------------------------------
+Nov 10, 2021 @ 11:49:55.000     AvgTicketPrice: 494.31 Cancelled: false Carrier: Logstash
+                                Airways dayOfWeek: 2 Dest: Mariscal Sucre International
+                                Airport DestAirportID: UIO DestCityName: Quito
+                                DestCountry: EC DestLocation: "coordinates": [-78.3575,
+                                -0.129166667 1, "type": "Point" ) DestRegion: EC-P
+                                                                        1-50 of 2157 <>
+--------------------------------------------------------------------------------------------------
+
+all we really care about is that first page,
+and having too many search results displayed at once
+can really be quite overwhelming.
+So it helps to show the first page
+of the most relevant search results and still
+give the option to page through more results if you need to.
+But 9 times out of 10, really,
+you're going to find what you're looking for
+in that first page.
