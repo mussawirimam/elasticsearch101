@@ -6,6 +6,11 @@ Simplify data referencing.
 
 Search across multiple indices with ease by assigning meaningful aliases to indices manually or automatically using index or component templates.
 Note: index alias is to be used for calling the index with much more simpler name or the alternative name
+
+Aliases is just a way to simplify
+how we reference our data in Elasticsearch
+by assigning an alias to one or more indices,
+to quickly reference what we care about.
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡶⠟⠛⠛⠉⠉⠛⠛⠿⢶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -54,4 +59,413 @@ Note: index alias is to be used for calling the index with much more simpler nam
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠣⠀⠀⠀⠀⠀⠀⠀⣰⠩⢠⠀⠇⣤⢻⠠⣤⣠⣿⠿⠟⠛⠛⠛⠛⠻⠷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠣⠀⠀⠀⠀⠀⠀⠀⣰⠩⢠⠀⠇⣤⢻⠠⣤⣠⣿⠿⠟⠛⠛⠛⠛⠻⠷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+
+
+
+GET ecommerce
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "kibana_sample_data_ecommerce" : {    the index name is actually "kibana_sample_data_ecommerce" but the alias is ecommerce for the ease of calling the ecommerce index
+    "aliases" : {    <----------------------------------------<<
+      "ecommerce" : { }    <----------------------------------------<<
+    },
+    "mappings" : {
+      "properties" : {
+        "category" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "currency" : {
+          "type" : "keyword"
+        },
+        "customer_birth_date" : {
+          "type" : "date"
+        },
+        "customer_first_name" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+#to add or to remove the alias
+POST _aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "kibana_sample_data_ecommerce",
+        "alias": "sample_data"
+      }
+    },
+    {
+      "remove": {
+        "index": "kibana_sample_data_ecommerce",
+        "alias": "ecommerce"
+      }
+    }
+  ]
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "acknowledged" : true
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+GET sample_data
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "kibana_sample_data_ecommerce" : {
+    "aliases" : {
+      "sample_data" : { }    <----------------------------------------<< alias has been changed to sample_data from ecommerce now
+    },
+    "mappings" : {
+      "properties" : {
+        "category" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword"
+            }
+          }
+        },
+        "currency" : {
+          "type" : "keyword"
+        },
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+#to add or to remove the alias
+POST _aliases
+{
+  "actions": [
+    {
+      "remove": {
+        "index": "kibana_sample_data_ecommerce",
+        "alias": "sample_data"
+      }
+    },
+    {
+      "add": {
+        "index": "kibana_sample_data_ecommerce",
+        "alias": "ecommerce"
+      }
+    }
+  ]
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "acknowledged" : true
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+GET ecommerce
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "kibana_sample_data_ecommerce" : {
+    "aliases" : {
+      "ecommerce" : { }    <----------------------------------------<< aliases is added back to ecommerce and alias sample_data is removed
+    },
+    "mappings" : {
+      "properties" : {
+        "category" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword"
+            }
+          }
+--------------------
+CONSOLE OUTPUT 
+--------------------
+
+NOTE:
+    you can add as many add or remove actions as you want
+and execute them all at the same time.
+All right, so this is one way to add an alias to an index
+using the aliases' API.
+The other way is through (component templates)
+and (index templates.)
+------------------------------------------------------------------------------
+#The other way is through component templates
+#and index templates
+
+PUT _component_template/courses
+{
+  "template": {
+    "aliases": {
+      "courses": {}
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "acknowledged" : true
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+PUT _index_template/elastic_stack
+{
+  "index_patterns": ["es-*"],
+  "composed_of":["courses"],
+  "template": {
+    "aliases": {
+      "elastic_stack": {},
+      "elasticsearch_101": {
+        "filter": {
+          "term": {
+            "course_name.keyword": "Elasticsearch 101"
+          }
+        }
+      }  
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "acknowledged" : true
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+POST es-elasticsearch_101/_doc
+{
+  "course_name": "Elasticsearch 101"
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+#we get the elasticsearch 101 and 102 
+{
+  "_index" : "es-elasticsearch_101",
+  "_type" : "_doc",
+  "_id" : "bBsGso8BuZ9_ztAg9skr",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 0,
+  "_primary_term" : 1
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+POST es-elasticsearch_101/_doc
+{
+  "course_name": "Elasticsearch 102"
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "_index" : "es-elasticsearch_101",
+  "_type" : "_doc",
+  "_id" : "uBsHso8BuZ9_ztAgjcll",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 1,
+  "_primary_term" : 1
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#NOW SEE HOW WE CAN REFERENCE THIS DATA NOW
+GET courses/_search
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 515,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "es-elasticsearch_101",
+        "_type" : "_doc",
+        "_id" : "bBsGso8BuZ9_ztAg9skr",
+        "_score" : 1.0,
+        "_source" : {
+          "course_name" : "Elasticsearch 101"    <----------------------------------------<<
+        }
+      },
+      {
+        "_index" : "es-elasticsearch_101",
+        "_type" : "_doc",
+        "_id" : "uBsHso8BuZ9_ztAgjcll",
+        "_score" : 1.0,
+        "_source" : {
+          "course_name" : "Elasticsearch 102"    <----------------------------------------<<
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#we will get same two results for elasticsearch 101 and 102
+GET elastic_stack/_search
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 0,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "es-elasticsearch_101",
+        "_type" : "_doc",
+        "_id" : "bBsGso8BuZ9_ztAg9skr",
+        "_score" : 1.0,
+        "_source" : {
+          "course_name" : "Elasticsearch 101"    <----------------------------------------<<
+        }
+      },
+      {
+        "_index" : "es-elasticsearch_101",
+        "_type" : "_doc",
+        "_id" : "uBsHso8BuZ9_ztAgjcll",
+        "_score" : 1.0,
+        "_source" : {
+          "course_name" : "Elasticsearch 102"    <----------------------------------------<<
+        }
+      }
+    ]
+  }
+}
+
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+# now we are getting only one search result for the elasticsearch 101
+GET elasticsearch_101/_search
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "es-elasticsearch_101",
+        "_type" : "_doc",
+        "_id" : "bBsGso8BuZ9_ztAg9skr",
+        "_score" : 1.0,
+        "_source" : {
+          "course_name" : "Elasticsearch 101" <----------------------------------------<< because this Now we're only getting one of those courses, the Elasticsearch 101 course, because this a filtered alias here.
+        }
+      }
+    ]
+  }
+}
+
+
+######################################
+PUT _index_template/elastic_stack
+{
+  "index_patterns": ["es-*"],
+  "composed_of":["courses"],
+  "template": {
+    "aliases": {
+      "elastic_stack": {},
+      "elasticsearch_101": {
+        "filter": {          <----------------------------------------<< because this Now we're only getting one of those courses, the Elasticsearch 101 course, because this a filtered alias here.
+          "term": {
+            "course_name.keyword": "Elasticsearch 101"
+          }
+        }
+      }  
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
