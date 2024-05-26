@@ -1,0 +1,50 @@
+Explicit Mapping:
+-----------------
+Manually define the fields and data types.
+1) Determine which string fields are analyzed.
+2) Define which numbers should be integers, floats, percents, etc.
+3) Customize the date format for date fields.
+------------------------------------------
+Sample:
+-------
+"kibana_sample_data_flights" : {
+  "mappings" : {
+    "properties" : {
+      "AvgTicketPrice" : {
+        "type" : "float"
+      }，
+      "Cancelled" : {
+        "type" : "boolean"
+      },
+      "Carrier" {
+        "type" : "keyword"
+      }，
+      "Dest" : {
+        "type" : "keyword"
+      },
+      "DistanceKilometers" : {
+        "type" : "float"
+      }，
+...
+------------------------------------------
+
+-----------------
+CONSOLE OUT ENDS
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+-----------------
+CONSOLE OUT ENDS
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+-----------------
+CONSOLE OUT ENDS
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
