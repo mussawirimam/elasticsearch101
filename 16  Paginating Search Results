@@ -33,7 +33,7 @@ in that first page.
 --------------------------------------------------------------------------------------------------
 GET ecommerce/_search
 {
-  "from: 20, <------------------------<< will get next 20th results (multiply by the size parameter to paginate search results)
+  "from": 20, <------------------------<< will get next 20th results (multiply by the size parameter to paginate search results)
   "size": 20, <------------------------------------------------<< will get top 20 search result
   "query": {
     "match": {
