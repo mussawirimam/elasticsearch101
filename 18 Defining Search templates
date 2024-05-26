@@ -2,6 +2,21 @@ Search Templates
 Reusable parameterized queries.
 When using Elasticsearch as a backend for a search application, search templates enable you to pass user inputs to your search without exposing the whole query.
 
+Search templates in Elasticsearch
+is probably the most important feature
+when developing a search application,
+because (you need some way to create
+a reusable and parameterized query)
+so that your search application
+doesn't actually have to craft these queries
+over and over again with different inputs.
+
+Instead, you can create
+a search template up front in Elasticsearch,
+(parameterize that template out
+so that your search application,
+all it has to do is just pass in the variables or parameters
+and let Elasticsearch create the query for you.)
 
 
  ------------  ------------------------
