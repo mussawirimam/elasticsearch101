@@ -34,3 +34,1957 @@ and let Elasticsearch create the query for you.)
  ------------  -----------------------
 | Phone Number| | 1+(234)-567-8900    |
  ------------  -----------------------
+
+#we have to parameterized it
+PUT _scripts/ecommerce_template
+{
+  "script": {
+    "lang": "mustache",
+    "source": {
+      "from": "{{from}}",
+      "size": "{{size}}",
+      "query": {
+        "match": {
+          "products.product_name": "{{product_name}}"
+        }
+      },
+      "highlight": {
+        "pre_tags": "<b>",
+        "post_tags": "<b>",
+        "fields": {
+          "products.product_name": {}
+        }
+      },
+      "sort": [
+        {
+          "customer_last_name.keyword": {}
+        },
+        {
+          "customer_first_name.keyword": {}
+        },
+        {
+          "products.price": {
+            "mode": "avg",
+            "order": "asc"
+          }
+        },
+        "_score"
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "acknowledged" : true
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#now, we can render our template to basically test it out. 
+POST _render/template        <----------------------<< you wont have to write the whole query again and again, all you just need to do is enter the parameters and it will give you the search results based on the search template from the script
+{
+  "id": "ecommerce_template",        <----------------------<< is the name of the script name 
+  "params": {
+    "from": 0,
+    "size": 10,
+    "product_name": "boots"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "template_output" : {
+    "from" : "0",
+    "size" : "10",            <----------------------<< 
+    "query" : {
+      "match" : {
+        "products.product_name" : "boots"
+      }
+    },
+    "highlight" : {
+      "pre_tags" : "<b>",
+      "post_tags" : "<b>",
+      "fields" : {
+        "products.product_name" : { }
+      }
+    },
+    "sort" : [
+      {
+        "customer_last_name.keyword" : { }
+      },
+      {
+        "customer_first_name.keyword" : { }
+      },
+      {
+        "products.price" : {
+          "mode" : "avg",
+          "order" : "asc"
+        }
+      },
+      "_score"
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#now, we can render our template to basically test it out. 
+POST _render/template
+{
+  "id": "ecommerce_template",
+  "params": {
+    "from": 0,
+    "size": 25,
+    "product_name": "boots"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "template_output" : {
+    "from" : "0",
+    "size" : "25",        <----------------------<<
+    "query" : {
+      "match" : {
+        "products.product_name" : "boots"
+      }
+    },
+    "highlight" : {
+      "pre_tags" : "<b>",
+      "post_tags" : "<b>",
+      "fields" : {
+        "products.product_name" : { }
+      }
+    },
+    "sort" : [
+      {
+        "customer_last_name.keyword" : { }
+      },
+      {
+        "customer_first_name.keyword" : { }
+      },
+      {
+        "products.price" : {
+          "mode" : "avg",
+          "order" : "asc"
+        }
+      },
+      "_score"
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#from an application.
+#One more thing I want to show here is,
+#what happens if we don't pass in a parameter?
+#If we just don't do the "from" and "size" here?
+#You can see that there are currently no values.
+#Now, that is not good.
+#Elasticsearch is not going to like that.
+#What we want to do is actually establish
+#a default value for these 2 parameters.
+#Down here in our script,
+#we have the from parameter here. 
+POST _render/template
+{
+  "id": "ecommerce_template",
+  "params": {
+    "product_name": "boots"
+  }
+}
+
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "template_output" : {
+    "from" : "",        <----------------------------<<
+    "size" : "",        <----------------------------<<
+    "query" : {
+      "match" : {
+        "products.product_name" : "boots"
+      }
+    },
+    "highlight" : {
+      "pre_tags" : "<b>",
+      "post_tags" : "<b>",
+      "fields" : {
+        "products.product_name" : { }
+      }
+    },
+    "sort" : [
+      {
+        "customer_last_name.keyword" : { }
+      },
+      {
+        "customer_first_name.keyword" : { }
+      },
+      {
+        "products.price" : {
+          "mode" : "avg",
+          "order" : "asc"
+        }
+      },
+      "_score"
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+        What we want to do is actually establish
+a default value for these 2 parameters.
+Down here in our script,
+we have the from parameter here.
+I'm going to add a default value of from to 0.
+What we're going to do here is the Mustache syntax again,
+but now we're going to add this little ^ (or circumflex).
+Then we're going to do from,
+so the name of the parameter again.
+Then we can specify the default value, 0.
+And we'll do another Mustache syntax here,
+/from, the name of the parameter, and then close that out.
+Now, here we have this default value
+wrapped in the parameter name,
+but it starts with the ^ and it ends with a /.
+We're going to do the same thing for size.
+If you do size and the default value here,
+we're going to just do--let's just do 15.
+And then {{/size.
+Let's just go ahead and PUT this.
+#we have to parameterized it
+# adding default value
+
+PUT _scripts/ecommerce_template
+{
+  "script": {
+    "lang": "mustache",
+    "source": {
+      "from": "{{from}}{{^from}}0{{/from}}",
+      "size": "{{size}}{{^size}}15{{/size}}",
+      "query": {
+        "match": {
+          "products.product_name": "{{product_name}}"
+        }
+      },
+      "highlight": {
+        "pre_tags": "<b>",
+        "post_tags": "<b>",
+        "fields": {
+          "products.product_name": {}
+        }
+      },
+      "sort": [
+        {
+          "customer_last_name.keyword": {}
+        },
+        {
+          "customer_first_name.keyword": {}
+        },
+        {
+          "products.price": {
+            "mode": "avg",
+            "order": "asc"
+          }
+        },
+        "_score"
+      ]
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+{
+  "acknowledged" : true
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+        Now if we render this out
+with no size and from parameters,
+we can see that these default values have populated.
+That's how we can create default values
+in our search template.
+
+POST _render/template
+{
+  "id": "ecommerce_template",
+  "params": {
+    "product_name": "boots"
+  }
+}
+
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+{
+  "template_output" : {
+    "from" : "0",          <----------------------<< # default value added from script
+    "size" : "15",          <----------------------<<  # default value added from script
+    "query" : {
+      "match" : {
+        "products.product_name" : "boots"
+      }
+    },
+    "highlight" : {
+      "pre_tags" : "<b>",
+      "post_tags" : "<b>",
+      "fields" : {
+        "products.product_name" : { }
+      }
+    },
+    "sort" : [
+      {
+        "customer_last_name.keyword" : { }
+      },
+      {
+        "customer_first_name.keyword" : { }
+      },
+      {
+        "products.price" : {
+          "mode" : "avg",
+          "order" : "asc"
+        }
+      },
+      "_score"
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+    Now if we render this out
+with no size and from parameters,
+we can see that these default values have populated.
+That's how we can create default values
+in our search template.
+Now, how do we actually use the search template?
+Okay, here we can do a GET on ecommerce,
+search, just like normal. But this time
+we're going to add another path here: template.
+We'll specify the ID of the search template--
+that's just the name we gave it: ecommerce_template.
+I'll just copy and paste that here.
+Then we can pass in our parameters.
+Params, and I'm just going to do product name is--
+let's see--belt.
+There we go, we've got the top 15 hits,
+because we didn't pass in a size and the default size is 15.
+We've got the first page of results
+because our default from is 0.
+And all of these search results have a product
+that was sold with the term "belt" in there somewhere.
+Okay. There's belt.
+We can see that all of our highlighting
+and sorting is still functioning that we have down there.
+Now, if I wanted the second page of results,
+I don't have to craft a big query.
+I can just do from 15,
+and there's the second page.
+This is all my search application has to create
+and pass to Elasticsearch,
+and Elasticsearch is doing all of this for us
+each time we execute that search.
+
+GET ecommerce/_search/template
+{
+  "id": "ecommerce_template",
+  "params": {
+    "product_name": "belt"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 474,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 141,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "PDTHkY4Bo6y4JKDsNoRk",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Women's Accessories",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Hicham",
+          "customer_full_name" : "Hicham Abbott",
+          "customer_gender" : "MALE",
+          "customer_id" : 8,
+          "customer_last_name" : "Abbott",
+          "customer_phone" : "",
+          "day_of_week" : "Friday",
+          "day_of_week_i" : 4,
+          "email" : "hicham@abbott-family.zzz",
+          "manufacturer" : [
+            "Oceanavigations",
+            "Low Tide Media"
+          ],
+          "order_date" : "2024-03-22T15:34:34+00:00",
+          "order_id" : 562099,
+          "products" : [
+            {
+              "base_price" : 13.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 18906,
+              "category" : "Women's Accessories",
+              "sku" : "ZO0317903179",
+              "taxless_price" : 13.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 6.58,
+              "_id" : "sold_product_562099_18906",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-09T15:34:34+00:00",
+              "product_name" : "Belt - black",
+              "price" : 13.99,
+              "taxful_price" : 13.99,
+              "base_unit_price" : 13.99
+            },
+            {
+              "base_price" : 16.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 21672,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0443904439",
+              "taxless_price" : 16.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.01,
+              "_id" : "sold_product_562099_21672",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-09T15:34:34+00:00",
+              "product_name" : "Polo shirt - black multicolor",
+              "price" : 16.99,
+              "taxful_price" : 16.99,
+              "base_unit_price" : 16.99
+            }
+          ],
+          "sku" : [
+            "ZO0317903179",
+            "ZO0443904439"
+          ],
+          "taxful_total_price" : 30.98,
+          "taxless_total_price" : 30.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "hicham",
+          "geoip" : {
+            "country_iso_code" : "MA",
+            "location" : {
+              "lon" : -8,
+              "lat" : 31.6
+            },
+            "region_name" : "Marrakech-Tensift-Al Haouz",
+            "continent_name" : "Africa",
+            "city_name" : "Marrakesh"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Abbott",
+          "Hicham",
+          15.488281,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "qDTHkY4Bo6y4JKDsB3bU",
+        "_score" : 4.0183105,
+        "_source" : {
+          "category" : [
+            "Women's Clothing",
+            "Women's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Elyssa",
+          "customer_full_name" : "Elyssa Adams",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 27,
+          "customer_last_name" : "Adams",
+          "customer_phone" : "",
+          "day_of_week" : "Tuesday",
+          "day_of_week_i" : 1,
+          "email" : "elyssa@adams-family.zzz",
+          "manufacturer" : [
+            "Oceanavigations",
+            "Angeldale"
+          ],
+          "order_date" : "2024-03-19T06:05:46+00:00",
+          "order_id" : 557466,
+          "products" : [
+            {
+              "base_price" : 43.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 25011,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0259102591",
+              "taxless_price" : 43.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 24.19,
+              "_id" : "sold_product_557466_25011",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-06T06:05:46+00:00",
+              "product_name" : "Trousers - blue",
+              "price" : 43.99,
+              "taxful_price" : 43.99,
+              "base_unit_price" : 43.99
+            },
+            {
+              "base_price" : 14.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 17425,
+              "category" : "Women's Accessories",
+              "sku" : "ZO0695706957",
+              "taxless_price" : 14.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 7.35,
+              "_id" : "sold_product_557466_17425",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-06T06:05:46+00:00",
+              "product_name" : "Belt - Floral White",
+              "price" : 14.99,
+              "taxful_price" : 14.99,
+              "base_unit_price" : 14.99
+            }
+          ],
+          "sku" : [
+            "ZO0259102591",
+            "ZO0695706957"
+          ],
+          "taxful_total_price" : 58.98,
+          "taxless_total_price" : 58.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "elyssa",
+          "geoip" : {
+            "country_iso_code" : "US",
+            "location" : {
+              "lon" : -74,
+              "lat" : 40.8
+            },
+            "region_name" : "New York",
+            "continent_name" : "North America",
+            "city_name" : "New York"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - Floral White"
+          ]
+        },
+        "sort" : [
+          "Adams",
+          "Elyssa",
+          29.496094,
+          4.0183105
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "YTTHkY4Bo6y4JKDsKYHx",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Irwin",
+          "customer_full_name" : "Irwin Adams",
+          "customer_gender" : "MALE",
+          "customer_id" : 14,
+          "customer_last_name" : "Adams",
+          "customer_phone" : "",
+          "day_of_week" : "Tuesday",
+          "day_of_week_i" : 1,
+          "email" : "irwin@adams-family.zzz",
+          "manufacturer" : [
+            "Angeldale",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-04-02T06:46:05+00:00",
+          "order_id" : 576401,
+          "products" : [
+            {
+              "base_price" : 16.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 24902,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0700507005",
+              "taxless_price" : 16.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 8.66,
+              "_id" : "sold_product_576401_24902",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-20T06:46:05+00:00",
+              "product_name" : "Belt business - cognac",
+              "price" : 16.99,
+              "taxful_price" : 16.99,
+              "base_unit_price" : 16.99
+            },
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 11309,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0596205962",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.06,
+              "_id" : "sold_product_576401_11309",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-20T06:46:05+00:00",
+              "product_name" : "Hat - sand/black",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            }
+          ],
+          "sku" : [
+            "ZO0700507005",
+            "ZO0596205962"
+          ],
+          "taxful_total_price" : 27.98,
+          "taxless_total_price" : 27.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "irwin",
+          "geoip" : {
+            "country_iso_code" : "CO",
+            "location" : {
+              "lon" : -74.1,
+              "lat" : 4.6
+            },
+            "region_name" : "Bogota D.C.",
+            "continent_name" : "South America",
+            "city_name" : "Bogotu00e1"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> business - cognac"
+          ]
+        },
+        "sort" : [
+          "Adams",
+          "Irwin",
+          13.988281,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "vDTHkY4Bo6y4JKDsD3gI",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Men's Shoes",
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Oliver",
+          "customer_full_name" : "Oliver Allison",
+          "customer_gender" : "MALE",
+          "customer_id" : 7,
+          "customer_last_name" : "Allison",
+          "customer_phone" : "",
+          "day_of_week" : "Sunday",
+          "day_of_week_i" : 6,
+          "email" : "oliver@allison-family.zzz",
+          "manufacturer" : [
+            "Elitelligence",
+            "Microlutions"
+          ],
+          "order_date" : "2024-03-17T03:57:36+00:00",
+          "order_id" : 554653,
+          "products" : [
+            {
+              "base_price" : 28.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 21267,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0505805058",
+              "taxless_price" : 28.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 13.34,
+              "_id" : "sold_product_554653_21267",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-04T03:57:36+00:00",
+              "product_name" : "Casual lace-ups - black",
+              "price" : 28.99,
+              "taxful_price" : 28.99,
+              "base_unit_price" : 28.99
+            },
+            {
+              "base_price" : 9.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Microlutions",
+              "tax_amount" : 0,
+              "product_id" : 17815,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0126501265",
+              "taxless_price" : 9.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.39,
+              "_id" : "sold_product_554653_17815",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-04T03:57:36+00:00",
+              "product_name" : "Belt - black",
+              "price" : 9.99,
+              "taxful_price" : 9.99,
+              "base_unit_price" : 9.99
+            }
+          ],
+          "sku" : [
+            "ZO0505805058",
+            "ZO0126501265"
+          ],
+          "taxful_total_price" : 38.98,
+          "taxless_total_price" : 38.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "oliver",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -0.1,
+              "lat" : 51.5
+            },
+            "continent_name" : "Europe"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Allison",
+          "Oliver",
+          19.488281,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "KzTHkY4Bo6y4JKDsD3kI",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Phil",
+          "customer_full_name" : "Phil Alvarez",
+          "customer_gender" : "MALE",
+          "customer_id" : 50,
+          "customer_last_name" : "Alvarez",
+          "customer_phone" : "",
+          "day_of_week" : "Tuesday",
+          "day_of_week_i" : 1,
+          "email" : "phil@alvarez-family.zzz",
+          "manufacturer" : [
+            "Low Tide Media",
+            "Angeldale"
+          ],
+          "order_date" : "2024-03-26T11:08:10+00:00",
+          "order_id" : 567256,
+          "products" : [
+            {
+              "base_price" : 14.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 24717,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0461004610",
+              "taxless_price" : 14.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 7.79,
+              "_id" : "sold_product_567256_24717",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-13T11:08:10+00:00",
+              "product_name" : "Belt - dark brown ",
+              "price" : 14.99,
+              "taxful_price" : 14.99,
+              "base_unit_price" : 14.99
+            },
+            {
+              "base_price" : 49.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 23939,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0702707027",
+              "taxless_price" : 49.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 24.5,
+              "_id" : "sold_product_567256_23939",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-13T11:08:10+00:00",
+              "product_name" : "Weekend bag - black",
+              "price" : 49.99,
+              "taxful_price" : 49.99,
+              "base_unit_price" : 49.99
+            }
+          ],
+          "sku" : [
+            "ZO0461004610",
+            "ZO0702707027"
+          ],
+          "taxful_total_price" : 64.98,
+          "taxless_total_price" : 64.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "phil",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -0.1,
+              "lat" : 51.5
+            },
+            "continent_name" : "Europe"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - dark brown"
+          ]
+        },
+        "sort" : [
+          "Alvarez",
+          "Phil",
+          32.496094,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "sjTHkY4Bo6y4JKDsAHSc",
+        "_score" : 3.1968966,
+        "_source" : {
+          "category" : [
+            "Women's Clothing",
+            "Women's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Mary",
+          "customer_full_name" : "Mary Bailey",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 20,
+          "customer_last_name" : "Bailey",
+          "customer_phone" : "",
+          "day_of_week" : "Thursday",
+          "day_of_week_i" : 3,
+          "email" : "mary@bailey-family.zzz",
+          "manufacturer" : [
+            "Tigress Enterprises",
+            "Pyramidustries"
+          ],
+          "order_date" : "2024-04-11T08:26:53+00:00",
+          "order_id" : 588615,
+          "products" : [
+            {
+              "base_price" : 41.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Tigress Enterprises",
+              "tax_amount" : 0,
+              "product_id" : 25123,
+              "category" : "Women's Clothing",
+              "sku" : "ZO0045600456",
+              "taxless_price" : 41.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 19.32,
+              "_id" : "sold_product_588615_25123",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T08:26:53+00:00",
+              "product_name" : "Jersey dress - peacoat/orange",
+              "price" : 41.99,
+              "taxful_price" : 41.99,
+              "base_unit_price" : 41.99
+            },
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Pyramidustries",
+              "tax_amount" : 0,
+              "product_id" : 24217,
+              "category" : "Women's Accessories",
+              "sku" : "ZO0187801878",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.6,
+              "_id" : "sold_product_588615_24217",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T08:26:53+00:00",
+              "product_name" : "Waist belt - rose gold-coloured",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            }
+          ],
+          "sku" : [
+            "ZO0045600456",
+            "ZO0187801878"
+          ],
+          "taxful_total_price" : 52.98,
+          "taxless_total_price" : 52.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "mary",
+          "geoip" : {
+            "country_iso_code" : "AE",
+            "location" : {
+              "lon" : 55.3,
+              "lat" : 25.3
+            },
+            "region_name" : "Dubai",
+            "continent_name" : "Asia",
+            "city_name" : "Dubai"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "Waist <b>belt<b> - rose gold-coloured"
+          ]
+        },
+        "sort" : [
+          "Bailey",
+          "Mary",
+          26.496094,
+          3.1968966
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "8TTHkY4Bo6y4JKDsGXv4",
+        "_score" : 4.0183105,
+        "_source" : {
+          "category" : [
+            "Men's Shoes",
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Jim",
+          "customer_full_name" : "Jim Baker",
+          "customer_gender" : "MALE",
+          "customer_id" : 41,
+          "customer_last_name" : "Baker",
+          "customer_phone" : "",
+          "day_of_week" : "Wednesday",
+          "day_of_week_i" : 2,
+          "email" : "jim@baker-family.zzz",
+          "manufacturer" : [
+            "Low Tide Media",
+            "Angeldale"
+          ],
+          "order_date" : "2024-04-10T22:27:50+00:00",
+          "order_id" : 588043,
+          "products" : [
+            {
+              "base_price" : 49.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 2269,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0406604066",
+              "taxless_price" : 49.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 23.01,
+              "_id" : "sold_product_588043_2269",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T22:27:50+00:00",
+              "product_name" : "Boots - Slate Gray",
+              "price" : 49.99,
+              "taxful_price" : 49.99,
+              "base_unit_price" : 49.99
+            },
+            {
+              "base_price" : 17.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 19655,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0700707007",
+              "taxless_price" : 17.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 8.28,
+              "_id" : "sold_product_588043_19655",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T22:27:50+00:00",
+              "product_name" : "Belt - black",
+              "price" : 17.99,
+              "taxful_price" : 17.99,
+              "base_unit_price" : 17.99
+            }
+          ],
+          "sku" : [
+            "ZO0406604066",
+            "ZO0700707007"
+          ],
+          "taxful_total_price" : 67.98,
+          "taxless_total_price" : 67.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "jim",
+          "geoip" : {
+            "country_iso_code" : "US",
+            "location" : {
+              "lon" : -74,
+              "lat" : 40.8
+            },
+            "region_name" : "New York",
+            "continent_name" : "North America",
+            "city_name" : "New York"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Baker",
+          "Jim",
+          33.992188,
+          4.0183105
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "RzTHkY4Bo6y4JKDsB3bU",
+        "_score" : 3.5608468,
+        "_source" : {
+          "category" : [
+            "Men's Clothing",
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Abd",
+          "customer_full_name" : "Abd Ball",
+          "customer_gender" : "MALE",
+          "customer_id" : 52,
+          "customer_last_name" : "Ball",
+          "customer_phone" : "",
+          "day_of_week" : "Tuesday",
+          "day_of_week_i" : 1,
+          "email" : "abd@ball-family.zzz",
+          "manufacturer" : [
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-19T23:05:17+00:00",
+          "order_id" : 558486,
+          "products" : [
+            {
+              "base_price" : 20.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 20093,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0530205302",
+              "taxless_price" : 20.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 9.66,
+              "_id" : "sold_product_558486_20093",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-06T23:05:17+00:00",
+              "product_name" : "Tracksuit bottoms - mottled light grey",
+              "price" : 20.99,
+              "taxful_price" : 20.99,
+              "base_unit_price" : 20.99
+            },
+            {
+              "base_price" : 11.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 20767,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0598505985",
+              "taxless_price" : 11.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.52,
+              "_id" : "sold_product_558486_20767",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-06T23:05:17+00:00",
+              "product_name" : "Belt - black ",
+              "price" : 11.99,
+              "taxful_price" : 11.99,
+              "base_unit_price" : 11.99
+            }
+          ],
+          "sku" : [
+            "ZO0530205302",
+            "ZO0598505985"
+          ],
+          "taxful_total_price" : 32.98,
+          "taxless_total_price" : 32.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "abd",
+          "geoip" : {
+            "country_iso_code" : "EG",
+            "location" : {
+              "lon" : 31.3,
+              "lat" : 30.1
+            },
+            "region_name" : "Cairo Governorate",
+            "continent_name" : "Africa",
+            "city_name" : "Cairo"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Ball",
+          "Abd",
+          16.488281,
+          3.5608468
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "uDTHkY4Bo6y4JKDsIHwt",
+        "_score" : 4.2941465,
+        "_source" : {
+          "category" : [
+            "Women's Accessories",
+            "Women's Shoes"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Abigail",
+          "customer_full_name" : "Abigail Banks",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 46,
+          "customer_last_name" : "Banks",
+          "customer_phone" : "",
+          "day_of_week" : "Monday",
+          "day_of_week_i" : 0,
+          "email" : "abigail@banks-family.zzz",
+          "manufacturer" : [
+            "Pyramidustries",
+            "Pyramidustries active"
+          ],
+          "order_date" : "2024-04-08T20:58:34+00:00",
+          "order_id" : 585317,
+          "products" : [
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Pyramidustries",
+              "tax_amount" : 0,
+              "product_id" : 12417,
+              "category" : "Women's Accessories",
+              "sku" : "ZO0187901879",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.17,
+              "_id" : "sold_product_585317_12417",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-26T20:58:34+00:00",
+              "product_name" : "Belt - grey",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            },
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Pyramidustries active",
+              "tax_amount" : 0,
+              "product_id" : 14508,
+              "category" : "Women's Shoes",
+              "sku" : "ZO0216102161",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 13.24,
+              "_id" : "sold_product_585317_14508",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-26T20:58:34+00:00",
+              "product_name" : "Trainers - mint",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            }
+          ],
+          "sku" : [
+            "ZO0187901879",
+            "ZO0216102161"
+          ],
+          "taxful_total_price" : 35.98,
+          "taxless_total_price" : 35.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "abigail",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -1.9,
+              "lat" : 52.5
+            },
+            "region_name" : "Birmingham",
+            "continent_name" : "Europe",
+            "city_name" : "Birmingham"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - grey"
+          ]
+        },
+        "sort" : [
+          "Banks",
+          "Abigail",
+          17.988281,
+          4.2941465
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "tDTHkY4Bo6y4JKDsNoRk",
+        "_score" : 4.0183105,
+        "_source" : {
+          "category" : [
+            "Men's Accessories",
+            "Men's Clothing"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Phil",
+          "customer_full_name" : "Phil Banks",
+          "customer_gender" : "MALE",
+          "customer_id" : 50,
+          "customer_last_name" : "Banks",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "phil@banks-family.zzz",
+          "manufacturer" : [
+            "Microlutions"
+          ],
+          "order_date" : "2024-03-30T02:18:14+00:00",
+          "order_id" : 572159,
+          "products" : [
+            {
+              "base_price" : 7.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Microlutions",
+              "tax_amount" : 0,
+              "product_id" : 17814,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0126401264",
+              "taxless_price" : 7.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 3.92,
+              "_id" : "sold_product_572159_17814",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T02:18:14+00:00",
+              "product_name" : "Belt - grey",
+              "price" : 7.99,
+              "taxful_price" : 7.99,
+              "base_unit_price" : 7.99
+            },
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Microlutions",
+              "tax_amount" : 0,
+              "product_id" : 21924,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0110101101",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 12.74,
+              "_id" : "sold_product_572159_21924",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T02:18:14+00:00",
+              "product_name" : "Shirt - dark grey",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            }
+          ],
+          "sku" : [
+            "ZO0126401264",
+            "ZO0110101101"
+          ],
+          "taxful_total_price" : 32.98,
+          "taxless_total_price" : 32.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "phil",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -0.1,
+              "lat" : 51.5
+            },
+            "continent_name" : "Europe"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - grey"
+          ]
+        },
+        "sort" : [
+          "Banks",
+          "Phil",
+          16.486328,
+          4.0183105
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "IDTHkY4Bo6y4JKDsMIMe",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Men's Accessories",
+            "Men's Shoes"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Robbie",
+          "customer_full_name" : "Robbie Barber",
+          "customer_gender" : "MALE",
+          "customer_id" : 48,
+          "customer_last_name" : "Barber",
+          "customer_phone" : "",
+          "day_of_week" : "Thursday",
+          "day_of_week_i" : 3,
+          "email" : "robbie@barber-family.zzz",
+          "manufacturer" : [
+            "Angeldale",
+            "Low Tide Media"
+          ],
+          "order_date" : "2024-04-11T06:40:19+00:00",
+          "order_id" : 588516,
+          "products" : [
+            {
+              "base_price" : 13.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Angeldale",
+              "tax_amount" : 0,
+              "product_id" : 15172,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0700207002",
+              "taxless_price" : 13.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 6.58,
+              "_id" : "sold_product_588516_15172",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T06:40:19+00:00",
+              "product_name" : "Belt - grey",
+              "price" : 13.99,
+              "taxful_price" : 13.99,
+              "base_unit_price" : 13.99
+            },
+            {
+              "base_price" : 41.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 1302,
+              "category" : "Men's Shoes",
+              "sku" : "ZO0385703857",
+              "taxless_price" : 41.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 22.25,
+              "_id" : "sold_product_588516_1302",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-29T06:40:19+00:00",
+              "product_name" : "Casual lace-ups - cement",
+              "price" : 41.99,
+              "taxful_price" : 41.99,
+              "base_unit_price" : 41.99
+            }
+          ],
+          "sku" : [
+            "ZO0700207002",
+            "ZO0385703857"
+          ],
+          "taxful_total_price" : 55.98,
+          "taxless_total_price" : 55.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "robbie",
+          "geoip" : {
+            "country_iso_code" : "AE",
+            "location" : {
+              "lon" : 55.3,
+              "lat" : 25.3
+            },
+            "region_name" : "Dubai",
+            "continent_name" : "Asia",
+            "city_name" : "Dubai"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - grey"
+          ]
+        },
+        "sort" : [
+          "Barber",
+          "Robbie",
+          27.996094,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "YTTHkY4Bo6y4JKDsAHSc",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Men's Clothing",
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Fitzgerald",
+          "customer_full_name" : "Fitzgerald Benson",
+          "customer_gender" : "MALE",
+          "customer_id" : 11,
+          "customer_last_name" : "Benson",
+          "customer_phone" : "",
+          "day_of_week" : "Saturday",
+          "day_of_week_i" : 5,
+          "email" : "fitzgerald@benson-family.zzz",
+          "manufacturer" : [
+            "Spritechnologies",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-30T07:10:34+00:00",
+          "order_id" : 572448,
+          "products" : [
+            {
+              "base_price" : 41.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Spritechnologies",
+              "tax_amount" : 0,
+              "product_id" : 24459,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0625906259",
+              "taxless_price" : 41.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 21.83,
+              "_id" : "sold_product_572448_24459",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T07:10:34+00:00",
+              "product_name" : "Soft shell jacket - black",
+              "price" : 41.99,
+              "taxful_price" : 41.99,
+              "base_unit_price" : 41.99
+            },
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 20769,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0598405984",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.82,
+              "_id" : "sold_product_572448_20769",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-17T07:10:34+00:00",
+              "product_name" : "Belt - black ",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            }
+          ],
+          "sku" : [
+            "ZO0625906259",
+            "ZO0598405984"
+          ],
+          "taxful_total_price" : 52.98,
+          "taxless_total_price" : 52.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "fuzzy",
+          "geoip" : {
+            "country_iso_code" : "US",
+            "location" : {
+              "lon" : -118.2,
+              "lat" : 34.1
+            },
+            "region_name" : "California",
+            "continent_name" : "North America",
+            "city_name" : "Los Angeles"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Benson",
+          "Fitzgerald",
+          26.496094,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "pTTHkY4Bo6y4JKDsGXv4",
+        "_score" : 3.5608468,
+        "_source" : {
+          "category" : [
+            "Women's Accessories",
+            "Women's Shoes"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Mary",
+          "customer_full_name" : "Mary Bowers",
+          "customer_gender" : "FEMALE",
+          "customer_id" : 20,
+          "customer_last_name" : "Bowers",
+          "customer_phone" : "",
+          "day_of_week" : "Monday",
+          "day_of_week_i" : 0,
+          "email" : "mary@bowers-family.zzz",
+          "manufacturer" : [
+            "Oceanavigations",
+            "Low Tide Media"
+          ],
+          "order_date" : "2024-04-08T20:49:55+00:00",
+          "order_id" : 585305,
+          "products" : [
+            {
+              "base_price" : 16.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 21286,
+              "category" : "Women's Accessories",
+              "sku" : "ZO0318203182",
+              "taxless_price" : 16.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 8.83,
+              "_id" : "sold_product_585305_21286",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-26T20:49:55+00:00",
+              "product_name" : "Belt - black",
+              "price" : 16.99,
+              "taxful_price" : 16.99,
+              "base_unit_price" : 16.99
+            },
+            {
+              "base_price" : 41.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Low Tide Media",
+              "tax_amount" : 0,
+              "product_id" : 20711,
+              "category" : "Women's Shoes",
+              "sku" : "ZO0372103721",
+              "taxless_price" : 41.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 21.41,
+              "_id" : "sold_product_585305_20711",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-26T20:49:55+00:00",
+              "product_name" : "High heeled sandals - light grey",
+              "price" : 41.99,
+              "taxful_price" : 41.99,
+              "base_unit_price" : 41.99
+            }
+          ],
+          "sku" : [
+            "ZO0318203182",
+            "ZO0372103721"
+          ],
+          "taxful_total_price" : 58.98,
+          "taxless_total_price" : 58.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "mary",
+          "geoip" : {
+            "country_iso_code" : "AE",
+            "location" : {
+              "lon" : 55.3,
+              "lat" : 25.3
+            },
+            "region_name" : "Dubai",
+            "continent_name" : "Asia",
+            "city_name" : "Dubai"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - black"
+          ]
+        },
+        "sort" : [
+          "Bowers",
+          "Mary",
+          29.492188,
+          3.5608468
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "vzTHkY4Bo6y4JKDsMIMe",
+        "_score" : 3.7757728,
+        "_source" : {
+          "category" : [
+            "Men's Clothing",
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "George",
+          "customer_full_name" : "George Brewer",
+          "customer_gender" : "MALE",
+          "customer_id" : 32,
+          "customer_last_name" : "Brewer",
+          "customer_phone" : "",
+          "day_of_week" : "Friday",
+          "day_of_week_i" : 4,
+          "email" : "george@brewer-family.zzz",
+          "manufacturer" : [
+            "Oceanavigations",
+            "Elitelligence"
+          ],
+          "order_date" : "2024-03-15T11:51:22+00:00",
+          "order_id" : 552408,
+          "products" : [
+            {
+              "base_price" : 24.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Oceanavigations",
+              "tax_amount" : 0,
+              "product_id" : 24171,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0279102791",
+              "taxless_price" : 24.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 13.49,
+              "_id" : "sold_product_552408_24171",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-02T11:51:22+00:00",
+              "product_name" : "Formal shirt - light grey",
+              "price" : 24.99,
+              "taxful_price" : 24.99,
+              "base_unit_price" : 24.99
+            },
+            {
+              "base_price" : 10.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 22465,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0598005980",
+              "taxless_price" : 10.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 5.6,
+              "_id" : "sold_product_552408_22465",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-02T11:51:22+00:00",
+              "product_name" : "Belt - navy",
+              "price" : 10.99,
+              "taxful_price" : 10.99,
+              "base_unit_price" : 10.99
+            }
+          ],
+          "sku" : [
+            "ZO0279102791",
+            "ZO0598005980"
+          ],
+          "taxful_total_price" : 35.98,
+          "taxless_total_price" : 35.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "george",
+          "geoip" : {
+            "country_iso_code" : "GB",
+            "location" : {
+              "lon" : -1.9,
+              "lat" : 52.5
+            },
+            "region_name" : "Birmingham",
+            "continent_name" : "Europe",
+            "city_name" : "Birmingham"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - navy"
+          ]
+        },
+        "sort" : [
+          "Brewer",
+          "George",
+          17.988281,
+          3.7757728
+        ]
+      },
+      {
+        "_index" : "kibana_sample_data_ecommerce",
+        "_type" : "_doc",
+        "_id" : "QTTHkY4Bo6y4JKDsB3bU",
+        "_score" : 4.0183105,
+        "_source" : {
+          "category" : [
+            "Men's Clothing",
+            "Men's Accessories"
+          ],
+          "currency" : "EUR",
+          "customer_first_name" : "Wagdi",
+          "customer_full_name" : "Wagdi Brewer",
+          "customer_gender" : "MALE",
+          "customer_id" : 15,
+          "customer_last_name" : "Brewer",
+          "customer_phone" : "",
+          "day_of_week" : "Wednesday",
+          "day_of_week_i" : 2,
+          "email" : "wagdi@brewer-family.zzz",
+          "manufacturer" : [
+            "Elitelligence"
+          ],
+          "order_date" : "2024-04-10T05:58:34+00:00",
+          "order_id" : 587115,
+          "products" : [
+            {
+              "base_price" : 11.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 11873,
+              "category" : "Men's Clothing",
+              "sku" : "ZO0569905699",
+              "taxless_price" : 11.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 6.35,
+              "_id" : "sold_product_587115_11873",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T05:58:34+00:00",
+              "product_name" : "Polo shirt - navy",
+              "price" : 11.99,
+              "taxful_price" : 11.99,
+              "base_unit_price" : 11.99
+            },
+            {
+              "base_price" : 11.99,
+              "discount_percentage" : 0,
+              "quantity" : 1,
+              "manufacturer" : "Elitelligence",
+              "tax_amount" : 0,
+              "product_id" : 18800,
+              "category" : "Men's Accessories",
+              "sku" : "ZO0598305983",
+              "taxless_price" : 11.99,
+              "unit_discount_amount" : 0,
+              "min_price" : 6.35,
+              "_id" : "sold_product_587115_18800",
+              "discount_amount" : 0,
+              "created_on" : "2016-12-28T05:58:34+00:00",
+              "product_name" : "Belt - brown",
+              "price" : 11.99,
+              "taxful_price" : 11.99,
+              "base_unit_price" : 11.99
+            }
+          ],
+          "sku" : [
+            "ZO0569905699",
+            "ZO0598305983"
+          ],
+          "taxful_total_price" : 23.98,
+          "taxless_total_price" : 23.98,
+          "total_quantity" : 2,
+          "total_unique_products" : 2,
+          "type" : "order",
+          "user" : "wagdi",
+          "geoip" : {
+            "country_iso_code" : "SA",
+            "location" : {
+              "lon" : 45,
+              "lat" : 25
+            },
+            "continent_name" : "Asia"
+          },
+          "event" : {
+            "dataset" : "sample_ecommerce"
+          }
+        },
+        "highlight" : {
+          "products.product_name" : [
+            "<b>Belt<b> - brown"
+          ]
+        },
+        "sort" : [
+          "Brewer",
+          "Wagdi",
+          11.9921875,
+          4.0183105
+        ]
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+
