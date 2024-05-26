@@ -1,0 +1,21 @@
+Search Templates
+Reusable parameterized queries.
+When using Elasticsearch as a backend for a search application, search templates enable you to pass user inputs to your search without exposing the whole query.
+
+
+
+ ------------  ------------------------
+| First  Name | |         John        |
+ ------------  ------------------------
+ ------------  ------------------------
+| Last  Name | |           Doe        |
+ ------------  ------------------------
+ ------------  ------------------------
+|    Age     | |          34          |
+ ------------  ------------------------
+ ------------  ------------------------
+| Email |      | John.doe@gmail.com   |
+ ------------  ------------------------
+ ------------  -----------------------
+| Phone Number| | 1+(234)-567-8900    |
+ ------------  -----------------------
