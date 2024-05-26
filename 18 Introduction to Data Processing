@@ -1,0 +1,61 @@
+INTRODUCTION TO DATA PROCESSION:
+--------------------------------
+
+Explicitly Mapping Fields: 
+  we can explicitly map our data fields.
+This is a way of manually defining a field
+and it's mapping data type.
+
+
+Dynamically Mapping Fields:
+  to dynamically mapping fields.
+This is a way of defining a dynamic template
+or a mapping template
+to automatically detect certain data types
+and then map them a particular way.
+
+Defining a Custom Analyzer:
+  The next one to get our hands dirty,
+digging into analysis and Elasticsearch,
+by creating our own custom analyzer to tweak the way
+some of the built-in analyzers already work.
+
+Defining Multi-Fields:
+  Then we're gonna leverage multi-fields.
+So this allows us to index the same data,
+but in multiple different ways.
+So we can index something as both a analyzed text
+and a non-analyzed text,
+or maybe as 2 different kinds of numbers,
+or maybe some of our numbers we also want to be strengths.
+So multi-fields make that possible.
+
+
+Reindexing Documents
+  Then we're going to talk about how to re-index documents.
+So, how to take documents from a particular source,
+even a remote source, and re-index them into a destination.
+
+Updating Documents
+  We'll also show how to update documents,
+both explicitly like updating a single documents value,
+and also updating maybe a bunch of documents with a query.
+
+Defining Ingest Pipelines
+  Then we're gonna leverage ingest pipelines,
+which are actually extremely powerful Elasticsearch.
+We're gonna leverage the ingest pipeline
+to mutate our data in some ways.
+We can combine different ingest processors
+to do something to our data.
+
+Handling Nested Arrays of Objects
+  Then lastly, we're gonna figure out
+how to handle nested arrays of objects.
+So Elasticsearch likes to flatten objects,
+particularly arrays of objects
+and that tends to get rid of all the individuality
+of each of those fields.
+So I'll show you a way to actually handle that
+and to properly maintain the relationships
+of nested arrays of objects.
