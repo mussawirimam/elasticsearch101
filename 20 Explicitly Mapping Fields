@@ -1,0 +1,181 @@
+Explicit Mapping:
+-----------------
+Manually define the fields and data types.
+1) Determine which string fields are analyzed.
+2) Define which numbers should be integers, floats, percents, etc.
+3) Customize the date format for date fields.
+------------------------------------------
+Sample:
+-------
+"kibana_sample_data_flights" : {
+  "mappings" : {
+    "properties" : {
+      "AvgTicketPrice" : {
+        "type" : "float"
+      }，
+      "Cancelled" : {
+        "type" : "boolean"
+      },
+      "Carrier" {
+        "type" : "keyword"
+      }，
+      "Dest" : {
+        "type" : "keyword"
+      },
+      "DistanceKilometers" : {
+        "type" : "float"
+      }，
+...
+------------------------------------------
+
+GET _cat/indices?v:
+-------------------
+health status index                               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   filebeat-7.13.4-2024.05.07-000002   3zvize5fS5GKrA_quqz1_w   1   0     119942            0     29.8mb         29.8mb
+yellow open   es-elasticsearch_101                SeR9jceHQp2cgFcpUszutA   1   1          2            0      7.7kb          7.7kb
+green  open   .apm-agent-configuration            sIypv-4oT024b4SbpC27cw   1   0          0            0       208b           208b
+green  open   earthquakes                         T0DBlgB5TfSYOtsW2ZAEuw   1   0      23411            0      5.2mb          5.2mb
+green  open   kibana_sample_data_flights          3lbMlG2URe-ATqu7g9uThA   1   0      13059            0      5.3mb          5.3mb
+green  open   .kibana_7.13.4_001                  b6AYw-C6SoqQTbomm0ARLg   1   0         79            1      2.1mb          2.1mb
+green  open   .ds-weblogs-2024.05.09-000001       UHp1frrsTZKHqRE3xA61Bg   1   0          0            0       208b           208b
+green  open   earthquakes-1                       SkHSguvPTk2nna7urJWX1A   1   0          0            0       208b           208b
+green  open   .tasks                              UB9loVXpQCyNBEe0VOxjrQ   1   0         41            4     51.8kb         51.8kb
+green  open   metricbeat-7.13.4-2024.05.07-000002 aqPV1Ue8RSqjLoxVS_QWow   1   0     436083            0    138.7mb        138.7mb
+green  open   .security-7                         ge3OgzyfT1OpZC890ENkfQ   1   0         51            0    211.7kb        211.7kb
+green  open   .apm-custom-link                    iTzX2g47RWSGXbI2qCGYRw   1   0          0            0       208b           208b
+green  open   kibana_sample_data_ecommerce        2QN6UwFdRvq1M_n9vLlPQA   1   0       4675            0        4mb            4mb
+green  open   .kibana-event-log-7.13.4-000002     _XqOsDe_T5aV0YJRnyahjw   1   0         38            0     60.8kb         60.8kb
+green  open   filebeat-7.13.4-2024.03.30-000001   HbQlhz9xQ6eQl4PIW55NIA   1   0     105924            0     19.7mb         19.7mb
+green  open   .kibana-event-log-7.13.4-000001     2qDs0zATSpqv5VUhW_kcEA   1   0         10            0     54.2kb         54.2kb
+green  open   applogs-1                           f25nsmYdRQ-Jbl8H70HG_g   1   0          0            0       230b           230b
+green  open   shakespeare                         OA2BTVXyST-hk3lfBpoasg   1   0     111396            0     19.5mb         19.5mb
+green  open   kibana_sample_data_logs             MARemlRkQ3avl74aaAvXog   1   0      14074            0      9.7mb          9.7mb
+green  open   .async-search                       hwwnnY4kRK24ZgeSszuLnA   1   0          0            0       231b           231b
+green  open   metricbeat-7.13.4-2024.03.30-000001 ofqDupIqSBqNOjC1Mom_Ow   1   0     107583            0     34.4mb         34.4mb
+green  open   .kibana_task_manager_7.13.4_001     KlopueG4S3qazgrGm4trSg   1   0         11         3686        1mb            1mb
+
+
+GET earthquakes
+
+-----------------
+CONSOLE OUT 
+-----------------
+{
+  "earthquakes" : {
+    "aliases" : { },
+    "mappings" : {
+      "_meta" : {
+        "created_by" : "file-data-visualizer"
+      },
+      "properties" : {
+        "@timestamp" : {
+          "type" : "date"
+        },
+        "Azimuthal Gap" : {
+          "type" : "double"
+        },
+        "Date" : {
+          "type" : "date",
+          "format" : "MM/dd/yyyy"
+        },
+        "Depth" : {
+          "type" : "double"
+        },
+        "Depth Error" : {
+          "type" : "double"
+        },
+        "Depth Seismic Stations" : {
+          "type" : "double"
+        },
+        "Horizontal Distance" : {
+          "type" : "double"
+        },
+        "Horizontal Error" : {
+          "type" : "double"
+        },
+        "ID" : {
+          "type" : "keyword"
+        },
+        "Latitude" : {
+          "type" : "double"
+        },
+        "Location Source" : {
+          "type" : "keyword"
+        },
+        "Longitude" : {
+          "type" : "double"
+        },
+        "Magnitude" : {
+          "type" : "double"
+        },
+        "Magnitude Error" : {
+          "type" : "keyword"
+        },
+        "Magnitude Seismic Stations" : {
+          "type" : "double"
+        },
+        "Magnitude Source" : {
+          "type" : "keyword"
+        },
+        "Magnitude Type" : {
+          "type" : "keyword"
+        },
+        "Root Mean Square" : {
+          "type" : "double"
+        },
+        "Source" : {
+          "type" : "keyword"
+        },
+        "Status" : {
+          "type" : "keyword"
+        },
+        "Time" : {
+          "type" : "keyword"
+        },
+        "Type" : {
+          "type" : "keyword"
+        },
+        "location" : {
+          "type" : "geo_point"
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "earthquakes",
+        "creation_date" : "1715231575380",
+        "number_of_replicas" : "0",
+        "uuid" : "T0DBlgB5TfSYOtsW2ZAEuw",
+        "version" : {
+          "created" : "7130499"
+        }
+      }
+    }
+  }
+}
+
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+-----------------
+CONSOLE OUT 
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
+
+-----------------
+CONSOLE OUT 
+-----------------
+-----------------
+CONSOLE OUT ENDS
+-----------------
