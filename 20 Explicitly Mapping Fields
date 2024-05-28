@@ -1,3 +1,15 @@
+  In this lesson, we're going to showcase
+how to explicitly map fields in Elasticsearch.
+So we can explicitly, or manually, define the fields
+and their data types in Elasticsearch.
+So we might want to do this in order to explicitly determine
+which string fields are analyzed.
+Maybe we also want to define which numbers
+should be integers, or floats, or percentages,
+or IP addresses, or whatever,
+and then we also could customize
+the date format for date fields or timestamp fields.
+
 Explicit Mapping:
 -----------------
 Manually define the fields and data types.
@@ -60,6 +72,18 @@ GET earthquakes
 -----------------
 CONSOLE OUT 
 -----------------
+  just show you an example of a mapping
+and then we'll go ahead and create a mapping.
+So let's just take a look real quick
+at the earthquakes index. We'll do a GET earthquakes.
+We can see here under mappings and then properties,
+we have these field names,
+and some data type assigned to them.
+
+  We can see here under mappings and then properties,
+we have these field names,
+and some data type assigned to them.
+
 {
   "earthquakes" : {
     "aliases" : { },
@@ -68,18 +92,18 @@ CONSOLE OUT
         "created_by" : "file-data-visualizer"
       },
       "properties" : {
-        "@timestamp" : {
-          "type" : "date"
+        "@timestamp" : {    <-----------------------------------<< So here we have an at timestamp which has a type date.
+          "type" : "date"    <-----------------------------------<< type date
         },
         "Azimuthal Gap" : {
           "type" : "double"
         },
         "Date" : {
-          "type" : "date",
-          "format" : "MM/dd/yyyy"
+          "type" : "date",   <-----------------------------------<< We also have a date field down here, which is type date,
+          "format" : "MM/dd/yyyy"    <-----------------------------------<< but here we're actually customizing the format of that date field.
         },
-        "Depth" : {
-          "type" : "double"
+        "Depth" : {     <-----------------------------------<< we've got a depth numerical here which is a double. That's a type of float.
+          "type" : "double"    <-----------------------------------<<    double
         },
         "Depth Error" : {
           "type" : "double"
@@ -93,7 +117,7 @@ CONSOLE OUT
         "Horizontal Error" : {
           "type" : "double"
         },
-        "ID" : {
+        "ID" : {    <-----------------------------------<< we have a keyword, so that's a non-analyzed string field,
           "type" : "keyword"
         },
         "Latitude" : {
@@ -161,21 +185,102 @@ CONSOLE OUT
     }
   }
 }
-
+    So this is essentially
+what mappings look like in Elasticsearch.
+Now these mappings here
+weren't necessarily created explicitly.
+This is just what has been created
+as this data was ingested.
+So there is dynamic mapping and explicit mapping.
+Both of them will end up effecting
+the mapping section of an index.
+So in this lesson,
+we'll focus on explicit mapping.
 -----------------
 CONSOLE OUT ENDS
 -----------------
 
------------------
-CONSOLE OUT 
------------------
------------------
-CONSOLE OUT ENDS
------------------
+  we'll focus on explicit mapping.
+So we can define explicit mappings like this.
+All right, so we'd go ahead and do a PUT.
+Let's do this in a component template and
+maybe we'll reuse this later.
+
+PUT _component_template/product_review_mappings
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "product_id": {
+          "type": "long"
+        },
+        "reviews": {
+          "properties": {
+            "first_name": {
+              "type": "keyword"
+            },
+            "last_name": {
+              "type": "keyword"
+            },
+            "review": {
+              "type": "text",
+              "analyzer": "english"
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 -----------------
 CONSOLE OUT 
 -----------------
+{
+  "acknowledged" : true
+}
+
+-----------------
+CONSOLE OUT ENDS
+-----------------
+GET _component_template/product_review_mappings
+
+-----------------
+CONSOLE OUT 
+-----------------
+{
+  "component_templates" : [
+    {
+      "name" : "product_review_mappings",
+      "component_template" : {
+        "template" : {
+          "mappings" : {
+            "properties" : {
+              "reviews" : {
+                "properties" : {
+                  "review" : {
+                    "analyzer" : "english",
+                    "type" : "text"
+                  },
+                  "last_name" : {
+                    "type" : "keyword"
+                  },
+                  "first_name" : {
+                    "type" : "keyword"
+                  }
+                }
+              },
+              "product_id" : {
+                "type" : "long"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+
 -----------------
 CONSOLE OUT ENDS
 -----------------
