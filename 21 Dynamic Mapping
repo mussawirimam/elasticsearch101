@@ -76,6 +76,14 @@ because maybe we're doing averages or something,
 some sort of aggregation on that data,
 and we want it to be able to have decimal values.
 
+  by default, Elasticsearch is going to
+index integers as longs and floats as doubles,
+that way you can allocate larger numbers.
+So we're going to look for the type long.
+So these are integers.
+And then we're going to define their mapping
+as a type double, which is a float.
+
 Dynamic mapping:
 
 PUT _component_template/integers_as_floats    <---------<< integers as floats. All right, so that's the name of our component template here.
