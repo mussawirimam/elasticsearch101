@@ -1,0 +1,6 @@
+Dynamic Mapping
+----------------
+Automatically add new fields and data types.
+1) New fields not already in the index will be added automatically.
+2) Data detectors will automatically determine data types for new fields.
+3) Dynamic templates allow for the customization of dynamic mapping behavior.
