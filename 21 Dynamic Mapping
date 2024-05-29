@@ -1,6 +1,139 @@
+NOTE: explicit mapping over rides the dynamic mapping 
 Dynamic Mapping
 ----------------
 Automatically add new fields and data types.
 1) New fields not already in the index will be added automatically.
 2) Data detectors will automatically determine data types for new fields.
 3) Dynamic templates allow for the customization of dynamic mapping behavior.
+
+  So we can automatically add new fields
+and assign their data types in Elasticsearch
+with dynamic mapping enabled, which is the default.
+
+  So fields that are not already in an index,
+when you go to index them, it will be added automatically.
+So the mapping for that field, we automatically add it.
+And the way it will do that is to try to determine,
+with data detectors, what the data type should be.
+So it will automatically determine if it's a date,
+or a string, or a number, if it's a float or an integer.
+So Elasticsearch does have some really good
+built-in logic to figure out what kind of data type
+it should be. Now, all of that is well and good,
+but a lot of times you're going to want to
+customize this behavior,
+which is possible with dynamic templates.
+So we can actually customize the dynamic mapping behavior
+explicitly with dynamic templates.
+
+Explicit Mapping example for comparison:
+-------------------------
+GET _component_template/product_review_mappings
+
+{
+  "component_templates" : [
+    {
+      "name" : "product_review_mappings",
+      "component_template" : {
+        "template" : {
+          "mappings" : {
+            "properties" : {
+              "reviews" : {
+                "properties" : {
+                  "review" : {
+                    "analyzer" : "english",
+                    "type" : "text"
+                  },
+                  "last_name" : {
+                    "type" : "keyword"
+                  },
+                  "first_name" : {
+                    "type" : "keyword"
+                  }
+                }
+              },
+              "product_id" : {
+                "type" : "long"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+-------------------------
+Dynamic mapping:
+
+PUT _component_template/integer_as_floats
+{
+  "template": {
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "integers_as_floats": {
+            "match_mapping_type": "long",
+            "mapping": {
+              "type": "double"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "acknowledged" : true
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+GET _component_template/integer_as_floats
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "component_templates" : [
+    {
+      "name" : "integer_as_floats",
+      "component_template" : {
+        "template" : {
+          "mappings" : {
+            "dynamic_templates" : [
+              {
+                "integers_as_floats" : {
+                  "mapping" : {
+                    "type" : "double"
+                  },
+                  "match_mapping_type" : "long"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
