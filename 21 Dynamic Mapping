@@ -63,18 +63,31 @@ GET _component_template/product_review_mappings
   ]
 }
 -------------------------
+  Let's go ahead and create another component template here
+to define some dynamic mapping.
+So we'll do a component template, and let's see,
+let's do a dynamic mapping that converts integers to floats.
+Maybe we have an index where the,
+sometimes we're indexing a whole number
+and the data detector is going to see that
+and try to index it as an integer.
+Whereas in reality, we want it to be a float,
+because maybe we're doing averages or something,
+some sort of aggregation on that data,
+and we want it to be able to have decimal values.
+
 Dynamic mapping:
 
-PUT _component_template/integer_as_floats
+PUT _component_template/integers_as_floats    <---------<< integers as floats. All right, so that's the name of our component template here.
 {
   "template": {
-    "mappings": {
-      "dynamic_templates": [
+    "mappings": {    <---------<< go ahead and define under template, mappings, but now this time, instead of defining the properties of our mapping, so that's where we would put our explicit mappings, we're going to define dynamic templates.
+      "dynamic_templates": [    <----------<<   we're going to define dynamic templates.  this is going to be an array of objects. We'll do an array here. So you can have as many templates as you like.
         {
-          "integers_as_floats": {
-            "match_mapping_type": "long",
-            "mapping": {
-              "type": "double"
+          "integers_as_floats": {     <---------<<  we'll go ahead and specify our dynamic template here integer, integers as floats.
+            "match_mapping_type": "long",    <---------<< we need to specify the mapping type that we want to catch. So we'll do a match mapping type. So you want to look for type long. So by default, Elasticsearch is going to index integers as longs and floats as doubles, that way you can allocate larger numbers. So we're going to look for the type long. So these are integers.
+            "mapping": {    <-------<< then we're going to define their mapping as a type double, which is a float.
+              "type": "double" 
             }
           }
         }
@@ -96,6 +109,23 @@ GET _component_template/integer_as_floats
 --------------------
 CONSOLE OUTPUT
 --------------------
+  So now, if we have an index where this component template
+is composing the index, whenever we ingest a integer,
+and we don't already have a field for that integer.
+So, it's worth mentioning that explicit mappings
+override dynamic mappings.
+All right, so if I have something specified down here
+as an integer, as a type long,
+and I also have this dynamic template in that same index,
+then that number will still be indexed as a type long,
+because the explicit mappings override dynamic mappings.
+Dynamic mappings only take effect when you have a new field
+that doesn't already have a mapping
+and there's no explicit mapping for it,
+and it matches the behavior outlined here.
+So it is a type of long,
+then it will be ingested as a double.
+
 {
   "component_templates" : [
     {
