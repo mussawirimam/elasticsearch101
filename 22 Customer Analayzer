@@ -1,0 +1,49 @@
+Multi-Fields
+-------------
+Index the same field in multiple ways.
+Multi-fields allow you to index fields multiple times. This way, you can have one field mapped in different ways depending on the potential use cases.
+
+Map a string as both an analyzed (text) field and non analyzed (keyword) field.
+
+Map an analyzed (text) field with multiple different analyzers.
+
+My Hypothesis:
+----------------
+if you type any string in it the objective of custom analyzer is that it automatically detects what DataType it is, and accordingly add that DataType to the field. 
+
+
+
+is the standard analyzer.
+Now to do a multi-field within this field here,
+we're going to go ahead and specify this fields parameter.
+So now underneath this fields parameter,
+we can specify our multi-fields.
+So we're going to have a multi-field called "keyword"
+with "type" "keyword", just like that.
+So now whenever we have string
+that doesn't already have a mapping,
+it's going to come here,
+it's going to get caught by this dynamic template.
+It's going to map that field as a analyzed text field
+with a standard analyzer,
+then it's going to add a .keyword field
+that's going to not analyze that string
+and store it as a keyword.
+
+
+So now whenever we have string
+that doesn't already have a mapping,
+it's going to come here,
+it's going to get caught by this dynamic template.
+It's going to map that field as a analyzed text field
+with a standard analyzer,
+then it's going to add a .keyword field
+that's going to not analyze that string
+and store it as a keyword.
+So this is the behavior
+that Elasticsearch has built in already.
+So really just showing you this,
+just to showcase that we can actually mimic that behavior
+with a dynamic template, with a multi-field.
+
+
