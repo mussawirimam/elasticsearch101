@@ -31,19 +31,140 @@ that's going to not analyze that string
 and store it as a keyword.
 
 
+
 So now whenever we have string
 that doesn't already have a mapping,
-it's going to come here,
-it's going to get caught by this dynamic template.
-It's going to map that field as a analyzed text field
-with a standard analyzer,
-then it's going to add a .keyword field
-that's going to not analyze that string
-and store it as a keyword.
+
+PUT _component_template/strings
+{
+  "template": {
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "string": {
+            "match_mapping_type": "string",    <----------<<  it's going to come here, it's going to get caught by this dynamic template.
+            "mapping": {
+              "type": "text",    <-------------<< It's going to map that field as a analyzed text field with a standard analyzer,    
+              "analyzer": "standard",   <-------------<< with a standard analyzer,  
+              "fields": {
+                "keyword": {    <-------------<<  then it's going to add a .keyword field that's going to not analyze that string and store it as a keyword.
+                  "type": "keyword"    <-------------<< that's going to not analyze that string and store it as a keyword.
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
 So this is the behavior
 that Elasticsearch has built in already.
 So really just showing you this,
 just to showcase that we can actually mimic that behavior
 with a dynamic template, with a multi-field.
 
+---------------------------------
+PUT _component_template/strings
+{
+  "template": {
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "string": {
+            "match_mapping_type": "string",
+            "mapping": {
+              "type": "text".
+              "analyzer": "standard",
+              "fields": {
+                "keyword": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
 
+
+
+QUESTION:
+---------------------
+Q: what is component template and how is it different from the index template in elasticsearch?
+
+  In Elasticsearch, a **component template** and an **index template** are both used to define settings, mappings, and aliases for indices. However, they serve different purposes and are used in different ways. Here's a detailed explanation of each:
+
+### Component Template
+
+A **component template** is a reusable, modular configuration that can be included in multiple index templates. It allows you to define specific parts of the index configuration, such as settings or mappings, in a modular way. This promotes reusability and manageability of index configurations.
+
+- **Modular**: You can define settings, mappings, and aliases in small, reusable templates.
+- **Reusability**: Component templates can be reused across multiple index templates, reducing duplication.
+- **Modularity**: Each component template focuses on a specific aspect of index configuration.
+
+**Example**: 
+You might have a component template for common settings across all indices:
+
+```json
+PUT _component_template/common-settings
+{
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    }
+  }
+}
+```
+
+Another component template for common mappings:
+
+```json
+PUT _component_template/common-mappings
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "timestamp": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
+```
+
+### Index Template
+
+An **index template** defines settings, mappings, and aliases that are applied to new indices that match a certain pattern. Index templates can include multiple component templates, which allows you to assemble a complete index configuration from smaller, reusable parts.
+
+- **Comprehensive**: Combines various component templates and additional settings, mappings, and aliases.
+- **Pattern Matching**: Applies to indices that match a specified pattern (e.g., `logs-*`).
+- **Priority**: Index templates can have priorities to control which template is applied when multiple templates match.
+
+**Example**:
+An index template that combines component templates:
+
+```json
+PUT _index_template/logs-template
+{
+  "index_patterns": ["logs-*"],
+  "priority": 100,
+  "composed_of": ["common-settings", "common-mappings"],
+  "template": {
+    "aliases": {
+      "logs": {}
+    }
+  }
+}
+```
+
+### Key Differences
+
+- **Scope**: Component templates define modular pieces of the configuration, while index templates define the complete configuration for indices matching a pattern.
+- **Reusability**: Component templates are reusable and can be included in multiple index templates. Index templates are more comprehensive and can include multiple component templates.
+- **Management**: Component templates simplify the management of common configurations by allowing you to update a single component template, which then updates all index templates that include it. Index templates apply these component configurations to indices that match their pattern.
+- **Pattern Matching**: Index templates use index patterns to determine which indices they apply to, while component templates do not have pattern matching and are included based on their names in index templates.
+
+In summary, **component templates** allow for the modular definition of settings, mappings, and aliases that can be reused in multiple **index templates**, which provide the overall configuration for indices matching specific patterns. This separation enhances flexibility and maintainability in managing Elasticsearch index configurations.
