@@ -1,0 +1,10 @@
+📤 source:
+Specify the local or remote source index and filter the source with a query.
+
+📥
+Destination:
+Specify the local index to reindex into.
+
+🚰
+Pipeline:
+Specify an ingest pipeline to modify the data in flight before it's written to the destination index.
