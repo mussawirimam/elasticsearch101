@@ -8,3 +8,720 @@ Specify the local index to reindex into.
 🚰
 Pipeline:
 Specify an ingest pipeline to modify the data in flight before it's written to the destination index.
+
+GET _cat/indices?v
+
+POST _reindex
+{
+  "source": {
+    "index": "flights"
+  },
+  "dest": {
+    "index": "flights_reindexed"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 4682,
+  "timed_out" : false,
+  "total" : 13059,
+  "updated" : 0,
+  "created" : 13059,
+  "deleted" : 0,
+  "batches" : 14,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+GET _cat/indices?v
+--------------------
+CONSOLE OUTPUT
+--------------------
+health status index                               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   filebeat-7.13.4-2024.05.07-000002   3zvize5fS5GKrA_quqz1_w   1   0     166219            0     41.1mb         41.1mb
+green  open   .apm-agent-configuration            sIypv-4oT024b4SbpC27cw   1   0          0            0       208b           208b
+yellow open   flights_reindexed                   kelHYAMiRW-gYw6HoCEeWg   1   1      13059            0      6.2mb          6.2mb
+green  open   earthquakes                         T0DBlgB5TfSYOtsW2ZAEuw   1   0      23411            0      5.2mb          5.2mb
+green  open   .kibana_7.13.4_001                  b6AYw-C6SoqQTbomm0ARLg   1   0         75            4      4.2mb          4.2mb
+green  open   kibana_sample_data_flights          3lbMlG2URe-ATqu7g9uThA   1   0      13059            0      5.3mb          5.3mb
+green  open   earthquakes-1                       SkHSguvPTk2nna7urJWX1A   1   0          0            0       208b           208b
+green  open   .ds-weblogs-2024.05.09-000001       UHp1frrsTZKHqRE3xA61Bg   1   0          0            0       208b           208b
+green  open   .tasks                              UB9loVXpQCyNBEe0VOxjrQ   1   0         48            5     55.4kb         55.4kb
+green  open   metricbeat-7.13.4-2024.05.07-000002 aqPV1Ue8RSqjLoxVS_QWow   1   0     601272            0    192.5mb        192.5mb
+green  open   .security-7                         ge3OgzyfT1OpZC890ENkfQ   1   0         51            0    211.7kb        211.7kb
+green  open   .apm-custom-link                    iTzX2g47RWSGXbI2qCGYRw   1   0          0            0       208b           208b
+green  open   kibana_sample_data_ecommerce        2QN6UwFdRvq1M_n9vLlPQA   1   0       4675            0        4mb            4mb
+green  open   .kibana-event-log-7.13.4-000002     _XqOsDe_T5aV0YJRnyahjw   1   0         57            0       61kb           61kb
+green  open   applogs-1                           f25nsmYdRQ-Jbl8H70HG_g   1   0          0            0       230b           230b
+green  open   filebeat-7.13.4-2024.03.30-000001   HbQlhz9xQ6eQl4PIW55NIA   1   0     105924            0     19.7mb         19.7mb
+green  open   .kibana-event-log-7.13.4-000001     2qDs0zATSpqv5VUhW_kcEA   1   0         10            0     54.2kb         54.2kb
+green  open   shakespeare                         OA2BTVXyST-hk3lfBpoasg   1   0     111396            0     19.5mb         19.5mb
+green  open   kibana_sample_data_logs             MARemlRkQ3avl74aaAvXog   1   0      14074            0      9.7mb          9.7mb
+green  open   .async-search                       hwwnnY4kRK24ZgeSszuLnA   1   0          0            0       231b           231b
+green  open   metricbeat-7.13.4-2024.03.30-000001 ofqDupIqSBqNOjC1Mom_Ow   1   0     107583            0     34.4mb         34.4mb
+green  open   .kibana_task_manager_7.13.4_001     KlopueG4S3qazgrGm4trSg   1   0         11         2132    858.1kb        858.1kb
+health status index                               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   filebeat-7.13.4-2024.05.07-000002   3zvize5fS5GKrA_quqz1_w   1   0     166219            0     41.1mb         41.1mb
+green  open   .apm-agent-configuration            sIypv-4oT024b4SbpC27cw   1   0          0            0       208b           208b
+yellow open   flights_reindexed                   kelHYAMiRW-gYw6HoCEeWg   1   1      13059            0      6.2mb          6.2mb     <----------------------------------<< flight got re-indexed (we can see here that we have the same number of documents.)
+green  open   earthquakes                         T0DBlgB5TfSYOtsW2ZAEuw   1   0      23411            0      5.2mb          5.2mb   
+green  open   .kibana_7.13.4_001                  b6AYw-C6SoqQTbomm0ARLg   1   0         75            4      4.2mb          4.2mb
+green  open   kibana_sample_data_flights          3lbMlG2URe-ATqu7g9uThA   1   0      13059            0      5.3mb          5.3mb    <----------------------------------<< flights_reindexed was reindexed using this index (look at the number of documents it matches)
+green  open   earthquakes-1                       SkHSguvPTk2nna7urJWX1A   1   0          0            0       208b           208b
+green  open   .ds-weblogs-2024.05.09-000001       UHp1frrsTZKHqRE3xA61Bg   1   0          0            0       208b           208b
+green  open   .tasks                              UB9loVXpQCyNBEe0VOxjrQ   1   0         48            5     55.4kb         55.4kb
+green  open   metricbeat-7.13.4-2024.05.07-000002 aqPV1Ue8RSqjLoxVS_QWow   1   0     601272            0    192.5mb        192.5mb
+green  open   .security-7                         ge3OgzyfT1OpZC890ENkfQ   1   0         51            0    211.7kb        211.7kb
+green  open   .apm-custom-link                    iTzX2g47RWSGXbI2qCGYRw   1   0          0            0       208b           208b
+green  open   kibana_sample_data_ecommerce        2QN6UwFdRvq1M_n9vLlPQA   1   0       4675            0        4mb            4mb
+green  open   .kibana-event-log-7.13.4-000002     _XqOsDe_T5aV0YJRnyahjw   1   0         57            0       61kb           61kb
+green  open   applogs-1                           f25nsmYdRQ-Jbl8H70HG_g   1   0          0            0       230b           230b
+green  open   filebeat-7.13.4-2024.03.30-000001   HbQlhz9xQ6eQl4PIW55NIA   1   0     105924            0     19.7mb         19.7mb
+green  open   .kibana-event-log-7.13.4-000001     2qDs0zATSpqv5VUhW_kcEA   1   0         10            0     54.2kb         54.2kb
+green  open   shakespeare                         OA2BTVXyST-hk3lfBpoasg   1   0     111396            0     19.5mb         19.5mb
+green  open   kibana_sample_data_logs             MARemlRkQ3avl74aaAvXog   1   0      14074            0      9.7mb          9.7mb
+green  open   .async-search                       hwwnnY4kRK24ZgeSszuLnA   1   0          0            0       231b           231b
+green  open   metricbeat-7.13.4-2024.03.30-000001 ofqDupIqSBqNOjC1Mom_Ow   1   0     107583            0     34.4mb         34.4mb
+green  open   .kibana_task_manager_7.13.4_001     KlopueG4S3qazgrGm4trSg   1   0         11         2132    858.1kb        858.1kb
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+#to get the term value 
+GET flights/_search
+--------------------
+CONSOLE OUTPUT
+--------------------
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8969.200822898836,
+          "timestamp" : "2024-03-22T04:05:18",
+          "DestLocation" : {
+            "lat" : "59.65190125",
+            "lon" : "17.91860008"
+          },
+          "DestAirportID" : "ARN",
+          "Carrier" : "Kibana Airlines",    <-----------<<
+          "Cancelled" : false,
+          "FlightTimeMin" : 498.2889346054909,
+          "Origin" : "San Diego International Airport",
+          "OriginLocation" : {
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+we'll just get all of the carriers for this flight
+or all the flights for this carrier rather.
+And then we'll go ahead and rename this down here
+to Kibana Airlines, like so.
+POST _reindex
+{
+  "source": {
+    "index": "flights",
+    "query": {
+      "term": {
+        "Carrier": {
+          "value": "Kibana Airlines"
+        }
+      }
+    }
+  },
+  "dest": {
+    "index": "kibana_airlines"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+{
+  "took" : 2641,
+  "timed_out" : false,
+  "total" : 3234,
+  "updated" : 0,
+  "created" : 3234,
+  "deleted" : 0,
+  "batches" : 4,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+GET _cat/indices?v
+
+--------------------
+CONSOLE OUTPUT
+--------------------
+we'll just get all of the carriers for this flight
+or all the flights for this carrier rather.
+And then we'll go ahead and rename this down here
+to Kibana Airlines, like so.
+
+this is how we reindex with local indices.
+
+health status index                               uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   filebeat-7.13.4-2024.05.07-000002   3zvize5fS5GKrA_quqz1_w   1   0     166404            0     41.3mb         41.3mb
+green  open   .apm-agent-configuration            sIypv-4oT024b4SbpC27cw   1   0          0            0       208b           208b
+yellow open   kibana_airlines                     3TdMNRAwQFqFXGE_3We-2Q   1   1       3234            0      1.6mb          1.6mb    <----------------------------------<< (only the carries are reindexed here from the flights)
+green  open   earthquakes                         T0DBlgB5TfSYOtsW2ZAEuw   1   0      23411            0      5.2mb          5.2mb
+yellow open   flights_reindexed                   kelHYAMiRW-gYw6HoCEeWg   1   1      13059            0      6.2mb          6.2mb
+green  open   .kibana_7.13.4_001                  b6AYw-C6SoqQTbomm0ARLg   1   0         76           17      4.2mb          4.2mb
+green  open   kibana_sample_data_flights          3lbMlG2URe-ATqu7g9uThA   1   0      13059            0      5.3mb          5.3mb
+green  open   earthquakes-1                       SkHSguvPTk2nna7urJWX1A   1   0          0            0       208b           208b
+green  open   .ds-weblogs-2024.05.09-000001       UHp1frrsTZKHqRE3xA61Bg   1   0          0            0       208b           208b
+green  open   .tasks                              UB9loVXpQCyNBEe0VOxjrQ   1   0         48            5     55.4kb         55.4kb
+green  open   metricbeat-7.13.4-2024.05.07-000002 aqPV1Ue8RSqjLoxVS_QWow   1   0     602100            0    192.9mb        192.9mb
+green  open   .security-7                         ge3OgzyfT1OpZC890ENkfQ   1   0         51            0    211.7kb        211.7kb
+green  open   .apm-custom-link                    iTzX2g47RWSGXbI2qCGYRw   1   0          0            0       208b           208b
+green  open   kibana_sample_data_ecommerce        2QN6UwFdRvq1M_n9vLlPQA   1   0       4675            0        4mb            4mb
+green  open   .kibana-event-log-7.13.4-000002     _XqOsDe_T5aV0YJRnyahjw   1   0         57            0       61kb           61kb
+green  open   .kibana-event-log-7.13.4-000001     2qDs0zATSpqv5VUhW_kcEA   1   0         10            0     54.2kb         54.2kb
+green  open   filebeat-7.13.4-2024.03.30-000001   HbQlhz9xQ6eQl4PIW55NIA   1   0     105924            0     19.7mb         19.7mb
+green  open   applogs-1                           f25nsmYdRQ-Jbl8H70HG_g   1   0          0            0       230b           230b
+green  open   shakespeare                         OA2BTVXyST-hk3lfBpoasg   1   0     111396            0     19.5mb         19.5mb
+green  open   kibana_sample_data_logs             MARemlRkQ3avl74aaAvXog   1   0      14074            0      9.7mb          9.7mb
+green  open   .async-search                       hwwnnY4kRK24ZgeSszuLnA   1   0          0            0       231b           231b
+green  open   .kibana_task_manager_7.13.4_001     KlopueG4S3qazgrGm4trSg   1   0         11         2312    906.7kb        906.7kb
+green  open   metricbeat-7.13.4-2024.03.30-000001 ofqDupIqSBqNOjC1Mom_Ow   1   0     107583            0     34.4mb         34.4mb
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+all of the kibana air lines are here in this index 
+
+GET kibana_airlines/_search
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 3,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 3234,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "aDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "QSJNJPL",
+          "DestCountry" : "SE",
+          "OriginWeather" : "Heavy Fog",
+          "OriginCityName" : "San Diego",
+          "AvgTicketPrice" : 774.805619241272,
+          "DistanceMiles" : 5573.203008740727,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Stockholm-Arlanda Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 8969.200822898836,
+          "timestamp" : "2024-03-22T04:05:18",
+          "DestLocation" : {
+            "lat" : "59.65190125",
+            "lon" : "17.91860008"
+          },
+          "DestAirportID" : "ARN",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 498.2889346054909,
+          "Origin" : "San Diego International Airport",
+          "OriginLocation" : {
+            "lat" : "32.73360062",
+            "lon" : "-117.1900024"
+          },
+          "DestRegion" : "SE-AB",
+          "OriginAirportID" : "SAN",
+          "OriginRegion" : "US-CA",
+          "DestCityName" : "Stockholm",
+          "FlightTimeHour" : 8.304815576758182,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "ajTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "76ZQ4RP",
+          "DestCountry" : "CA",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Winnipeg",
+          "AvgTicketPrice" : 227.35425118762947,
+          "DistanceMiles" : 0,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Winnipeg / James Armstrong Richardson International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "CA",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 0,
+          "timestamp" : "2024-03-22T06:11:16",
+          "DestLocation" : {
+            "lat" : "49.90999985",
+            "lon" : "-97.23989868"
+          },
+          "DestAirportID" : "YWG",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 0,
+          "Origin" : "Winnipeg / James Armstrong Richardson International Airport",
+          "OriginLocation" : {
+            "lat" : "49.90999985",
+            "lon" : "-97.23989868"
+          },
+          "DestRegion" : "CA-MB",
+          "OriginAirportID" : "YWG",
+          "OriginRegion" : "CA-MB",
+          "DestCityName" : "Winnipeg",
+          "FlightTimeHour" : 0,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "bjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "Y6536M7",
+          "DestCountry" : "CN",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Bangalore",
+          "AvgTicketPrice" : 998.6478990121226,
+          "DistanceMiles" : 2432.206956406059,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Xi'an Xianyang International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "IN",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 3914.2576720503525,
+          "timestamp" : "2024-03-22T07:37:08",
+          "DestLocation" : {
+            "lat" : "34.447102",
+            "lon" : "108.751999"
+          },
+          "DestAirportID" : "XIY",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 244.64110450314703,
+          "Origin" : "Kempegowda International Airport",
+          "OriginLocation" : {
+            "lat" : "13.1979",
+            "lon" : "77.706299"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "BLR",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Xi'an",
+          "FlightTimeHour" : 4.077351741719117,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "bzTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "TFFZYSH",
+          "DestCountry" : "JP",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Beijing",
+          "AvgTicketPrice" : 573.0766436985189,
+          "DistanceMiles" : 1097.3318128303997,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Kansai International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "CN",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 1765.984368987727,
+          "timestamp" : "2024-03-22T04:03:56",
+          "DestLocation" : {
+            "lat" : "34.4272995",
+            "lon" : "135.2440033"
+          },
+          "DestAirportID" : "KIX",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 103.8814334698663,
+          "Origin" : "Beijing Capital International Airport",
+          "OriginLocation" : {
+            "lat" : "40.08010101",
+            "lon" : "116.5849991"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "PEK",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Osaka",
+          "FlightTimeHour" : 1.7313572244977715,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "cjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "KWJY2SM",
+          "DestCountry" : "US",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "Tokoname",
+          "AvgTicketPrice" : 881.1937380054992,
+          "DistanceMiles" : 6872.61810341732,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Newark Liberty International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "JP",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 11060.406709026043,
+          "timestamp" : "2024-03-22T07:47:56",
+          "DestLocation" : {
+            "lat" : "40.69250107",
+            "lon" : "-74.16870117"
+          },
+          "DestAirportID" : "EWR",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 850.8005160789264,
+          "Origin" : "Chubu Centrair International Airport",
+          "OriginLocation" : {
+            "lat" : "34.85839844",
+            "lon" : "136.8049927"
+          },
+          "DestRegion" : "US-NJ",
+          "OriginAirportID" : "NGO",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Newark",
+          "FlightTimeHour" : 14.180008601315441,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "dTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "PVNKAA2",
+          "DestCountry" : "CH",
+          "OriginWeather" : "Hail",
+          "OriginCityName" : "Hyderabad",
+          "AvgTicketPrice" : 751.4539947048946,
+          "DistanceMiles" : 4417.537083808474,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Zurich Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "IN",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 7109.336800604665,
+          "timestamp" : "2024-03-22T07:17:56",
+          "DestLocation" : {
+            "lat" : "47.464699",
+            "lon" : "8.54917"
+          },
+          "DestAirportID" : "ZRH",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 394.9631555891481,
+          "Origin" : "Rajiv Gandhi International Airport",
+          "OriginLocation" : {
+            "lat" : "17.23131752",
+            "lon" : "78.42985535"
+          },
+          "DestRegion" : "CH-ZH",
+          "OriginAirportID" : "HYD",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Zurich",
+          "FlightTimeHour" : 6.582719259819134,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "eDTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "C0YW7XC",
+          "DestCountry" : "IN",
+          "OriginWeather" : "Sunny",
+          "OriginCityName" : "Denver",
+          "AvgTicketPrice" : 697.2935157199381,
+          "DistanceMiles" : 8776.888244201667,
+          "FlightDelay" : false,
+          "DestWeather" : "Cloudy",
+          "Dest" : "Kempegowda International Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "US",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 14125.032434476489,
+          "timestamp" : "2024-03-22T19:21:42",
+          "DestLocation" : {
+            "lat" : "13.1979",
+            "lon" : "77.706299"
+          },
+          "DestAirportID" : "BLR",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 1177.086036206374,
+          "Origin" : "Denver International Airport",
+          "OriginLocation" : {
+            "lat" : "39.86169815",
+            "lon" : "-104.6729965"
+          },
+          "DestRegion" : "SE-BD",
+          "OriginAirportID" : "DEN",
+          "OriginRegion" : "US-CO",
+          "DestCityName" : "Bangalore",
+          "FlightTimeHour" : 19.61810060343957,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "gTTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "99211I7",
+          "DestCountry" : "IT",
+          "OriginWeather" : "Clear",
+          "OriginCityName" : "Abu Dhabi",
+          "AvgTicketPrice" : 258.63247764548413,
+          "DistanceMiles" : 2976.462320954196,
+          "FlightDelay" : true,
+          "DestWeather" : "Heavy Fog",
+          "Dest" : "Turin Airport",
+          "FlightDelayType" : "Weather Delay",
+          "OriginCountry" : "AE",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 4790.15177745371,
+          "timestamp" : "2024-03-22T14:21:11",
+          "DestLocation" : {
+            "lat" : "45.200802",
+            "lon" : "7.64963"
+          },
+          "DestAirportID" : "TO11",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 735.4683434048827,
+          "Origin" : "Abu Dhabi International Airport",
+          "OriginLocation" : {
+            "lat" : "24.43300056",
+            "lon" : "54.65110016"
+          },
+          "DestRegion" : "IT-21",
+          "OriginAirportID" : "AUH",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Torino",
+          "FlightTimeHour" : 12.257805723414712,
+          "FlightDelayMin" : 300
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "hjTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "ZAKWJJ8",
+          "DestCountry" : "DE",
+          "OriginWeather" : "Rain",
+          "OriginCityName" : "Chengdu",
+          "AvgTicketPrice" : 809.397682343658,
+          "DistanceMiles" : 4776.884382760057,
+          "FlightDelay" : false,
+          "DestWeather" : "Clear",
+          "Dest" : "Munich Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "CN",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 7687.650220088602,
+          "timestamp" : "2024-03-22T18:21:13",
+          "DestLocation" : {
+            "lat" : "48.353802",
+            "lon" : "11.7861"
+          },
+          "DestAirportID" : "MUC",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 427.0916788938112,
+          "Origin" : "Chengdu Shuangliu International Airport",
+          "OriginLocation" : {
+            "lat" : "30.57850075",
+            "lon" : "103.9469986"
+          },
+          "DestRegion" : "DE-BY",
+          "OriginAirportID" : "CTU",
+          "OriginRegion" : "SE-BD",
+          "DestCityName" : "Munich",
+          "FlightTimeHour" : 7.118194648230187,
+          "FlightDelayMin" : 0
+        }
+      },
+      {
+        "_index" : "kibana_airlines",
+        "_type" : "_doc",
+        "_id" : "hzTHkY4Bo6y4JKDsaozq",
+        "_score" : 1.0,
+        "_source" : {
+          "FlightNum" : "FVN1EB2",
+          "DestCountry" : "CH",
+          "OriginWeather" : "Heavy Fog",
+          "OriginCityName" : "Warsaw",
+          "AvgTicketPrice" : 393.51030434373945,
+          "DistanceMiles" : 642.1409366028741,
+          "FlightDelay" : false,
+          "DestWeather" : "Sunny",
+          "Dest" : "Zurich Airport",
+          "FlightDelayType" : "No Delay",
+          "OriginCountry" : "PL",
+          "dayOfWeek" : 4,
+          "DistanceKilometers" : 1033.425663476216,
+          "timestamp" : "2024-03-22T13:51:21",
+          "DestLocation" : {
+            "lat" : "47.464699",
+            "lon" : "8.54917"
+          },
+          "DestAirportID" : "ZRH",
+          "Carrier" : "Kibana Airlines",
+          "Cancelled" : false,
+          "FlightTimeMin" : 93.9477875887469,
+          "Origin" : "Warsaw Chopin Airport",
+          "OriginLocation" : {
+            "lat" : "52.16569901",
+            "lon" : "20.96710014"
+          },
+          "DestRegion" : "CH-ZH",
+          "OriginAirportID" : "WAW",
+          "OriginRegion" : "PL-MZ",
+          "DestCityName" : "Zurich",
+          "FlightTimeHour" : 1.5657964598124485,
+          "FlightDelayMin" : 0
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+this will fail because we have to whitelist the host from the local node in the elasticsearch configuration file
+POST _reindex
+{
+  "source": {
+    "remote": {
+      "host": "http://34.234.164.91:9200",
+      "username": "elastic",
+      "password": "elastic_acg"
+    },
+    "index": "flights",
+    "query": {
+      "term": {
+        "Carrier": {
+          "value": "Logstash Airways"
+        }
+      }
+    }
+  },
+  "dest": {
+    "index": "logstash_airways"
+  }
+}
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "error" : {
+    "root_cause" : [
+      {
+        "type" : "illegal_argument_exception",
+        "reason" : "[34.234.164.91:9200] not whitelisted in reindex.remote.whitelist"    <-----------<<
+      }
+    ],
+    "type" : "illegal_argument_exception",
+    "reason" : "[34.234.164.91:9200] not whitelisted in reindex.remote.whitelist"
+  },
+  "status" : 400
+}
+
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+edit /etc/elasticsearch.yml 
+(to white list go down the file and add in the line)
+
+# Require explicit names when deleting indices:
+#
+#action.destructive_requires_name: true
+#
+reindex.remote.whitelist: "34.234.164.91:9200"     <--------------<< add this line to whitelist the server
+---------------------------------------------------
+systemctl restart elasticsearch
+service elasticsearch restart 
+/path/to/bin/ealsticsearch -d
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
