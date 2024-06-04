@@ -9,6 +9,34 @@ which you would need the document ID for,
 or we can do it based on the results of a query
 so update all documents that match a specific query.
 
+So some common use cases here for updating documents
+would be to pick up the mapping changes.
+So if you wanted to change the mappings of an index,
+you can do that even after things have already been indexed
+but the data won't actually pick up those changes
+until you update those documents.
+So you can actually do an update_by_query with no query
+which means it updates all documents,
+and you actually don't even perform any specific update.
+You just run that by itself
+and that will automatically update all the documents
+to another version and pick up those new mapping changes.
+Another use case here would be to update documents
+with a script to change their source values.
+So this is a really flexible way to update your documents
+because you can apply any logic you want with the script.
+In this case, this always uses the language Painless,
+which is an Elasticsearch scripting language.
+It's really easy to use and understand
+and there's really good documentation on it as well.
+So definitely check that out.
+And then another use case here
+will be to update documents with an ingest pipeline.
+Now, just like we mentioned in the previous lesson,
+we haven't talked about pipelines yet but we will.
+So again, just keep this in the back of your mind
+for that lesson.
+
 The (update) and (update_by-query)
 APIs enable the modification of documents after they have already been indexed.
 
