@@ -1,0 +1,739 @@
+Updating Documents
+------------------
+Update by document ID or query.
+
+So there's 2 different ways
+we can update a document in Elasticsearch.
+We can either do it explicitly for a specific document,
+which you would need the document ID for,
+or we can do it based on the results of a query
+so update all documents that match a specific query.
+
+The (update) and (update_by-query)
+APIs enable the modification of documents after they have already been indexed.
+
+Update documents to pick up mapping changes.
+
+Update documents with a script to change their source values.
+
+Update documents with an ingest pipeline.
+
+
+GET earthquakes/_search
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 9,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:44:18",
+          "Latitude" : 19.246,
+          "Magnitude" : 6.0,
+          "Longitude" : 145.616,
+          "Date" : "01/02/1965",
+          "Depth" : 131.6,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-02T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "19.246,145.616",
+          "ID" : "ISCGEM860706"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7xTEW48B8fnXy2vw2DDI",    <------------------------------------------<< id needed to updated the field in document
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:29:49",
+          "Latitude" : 1.863,
+          "Magnitude" : 5.8,
+          "Longitude" : 127.352,
+          "Date" : "01/04/1965",
+          "Depth" : 80.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",    <------------------------------------------<< Type Earthqukes to Natural
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-04T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "1.863,127.352",
+          "ID" : "ISCGEM860737"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:05:58",
+          "Latitude" : -20.579,
+          "Magnitude" : 6.2,
+          "Longitude" : -173.972,
+          "Date" : "01/05/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-05T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-20.579,-173.972",
+          "ID" : "ISCGEM860762"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "18:49:43",
+          "Latitude" : -59.076,
+          "Magnitude" : 5.8,
+          "Longitude" : -23.557,
+          "Date" : "01/08/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-08T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-59.076,-23.557",
+          "ID" : "ISCGEM860856"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:50",
+          "Latitude" : 11.938,
+          "Magnitude" : 5.8,
+          "Longitude" : 126.427,
+          "Date" : "01/09/1965",
+          "Depth" : 15.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-09T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "11.938,126.427",
+          "ID" : "ISCGEM860890"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "8xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:36:32",
+          "Latitude" : -13.405,
+          "Magnitude" : 6.7,
+          "Longitude" : 166.629,
+          "Date" : "01/10/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-10T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.405,166.629",
+          "ID" : "ISCGEM860922"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9BTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:32:25",
+          "Latitude" : 27.357,
+          "Magnitude" : 5.9,
+          "Longitude" : 87.867,
+          "Date" : "01/12/1965",
+          "Depth" : 20.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-12T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "27.357,87.867",
+          "ID" : "ISCGEM861007"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9RTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "23:17:42",
+          "Latitude" : -13.309,
+          "Magnitude" : 6.0,
+          "Longitude" : 166.212,
+          "Date" : "01/15/1965",
+          "Depth" : 35.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-15T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-13.309,166.212",
+          "ID" : "ISCGEM861111"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9hTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "11:32:37",
+          "Latitude" : -56.452,
+          "Magnitude" : 6.0,
+          "Longitude" : -27.043,
+          "Date" : "01/16/1965",
+          "Depth" : 95.0,
+          "Source" : "ISCGEMSUP",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-16T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-56.452,-27.043",
+          "ID" : "ISCGEMSUP861125"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "9xTEW48B8fnXy2vw2DDI",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "10:43:17",
+          "Latitude" : -24.563,
+          "Magnitude" : 5.8,
+          "Longitude" : 178.487,
+          "Date" : "01/17/1965",
+          "Depth" : 565.0,
+          "Source" : "ISCGEM",
+          "Type" : "Earthquake",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-17T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "-24.563,178.487",
+          "ID" : "ISCGEM861148"
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+So that's how we can update
+an individual document.
+
+to do this specifically for this document,
+I need to get the ID.
+So I want this document ID up here
+
+POST earthquakes/_update/7hTEW48B8fnXy2vw2DDI
+{
+  "doc": {
+    "Type": "Natural"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "_index" : "earthquakes",
+  "_type" : "_doc",
+  "_id" : "7hTEW48B8fnXy2vw2DDI",
+  "_version" : 2,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 23411,
+  "_primary_term" : 36
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+GET earthquakes/_doc/7hTEW48B8fnXy2vw2DDI
+
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "_index" : "earthquakes",
+  "_type" : "_doc",
+  "_id" : "7hTEW48B8fnXy2vw2DDI",
+  "_version" : 2,
+  "_seq_no" : 23411,
+  "_primary_term" : 36,
+  "found" : true,
+  "_source" : {
+    "Status" : "Automatic",
+    "Magnitude Source" : "ISCGEM",
+    "Time" : "13:44:18",
+    "Latitude" : 19.246,
+    "Magnitude" : 6.0,
+    "Longitude" : 145.616,
+    "Date" : "01/02/1965",
+    "Depth" : 131.6,
+    "Source" : "ISCGEM",
+    "Type" : "Natural",
+    "Magnitude Type" : "MW",
+    "@timestamp" : "1965-01-02T00:00:00.000-05:00",
+    "Location Source" : "ISCGEM",
+    "location" : "19.246,145.616",
+    "ID" : "ISCGEM860706"
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+if we wanted to do this for all documents
+that had Type earthquake,
+so we can do that with an (update by query.)
+So let's go ahead and do, I'll do this up here.
+So if we do a POST to earthquakes,
+now we can do an update_by_query API.
+
+
+POST earthquakes/_update_by_query    <--------------------------------<< update_by_query
+{
+  "script": {      <-----------------------------------<< instructor mentioned that the script will always be painless
+    "source": "ctx._source.Type = 'Natural'"    <--------------------------------<< Natural is the field
+  },
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Earthquake"
+      }
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+
+{
+  "took" : 9949,
+  "timed_out" : false,
+  "total" : 23230,
+  "updated" : 23230,
+  "deleted" : 0,
+  "batches" : 24,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+we will not get any result which is good 
+
+GET earthquakes/_search
+{
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Earthquake"
+      }
+    }
+  }
+}
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 18,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 0,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+we did get the result since the document has been updated 
+
+GET earthquakes/_search
+{
+  "query": {
+    "term": {
+      "Type": {
+        "value": "Natural"
+      }
+    }
+  }
+}
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+{
+  "took" : 17,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 10000,
+      "relation" : "gte"
+    },
+    "max_score" : 0.36925498,
+    "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "7hTEW48B8fnXy2vw2DDI",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Automatic",
+          "Magnitude Source" : "ISCGEM",
+          "Time" : "13:44:18",
+          "Latitude" : 19.246,
+          "Magnitude" : 6.0,
+          "Longitude" : 145.616,
+          "Date" : "01/02/1965",
+          "Depth" : 131.6,
+          "Source" : "ISCGEM",
+          "Type" : "Natural",
+          "Magnitude Type" : "MW",
+          "@timestamp" : "1965-01-02T00:00:00.000-05:00",
+          "Location Source" : "ISCGEM",
+          "location" : "19.246,145.616",
+          "ID" : "ISCGEM860706"
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "ghTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "US",
+          "Time" : "10:09:06",
+          "Latitude" : 35.336,
+          "Magnitude" : 6.3,
+          "Longitude" : -35.924,
+          "Date" : "05/25/2010",
+          "Depth" : 10.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 385.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 31.7,
+          "@timestamp" : "2010-05-25T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "35.336,-35.924",
+          "ID" : "USP000HD5E",
+          "Root Mean Square" : 1.2
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "gxTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "US",
+          "Time" : "08:53:08",
+          "Latitude" : 25.773,
+          "Magnitude" : 6.5,
+          "Longitude" : 129.944,
+          "Date" : "05/26/2010",
+          "Depth" : 10.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 548.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 9.9,
+          "@timestamp" : "2010-05-26T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "25.773,129.944",
+          "ID" : "USP000HD6J",
+          "Root Mean Square" : 0.89
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "hBTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "GCMT",
+          "Time" : "17:14:47",
+          "Latitude" : -13.698,
+          "Magnitude" : 7.2,
+          "Longitude" : 166.643,
+          "Date" : "05/27/2010",
+          "Depth" : 31.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 327.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 11.7,
+          "@timestamp" : "2010-05-27T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "-13.698,166.643",
+          "ID" : "USP000HD84",
+          "Root Mean Square" : 1.08
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "hRTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "US",
+          "Time" : "17:24:23",
+          "Latitude" : -13.884,
+          "Magnitude" : 5.6,
+          "Longitude" : 166.73,
+          "Date" : "05/27/2010",
+          "Depth" : 35.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 97.0,
+          "Magnitude Type" : "MB",
+          "Magnitude Seismic Stations" : 27.0,
+          "Azimuthal Gap" : 32.3,
+          "@timestamp" : "2010-05-27T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "-13.884,166.73",
+          "ID" : "USP000HD86",
+          "Root Mean Square" : 0.9
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "hhTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "GCMT",
+          "Time" : "20:48:00",
+          "Latitude" : -13.658,
+          "Magnitude" : 6.1,
+          "Longitude" : 166.745,
+          "Date" : "05/27/2010",
+          "Depth" : 35.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 161.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 32.2,
+          "@timestamp" : "2010-05-27T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "-13.658,166.745",
+          "ID" : "USP000HD8V",
+          "Root Mean Square" : 0.96
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "hxTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "GCMT",
+          "Time" : "04:25:59",
+          "Latitude" : -14.048,
+          "Magnitude" : 5.8,
+          "Longitude" : 166.606,
+          "Date" : "05/28/2010",
+          "Depth" : 34.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 196.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 30.8,
+          "@timestamp" : "2010-05-28T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "-14.048,166.606",
+          "ID" : "USP000HD9C",
+          "Root Mean Square" : 1.1
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "iBTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "GCMT",
+          "Time" : "02:29:49",
+          "Latitude" : 33.165,
+          "Magnitude" : 5.8,
+          "Longitude" : 96.07,
+          "Date" : "05/29/2010",
+          "Depth" : 7.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 304.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 25.0,
+          "@timestamp" : "2010-05-29T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "33.165,96.07",
+          "ID" : "USP000HDAW",
+          "Root Mean Square" : 1.05
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "iRTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "GCMT",
+          "Time" : "10:16:00",
+          "Latitude" : 6.948,
+          "Magnitude" : 6.0,
+          "Longitude" : 124.025,
+          "Date" : "05/31/2010",
+          "Depth" : 20.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 234.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 18.5,
+          "@timestamp" : "2010-05-31T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "6.948,124.025",
+          "ID" : "USP000HDDW",
+          "Root Mean Square" : 1.06
+        }
+      },
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "ihTEW48B8fnXy2vw_3-_",
+        "_score" : 0.36925498,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "GCMT",
+          "Time" : "19:51:46",
+          "Latitude" : 11.132,
+          "Magnitude" : 6.5,
+          "Longitude" : 93.471,
+          "Date" : "05/31/2010",
+          "Depth" : 112.0,
+          "Source" : "US",
+          "Type" : "Natural",
+          "Depth Seismic Stations" : 422.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 19.2,
+          "@timestamp" : "2010-05-31T00:00:00.000-04:00",
+          "Location Source" : "US",
+          "location" : "11.132,93.471",
+          "ID" : "USP000HDE8",
+          "Root Mean Square" : 1.09
+        }
+      }
+    ]
+  }
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+--------------------
+CONSOLE OUTPUT 
+--------------------
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
