@@ -26,8 +26,38 @@ which is possible with dynamic templates.
 So we can actually customize the dynamic mapping behavior
 explicitly with dynamic templates.
 
+Sample: 
+--------
+{
+  "component_templates" : [
+    {
+      "name" : "string_as_keywords",
+      "component_template" : {
+        "template" : {
+          "mappings" : {
+            "dynamic_templates" : [
+              {
+                "strings_as_keywords" : {
+                "mapping" : {
+                  "ignore_above": 256,
+                  "type" : "keyword"
+                },
+                "match_mapping_type" : "string"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]
+}
+
+
+
+
 Explicit Mapping example for comparison:
--------------------------
+----------------------------------------
 GET _component_template/product_review_mappings
 
 {
