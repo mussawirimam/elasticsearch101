@@ -5,7 +5,8 @@ https://stackoverflow.com/questions/70173051/what-are-the-differences-between-di
 https://www.youtube.com/@swarmee3263/videos
 
 https://www.youtube.com/watch?v=Y8oHEHLzFik:
-    Index Templates - An index template consist of settings, mappings and alias. It can also be a collection Component Templates
+
+Index Templates - An index template consist of settings, mappings and alias. It can also be a collection Component Templates
 
 Component Templates - These are nothing but resuable blocks that configure settings, mappings and alias. These templates can be used to create an Index Template
 
