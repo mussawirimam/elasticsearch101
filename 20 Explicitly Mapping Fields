@@ -1,3 +1,9 @@
+
+As the data gets ingested the fields gets mapped by default data types <------ This type of mapping is not explicit mapping 
+
+So there is dyamic mapping and explicit mapping. Both of them will end up effecting the mapping section of the index. 
+
+
   In this lesson, we're going to showcase
 how to explicitly map fields in Elasticsearch.
 So we can explicitly, or manually, define the fields
