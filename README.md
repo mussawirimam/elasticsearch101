@@ -6,6 +6,7 @@ https://www.youtube.com/@swarmee3263/videos
 
 https://www.youtube.com/watch?v=Y8oHEHLzFik:
     Index Templates - An index template consist of settings, mappings and alias. It can also be a collection Component Templates
+
 Component Templates - These are nothing but resuable blocks that configure settings, mappings and alias. These templates can be used to create an Index Template
 
 first you will create a component template which you can use to call in the index template as compose.... Because you dont want to keep on writing the mappings and the requirements again and again in the index..
