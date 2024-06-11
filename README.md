@@ -12,6 +12,9 @@ Component Templates - These are nothing but resuable blocks that configure setti
 
 first you will create a component template which you can use to call in the index template as compose.... Because you dont want to keep on writing the mappings and the requirements again and again in the index..
 
+Dynamic index mappings in Elasticsearch and OpenSearch:
+https://www.youtube.com/watch?v=KBMTES9lMOM
+
 https://emojicombos.com
 Welcome to Emoji Combos! The database and this site are still being constructed, but in the mean time you can use the search box below. You might also like to check out our image to dot art generator, our dot art maker, our emoji art maker, and this AI Chat.
 
