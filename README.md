@@ -10,7 +10,7 @@ Index Templates - An index template consist of settings, mappings and alias. It 
 
 Component Templates - These are nothing but resuable blocks that configure settings, mappings and alias. These templates can be used to create an Index Template
 
-first you will create a component template which you can use to call in the index template as compose.... Because you dont want to keep on writing the mappings and the requirements again and again in the index..
+first you will create a component template which you can use to call in the index template as compose.... Because you dont want to keep on writing the mappings and the requirements again and again for indexing.. It would consume a lot of your time.
 
 Dynamic index mappings in Elasticsearch and OpenSearch:
 https://www.youtube.com/watch?v=KBMTES9lMOM
