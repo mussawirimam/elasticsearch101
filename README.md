@@ -4,7 +4,7 @@ list of useful website:
 https://stackoverflow.com/questions/70173051/what-are-the-differences-between-different-elastic-data-stream-types
 https://www.youtube.com/@swarmee3263/videos
 
-https://www.youtube.com/watch?v=Y8oHEHLzFik:
+How to use Index Templates in Elasticsearch: https://www.youtube.com/watch?v=Y8oHEHLzFik:
 
 Index Templates - An index template consist of settings, mappings and alias. It can also be a collection Component Templates
 
