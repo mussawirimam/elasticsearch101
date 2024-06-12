@@ -28,7 +28,7 @@ PUT _component_template/product_review_mappings
       "analysis": {
         "analyzer": {
           "user_reviews" : {
-            "type": "customer",
+            "type": "custom",
             "tokenizer": "classic",
             "char_filter": ["social_acronyms"],
             "filters": ["lowercase", "english_stop"]
@@ -57,3 +57,95 @@ PUT _component_template/product_review_mappings
     }
   }
 }
+----------------
+CONSOLE OUTPUT
+----------------
+{
+  "acknowledged" : true
+}
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
+
+GET _component_template/product_review_mappings
+
+
+----------------
+CONSOLE OUTPUT
+----------------
+{
+  "component_templates" : [
+    {
+      "name" : "product_review_mappings",
+      "component_template" : {
+        "template" : {
+          "settings" : {
+            "index" : {
+              "analysis" : {
+                "filter" : {
+                  "english_stop" : {
+                    "type" : "stop",
+                    "ignore_cas" : "true",
+                    "stopwords" : [
+                      "_english_"
+                    ]
+                  }
+                },
+                "analyzer" : {
+                  "user_reviews" : {
+                    "char_filter" : [
+                      "social_acronyms"
+                    ],
+                    "filters" : [
+                      "lowercase",
+                      "english_stop"
+                    ],
+                    "type" : "custom",
+                    "tokenizer" : "classic"
+                  }
+                },
+                "char_filter" : {
+                  "social_acronyms" : {
+                    "type" : "mapping",
+                    "mappings" : [
+                      "imo => in my opinion",
+                      "b2b => business to business",
+                      "b2c => business to consumer",
+                      "roi => return on investment",
+                      "afaik => as far as I know"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "mappings" : {
+            "properties" : {
+              "reviews" : {
+                "properties" : {
+                  "review" : {
+                    "analyzer" : "user_reviews",
+                    "type" : "text"
+                  },
+                  "last_name" : {
+                    "type" : "keyword"
+                  },
+                  "first_name" : {
+                    "type" : "keyword"
+                  }
+                }
+              },
+              "product_id" : {
+                "type" : "long"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+
+--------------------
+CONSOLE OUTPUT ENDS
+--------------------
