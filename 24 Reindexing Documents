@@ -8,6 +8,8 @@ Specify the local index to reindex into.
 🚰
 Pipeline:
 Specify an ingest pipeline to modify the data in flight before it's written to the destination index.
+  - We can establish an ingest node pipeline and run our data through pipeline before it reaches the destination. 
+So, in between source and destination, we can actually parse, and mutate, and enrich our dta with ingest pipelines in flight. 
 
 GET _cat/indices?v
 
