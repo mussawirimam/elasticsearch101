@@ -3,13 +3,11 @@ Multi-Fields
 Index the same (field) in multiple ways.
 Multi-fields allow you to index fields multiple times. This way, you can have one (field) mapped in different ways depending on the potential use cases.
 
-Map a string as both an analyzed (text) field and non analyzed (keyword) field.
+Some common use cases would be:
+To map a string as both an analyzed (text) field and non analyzed (keyword) field.
 
 Map an analyzed (text) field with multiple different analyzers.
 
-My Hypothesis:
-----------------
-if you type any string in it the objective of custom analyzer is that it automatically detects what DataType it is, and accordingly add that DataType to the field. 
 
 
 
