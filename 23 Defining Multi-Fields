@@ -8,6 +8,9 @@ To map a string as both an analyzed (text) field and non analyzed (keyword) fiel
 
 Map an analyzed (text) field with multiple different analyzers.
 
+hyphothesis:
+whenever you see the autosuggestion in devtools and there is a .keyword and text for the fields. This is how we add this behavior for the same field as text and keyword; meaning anaylyzed and non-analyzed field
+
 
 
 
