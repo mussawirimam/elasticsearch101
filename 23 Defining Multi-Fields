@@ -73,7 +73,7 @@ PUT _component_template/strings
             "mapping": {
               "type": "text".
               "analyzer": "standard",
-              "fields": {
+              "fields": {    <---------------- specifying the multi-field parameters and within it we can specify our multi-field
                 "keyword": {
                   "type": "keyword"
                 }
