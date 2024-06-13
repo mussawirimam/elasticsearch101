@@ -122,7 +122,7 @@ PUT _component_template/integers_as_floats    <---------<< integers as floats. A
     "mappings": {    <---------<< go ahead and define under template, mappings, but now this time, instead of defining the properties of our mapping, so that's where we would put our explicit mappings, we're going to define dynamic templates.
       "dynamic_templates": [    <----------<<   we're going to define dynamic templates.  this is going to be an array of objects. We'll do an array here. So you can have as many templates as you like.
         {
-          "integers_as_floats": {     <---------<<  we'll go ahead and specify our dynamic template here integer, integers as floats.
+          "integers_as_floats": {     <---------<<  we'll go ahead and specify our dynamic template here integer, integers as floats. (this is also a name of the name of the Dynamic mapping of the dynamic template)
             "match_mapping_type": "long",    <---------<< we need to specify the mapping type that we want to catch. So we'll do a match mapping type. So you want to look for type long. So by default, Elasticsearch is going to index integers as longs and floats as doubles, that way you can allocate larger numbers. So we're going to look for the type long. So these are integers.
             "mapping": {    <-------<< then we're going to define their mapping as a type double, which is a float.
               "type": "double" 
