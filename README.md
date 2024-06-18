@@ -23,6 +23,8 @@ https://www.youtube.com/watch?v=z5BxD1WNx6E
 https://emojicombos.com
 Welcome to Emoji Combos! The database and this site are still being constructed, but in the mean time you can use the search box below. You might also like to check out our image to dot art generator, our dot art maker, our emoji art maker, and this AI Chat.
 
+How after creating a Component/Index template you apply the changes to the index? 
+
 https://albright.pro/dotart/
 
 https://text-symbols.com/cool/
