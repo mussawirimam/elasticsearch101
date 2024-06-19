@@ -1,3 +1,5 @@
+. to white list ip-address, if the source or destination is a remote server
+
 📤 source:
 Specify the local or remote source index and filter the source with a query.
 
