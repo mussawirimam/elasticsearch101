@@ -1,0 +1,156 @@
+Ingest Pipelines
+Process and enrich your data.
+1) Pipelines use processors to perform some action on a document.
+
+2) Processors are executed in order.
+
+3) Ingest pipelines can be used in the update_by-query and reindex APls.
+
+GET earthquakes/_search
+-------------------
+CONSOLE OUTPUT
+-------------------
+  "hits" : [
+      {
+        "_index" : "earthquakes",
+        "_type" : "_doc",
+        "_id" : "uxTEW48B8fnXy2vw-H5b",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "US",
+          "Time" : "06:59:05",
+          "Latitude" : -47.911,
+          "Magnitude" : 6.2,
+          "Longitude" : 99.593,
+          "Date" : "02/05/2010",
+          "Depth" : 1.0,
+          "Source" : "US",
+          "Type" : "Rock Burst",
+          "Depth Seismic Stations" : 203.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 43.9,
+          "@timestamp" : "2010-02-05T00:00:00.000-05:00",
+          "Location Source" : "US",
+          "location" : "-47.911,99.593",
+          "ID" : "USP000H6Z1",
+          "Root Mean Square" : 1.14
+        }
+      },
+-------------------
+CONSOLE OUTPUT END
+-------------------
+PUT _ingest/pipeline/earthquakes_refactor
+{
+  "description": "refractoring the earthquakes dataset",
+  "processors": [
+    {
+      "remove": {
+        "field": ["Latitude", "Longitude"]
+      }
+    },
+    {
+      "set": {
+        "field": "timestamp",
+        "value": "{{_source.Date}} {{_source.Time}}"
+      }
+    },
+    {
+      "date": {
+        "field": "timestamp",
+        "formats": ["MM/dd/yyyy HH:mm:ss"]
+      }
+    },
+    {
+      "remove": {
+        "field": ["Date", "Time", "timestamp"]
+      }
+    }
+  ]
+}
+
+-------------------
+CONSOLE OUTPUT
+-------------------
+{
+  "acknowledged" : true
+}
+
+-------------------
+CONSOLE OUTPUT END
+-------------------
+POST _reindex
+{
+ "source": {
+   "index": "earthquakes"
+ },
+ "dest": {
+   "index": "earthquakes_refactored"
+   , "pipeline": "earthquakes_refactor"
+ }
+}
+
+-------------------
+CONSOLE OUTPUT
+-------------------
+{
+  "took" : 7354,
+  "timed_out" : false,
+  "total" : 23411,
+  "updated" : 0,
+  "created" : 23411,
+  "deleted" : 0,
+  "batches" : 24,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+
+-------------------
+CONSOLE OUTPUT END
+-------------------
+GET earthquakes_refactored/_search
+
+-------------------
+CONSOLE OUTPUT
+-------------------
+    "hits" : [
+      {
+        "_index" : "earthquakes_refactored",
+        "_type" : "_doc",
+        "_id" : "uxTEW48B8fnXy2vw-H5b",
+        "_score" : 1.0,
+        "_source" : {
+          "Status" : "Reviewed",
+          "Magnitude Source" : "US",
+          "Magnitude" : 6.2,
+          "Depth" : 1.0,
+          "Source" : "US",
+          "Type" : "Rock Burst",
+          "Depth Seismic Stations" : 203.0,
+          "Magnitude Type" : "MWC",
+          "Azimuthal Gap" : 43.9,
+          "@timestamp" : "2010-02-05T06:59:05.000Z",
+          "Location Source" : "US",
+          "location" : "-47.911,99.593",
+          "ID" : "USP000H6Z1",
+          "Root Mean Square" : 1.14
+        }
+      },
+-------------------
+CONSOLE OUTPUT END
+-------------------
+
+-------------------
+CONSOLE OUTPUT
+-------------------
+-------------------
+CONSOLE OUTPUT END
+-------------------
