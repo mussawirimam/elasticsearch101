@@ -147,9 +147,160 @@ CONSOLE OUTPUT
 -------------------
 CONSOLE OUTPUT END
 -------------------
-
+#So I want to add a array to each document called words, and that array is going to be each individual word in the text entry field, then I want to add another field that's called word count,
+# which tells me how many words there are in the text entry field. Just another way of breaking this text entry field out. To do some analysis on it. 
+GET shakespeare/_search
 -------------------
 CONSOLE OUTPUT
+-------------------
+"hits" : [
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "35752",
+        "_score" : 1.0,
+        "_source" : {
+          "type" : "line",
+          "line_id" : 35753,
+          "play_name" : "Hamlet",
+          "speech_number" : 15,
+          "line_number" : "4.7.69",
+          "speaker" : "KING CLAUDIUS",
+          "text_entry" : "To an exploit, now ripe in my device,"
+        }
+      },
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "35753",
+        "_score" : 1.0,
+        "_source" : {
+          "type" : "line",
+          "line_id" : 35754,
+          "play_name" : "Hamlet",
+          "speech_number" : 15,
+          "line_number" : "4.7.70",
+          "speaker" : "KING CLAUDIUS",
+          "text_entry" : "Under the which he shall not choose but fall:"
+        }
+-------------------
+CONSOLE OUTPUT END
+-------------------
+PUT _ingest/pipeline/shakespeare_words
+{
+  "description": "Create the words array and word_count fields",
+  "processors": [
+    {
+      "split": {
+        "field": "text_entry",
+        "separator": "\\s+",
+        "target_field" : "words"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx.word_count = ctx.words.length"
+      }
+    }
+  ]
+}
+-------------------
+CONSOLE OUTPUT 
+-------------------
+{
+  "acknowledged" : true
+}
+-------------------
+CONSOLE OUTPUT END
+-------------------
+# using update by query to directly inject the changes into the index without re-indexing
+
+POST shakespeare/_update_by_query?pipeline=shakespeare_words
+
+-------------------
+CONSOLE OUTPUT 
+-------------------
+{
+  "took" : 20906,
+  "timed_out" : false,
+  "total" : 111396,
+  "updated" : 111396,
+  "deleted" : 0,
+  "batches" : 112,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+
+-------------------
+CONSOLE OUTPUT END
+-------------------
+GET shakespeare/_search
+
+-------------------
+CONSOLE OUTPUT 
+-------------------
+    "hits" : [
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "42398",
+        "_score" : 1.0,
+        "_source" : {
+          "play_name" : "Henry VIII",
+          "speech_number" : 110,
+          "text_entry" : "O Cromwell,",
+          "words" : [
+            "O",
+            "Cromwell,"
+          ],
+          "type" : "line",
+          "line_id" : 42399,
+          "word_count" : 2,
+          "line_number" : "3.2.523",
+          "speaker" : "CARDINAL WOLSEY"
+        }
+      },
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "42399",
+        "_score" : 1.0,
+        "_source" : {
+          "play_name" : "Henry VIII",
+          "speech_number" : 110,
+          "text_entry" : "Thou fallst a blessed martyr! Serve the king;",
+          "words" : [
+            "Thou",
+            "fallst",
+            "a",
+            "blessed",
+            "martyr!",
+            "Serve",
+            "the",
+            "king;"
+          ],
+          "type" : "line",
+          "line_id" : 42400,
+          "word_count" : 8,
+          "line_number" : "3.2.524",
+          "speaker" : "CARDINAL WOLSEY"
+        }
+      },
+      {
+-------------------
+CONSOLE OUTPUT END
+-------------------
+-------------------
+CONSOLE OUTPUT 
 -------------------
 -------------------
 CONSOLE OUTPUT END
