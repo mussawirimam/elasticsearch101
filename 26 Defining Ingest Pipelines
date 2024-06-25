@@ -299,9 +299,77 @@ CONSOLE OUTPUT
 -------------------
 CONSOLE OUTPUT END
 -------------------
+GET _cat/indices?v
+GET shakespeare/_search
+DELETE shakespeare_refractor
+
+GET shakespeare_refractor/_search
+
+POST _reindex
+{
+ "source": {
+   "index": "shakespeare"
+ },
+ "dest": {
+   "index": "shakespeare_refractor"
+   , "pipeline": "shakespeare_refractor"
+ }
+}
+
+PUT _ingest/pipeline/shakespeare_refractor
+{
+  "description": "refactoring the Shakespeare dataset",
+  "processors": [
+    {
+      "set": {
+        "field": "play_name_two",
+        "value": "{{play_name}}"
+      }
+    },
+    {
+      "remove": {
+        "field": "play_name"
+      }
+    }
+  ]
+}
+
 -------------------
 CONSOLE OUTPUT 
 -------------------
+Document before the ingest pipeline
+      {
+        "_index" : "shakespeare",
+        "_type" : "_doc",
+        "_id" : "0",
+        "_score" : 1.0,
+        "_source" : {
+          "type" : "act",
+          "line_id" : 1,
+          "play_name" : "Henry IV",
+          "speech_number" : "",
+          "line_number" : "",
+          "speaker" : "",
+          "text_entry" : "ACT I"
+        }
+-----------------------------
+Document after the ingest pipeline applied
+    "hits" : [
+      {
+        "_index" : "shakespeare_refractor",
+        "_type" : "_doc",
+        "_id" : "54590",
+        "_score" : 1.0,
+        "_source" : {
+          "play_name_two" : "Loves Labours Lost",
+          "speech_number" : 96,
+          "text_entry" : "Shall we resolve to woo these girls of France?",
+          "type" : "line",
+          "line_id" : 54591,
+          "line_number" : "4.3.380",
+          "speaker" : "LONGAVILLE"
+        }
+      },
 -------------------
 CONSOLE OUTPUT END
 -------------------
