@@ -1,0 +1,21 @@
+first thing is that you have to have a data/log
+1st get the data example: 
+in the message field you see that you need to break down the log: "xyz" from the message field
+
+2nd you will create the pipeline to break the field and use the correct processors accordingly
+
+3rd push the pipeline on the system
+
+4th simulate your pipeline on the data
+
+5th put the pipeline inside the index template settings 
+
+6th rollover the index with the pipeline 
+
+go through the documentations below:
+https://opensearch.org/docs/latest/ingest-pipelines/
+https://opensearch.org/docs/latest/ingest-pipelines/create-ingest/
+https://opensearch.org/docs/latest/ingest-pipelines/simulate-ingest/
+https://opensearch.org/docs/latest/ingest-pipelines/get-ingest/
+https://opensearch.org/docs/latest/ingest-pipelines/delete-ingest/
+https://opensearch.org/docs/latest/ingest-pipelines/processors/index-processors/
