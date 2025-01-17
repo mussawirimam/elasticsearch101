@@ -1,10 +1,16 @@
 steps of logstash
 
-1. filebeat agent will be setup on the server which monitors the file that you have specified
-2. you create a logstash pipeline using the processors like gsub to remove and replace the lines with help of regex
-  a. you can click on create and deploy 
-3. on the logstash server, you can monitor the logs if there are any errors or if the your code from kibana got successfulyy deployed using tail -f command on log file
-4. the file that file beat is monitoring from step 1, you generate the logs so that it can show up on the kibana discover page.
+1. login on filebeat agent server where filbeat will be setup on the server which monitors the file that you have specified
+2. on kibana, click on stack management and then ingest pipeline
+    a. you create a logstash pipeline using the processors like gsub to remove and replace the lines with help of regex)
+    b. you can click on create and deploy 
+
+3. login on the logstash server, 
+    a. go to logstash log file directory
+      you can monitor the logs if there are any errors or not and if the your code from kibana got successfulyy deployed using tail -f command on log file
+
+4. go on the server where the filebeat server from step 1 which is monitoring the specified file
+    the file that file beat is monitoring from step 1, generate the logs so that it can show up on the kibana discover page... (you can yank and paste a new line in file)
 5. now you look at the changes that took place or not from the step 2 
 
 
