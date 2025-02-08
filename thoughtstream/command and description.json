@@ -56,7 +56,7 @@ kibana_sample_data_ecommerce        0 p STARTED   4675   4.1mb 172.31.113.54 nod
 .tasks                              0 p STARTED      2   7.8kb 172.31.113.54 node-1
 .kibana_task_manager_7.13.4_001     0 p STARTED     11 486.4kb 172.31.113.54 node-1
 
-### within the indices exists indexes, within the index exists documents. And documents are mapped/ingested/aggregated
+// within the indices exists indexes, within the index exists documents. And documents are mapped/ingested/aggregated
 GET /_cat/indices
 green open .apm-agent-configuration            6klEWlk6QPOCHhPTl7wnEQ 1 0      0    0    208b    208b
 green open metricbeat-7.13.4-2025.02.08-000001 vZSXcJwwR3uvAGg0wSlNlA 1 0  18436    0  10.3mb  10.3mb
