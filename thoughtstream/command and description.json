@@ -345,3 +345,82 @@ GET shakespeare/_search
     ]
   }
 }
+
+
+### This will give you the settings (such as the number of shards, replicas, etc.) for the shakespeare index.
+### If you're looking to define or retrieve an index template (which could define mappings, settings, etc. for indices)
+GET shakespeare/_settings
+{
+  "shakespeare" : {
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "shakespeare",
+        "creation_date" : "1738973848294",
+        "number_of_replicas" : "0",
+        "uuid" : "j8TnCiyVSeqKAoB_gWdtCw",
+        "version" : {
+          "created" : "7130499"
+        }
+      }
+    }
+  }
+}
+
+### lists all the templates for the indexes
+GET /_cat/templates
+metricbeat-7.13.4                         [metricbeat-7.13.4-*]        1                  
+.monitoring-beats                         [.monitoring-beats-7-*]      0          7120099 
+.monitoring-kibana                        [.monitoring-kibana-7-*]     0          7120099 
+.ml-notifications-000001                  [.ml-notifications-000001]   0          7130499 
+.monitoring-alerts-7                      [.monitoring-alerts-7]       0          7120099 
+.management-beats                         [.management-beats]          0          70000   
+.transform-notifications-000002           [.transform-notifications-*] 0          7130499 
+.kibana-event-log-7.13.4-template         [.kibana-event-log-7.13.4-*] 0                  
+.ml-anomalies-                            [.ml-anomalies-*]            0          7130499 
+.ml-state                                 [.ml-state*]                 0          7130499 
+.kibana_security_session_index_template_1 [.kibana_security_session_1] 1000               
+.ml-stats                                 [.ml-stats-*]                0          7130499 
+.monitoring-logstash                      [.monitoring-logstash-7-*]   0          7120099 
+filebeat-7.13.4                           [filebeat-7.13.4-*]          1                  
+.monitoring-es                            [.monitoring-es-7-*]         0          7120099 
+ilm-history                               [ilm-history-5*]             2147483647 5       []
+.slm-history                              [.slm-history-5*]            2147483647 5       []
+synthetics                                [synthetics-*-*]             100        0       [synthetics-mappings, synthetics-settings]
+metrics                                   [metrics-*-*]                100        0       [metrics-mappings, metrics-settings]
+.watch-history-13                         [.watcher-history-13*]       2147483647 13      []
+logs                                      [logs-*-*]                   100        0       [logs-mappings, logs-settings]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### ingest pipeline steps
+1. you create a pipeline 
+2. you put the pipeline on the sytem 
+3. you will create put the pipeline into the rollover ism (in setting/template)
+4. you simulate your pipleline
+5. you post the pipeline to take the effect for the next rollover index 
+
