@@ -1,0 +1,287 @@
+GET _cat/indices?v
+
+GET accounts/_search
+
+POST _reindex
+{
+  "source": {
+    "remote": {
+      "host": "http://10.0.1.101:9200",
+      "username": "elastic",
+      "password": "elastic_acg"
+    },
+    "index": "accounts"
+  },
+  "dest": {
+    "index": "accounts",
+    "pipeline": "migrate_accounts"
+  }
+}
+
+GET _ingest/pipeline
+GET _ingest/pipeline/migrate_accounts
+PUT _ingest/pipeline/migrate_accounts
+{
+  "description": "refractoring accounts dataset and adding a bonus five percent",
+  "processors": [
+    {
+     "remove": {
+       "field": "account_number"
+     } 
+    },
+    {
+      "set": {
+        "field": "_source.fullname",
+        "value": "{{_source.firstname}} {{_source.lastname}}"
+      }
+    },
+    {
+      "script": {
+        "description": "adds a bonus and increments the bonus counter",
+        "source": """
+          ctx.balance += ctx.balance * 0.5;
+          if(ctx.bonus_pct == null) {
+            ctx.bonus_pct = 5;
+          }
+        """
+      }
+    }
+  ]
+}
+
+
+
+PUT /_ingest/pipeline/drop-pii
+{
+  "description": "Pipeline that prevents PII from being indexed",
+  "processors": [
+    {
+      "drop": {
+        "if": "ctx.fullname == 'Duke' && ctx.fullname == 'Hattie'" 
+      }
+    }
+  ]
+}
+#|| is used for OR condition
+# && is used for AND condition
+
+PUT _ingest/pipeline/migrate_accountstwo
+{
+  "description": "Refactoring accounts dataset and adding a five percent bonus",
+  "processors": [
+    {
+      "remove": {
+        "field": "account_number"
+      }
+    },
+    {
+      "set": {
+        "field": "fullname",
+        "value": "{{firstname}} {{lastname}}"
+      }
+    },
+    {
+      "set": {
+        "field": "xyz",
+        "value": "{{firstname}}"
+      }
+    },
+    {
+      "script": {
+        "description": "Adds a bonus and increments the bonus counter",
+        "source": """
+          ctx.balance *= 1.05;
+          if (ctx.bonus_pct == null) {
+            ctx.bonus_pct = 5;
+          }
+        """
+      }
+    }
+  ]
+}
+
+PUT /_ingest/pipeline/droppi
+{
+  "description": "Pipeline that prevents PII from being indexed",
+  "processors": [
+    {
+      "drop": {
+        "if": "ctx.fullname == 'Amber' || ctx.fullname == 'Duke'"
+      }
+    }
+  ]
+}
+
+
+POST _reindex
+{
+  "source": {
+    "index": "old_index"
+  },
+  "dest": {
+    "index": "new_index"
+  }
+}
+
+DELETE /old_index
+
+
+PUT _ingest/pipeline/my_pipeline
+{
+  "description": "Example pipeline that adds a processed_time field",
+  "processors": [
+    {
+      "set": {
+        "field": "processed_time",
+        "value": "{{_ingest.timestamp}}"
+      }
+    }
+  ]
+}
+
+PUT _ingest/pipeline/my_grok_pipeline
+{
+  "description": "Extract timestamp and log level from message",
+  "processors": [
+    {
+      "grok": {
+        "field": "message",
+        "patterns": ["%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} %{GREEDYDATA:message_body}"]
+      }
+    }
+  ]
+}
+
+POST /my_index/_doc/1?pipeline=my_pipeline
+{
+  "message": "Sample log entry"
+}
+
+PUT /my_index
+{
+  "settings": {
+    "index.default_pipeline": "my_pipeline"
+  }
+}
+
+POST _ingest/pipeline/my_pipeline/_simulate
+{
+  "doc": {
+    "message": "Sample log entry"
+  }
+}
+
+
+
+
+
+
+-----------------------------------------------------
+-----------------------------------------------------
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET _cat/indices
+
+
+### open document
+GET shakespeare/_search
+GET _cat/indices
+
+
+
+
+### put pipeline
+PUT /_ingest/pipeline/remove_ip
+{
+  "description": "Pipeline that excludes the ip_address field.",
+  "processors": [
+    {
+      "remove": {
+        "field": "speaker"
+      }
+    },
+    {
+          "remove": {
+        "field": "speech_number"
+    }
+    },
+{
+        "remove": {
+        "field": "play_name"
+        }},
+        {
+      "remove": {
+        "field": "text_entry"
+      }}
+  ]
+}
+
+POST _ingest/pipeline/remove_ip/_simulate
+{
+  "type": "act",
+  "line_id": 1,
+  "play_name": "Henry IV",
+  "speech_number": "",
+  "line_number": "",
+  "speaker": "Falstaff",
+  "text_entry": "ACT I"
+}
+
+### sample doc to simulate
+POST _ingest/pipeline/remove_ip/_simulate
+{
+  "docs": [
+    {
+      "_source": {
+        "type": "act",
+        "line_id": 1,
+        "play_name": "Henry IV",
+        "speech_number": "",
+        "line_number": "",
+        "speaker": "Falstaff",
+        "text_entry": "ACT I"
+      }
+    },
+    {
+      "_source": {
+        "type": "act",
+        "line_id": 2,
+        "play_name": "Henry IV",
+        "speech_number": "",
+        "line_number": "",
+        "speaker": "Prince Henry",
+        "text_entry": "ACT II"
+      }
+    }
+  ]
+}
+
+POST _reindex
+{
+  "source": {
+    "index": "shakespeare"
+  },
+  "dest": {
+    "index": "shakespeare2",
+    "pipeline": "remove_ip"
+  }
+}
+
+GET shakespeare2/_search
+GET shakespeare/_search
+
+
+
+
+
+### you create index First
+### in index docuements will go
+### and on documents pipelines are applied
+### pipeline first get stored in the system
+### then you simulate
+### then you post it to index
