@@ -14,7 +14,9 @@
   "primary_term": 1
 }
 
+
 ### use this below
+### structure of the data in dev tool I noticed is that, you have the indices, within that you have index, and within the index you have the documents. 
 POST test_index/_doc/test_doc
 {
   "total": 2,
@@ -39,3 +41,7 @@ OUTPUT
 
 ### now if you go to the Data Index Management, you will be abel to see this index under the indices
 click on the hamburger menu > stack management > index management > you will see the same_index under indices
+
+### we will test the one day data within this document to see how much data is being consumed through one day. It is called Data Sizing. 
+
+
