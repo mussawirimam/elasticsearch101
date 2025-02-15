@@ -1,0 +1,40 @@
+### X dont use this one X
+#POST test_index/_doc/test_doc
+{
+  "index": "test_index",
+  "id": "test_doc",
+  "version": 3,
+  "result": "updated",
+  "shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "seq_no": 2,
+  "primary_term": 1
+}
+
+### use this below
+POST test_index/_doc/test_doc
+{
+  "total": 2,
+  "seq_no": 2,
+  "primary_term": 1
+}
+
+OUTPUT
+{
+  "_index": "test_index",
+  "_id": "test_doc",
+  "_version": 2,
+  "result": "updated",
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 1,
+  "_primary_term": 1
+}
+
+### now if you go to the Data Index Management, you will be abel to see this index under the indices
