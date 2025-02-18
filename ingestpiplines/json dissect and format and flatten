@@ -1,3 +1,5 @@
+### painless scripting documentation: https://www.elastic.co/guide/en/elasticsearch/painless/index.html
+
 Okay, let's take a look at this problem again. The user is trying to extract JSON fields from the `@message` field in Elasticsearch using an ingest pipeline, but the simulation isn't working as expected. The simulation output shows that the `@message` field remains unchanged, and none of the new fields are being created.
 
 First, I need to understand why the pipeline isn't processing the `@message` field. The pipeline uses a JSON processor to parse `@message` into `parsed_message`, then a script processor to extract fields from `parsed_message`. The user's simulation result doesn't show any new fields, which suggests that either the JSON parsing failed or the script isn't executing correctly.
