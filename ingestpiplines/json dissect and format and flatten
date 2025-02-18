@@ -1,0 +1,143 @@
+Okay, let's take a look at this problem again. The user is trying to extract JSON fields from the `@message` field in Elasticsearch using an ingest pipeline, but the simulation isn't working as expected. The simulation output shows that the `@message` field remains unchanged, and none of the new fields are being created.
+
+First, I need to understand why the pipeline isn't processing the `@message` field. The pipeline uses a JSON processor to parse `@message` into `parsed_message`, then a script processor to extract fields from `parsed_message`. The user's simulation result doesn't show any new fields, which suggests that either the JSON parsing failed or the script isn't executing correctly.
+
+Looking at the `@message` content, it starts with a timestamp, UUID, log level, and then a JSON array. The JSON array is part of a string, but there's some non-JSON text before the array ("2025-01-21T20:46:47.793Z\t...\tinfo\t[...]"). The JSON processor might be failing because the entire `@message` isn't valid JSON—it has that prefix before the JSON array.
+
+Wait, the initial part of `@message` isn't JSON. The JSON processor is trying to parse the entire `@message` field as JSON, but it's actually a mix of tab-separated values and a JSON array. That’s the problem! The pipeline's JSON processor is expecting the entire `@message` to be a JSON object or array, but it's not. The actual JSON array is embedded within the `@message` string after some other text.
+
+So, the first step should be to extract the JSON array part from the `@message` before attempting to parse it. The current pipeline tries to parse the entire `@message` as JSON, which fails because of the leading non-JSON content. That's why the `parsed_message` isn't being created, and the script processor isn't running.
+
+To fix this, the pipeline needs to first dissect or split the `@message` to isolate the JSON array. Then, parse that JSON array. Let's adjust the pipeline to include a dissect processor to split the `@message` into parts, extract the JSON array, and then process it.
+
+Here's the revised plan:
+
+1. **Dissect Processor**: Split `@message` into parts to separate the JSON array.
+
+2. **JSON Processor**: Parse the extracted JSON array.
+
+3. **Script Processor**: Flatten the JSON structure into individual fields.
+
+Testing this approach with the simulation should now correctly extract the fields. If the JSON array is properly isolated and parsed, the script should then create the new fields as expected. If this works, reindexing with the updated pipeline should resolve the issue, and the fields should appear in Kibana after refreshing the index pattern.
+
+
+### I still need to test whether the pipeline will be automatically recognize which documents are getting the json format and ignore the ones that arent getting the json format. 
+
+
+PUT _ingest/pipeline/extract-json-fields
+{
+  "description": "Extract JSON fields from @message and flatten nested JSON structure",
+  "processors": [
+    {
+      "dissect": {
+        "field": "@message",
+        "pattern": "%{log_timestamp}\t%{uuid}\t%{log_level}\t%{json_array}",
+        "ignore_missing": true
+      }
+    },
+    {
+      "json": {
+        "field": "json_array",
+        "target_field": "parsed_message",
+        "ignore_failure": true
+      }
+    },
+    {
+      "script": {
+        "source": """
+          if (ctx.parsed_message != null && ctx.parsed_message instanceof List) {
+            def firstEntry = ctx.parsed_message[0];
+            ctx.timestamp = firstEntry.Timestamp;
+            ctx.traceId = firstEntry.TraceId;
+            ctx.spanId = firstEntry.SpanId;
+            ctx.parentId = firstEntry.ParentId;
+            ctx.traceFlags = firstEntry.TraceFlags;
+            ctx.severityText = firstEntry.SeverityText;
+            ctx.severityNumber = firstEntry.SeverityNumber;
+            ctx.body = firstEntry.Body;
+            
+            // Flatten attributes
+            if (firstEntry.Attributes != null) {
+              for (def entry : firstEntry.Attributes.entrySet()) {
+                ctx["attributes." + entry.getKey()] = entry.getValue();
+              }
+            }
+            
+            // Flatten resource
+            if (firstEntry.Resource != null) {
+              for (def entry : firstEntry.Resource.entrySet()) {
+                ctx["resource." + entry.getKey()] = entry.getValue();
+              }
+            }
+          }
+        """,
+        "ignore_failure": true
+      }
+    },
+    {
+      "remove": {
+        "field": ["json_array", "parsed_message"],
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
+
+
+POST _ingest/pipeline/extract-json-fields/_simulate
+{
+  "docs": [
+    {
+      "_source": {
+        "@message": """2025-01-21T20:46:47.793Z	ef34f287-2a7f-4cc9-b099-6490ee9567b6	info	[
+  {
+    "Timestamp": "2025-01-21T20:46:47.7930901Z",
+    "TraceId": "679007b5c4eb1d5d309d6500de7f646c",
+    "SpanId": "7967927ad1a70fcf",
+    "ParentId": "9c4eddea28b3b7d2",
+    "TraceFlags": 1,
+    "SeverityText": "Information",
+    "SeverityNumber": 9,
+    "Body": "Request finished  POST https://glwyrhzjn1.execute-api.us-east-1.amazonaws.com/prod/api/Agencies/search/bond - 200 - application/json;\u002Bcharset=utf-8 2062.2849ms",
+    "Attributes": {
+      "AppId": "440676",
+      "Environment": "prod",
+      "ValueStream": "cds",
+      "ServiceName": "Microsoft.AspNetCore.Hosting.Diagnostics",
+      "UniqueUserId": "e0bc260f-473f-44d9-b69e-daa98a9d74ca",
+      "UniqueUserIdType": null,
+      "XAmznTraceId": "1-679007b5-c4eb1d5d309d6500de7f646c"
+    },
+    "Resource": {
+      "cloud.provider": "aws",
+      "cloud.region": "us-east-1",
+      "faas.name": "prod-bondagencymanagement",
+      "faas.version": "$LATEST",
+      "service.name": "Amazon.Lambda.RuntimeSupport",
+      "service.instance.id": "2ec2d8d5-a308-4c63-a7ce-8b8e867c1585",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.language": "dotnet",
+      "telemetry.sdk.version": "1.9.0",
+      "RequestId": "0HN9QBAICN0O7",
+      "RequestPath": "/prod/api/Agencies/search/bond"
+    }
+  }
+]"""
+      }
+    }
+  ]
+}
+
+
+
+POST _reindex
+{
+  "source": {
+    "index": "cwl-aidx-520509533630-2025.01.21-000185"
+  },
+  "dest": {
+    "index": "cwl-aidx-reindexed6",
+    "pipeline": "extract-json-fields"
+  }
+}
